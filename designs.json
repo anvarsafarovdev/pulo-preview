@@ -1,13 +1,13 @@
 {
- "updated": "12 Nov 22:59 (Tashkent)",
+ "updated": "12 Nov 23:07 (Tashkent)",
  "designs": [
   {
-   "file": "record-debt.html",
-   "title": "Record a debt: keyboard and button test",
-   "rev": "r1",
-   "what": "Type an amount, a number, a name. Does Telegram's button sit right above the keyboard? Try Back with a card open.",
-   "stamp": "202611122259",
-   "when": "12 Nov 22:59"
+   "file": "record-debt-r8.html",
+   "title": "Record a debt (approved r8, live)",
+   "rev": "r8",
+   "what": "Your approved design with the real keyboard and Telegram’s real bottom button. Opens full screen like the real app. Options (plan, From a person, theme): ⋯ → Settings.",
+   "stamp": "202611122307",
+   "when": "12 Nov 23:07"
   },
   {
    "file": "telegram-check.html",
@@ -16,14 +16,6 @@
    "what": "Shows what this phone's Telegram can do, with the app's own test. Screenshot it on both phones; try the grey button with the keyboard open.",
    "stamp": "202611122259",
    "when": "12 Nov 22:59"
-  },
-  {
-   "file": "record-debt-r8.html",
-   "title": "Record a debt r8 (approved 11 Nov)",
-   "rev": "r8",
-   "what": "UI only. The keyboard and Next are drawn, as in the drawing. To switch Free/Starter/Pro, From a person or the theme: Telegram ⋯ menu → Settings.",
-   "stamp": "202611122235",
-   "when": "12 Nov 22:35"
   },
   {
    "file": "fonts.html",

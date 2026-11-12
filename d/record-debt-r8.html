@@ -517,7 +517,7 @@ svg.f{width:23px;height:23px;flex:0 0 auto;fill:currentColor;stroke:none;}
   <div id="vRec" style="flex:1 1 auto;min-height:0;display:flex;flex-direction:column">
     <div class="rd-body" id="rdBody">
       <div class="rd-top"><h1>Record a debt</h1><button class="rd-plan press" type="button" id="rdPlan">STARTER</button></div>
-      <label class="rd-amt rd-sec" data-sec="amt"><input class="cf" id="rdAmt" type="text" inputmode="none" autocomplete="off" placeholder="0" aria-label="Amount">
+      <label class="rd-amt rd-sec" data-sec="amt"><input class="cf" id="rdAmt" type="text" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Amount">
         <button class="rd-cur press" type="button" id="rdCur" data-sh="shCur"><span id="rdCurT">UZS</span><svg class="i xs"><use href="#i-down"/></svg></button></label>
       <div id="rdWho"></div>
       <div class="rd-sec grp" data-sec="when" id="rdStepWhen">
@@ -809,9 +809,9 @@ svg.f{width:23px;height:23px;flex:0 0 auto;fill:currentColor;stroke:none;}
       el.innerHTML = '<div class="rd-who two rd-sec" data-sec="who"><span class="nm cf">Shuhrat Toshmatov</span><span class="num">+998 90 412 18 04</span></div>';
       return;
     }
-    el.innerHTML = '<label class="rd-who rd-sec" data-sec="who"><span class="pfx">+998</span><input id="rdNum" type="text" inputmode="none" placeholder="90 123 45 67" aria-label="Their number">' +
+    el.innerHTML = '<label class="rd-who rd-sec" data-sec="who"><span class="pfx">+998</span><input id="rdNum" type="tel" inputmode="numeric" placeholder="90 123 45 67" aria-label="Their number">' +
       '<button class="rd-scan press" type="button" id="rdScan" aria-label="Scan the customer’s code"><svg class="i"><use href="#i-scan"/></svg></button></label>' +
-      '<label class="rd-new rd-sec" id="rdNew" data-sec="name" hidden><span>New contact</span><input id="rdName" type="text" inputmode="none" placeholder="Their name" aria-label="Their name"></label>';
+      '<label class="rd-new rd-sec" id="rdNew" data-sec="name" hidden><span>New contact</span><input id="rdName" type="text" inputmode="text" autocapitalize="words" placeholder="Their name" aria-label="Their name"></label>';
     var n = document.getElementById('rdNum');
     n.addEventListener('input', function () {
       var d = n.value.replace(/\D/g, '').slice(0, 9);
@@ -1024,8 +1024,30 @@ svg.f{width:23px;height:23px;flex:0 0 auto;fill:currentColor;stroke:none;}
 }());
 </script>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../frame.css?v=202611122259">
-<script src="../tg.js?v=202611122259"></script>
-<script src="../frame.js?v=202611122259"></script>
+<link rel="stylesheet" href="../frame.css?v=202611122307">
+<style>
+/* live on the phone: the drawn keyboard and the drawn Telegram button give way to the real ones */
+html.tg .kb,html.tg .tgm{display:none!important;}
+#rdAmt{caret-color:auto;}
+</style>
+<script src="../tg.js?v=202611122307"></script>
+<script src="../frame.js?v=202611122307"></script>
+<script>
+(function () {
+  var T = window.PT; if (!T) return;
+  if (T.inTG) document.documentElement.classList.add('tg'); else return;
+  var last = '';
+  function tick() {
+    var b = document.getElementById('rdGo');
+    var rec = document.getElementById('vRec');
+    var visible = !!(b && rec && getComputedStyle(rec).display !== 'none');
+    var key = visible ? (b.textContent + '|' + b.classList.contains('off')) : 'hidden';
+    if (key === last) return; last = key;
+    if (!visible) { T.main(null); return; }
+    T.main({ text: b.textContent, enabled: !b.classList.contains('off'), onClick: function () { T.haptic('light'); b.click(); } });
+  }
+  setInterval(tick, 120); tick();
+})();
+</script>
 </body>
 </html>
