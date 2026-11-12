@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Fonts · eight that cover all four languages</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/fonts.css?v=202611122212">
+<link rel="stylesheet" href="../kit.css?v=202611122212">
+<style>
+.app{font-family:var(--ff);}
+.top{flex:0 0 auto;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 16px 10px;
+  box-shadow:inset 0 -1px 0 var(--line);}
+.top::-webkit-scrollbar{display:none;}
+.chip{flex:0 0 auto;height:40px;padding:0 14px;border:0;border-radius:999px;background:var(--surface);color:var(--text-2);
+  font-size:15px;font-weight:700;white-space:nowrap;}
+.chip.on{background:var(--text-1);color:var(--ground);}
+.bar{display:flex;align-items:flex-start;gap:12px;padding:18px 16px 0 23px;}
+.bar .who{flex:1 1 auto;min-width:0;}
+.biz{margin:0 0 2px;font-size:14.7px;color:var(--text-3);}
+.store{margin:0;font-size:16.9px;font-weight:700;line-height:1.3;}
+.round{width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);color:var(--text-2);display:grid;place-items:center;}
+.book{display:grid;grid-template-columns:1fr 1fr;margin:16px 16px 0;padding:16px;border-radius:10px;background:var(--surface);}
+.cell{display:flex;flex-direction:column;gap:6px;min-width:0;}
+.cell+.cell{padding-left:16px;margin-left:12px;box-shadow:inset 1px 0 0 var(--track);}
+.k{margin:0;font-size:14.7px;color:var(--text-2);}
+.v{margin:0;font-size:19.4px;font-weight:700;line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.v small,.amt small{font-size:.6em;font-weight:500;}
+.in{color:var(--in);} .out{color:var(--out);}
+.lab{margin:28px 23px 6px;font-size:14.7px;font-weight:600;color:var(--text-2);}
+.prow{display:flex;align-items:center;gap:12px;padding:11px 23px;box-shadow:inset 0 -1px 0 var(--line);}
+.prow .tx{flex:1 1 auto;min-width:0;}
+.nm{margin:0;font-size:17px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sb{margin:2px 0 0;font-size:14.7px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.amt{margin:0;font-size:16.9px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.amt small{color:var(--text-2);}
+.plate{display:flex;flex-direction:column;gap:8px;margin:0 16px;padding:16px;border-radius:10px;background:var(--surface);}
+.big{margin:0;font-size:36.8px;font-weight:700;line-height:1.1;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.big small{font-size:.5em;font-weight:500;color:var(--text-2);}
+.mid{margin:0;font-size:23.3px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--text-2);}
+.mid small{font-size:.6em;font-weight:500;}
+.note{margin:0;font-size:14.7px;color:var(--text-2);}
+.field{display:flex;flex-direction:column;gap:6px;margin:12px 16px 0;}
+.field label{font-size:14.7px;color:var(--text-2);}
+.field input{height:48px;padding:0 14px;border:0;border-radius:10px;background:var(--surface);font-size:16.9px;}
+.ln{display:flex;flex-direction:column;gap:3px;padding:10px 23px;box-shadow:inset 0 -1px 0 var(--line);}
+.ln .tg{margin:0;font-size:14.7px;color:var(--text-3);}
+.ln .tx{margin:0;font-size:16.9px;}
+.sz{display:flex;flex-direction:column;gap:12px;padding:4px 23px 0;}
+.sz p{margin:0;}
+.sz .tg{font-size:14.7px;color:var(--text-3);}
+.sz .sm{line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums;}
+.mis p{margin:0;font-size:28.7px;line-height:1.25;letter-spacing:.02em;}
+.all{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;padding:12px 23px;border:0;text-align:left;
+  background:none;box-shadow:inset 0 -1px 0 var(--line);}
+.all.on{background:var(--surface);}
+.all .an{font-size:14.7px;font-weight:600;color:var(--text-2);}
+.all .aa{font-size:23.3px;font-weight:700;line-height:1.25;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--in);}
+.all .ab{font-size:16.9px;line-height:1.4;}
+.end{height:40px;}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="top" id="chips" role="tablist" aria-label="Fonts"></div>
+  <div class="body" id="body">
+    <div class="bar">
+      <div class="who"><p class="biz">Ali Valiyev’s shops</p><p class="store">Bakery on Çorsu</p></div>
+      <button class="round press" type="button" id="theme" aria-label="Switch between dark and bright">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8 8 0 019.4 4a8 8 0 1010.6 10.6z"/></svg>
+      </button>
+    </div>
+    <div class="book">
+      <div class="cell"><p class="k">They owe me</p><p class="v in">12 450 000 <small>UZS</small></p></div>
+      <div class="cell"><p class="k">I owe</p><p class="v out">3 200 000 <small>UZS</small></p></div>
+    </div>
+
+    <p class="lab">People who owe you</p>
+    <div id="people"></div>
+
+    <p class="lab">Record a debt</p>
+    <div class="plate">
+      <p class="big">1 250 000 <small>UZS</small></p>
+      <p class="mid">1 171.42 <small>USD</small> · 980.50 <small>EUR</small></p>
+      <p class="note">Reminder every Wednesday until fully paid · first one Wed 18 Nov</p>
+    </div>
+    <div class="field"><label for="ty">Type here: try Ş Ç Ğ Ö, Ў Қ Ғ Ҳ (the keyboard opens)</label>
+      <input id="ty" type="text" autocomplete="off" value="Şahzoda Ğofurova · Ўткир Ғайратов"></div>
+
+    <p class="lab">One sentence, five ways</p>
+    <div id="lines"></div>
+
+    <p class="lab">Every size the app uses</p>
+    <div class="sz" id="sizes"></div>
+
+    <p class="lab">Easy to misread?</p>
+    <div class="plate mis">
+      <p>Il1 O0 rn m 5S 8B</p>
+      <p>Ўў Ққ Ғғ Ҳҳ ЗЭ</p>
+      <p>Şş Çç Ğğ Öö Oʻ Gʻ</p>
+      <p style="font-weight:700;font-variant-numeric:tabular-nums">0123456789</p>
+    </div>
+
+    <p class="lab">All eight, side by side · tap one to choose it</p>
+    <div id="all"></div>
+    <div class="end"></div>
+  </div>
+</div>
+<script>
+(function () {
+  var F = [
+    ['Inter', 'Inter'], ['Onest', 'Onest'], ['Nunito', 'Nunito'], ['Montserrat', 'Montserrat'],
+    ['Fira Sans', "'Fira Sans'"], ['Source Sans 3', "'Source Sans 3'"], ['Nunito Sans', "'Nunito Sans'"],
+    ['M PLUS Rounded', "'M PLUS Rounded 1c'"]
+  ];
+  var people = [
+    ['Şahzoda Ğofurova', 'Due Wed 18 Nov', '1 250 000'],
+    ['Oʻktam Gʻaniyev', 'Reminds every Wednesday', '87 500'],
+    ['Ўткир Ғайратов', 'Plan · 4 of 12 paid', '12 000 000'],
+    ['Алексей Щербаков', 'Paid 450 000 today', '450 000'],
+    ['Rahim Çorşanbiyev', 'Overdue since 2 Nov', '3 999 999']
+  ];
+  var lines = [
+    ['English', 'All done: the debt is recorded, and a reminder goes out every Wednesday.'],
+    ['Русский', 'Готово: долг записан, напоминание приходит каждую среду.'],
+    ['Ўзбекча (кирилл)', 'Ҳаммаси тўғри: қарз ёзилди, эслатма ҳар чоршанба келади.'],
+    ['Oʻzbekcha (lotin, today)', 'Hammasi toʻgʻri: qarz yozildi, eslatma har chorshanba keladi.'],
+    ['Özbekça (lotin, from April 2027)', 'Hammasi töğri: qarz yozildi, eslatma har çorşanba keladi.']
+  ];
+  var sizes = [
+    ['12.9 px · dock labels and count badge only', '12.9px', 500, 'Home · Qarzlar · Долги · 12'],
+    ['14.7 px · labels and sentences (the smallest)', '14.7px', 400, 'Qarz · Долг · Қарз · 1 250 000 UZS'],
+    ['16.9 px · body text', '16.9px', 400, 'Qarz · Долг · Қарз · 1 250 000'],
+    ['19.4 px · names and row amounts', '19.4px', 700, 'Ўткир · Şahzoda · 1 250 000'],
+    ['23.3 px · titles', '23.3px', 700, 'Ҳисоб · Ğalaba · 1 250 000'],
+    ['28.7 px · big figures', '28.7px', 700, '1 250 000 UZS'],
+    ['36.8 px · the amount you type', '36.8px', 700, '12 450 000']
+  ];
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  var P = document.getElementById('people');
+  people.forEach(function (p) {
+    P.appendChild(el('div', 'prow', '<div class="tx"><p class="nm">' + p[0] + '</p><p class="sb">' + p[1] + '</p></div><p class="amt">' + p[2] + ' <small>UZS</small></p>'));
+  });
+  var L = document.getElementById('lines');
+  lines.forEach(function (l) { L.appendChild(el('div', 'ln', '<p class="tg">' + l[0] + '</p><p class="tx">' + l[1] + '</p>')); });
+  var S = document.getElementById('sizes');
+  sizes.forEach(function (s) { S.appendChild(el('div', '', '<p class="tg">' + s[0] + '</p><p class="sm" style="font-size:' + s[1] + ';font-weight:' + s[2] + '">' + s[3] + '</p>')); });
+
+  var cur = 0, chips = document.getElementById('chips'), all = document.getElementById('all'), app = document.getElementById('app');
+  F.forEach(function (f, i) {
+    var c = el('button', 'chip press'); c.type = 'button'; c.textContent = f[0]; c.style.fontFamily = f[1] + ',sans-serif';
+    c.setAttribute('role', 'tab'); c.onclick = function () { pick(i, true); }; chips.appendChild(c);
+    var a = el('button', 'all', '<span class="an">' + f[0] + '</span><span class="aa">12 450 000 UZS</span><span class="ab">Ҳаммаси тўғри · Hammasi töğri</span>');
+    a.type = 'button'; a.style.fontFamily = f[1] + ',sans-serif'; a.onclick = function () { pick(i, true); document.getElementById('body').scrollTop = 0; };
+    all.appendChild(a);
+  });
+  function pick(i, buzz) {
+    cur = i;
+    app.style.setProperty('--ff', F[i][1] + ',sans-serif');
+    [].forEach.call(chips.children, function (c, j) { c.classList.toggle('on', j === i); c.setAttribute('aria-selected', j === i); });
+    [].forEach.call(all.children, function (c, j) { c.classList.toggle('on', j === i); });
+    var on = chips.children[i]; chips.scrollTo({ left: on.offsetLeft - 16, behavior: 'smooth' });
+    if (buzz) PT.haptic('select');
+    PT.main({ text: 'Next font: ' + F[(i + 1) % F.length][0], onClick: function () { pick((cur + 1) % F.length, true); } });
+  }
+  document.getElementById('theme').onclick = function () { PT.setTheme(PT.theme() === 'dark' ? 'light' : 'dark'); PT.haptic('light'); };
+  window.addEventListener('load', function () { pick(0, false); });
+  if (document.readyState === 'complete') pick(0, false);
+})();
+</script>
+<script src="../tg.js?v=202611122212"></script>
+</body>
+</html>

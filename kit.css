@@ -1,0 +1,84 @@
+/* Pulo Preview kit. Tokens lifted from the approved 06-home.html (dark default, bright under data-theme). */
+:root{
+  --ground:#1A1D21;
+  --surface:#222529;
+  --raised:#2A2E33;          
+  --text-1:#D1D2D3;
+  --text-2:#ABADAF;
+  --text-3:#ABADAF;          
+  --in:#2EB67D;              
+  --out:#E95784;             
+  --line:rgba(255,255,255,0.06);
+  --track:rgba(255,255,255,0.10);
+  --dim-plate:#1F2226;
+  --text-dim:#8A8D90;
+  --pie:#D1D2D3;             
+  --pie-track:rgba(255,255,255,0.13);
+  --dock-bg:#1A1D21;         
+  --dock-ink:#D1D2D3;        
+  --dock-dim:#9A9DA0;        
+  --dock-active:rgba(209,210,211,0.12);
+  --dock-shadow:0 8px 24px rgba(0,0,0,0.42);
+  --scrim:rgba(0,0,0,0.55);
+  --gut:23px;   --r-1:10px;  --r-pill:999px;  --r-btn:8px;
+  --row-gap:26px; --field-h:46px;
+  --tap:48px;   
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:28px; --s7:40px;
+  --t-1:0.72rem; --t-2:0.82rem; --t-3:0.94rem; --t-4:1.08rem;
+  --t-5:1.3rem;  --t-6:1.6rem;  --t-7:2.05rem;
+}
+:root[data-theme="light"]{
+  --ground:#F9F9F9;
+  --surface:#E7E7E7;
+  --raised:#DCDCDC;
+  --text-1:#202020;
+  --text-2:#666666;
+  --text-3:#5F6266;          
+  --in:#007036;              
+  --out:#C20027;             
+  --line:rgba(0,0,0,0.06);
+  --track:rgba(0,0,0,0.10);
+  --dim-plate:#F0F0F0;
+  --text-dim:#676B6F;        
+  --pie:#84878A;             
+  --pie-track:rgba(0,0,0,0.10);
+  --dock-bg:#F9F9F9;         
+  --dock-ink:#202020;        
+  --dock-dim:#5F6266;        
+  --dock-active:rgba(0,0,0,0.10);
+  --dock-shadow:0 8px 24px rgba(0,0,0,0.18);
+  --scrim:rgba(0,0,0,0.35);
+}*,*::before,*::after{box-sizing:border-box;}
+[hidden]{display:none!important;}
+html{font-size:clamp(16px,4.6vw,19px);-webkit-text-size-adjust:100%;}
+html,body{margin:0;height:100%;}
+body{background:var(--ground);color:var(--text-1);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;font-size:var(--t-3);line-height:1.45;
+  -webkit-tap-highlight-color:transparent;overscroll-behavior:none;}
+.cf{font-family:"Comfortaa","IBM Plex Sans",sans-serif;}
+button,input{font:inherit;color:inherit;}
+:focus-visible{outline:2px solid var(--text-1);outline-offset:2px;border-radius:6px;}
+svg.i{width:22px;height:22px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+/* The page is exactly Telegram's visible area: it shrinks when the keyboard opens. */
+.app{position:fixed;left:0;right:0;top:0;height:var(--tg-viewport-height,100vh);display:flex;flex-direction:column;
+  overflow:hidden;padding-top:calc(var(--tg-safe-area-inset-top,0px) + var(--tg-content-safe-area-inset-top,0px));}
+.body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;}
+.body::-webkit-scrollbar{display:none;}
+.press{transition:transform .14s ease,background-color .14s ease;cursor:pointer;}
+.press:active{transform:scale(.96);}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;transition-duration:1ms!important;}}
+/* Outside Telegram only: the page draws its own bottom button and Back. */
+.fb-main{flex:0 0 auto;padding:8px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--ground);
+  border-top:1px solid var(--track);}
+.fb-main button{width:100%;height:50px;border:0;border-radius:12px;background:var(--text-1);color:var(--ground);
+  font-weight:600;font-size:16px;}
+.fb-main button:disabled{opacity:.42;}
+.fb-back{position:fixed;z-index:90;left:10px;top:10px;height:34px;padding:0 12px;border:0;border-radius:999px;
+  background:var(--surface);color:var(--text-2);font-size:14px;font-weight:600;}
+.toast{position:fixed;z-index:80;left:16px;right:16px;top:calc(12px + var(--tg-content-safe-area-inset-top,0px));
+  padding:12px 16px;border-radius:var(--r-1);background:var(--text-1);color:var(--ground);font-size:var(--t-2);
+  font-weight:500;box-shadow:var(--dock-shadow);opacity:0;transform:translateY(-12px);pointer-events:none;
+  transition:opacity .2s,transform .2s;}
+.toast.on{opacity:1;transform:none;}
+html.fb .app{top:52px;height:calc(100% - 52px);}

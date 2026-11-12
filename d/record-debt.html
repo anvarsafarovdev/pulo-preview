@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Record a debt · keyboard and button test</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/fonts.css?v=202611122212">
+<link rel="stylesheet" href="../kit.css?v=202611122212">
+<style>
+.hd{padding:var(--s4) var(--gut) var(--s2);}
+.hd h1{margin:0;font-size:var(--t-5);font-weight:700;}
+.st{margin:var(--s2) var(--s4) 0;padding:var(--s3) var(--s4) var(--s4);border-radius:14px;background:var(--surface);
+  transition:opacity .25s cubic-bezier(.2,0,0,1),box-shadow .2s;}
+.st.cur{box-shadow:inset 0 0 0 1.5px var(--text-2);}
+.st.done{opacity:.5;cursor:pointer;}
+.st.done *{pointer-events:none;}
+.st.later{opacity:.26;pointer-events:none;}
+.st .lb{margin:0 0 6px;font-size:var(--t-2);color:var(--text-2);}
+.amt{display:flex;align-items:baseline;gap:10px;}
+.amt input{flex:1 1 auto;min-width:0;width:100%;padding:0;border:0;background:none;outline:none;
+  font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-weight:700;font-size:var(--t-7);line-height:1.15;
+  font-variant-numeric:tabular-nums;caret-color:transparent;}
+.amt input::placeholder{color:var(--text-1);opacity:1;}
+.cur-b{flex:0 0 auto;height:36px;padding:0 12px;border:0;border-radius:999px;background:var(--ground);color:var(--text-2);
+  font-size:var(--t-2);font-weight:600;}
+.ph{display:flex;align-items:center;gap:8px;}
+.ph span{font-size:var(--t-4);font-weight:600;color:var(--text-2);}
+.ph input,.nm input{flex:1 1 auto;min-width:0;height:44px;padding:0;border:0;background:none;outline:none;
+  font-size:var(--t-4);font-weight:600;letter-spacing:.02em;}
+.nm input{font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-weight:700;letter-spacing:0;}
+.days{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:4px 16px 2px;
+  overscroll-behavior-x:contain;}
+.days::-webkit-scrollbar{display:none;}
+.day{flex:0 0 auto;scroll-snap-align:center;min-width:76px;height:58px;padding:0 10px;border:0;border-radius:12px;
+  background:var(--ground);color:var(--text-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;}
+.day b{font-size:var(--t-3);font-weight:700;color:var(--text-1);}
+.day span{font-size:var(--t-2);}
+.day.on{background:var(--text-1);color:var(--ground);}
+.day.on b{color:var(--ground);}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:var(--s3);}
+.card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px;border:0;border-radius:12px;
+  background:var(--ground);text-align:left;color:var(--text-1);}
+.card b{font-size:var(--t-3);font-weight:700;}
+.card span{font-size:var(--t-2);color:var(--text-3);}
+.foot{flex:0 0 auto;margin:0;padding:8px var(--gut) 10px;min-height:2.3em;font-size:var(--t-2);color:var(--text-2);
+  box-shadow:inset 0 1px 0 var(--line);}
+.spacer{height:200px;}
+/* sheet */
+.scrim{position:fixed;inset:0;z-index:30;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity .24s;border:0;}
+.scrim.open{opacity:1;pointer-events:auto;}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(104%);transition:transform .26s cubic-bezier(.2,0,0,1);
+  background:var(--surface);border-radius:20px 20px 0 0;padding:12px var(--gut) 24px;}
+.sheet.open{transform:none;}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--track);margin:0 auto 14px;}
+.pill{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px 0 4px;border-radius:999px;
+  background:var(--ground);color:var(--text-2);font-size:var(--t-2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.lk{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--in);color:var(--ground);
+  animation:lkPulse 1.8s ease-out infinite;}
+.lk svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.4;}
+@keyframes lkPulse{0%{box-shadow:0 0 0 0 rgba(46,182,125,.6);transform:scale(1);}45%{transform:scale(1.1);}
+  70%{box-shadow:0 0 0 9px rgba(46,182,125,0);}100%{box-shadow:0 0 0 0 rgba(46,182,125,0);transform:scale(1);}}
+.sheet h3{margin:14px 0 0;font-size:var(--t-4);font-weight:700;}
+.sheet p{margin:6px 0 0;font-size:var(--t-2);line-height:1.55;color:var(--text-2);}
+/* done */
+.done-v{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12vh var(--gut) 0;}
+.tick{width:84px;height:84px;}
+.tick circle{fill:var(--in);opacity:.16;}
+.tick path{fill:none;stroke:var(--in);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;
+  animation:draw .5s .15s cubic-bezier(.2,0,0,1) forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.done-v h2{margin:18px 0 0;font-size:var(--t-5);font-weight:700;}
+.done-v .who{margin:10px 0 0;font-size:var(--t-4);font-weight:700;}
+.done-v .sum{margin:2px 0 0;font-size:var(--t-6);font-weight:700;color:var(--in);font-variant-numeric:tabular-nums;}
+.done-v .sum small{font-size:.55em;font-weight:500;color:var(--text-2);}
+.done-v .when{margin:10px 0 0;font-size:var(--t-2);color:var(--text-2);}
+.again{margin-top:22px;height:44px;padding:0 18px;border:0;border-radius:999px;background:var(--surface);color:var(--text-1);
+  font-size:var(--t-2);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="body" id="body">
+    <div id="form">
+      <header class="hd"><h1 class="cf">Record a debt</h1></header>
+      <section class="st" data-step="amount">
+        <p class="lb">How much?</p>
+        <div class="amt"><input id="amt" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="0" aria-label="Amount">
+          <button class="cur-b press" type="button" id="cur">UZS</button></div>
+      </section>
+      <section class="st" data-step="phone">
+        <p class="lb">Their number</p>
+        <div class="ph"><span>+998</span><input id="ph" type="tel" inputmode="numeric" autocomplete="off" placeholder="90 123 45 67" aria-label="Their number"></div>
+      </section>
+      <section class="st" data-step="name">
+        <p class="lb">Their name</p>
+        <div class="nm"><input id="nm" type="text" autocomplete="off" autocapitalize="words" placeholder="Name" aria-label="Their name"></div>
+      </section>
+      <section class="st" data-step="when">
+        <p class="lb">When is it due?</p>
+        <div class="days" id="days"></div>
+        <div class="cards">
+          <button class="card press" type="button" data-card="rep"><b>Repeats</b><span>Starter</span></button>
+          <button class="card press" type="button" data-card="ins"><b>Installments</b><span>Pro</span></button>
+        </div>
+      </section>
+      <div class="spacer"></div>
+    </div>
+    <div id="donev" hidden></div>
+  </div>
+  <p class="foot" id="foot"></p>
+</div>
+<button class="scrim" id="scrim" type="button" aria-label="Close"></button>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true">
+  <div class="grab"></div>
+  <span class="pill"><span class="lk"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></span><span id="shTier">Starter</span></span>
+  <h3 id="shT"></h3>
+  <p id="shP"></p>
+</div>
+<script>
+(function () {
+  var steps = ['amount', 'phone', 'name', 'when'];
+  var S = { step: 'amount', amt: '', cur: 'UZS', ph: '', nm: '', day: -1, sheet: null, saving: false };
+  var $ = function (id) { return document.getElementById(id); };
+  var amt = $('amt'), ph = $('ph'), nm = $('nm');
+  var WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function dayDate(n) { var d = new Date(); d.setDate(d.getDate() + n); return d; }
+  function fmtDay(n) { var d = dayDate(n); return WD[d.getDay()] + ' ' + d.getDate() + ' ' + MO[d.getMonth()]; }
+  function group(s) { return s.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function phoneFmt(s) { var p = [s.slice(0, 2), s.slice(2, 5), s.slice(5, 7), s.slice(7, 9)]; return p.filter(Boolean).join(' '); }
+
+  var days = $('days');
+  for (var i = 0; i <= 30; i++) (function (n) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'day press';
+    var d = dayDate(n);
+    b.innerHTML = '<b>' + (n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : WD[d.getDay()] + ' ' + d.getDate()) + '</b><span>' + (n < 2 ? d.getDate() + ' ' + MO[d.getMonth()] : 'in ' + n + ' days') + '</span>';
+    b.onclick = function () { S.day = n; PT.haptic('select'); b.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); render(); };
+    days.appendChild(b);
+  })(i);
+
+  function filled(s) {
+    if (s === 'amount') return Number(S.amt) > 0;
+    if (s === 'phone') return S.ph.length === 9;
+    if (s === 'name') return S.nm.trim().length >= 2;
+    return S.day >= 0;
+  }
+  function nextMissing() {
+    var from = steps.indexOf(S.step);
+    for (var k = from + 1; k < steps.length - 1; k++) if (!filled(steps[k])) return steps[k];
+    for (var j = 0; j < from; j++) if (!filled(steps[j])) return steps[j];
+    return 'when';
+  }
+  function go(step, focus) {
+    S.step = step; render();
+    var sec = document.querySelector('[data-step="' + step + '"]');
+    sec.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    if (step === 'when') { if (document.activeElement) document.activeElement.blur(); return; }
+    if (focus) { var inp = { amount: amt, phone: ph, name: nm }[step]; setTimeout(function () { inp.focus(); }, 30); }
+  }
+  [].forEach.call(document.querySelectorAll('.st'), function (sec) {
+    sec.addEventListener('click', function () {
+      var s = sec.getAttribute('data-step');
+      if (s !== S.step && filled(s)) { PT.haptic('light'); go(s, true); }
+    });
+  });
+  amt.addEventListener('input', function () {
+    S.amt = amt.value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 12);
+    amt.value = S.amt ? group(S.amt) : ''; render();
+  });
+  ph.addEventListener('input', function () {
+    S.ph = ph.value.replace(/\D/g, '').slice(0, 9); ph.value = phoneFmt(S.ph);
+    if (S.ph.length === 9 && !filled('name')) { PT.haptic('light'); go('name', true); } else render();
+  });
+  nm.addEventListener('input', function () { S.nm = nm.value; render(); });
+  $('cur').onclick = function (e) {
+    e.stopPropagation(); S.cur = { UZS: 'USD', USD: 'EUR', EUR: 'UZS' }[S.cur]; $('cur').textContent = S.cur; PT.haptic('select');
+  };
+
+  /* the two paid cards: this preview's shop is on Free, so both show the lock */
+  var sheet = $('sheet'), scrim = $('scrim');
+  function closeSheet() { S.sheet = null; sheet.classList.remove('open'); scrim.classList.remove('open'); PT.popBack(closeSheet); render(); }
+  function openSheet(kind) {
+    S.sheet = kind;
+    $('shTier').textContent = kind === 'rep' ? 'Starter' : 'Pro';
+    $('shT').textContent = kind === 'rep' ? 'Repeats come with Starter' : 'Installments come with Pro';
+    $('shP').textContent = kind === 'rep' ? 'Set it once. Pulo reminds them every week or month until they pay.'
+      : 'Split a debt into 2 to 60 payments. Pulo reminds them before each one.';
+    sheet.classList.add('open'); scrim.classList.add('open'); PT.pushBack(closeSheet); PT.haptic('light'); render();
+  }
+  [].forEach.call(document.querySelectorAll('[data-card]'), function (c) {
+    c.addEventListener('click', function (e) { e.stopPropagation(); openSheet(c.getAttribute('data-card')); });
+  });
+  scrim.onclick = closeSheet;
+
+  var LINES = { amount: 'Enter the amount.', phone: 'Enter their number, or scan their code.', name: 'Enter their name.',
+    when: 'Choose when it is due, or a repeat or a plan.' };
+  function render() {
+    [].forEach.call(document.querySelectorAll('.st'), function (sec) {
+      var s = sec.getAttribute('data-step');
+      sec.className = 'st ' + (s === S.step ? 'cur' : filled(s) ? 'done' : 'later');
+    });
+    [].forEach.call(days.children, function (b, n) { b.classList.toggle('on', n === S.day); });
+    if (S.done) return;
+    $('foot').textContent = S.sheet ? (S.sheet === 'rep' ? 'Repeats come with Starter.' : 'Installments come with Pro.') : LINES[S.step];
+    if (S.sheet) { PT.main({ text: 'See plans', onClick: function () { PT.toast('The plans page is not part of this preview.'); } }); return; }
+    if (S.step !== 'when') {
+      PT.main({ text: 'Next', enabled: filled(S.step), onClick: function () { PT.haptic('light'); go(nextMissing(), true); } });
+      return;
+    }
+    var ready = steps.every(filled);
+    PT.main({ text: 'Save and invite', enabled: ready, progress: S.saving, onClick: save });
+  }
+  function save() {
+    S.saving = true; render();
+    setTimeout(function () { S.saving = false; S.done = true; PT.haptic('success'); showDone(); }, 700);
+  }
+  function showDone() {
+    $('form').hidden = true; $('foot').hidden = true;
+    var v = $('donev'); v.hidden = false;
+    v.innerHTML = '<div class="done-v"><svg class="tick" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="42"/><path d="M26 43l11 11 21-23"/></svg>' +
+      '<h2 class="cf">Debt recorded</h2><p class="who cf"></p><p class="sum cf">' + group(S.amt) + ' <small>' + S.cur + '</small></p>' +
+      '<p class="when">Due ' + fmtDay(S.day) + ' · one reminder that day</p>' +
+      '<button class="again press" type="button" id="again">Record another</button></div>';
+    v.querySelector('.who').textContent = S.nm.trim();
+    $('again').onclick = function () { location.reload(); };
+    $('body').scrollTop = 0;
+    PT.main({ text: 'Done', onClick: function () { PT.home(); } });
+  }
+  window.addEventListener('load', function () { render(); });
+})();
+</script>
+<script src="../tg.js?v=202611122212"></script>
+</body>
+</html>
