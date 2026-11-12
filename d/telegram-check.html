@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Telegram check</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/fonts.css?v=202611122242">
+<link rel="stylesheet" href="../kit.css?v=202611122242">
+<style>
+.hd{padding:var(--s4) var(--gut) var(--s2);}
+.hd h1{margin:0;font-size:var(--t-5);font-weight:700;}
+.hd p{margin:4px 0 0;font-size:var(--t-2);color:var(--text-2);}
+.tb{margin:var(--s2) var(--s4) 0;padding:var(--s2) var(--s4);border-radius:14px;background:var(--surface);}
+.r{display:flex;justify-content:space-between;gap:12px;padding:8px 0;box-shadow:inset 0 -1px 0 var(--line);font-size:var(--t-2);}
+.r:last-child{box-shadow:none;}
+.r span{color:var(--text-2);}
+.r b{font-weight:600;text-align:right;word-break:break-all;}
+.r b.ok{color:var(--in);} .r b.no{color:var(--out);}
+.acts{display:flex;flex-direction:column;gap:8px;margin:var(--s4) var(--s4) 0;}
+.acts button{height:46px;border:0;border-radius:12px;background:var(--surface);color:var(--text-1);font-weight:600;font-size:var(--t-2);}
+.acts input{height:46px;padding:0 14px;border:0;border-radius:12px;background:var(--surface);font-size:var(--t-3);}
+.sp{height:120px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="body">
+    <header class="hd"><h1 class="cf">Telegram check</h1>
+      <p>Screenshot this on each phone and send it to Claude. It shows what this Telegram can do, with the same test the app uses.</p></header>
+    <div class="tb" id="tb"></div>
+    <div class="acts">
+      <button type="button" id="a1">Show the bottom button, ACTIVE</button>
+      <button type="button" id="a2">Show the bottom button, INACTIVE (grey)</button>
+      <button type="button" id="a3">Hide the bottom button</button>
+      <input id="ty" inputmode="numeric" placeholder="Tap here: the keyboard opens">
+    </div>
+    <div class="sp"></div>
+  </div>
+</div>
+<script>
+(function () {
+  var W = window.Telegram && window.Telegram.WebApp, mb = W && W.MainButton;
+  function yes(v) { return v ? '<b class="ok">yes</b>' : '<b class="no">NO</b>'; }
+  function fn(name) { return !!(mb && typeof mb[name] === 'function'); }
+  function rows() {
+    var ver = W ? W.version : '—';
+    var six = ['setText', 'show', 'onClick', 'setParams', 'showProgress', 'hideProgress'].every(fn);
+    var gate = !!(W && W.isVersionAtLeast && W.isVersionAtLeast('6.0')) && six;
+    var R = [
+      ['Telegram app', W ? W.platform : 'not inside Telegram'],
+      ['Bot API version', ver],
+      ['Colour scheme', W ? W.colorScheme : '—'],
+      ['Screen height (now / steady)', W ? Math.round(W.viewportHeight) + ' / ' + Math.round(W.viewportStableHeight) : innerHeight],
+      ['Browser', navigator.userAgent.replace(/^Mozilla\/5\.0 /, '').slice(0, 90)],
+      ['Version 6.0 or newer', null, !!(W && W.isVersionAtLeast && W.isVersionAtLeast('6.0'))],
+      ['Bottom button: all six calls', null, six],
+      ["The app's test (mainButtonAvailable)", null, gate],
+      ['Settings in the ⋯ menu', null, !!(W && W.SettingsButton)],
+      ['Vibration', null, !!(W && W.HapticFeedback)]
+    ];
+    document.getElementById('tb').innerHTML = R.map(function (r) {
+      return '<div class="r"><span>' + r[0] + '</span>' + (r[1] === null ? yes(r[2]) : '<b>' + String(r[1]).replace(/</g, '&lt;') + '</b>') + '</div>';
+    }).join('');
+  }
+  rows();
+  if (W && W.onEvent) W.onEvent('viewportChanged', rows);
+  document.getElementById('a1').onclick = function () { PT.main({ text: 'Next', enabled: true, onClick: function () { PT.toast('Tapped'); } }); };
+  document.getElementById('a2').onclick = function () { PT.main({ text: 'Next', enabled: false, onClick: function () {} }); };
+  document.getElementById('a3').onclick = function () { PT.main(null); };
+})();
+</script>
+<script src="../tg.js?v=202611122242"></script>
+</body>
+</html>

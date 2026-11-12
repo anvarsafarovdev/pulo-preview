@@ -65,9 +65,14 @@
       var mb = W.MainButton;
       if (!tgHandler) { tgHandler = fire; mb.onClick(tgHandler); }
       if (!cfg) { mb.hideProgress(); mb.hide(); return; }
-      mb.setParams({ text: cfg.text, color: css('--text-1'), text_color: css('--ground'),
-        is_active: cfg.enabled !== false, is_visible: true });
-      if (cfg.progress) mb.showProgress(false); else mb.hideProgress();
+      /* The same calls, in the same order, as the app's shell.setMainButton
+         (src/client/mini-app/shell.ts, REDESIGN-6d), so a difference between
+         this preview and staging is never this code. */
+      mb.setText(cfg.text);
+      try { mb.setParams({ color: css('--text-1'), text_color: css('--ground') }); } catch (e) {}
+      if (cfg.enabled === false) mb.disable(); else mb.enable();
+      if (cfg.progress) mb.showProgress(); else mb.hideProgress();
+      mb.show();
       return;
     }
     var host = document.querySelector('.app');
