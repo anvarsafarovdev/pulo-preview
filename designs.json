@@ -1,13 +1,13 @@
 {
- "updated": "12 Nov 22:31 (Tashkent)",
+ "updated": "12 Nov 22:35 (Tashkent)",
  "designs": [
   {
    "file": "record-debt-r8.html",
    "title": "Record a debt r8 (approved 11 Nov)",
    "rev": "r8",
-   "what": "The approved drawing as it is: drawn keyboard and drawn Telegram button. Use the bar at the top to switch From Home / From a person, plan and theme.",
-   "stamp": "202611122231",
-   "when": "12 Nov 22:31"
+   "what": "UI only. The keyboard and Next are drawn, as in the drawing. To switch Free/Starter/Pro, From a person or the theme: Telegram ⋯ menu → Settings.",
+   "stamp": "202611122235",
+   "when": "12 Nov 22:35"
   },
   {
    "file": "fonts.html",

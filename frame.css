@@ -1,0 +1,15 @@
+/* Pulo Preview: an older drawing shown as UI only. The drawing's option bar,
+   its notes and its drawn Telegram header are hidden; the screen fills the
+   phone. Telegram's ⋯ menu → Settings (or the Options button outside
+   Telegram) brings the option bar back. */
+html:not(.pv-opts) .docbar{display:none!important;}
+.amend,.notes,.tgbar{display:none!important;}
+.stage{padding:0!important;display:block!important;}
+.scr{max-width:none!important;width:100%!important;max-height:none!important;border-radius:0!important;box-shadow:none!important;
+  height:calc(var(--tg-viewport-height,100svh) - var(--chrome,0px))!important;}
+html,body{background:var(--ground);}
+body{margin:0;}
+.pv-optb{position:fixed;z-index:95;right:10px;top:10px;height:34px;padding:0 12px;border:0;border-radius:999px;
+  background:var(--surface);color:var(--text-2);font:600 14px/1 -apple-system,system-ui,sans-serif;}
+html.fb .scr{height:calc(100svh - var(--chrome,0px))!important;}
+html.fb body{padding-top:0!important;}
