@@ -1,13 +1,21 @@
 {
- "updated": "12 Nov 22:42 (Tashkent)",
+ "updated": "12 Nov 22:59 (Tashkent)",
  "designs": [
+  {
+   "file": "record-debt.html",
+   "title": "Record a debt: keyboard and button test",
+   "rev": "r1",
+   "what": "Type an amount, a number, a name. Does Telegram's button sit right above the keyboard? Try Back with a card open.",
+   "stamp": "202611122259",
+   "when": "12 Nov 22:59"
+  },
   {
    "file": "telegram-check.html",
    "title": "Telegram check (for the Lenovo)",
    "rev": "r1",
    "what": "Shows what this phone's Telegram can do, with the app's own test. Screenshot it on both phones; try the grey button with the keyboard open.",
-   "stamp": "202611122242",
-   "when": "12 Nov 22:42"
+   "stamp": "202611122259",
+   "when": "12 Nov 22:59"
   },
   {
    "file": "record-debt-r8.html",
@@ -22,14 +30,6 @@
    "title": "Fonts: eight that cover all four languages",
    "rev": "r1",
    "what": "Tap a font at the top or the bottom button to switch. Type in the box to try the keyboard.",
-   "stamp": "202611122212",
-   "when": "12 Nov 22:12"
-  },
-  {
-   "file": "record-debt.html",
-   "title": "Record a debt: keyboard and button test",
-   "rev": "r1",
-   "what": "Type an amount, a number, a name. Does Telegram's button sit right above the keyboard? Try Back with a card open.",
    "stamp": "202611122212",
    "when": "12 Nov 22:12"
   }

@@ -86,6 +86,11 @@
     if (cfg) { fbBtn.textContent = cfg.progress ? '…' : cfg.text; fbBtn.disabled = cfg.enabled === false; }
   }
   T.main = function (cfg) { mainCfg = cfg; syncMain(); };
+  T.fullscreen = function (on) {
+    try { localStorage.setItem('pv-fullscreen', on ? 'on' : 'off'); } catch (e) {}
+    if (!inTG) return;
+    try { if (on && W.requestFullscreen) W.requestFullscreen(); else if (!on && W.exitFullscreen) W.exitFullscreen(); } catch (e) {}
+  };
 
   /* ── Vibration: Telegram's own, else the browser's. */
   T.haptic = function (kind) {
@@ -110,6 +115,14 @@
     try { W.ready(); } catch (e) {}
     try { W.expand(); } catch (e) {}
     try { if (W.disableVerticalSwipes) W.disableVerticalSwipes(); } catch (e) {}
+    /* Full screen, as the real app asks for it (shell.ts start(): Bot API 8.0
+       and a callable requestFullscreen). The preview remembers a choice made on
+       the Telegram check page, so both modes can be compared on one phone. */
+    var fsPref = null;
+    try { fsPref = localStorage.getItem('pv-fullscreen'); } catch (e) {}
+    if (fsPref !== 'off' && W.isVersionAtLeast && W.isVersionAtLeast('8.0') && typeof W.requestFullscreen === 'function') {
+      try { W.requestFullscreen(); } catch (e) {}
+    }
     W.BackButton.onClick(onBack);
     W.onEvent('themeChanged', function () { applyTheme(); });
   } else if (window.matchMedia) {
