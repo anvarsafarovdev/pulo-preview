@@ -1,6 +1,14 @@
 {
- "updated": "12 Nov 23:07 (Tashkent)",
+ "updated": "13 Nov 01:44 (Tashkent)",
  "designs": [
+  {
+   "file": "record-debt-r9.html",
+   "title": "Record a debt r9: all fixes, to approve",
+   "rev": "r9",
+   "what": "Full screen always. Pulo’s own bottom button sits on the keyboard (iOS and Android). Next guides you; tap any field to fill by hand. Options: ⋯ → Settings.",
+   "stamp": "202611130144",
+   "when": "13 Nov 01:44"
+  },
   {
    "file": "record-debt-r8.html",
    "title": "Record a debt (approved r8, live)",
