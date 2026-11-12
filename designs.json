@@ -1,6 +1,14 @@
 {
- "updated": "12 Nov 22:12 (Tashkent)",
+ "updated": "12 Nov 22:31 (Tashkent)",
  "designs": [
+  {
+   "file": "record-debt-r8.html",
+   "title": "Record a debt r8 (approved 11 Nov)",
+   "rev": "r8",
+   "what": "The approved drawing as it is: drawn keyboard and drawn Telegram button. Use the bar at the top to switch From Home / From a person, plan and theme.",
+   "stamp": "202611122231",
+   "when": "12 Nov 22:31"
+  },
   {
    "file": "fonts.html",
    "title": "Fonts: eight that cover all four languages",
