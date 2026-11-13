@@ -1,0 +1,119 @@
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+
+html {
+  font-size: clamp(16px, 4.6vw, 19px);
+  -webkit-text-size-adjust: 100%;
+  
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+body {
+  background: var(--ground);
+  
+  font-family: 'Pulo Round', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+
+
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-3);
+}
+
+
+
+.pulo-app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  
+  background: var(--ground);
+  
+  
+  height: min(var(--pulo-viewport-height, 100%), 100%);
+  
+  padding-top: var(--pulo-layout-inset-top, 0px);
+}
+
+
+.pulo-app[data-exit-visible='true'] {
+  --pulo-header-exit-gutter: calc(var(--pulo-exit-control-size, 44px) + 8px);
+}
+
+
+
+.pulo-exit-control {
+  position: fixed;
+  z-index: 20;
+  
+  display: var(--pulo-exit-control-display, none);
+  top: var(--pulo-exit-control-top, 8px);
+  right: var(--pulo-exit-control-right, 8px);
+  width: var(--pulo-exit-control-size, 44px);
+  height: var(--pulo-exit-control-size, 44px);
+  align-items: center;
+  justify-content: center;
+  
+  border: 0.5px solid var(--track);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-2);
+  cursor: pointer;
+  padding: 0;
+}
+
+
+.pulo-exit-control > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+}
+
+
+
+
+@keyframes vt-home-away{from{transform:translateX(0);opacity:1}to{transform:translateX(-30%);opacity:.45}}
+@keyframes vt-home-back{from{transform:translateX(-30%);opacity:.45}to{transform:translateX(0);opacity:1}}
+@keyframes vt-person-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes vt-person-out{from{transform:translateX(0)}to{transform:translateX(100%)}}
+:root[data-vt]::view-transition-old(root),:root[data-vt]::view-transition-new(root){mix-blend-mode:normal}
+:root[data-vt='person-in']::view-transition-old(root){animation:vt-home-away var(--dur-route) var(--ease-out) both}
+:root[data-vt='person-in']::view-transition-new(root){animation:vt-person-in var(--dur-route) var(--ease-out) both}
+:root[data-vt='person-out']::view-transition-old(root){animation:vt-person-out var(--dur-sheet-out) var(--ease-in) both;z-index:1}
+:root[data-vt='person-out']::view-transition-new(root){animation:vt-home-back var(--dur-sheet-out) var(--ease-in) both}
+:root[data-vt='debt-in']::view-transition-old(root),:root[data-vt='section-in']::view-transition-old(root),:root[data-vt='request-in']::view-transition-old(root){animation:vt-home-away var(--dur-route) var(--ease-out) both}
+:root[data-vt='debt-in']::view-transition-new(root),:root[data-vt='section-in']::view-transition-new(root),:root[data-vt='request-in']::view-transition-new(root){animation:vt-person-in var(--dur-route) var(--ease-out) both}
+:root[data-vt='debt-out']::view-transition-old(root),:root[data-vt='section-out']::view-transition-old(root),:root[data-vt='request-out']::view-transition-old(root){animation:vt-person-out var(--dur-sheet-out) var(--ease-in) both;z-index:1}
+:root[data-vt='debt-out']::view-transition-new(root),:root[data-vt='section-out']::view-transition-new(root),:root[data-vt='request-out']::view-transition-new(root){animation:vt-home-back var(--dur-sheet-out) var(--ease-in) both}
+::view-transition-group(pulo-name),::view-transition-group(pulo-amount){animation-duration:var(--dur-route);animation-timing-function:var(--ease-out)}
+

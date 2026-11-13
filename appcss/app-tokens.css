@@ -1,0 +1,62 @@
+
+:root{
+  
+  --ground:#1A1D21;
+  --surface:#222529;
+  --raised:#2A2E33;          
+  --text-1:#D1D2D3;
+  --text-2:#ABADAF;
+  --text-3:#ABADAF;          
+  --in:#2EB67D;              
+  --out:#E95784;             
+  --line:rgba(255,255,255,0.06);
+  --track:rgba(255,255,255,0.10);
+  
+  --dim-plate:#1F2226;
+  --text-dim:#8A8D90;
+  --pie:#D1D2D3;             
+  --pie-track:rgba(255,255,255,0.13);
+  
+  --dock-bg:#1A1D21;         
+  --dock-ink:#D1D2D3;        
+  --dock-dim:#9A9DA0;        
+  --dock-active:rgba(209,210,211,0.12);
+  --dock-shadow:0 8px 24px rgba(0,0,0,0.42);
+  --scrim:rgba(0,0,0,0.55);
+
+  
+  --gut:23px;   --r-1:10px;  --r-pill:999px;  --r-btn:8px;
+  --row-gap:26px; --field-h:46px;
+  --tap:48px;   
+
+  
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:28px; --s7:40px;
+  --t-1:0.72rem; --t-2:0.82rem; --t-3:0.94rem; --t-4:1.08rem;
+  --t-5:1.3rem;  --t-6:1.6rem;  --t-7:2.05rem;
+}
+
+
+:root[data-theme="light"]{
+  --ground:#F9F9F9;
+  --surface:#E7E7E7;
+  --raised:#DCDCDC;
+  --text-1:#202020;
+  --text-2:#666666;
+  --text-3:#5F6266;          
+  --in:#007036;              
+  --out:#C20027;             
+  --line:rgba(0,0,0,0.06);
+  --track:rgba(0,0,0,0.10);
+  --dim-plate:#F0F0F0;
+  --text-dim:#676B6F;        
+  --pie:#84878A;             
+  --pie-track:rgba(0,0,0,0.10);
+  
+  --dock-bg:#F9F9F9;         
+  --dock-ink:#202020;        
+  --dock-dim:#5F6266;        
+  --dock-active:rgba(0,0,0,0.10);
+  --dock-shadow:0 8px 24px rgba(0,0,0,0.18);
+  --scrim:rgba(0,0,0,0.35);
+}
+

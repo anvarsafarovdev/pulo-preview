@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="robots" content="noindex,nofollow">
+<title>Next button check (app code)</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611132027">
+<link rel="stylesheet" href="../appcss/app-tokens.css?v=202611132027">
+<link rel="stylesheet" href="../appcss/app-base.css?v=202611132027">
+<link rel="stylesheet" href="../appcss/app-rd.css?v=202611132027">
+<style>
+html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
+#dbg { position: fixed; left: 8px; right: 8px; bottom: 50%; z-index: 99; pointer-events: none;
+  font: 600 12px/1.35 ui-monospace, Menlo, monospace; color: #fff; background: rgba(200,30,30,.85);
+  padding: 6px 8px; border-radius: 8px; white-space: pre-wrap; }
+.filler { height: 220px; border-radius: 14px; background: var(--surface, #2a2d33); margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root">
+  <div class="rd-screen rd-own-foot">
+    <div class="rd-body">
+      <div class="rd-top"><h1 class="rd-title">Record a debt</h1><button type="button" class="rd-plan press">FREE</button></div>
+      <div class="rd-amt rd-sec"><span class="feel-rise"><input aria-label="Amount" class="feel-rise-input cf" inputmode="numeric" placeholder="0" type="text" autocomplete="off"></span><button type="button" class="rd-cur press"><span>UZS</span></button></div>
+      <div class="rd-who rd-sec"><span class="pfx">+998</span><span class="feel-rise"><input aria-label="Who" class="feel-rise-input" inputmode="numeric" placeholder="90 123 45 67" type="text" autocomplete="off"></span></div>
+      <label class="rd-new rd-sec"><span>New contact</span><input aria-label="Their name" placeholder="Their name" type="text" autocomplete="off"></label>
+      <div class="rd-card rd-sec"><div class="rd-due"><b>Due in 7 days</b><span>20 Nov 2026</span></div><div style="height:110px"></div></div>
+      <div class="filler"></div>
+    </div>
+    <div class="rd-foot">
+      <p class="rd-why" role="status">Fill in every field to save.</p>
+      <button type="button" class="rd-save" id="go">Next</button>
+    </div>
+  </div>
+</div>
+<pre id="dbg">…</pre>
+<script>
+(function () {
+  var W = window.Telegram && Telegram.WebApp, inTG = !!(W && W.initData !== undefined && W.platform && W.platform !== 'unknown');
+  if (/[?&]fix=1/.test(location.search)) document.documentElement.classList.add('fixbody');
+  var root = document.getElementById('root'), dbg = document.getElementById('dbg'), go = document.getElementById('go');
+  var lastEv = 'load', n = 0;
+  go.addEventListener('pointerdown', function (e) { e.preventDefault(); });
+  go.addEventListener('mousedown', function (e) { e.preventDefault(); });
+  go.addEventListener('click', function () { go.textContent = 'Tapped ' + (++n); });
+
+  /* the shell's insets, as the app publishes them */
+  function insets() {
+    var top = 0, bottom = 0;
+    if (inTG) { var a = W.safeAreaInset || {}, c = W.contentSafeAreaInset || {};
+      top = (a.top || 0) + (c.top || 0); bottom = (a.bottom || 0) + (c.bottom || 0); }
+    var d = document.documentElement.style;
+    d.setProperty('--pulo-layout-inset-top', top + 'px');
+    d.setProperty('--pulo-layout-inset-bottom', bottom + 'px');
+  }
+
+  /* ── a line-for-line port of app/keyboard.ts useKeyboardFit (REDESIGN-7a) ── */
+  var view = window, vv = window.visualViewport, tallest = 0, focusEl = null, timers = [], blurTimer = null, runwayNode = null;
+  function positive(v) { return typeof v === 'number' && isFinite(v) && v > 0; }
+  function isTextField(n) { if (!n || !n.tagName) return false; var t = n.tagName.toUpperCase(); return t === 'TEXTAREA' || (t === 'INPUT' && n.type !== 'range'); }
+  function raisesKeyboard(n) { if (!n || !n.tagName) return false; var t = n.tagName.toUpperCase(); return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT' || n.isContentEditable === true; }
+  function scrollerOf(c) { var node = c.parentElement; while (node) { var o = getComputedStyle(node).overflowY; if (o === 'auto' || o === 'scroll') return node; if (node === root) return null; node = node.parentElement; } return null; }
+  function measureHeight() { var cs = [vv && vv.height, view.innerHeight, document.documentElement.clientHeight]; for (var i = 0; i < cs.length; i++) if (positive(cs[i])) return cs[i]; return null; }
+  function measureOffsetTop() { var r = vv && vv.offsetTop; return typeof r === 'number' && isFinite(r) ? r : 0; }
+  var SPACER = /[?&]spacer=1/.test(location.search), spacerEl = null;
+  function clearRunway() { if (!runwayNode) return; if (spacerEl) { spacerEl.remove(); spacerEl = null; } else runwayNode.style.removeProperty('padding-bottom'); runwayNode = null; }
+  function giveRunway(s) { if (runwayNode === s) return; clearRunway(); var base = parseFloat(getComputedStyle(s).paddingBottom), room = s.clientHeight; if (!(room > 0)) return;
+    if (SPACER) { spacerEl = document.createElement('div'); spacerEl.setAttribute('aria-hidden', 'true'); spacerEl.style.cssText = 'height:' + room + 'px;flex:none;pointer-events:none'; s.appendChild(spacerEl); }
+    else s.style.paddingBottom = ((isFinite(base) ? base : 0) + room) + 'px'; runwayNode = s; }
+  function place(c, smooth) { var s = scrollerOf(c); if (!s) return; giveRunway(s); var pt = parseFloat(getComputedStyle(s).paddingTop) || 0; var room = s.clientHeight - pt - c.offsetHeight; var y = c.offsetTop - pt - Math.max(0, room * 0.3); s.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' }); }
+  function measure(ev) {
+    if (ev && ev.type) lastEv = ev.type;
+    var h = measureHeight(), off = measureOffsetTop();
+    tallest = Math.max(tallest, positive(view.innerHeight) ? view.innerHeight : 0, h || 0);
+    var open = h !== null && isTextField(document.activeElement) && tallest - h > 120;
+    if (h === null) root.style.removeProperty('height'); else root.style.height = h + 'px';
+    if (off !== 0) root.style.transform = 'translateY(' + off + 'px)'; else root.style.removeProperty('transform');
+    if (open) root.style.setProperty('--pulo-layout-inset-bottom', '0px'); else root.style.removeProperty('--pulo-layout-inset-bottom');
+    if (focusEl && document.activeElement === focusEl) place(focusEl, false);
+    show(open);
+  }
+  root.addEventListener('focusin', function (e) { var t = e.target; if (!raisesKeyboard(t)) return; if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
+    timers.forEach(clearTimeout); timers = []; focusEl = null; measure({ type: 'focusin' }); focusEl = t; place(t, true);
+    timers.push(setTimeout(function () { place(t, true); show(); }, 280)); timers.push(setTimeout(function () { place(t, true); show(); }, 560)); timers.push(setTimeout(show, 1200)); });
+  root.addEventListener('focusout', function () { if (blurTimer) clearTimeout(blurTimer); blurTimer = setTimeout(function () { blurTimer = null; var a = document.activeElement; if (!raisesKeyboard(a)) clearRunway(); if (isTextField(a)) return; focusEl = null; timers.forEach(clearTimeout); timers = []; measure({ type: 'blur' }); }, 60); });
+  if (vv) { vv.addEventListener('resize', measure); vv.addEventListener('scroll', measure); }
+  view.addEventListener('resize', measure);
+  view.addEventListener('scroll', function () { if (view.scrollY && view.scrollTo) view.scrollTo(0, 0); });
+  if (inTG) ['viewportChanged', 'safeAreaChanged', 'contentSafeAreaChanged', 'fullscreenChanged'].forEach(function (e) { try { W.onEvent(e, function () { insets(); measure({ type: e }); }); } catch (x) {} });
+
+  function show(open) {
+    var r = go.getBoundingClientRect(), vh = vv ? vv.height + vv.offsetTop : innerHeight;
+    dbg.textContent =
+      (SPACER ? 'FIXED: runway as spacer' : 'A: app as shipped') + ' · ' + (inTG ? W.platform + ' ' + W.version + (W.isFullscreen ? ' full' : ' not-full') : 'browser') +
+      '\nvisual h ' + (vv ? Math.round(vv.height) : '-') + '  top ' + (vv ? Math.round(vv.offsetTop) : '-') + '  inner h ' + innerHeight + '  tallest ' + Math.round(tallest) +
+      '\nframe h ' + (root.style.height || 'css') + '  tg h ' + (inTG ? Math.round(W.viewportHeight) : '-') + '  keyboard ' + (open === undefined ? '?' : open ? 'open' : 'closed') +
+      '\nbutton bottom ' + Math.round(r.bottom) + ' / visible to ' + Math.round(vh) + '  → ' + (r.bottom <= vh + 1 && r.top >= 0 ? 'VISIBLE' : 'HIDDEN') + '  (' + lastEv + ')';
+  }
+  window.addEventListener('load', function () {
+    if (window.PT) PT.main(null);
+    insets(); measure({ type: 'load' }); setTimeout(function () { insets(); measure({ type: 'load+300' }); }, 300);
+  });
+})();
+</script>
+<script src="../tg.js?v=202611132027"></script>
+</body>
+</html>
