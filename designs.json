@@ -1,19 +1,19 @@
 {
- "updated": "13 Nov 20:47 (Tashkent)",
+ "updated": "14 Nov 00:33 (Tashkent)",
  "designs": [
+  {
+   "file": "frame-check-fixed.html",
+   "title": "Next button: THE FIX (red box starts with FIX PAGE)",
+   "rev": "diag-b3",
+   "what": "The fix. The red box now sits at the top so you can see Next. On the Lenovo, Next appears right under the field you type in.",
+   "stamp": "202611140033",
+   "when": "14 Nov 00:33"
+  },
   {
    "file": "frame-check.html",
    "title": "Next button: old code as shipped (fails on purpose)",
    "rev": "diag-a",
    "what": "Pulo's real Record a debt layout code. Tap a field: the red box says whether Next is VISIBLE or HIDDEN.",
-   "stamp": "202611132047",
-   "when": "13 Nov 20:47"
-  },
-  {
-   "file": "frame-check-fixed.html",
-   "title": "Next button: THE FIX (red box starts with FIX PAGE)",
-   "rev": "diag-b2",
-   "what": "The same code with the one-line fix. Tap a field: Next should stay above the keyboard.",
    "stamp": "202611132047",
    "when": "13 Nov 20:47"
   },
