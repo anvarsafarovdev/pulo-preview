@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,interactive-widget=resizes-content">
+<meta name="robots" content="noindex,nofollow">
+<title>Record a debt r9 · one font, size code</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611131035">
+<link rel="stylesheet" href="../kit.css?v=202611131035">
+<link rel="stylesheet" href="../type.css?v=202611131035">
+<style>
+/* ── Record a debt r9 (13 Nov 2026). Full screen always; Pulo draws its own
+   bottom button so it can sit exactly above the keyboard on iOS and Android. */
+html,body{overflow:hidden;position:fixed;inset:0;}
+.app{position:fixed;left:0;right:0;top:0;height:100%;padding:0!important;display:flex;flex-direction:column;
+  background:var(--ground);will-change:transform;}
+html.fb .app{top:0;height:100%;}
+.body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;
+  padding:calc(var(--top,0px) + 6px) var(--gut) 34vh;}
+.body::-webkit-scrollbar{display:none;}
+.cf{font-family:"Comfortaa","IBM Plex Sans",sans-serif;}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:4px;}
+.top h1{margin:0;font-size:var(--t-5);font-weight:700;}
+.plan{height:30px;padding:0 12px;border-radius:999px;border:0;background:var(--surface);color:var(--text-3);
+  font-size:var(--t-1);font-weight:700;letter-spacing:.07em;}
+.sec{transition:opacity .22s cubic-bezier(.2,0,0,1);}
+.sec.dim{opacity:.42;}
+/* amount */
+.amt{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:16px;padding:18px 16px 16px;
+  border-radius:14px;background:var(--surface);}
+.amt input{width:100%;border:0;background:none;outline:none;text-align:center;padding:0;
+  font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-7);font-weight:700;line-height:1.2;
+  font-variant-numeric:tabular-nums;color:var(--in);caret-color:var(--text-1);}
+.amt input::placeholder{color:var(--text-2);opacity:1;}
+.cur{height:34px;padding:0 12px 0 14px;border-radius:10px;border:0;background:var(--ground);color:var(--text-2);
+  font-size:var(--t-2);font-weight:600;display:inline-flex;align-items:center;gap:6px;box-shadow:none;}
+.cur svg{width:14px;height:14px;}
+/* number and name */
+.row{display:flex;align-items:center;gap:12px;margin-top:10px;padding:0 8px 0 16px;min-height:56px;border-radius:14px;
+  background:var(--surface);}
+.row .pfx{font-size:var(--t-3);color:var(--text-2);flex:0 0 auto;}
+.row input{flex:1 1 auto;min-width:0;height:54px;border:0;background:none;outline:none;padding:0;
+  font-size:var(--t-3);color:var(--text-1);letter-spacing:.01em;}
+.row input::placeholder{color:var(--text-2);opacity:.75;}
+.row .lbl{flex:0 0 auto;font-size:var(--t-2);color:var(--text-3);}
+.scan{flex:0 0 auto;width:44px;height:44px;border-radius:10px;border:0;background:var(--ground);color:var(--text-2);
+  display:inline-flex;align-items:center;justify-content:center;}
+.scan svg{width:22px;height:22px;}
+/* when */
+.card{margin-top:10px;padding:14px 16px 12px;border-radius:14px;background:var(--surface);}
+.due{display:flex;justify-content:space-between;align-items:baseline;gap:12px;min-height:1.6em;}
+.due b{font-size:var(--t-3);font-weight:700;}
+.due span{font-size:var(--t-2);color:var(--text-3);white-space:nowrap;}
+.wheel{display:flex;gap:4px;margin:10px -16px 0;padding:0 calc(50% - 23px);overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;overscroll-behavior-x:contain;}
+.wheel::-webkit-scrollbar{display:none;}
+.wheel button{flex:0 0 46px;height:46px;scroll-snap-align:center;border-radius:12px;border:0;background:none;color:var(--text-3);
+  font-size:var(--t-3);font-variant-numeric:tabular-nums;}
+.wheel button.on{background:var(--ground);color:var(--text-1);font-weight:700;}
+/* paid cards */
+.paid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.pc{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:12px 14px 14px;min-height:96px;
+  border-radius:14px;border:0;text-align:left;color:var(--text-1);background:var(--surface);overflow:hidden;}
+.pc::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(46,182,125,.20),rgba(46,182,125,0) 70%);pointer-events:none;}
+.pc.pro::before{background:linear-gradient(135deg,rgba(124,108,240,.22),rgba(124,108,240,0) 70%);}
+.pc > *{position:relative;}
+.pc .ic{width:24px;height:24px;color:var(--in);}
+.pc.pro .ic{color:#9b8cff;}
+.pc b{margin-top:4px;font-size:var(--t-3);font-weight:700;}
+.pc span.s{font-size:var(--t-2);color:var(--text-3);line-height:1.35;}
+.tag{position:absolute!important;top:10px;right:10px;height:24px;padding:0 9px 0 7px;border-radius:999px;background:var(--ground);
+  color:var(--text-2);font-size:var(--t-1);font-weight:600;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;}
+.tag svg{width:12px;height:12px;}
+/* the open option: tabs and panel */
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.tab{height:52px;padding:0 12px 0 16px;border-radius:14px;border:0;background:var(--surface);color:var(--text-2);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:var(--t-3);font-weight:600;min-width:0;}
+.tab span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tab.on{color:var(--text-1);box-shadow:inset 0 0 0 1.5px var(--text-2);}
+.tab .lk{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--ground);display:inline-flex;align-items:center;justify-content:center;}
+.tab .lk svg{width:13px;height:13px;}
+.panel{margin-top:10px;padding:16px;border-radius:14px;background:var(--surface);text-align:center;}
+.pill{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px 0 5px;border-radius:999px;
+  background:rgba(46,182,125,.16);color:var(--text-1);font-size:var(--t-2);font-weight:700;letter-spacing:.07em;}
+.pill.pro{background:rgba(124,108,240,.18);}
+.pill i{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--in);color:var(--ground);
+  animation:pulse 1.8s ease-out infinite;}
+.pill.pro i{background:#8f80f5;animation-name:pulseP;}
+.pill i svg{width:14px;height:14px;stroke-width:2.4;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(46,182,125,.55);}70%{box-shadow:0 0 0 9px rgba(46,182,125,0);}100%{box-shadow:0 0 0 0 rgba(46,182,125,0);}}
+@keyframes pulseP{0%{box-shadow:0 0 0 0 rgba(143,128,245,.55);}70%{box-shadow:0 0 0 9px rgba(143,128,245,0);}100%{box-shadow:0 0 0 0 rgba(143,128,245,0);}}
+.big{margin:12px 0 0;white-space:nowrap;}
+.big b{font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-6);font-weight:700;color:var(--in);font-variant-numeric:tabular-nums;}
+.big small{margin-left:4px;font-size:var(--t-2);color:var(--text-3);}
+.every{margin:6px 0 0;font-size:var(--t-3);font-weight:600;}
+.first{margin:2px 0 0;font-size:var(--t-2);color:var(--text-2);}
+.vw{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 0;}
+.col{height:132px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;padding:44px 0;border-radius:12px;
+  -webkit-mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent);}
+.col::-webkit-scrollbar{display:none;}
+.col button{display:block;width:100%;height:44px;scroll-snap-align:center;border:0;background:none;color:var(--text-3);font-size:var(--t-3);}
+.col button.on{color:var(--text-1);font-weight:700;}
+.vw-band{position:relative;}
+.vw-band::before{content:"";position:absolute;left:0;right:0;top:44px;height:44px;border-radius:12px;background:var(--ground);pointer-events:none;}
+.slide{width:100%;margin:16px 0 4px;accent-color:var(--text-1);}
+.note{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;padding:12px;border-radius:12px;background:var(--ground);
+  text-align:left;font-size:var(--t-2);line-height:1.5;color:var(--text-2);}
+.note svg{flex:0 0 auto;width:18px;height:18px;margin-top:2px;color:var(--in);}
+.fixed{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;padding-top:12px;
+  border-top:1px solid var(--track);font-size:var(--t-2);color:var(--text-2);}
+.fixed svg{width:16px;height:16px;}
+/* photo and note */
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
+.ex{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border:0;border-radius:12px;background:none;
+  color:var(--text-1);font-size:var(--t-2);font-weight:500;}
+.ex svg{width:18px;height:18px;flex:0 0 auto;display:block;}
+/* the foot: Pulo's own bottom button, always above the keyboard or the home bar */
+.foot{flex:0 0 auto;padding:6px 12px calc(10px + var(--bottom,0px));background:var(--ground);}
+.why{min-height:1.4em;margin:0 0 6px;text-align:center;font-size:var(--t-2);color:var(--text-3);}
+.go{display:block;width:100%;height:52px;border:0;border-radius:12px;background:var(--text-1);color:var(--ground);
+  font-family:"IBM Plex Sans",sans-serif;font-size:16px;font-weight:600;box-shadow:none;
+  transition:opacity .15s,transform .12s;-webkit-appearance:none;appearance:none;}
+.go:active{transform:scale(.985);}
+.go:disabled{opacity:.35;}
+.go.busy{color:transparent;position:relative;}
+.go.busy::after{content:"";position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;
+  border:2px solid var(--ground);border-right-color:transparent;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+/* sheets */
+.scrim{position:fixed;inset:0;z-index:30;border:0;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity .24s;}
+.scrim.open{opacity:1;pointer-events:auto;}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(104%);transition:transform .26s cubic-bezier(.2,0,0,1);
+  background:var(--surface);border-radius:20px 20px 0 0;padding:12px var(--gut) calc(20px + var(--bottom,0px));}
+.sheet.open{transform:none;}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--track);margin:0 auto 14px;}
+.sheet h3{margin:0 0 6px;font-size:var(--t-4);font-weight:700;}
+.sheet p{margin:0 0 10px;font-size:var(--t-2);color:var(--text-2);line-height:1.5;}
+.opt{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 4px;border:0;background:none;
+  color:var(--text-1);font-size:var(--t-3);border-bottom:1px solid var(--line);text-align:left;}
+.opt:last-child{border-bottom:0;}
+.opt small{color:var(--text-3);font-size:var(--t-2);}
+.opt svg{width:20px;height:20px;color:var(--in);}
+.seg{display:flex;gap:6px;margin:4px 0 14px;}
+.seg button{flex:1 1 0;height:42px;border:0;border-radius:10px;background:var(--ground);color:var(--text-2);font-size:var(--t-2);font-weight:600;}
+.seg button.on{background:var(--text-1);color:var(--ground);}
+.sh-lab{margin:6px 0 6px;font-size:var(--t-2);color:var(--text-3);}
+.sh-go{display:block;width:100%;height:50px;margin-top:8px;border:0;border-radius:12px;background:var(--text-1);color:var(--ground);font-size:16px;font-weight:600;}
+/* done */
+.done{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:60vh;}
+.ring{width:84px;height:84px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;}
+.ring svg{width:42px;height:42px;stroke:var(--in);stroke-width:2.6;stroke-dasharray:40;stroke-dashoffset:40;animation:draw .5s .1s cubic-bezier(.2,0,0,1) forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.done h2{margin:18px 0 0;font-size:var(--t-5);font-weight:700;}
+.done .who{margin:10px 0 0;font-size:var(--t-4);font-weight:700;}
+.done .sum{margin:4px 0 0;}
+.done .sum b{font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-6);font-weight:700;color:var(--in);}
+.done .sum small{margin-left:4px;color:var(--text-3);font-size:var(--t-2);}
+.done .line{margin:10px 0 0;font-size:var(--t-2);color:var(--text-2);}
+.again{margin-top:20px;height:44px;padding:0 18px;border:0;border-radius:999px;background:var(--surface);color:var(--text-1);font-size:var(--t-2);font-weight:600;}
+.opts-btn{position:fixed;z-index:50;right:10px;top:10px;height:34px;padding:0 12px;border:0;border-radius:999px;background:var(--surface);
+  color:var(--text-2);font-size:14px;font-weight:600;}
+svg.i{stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+
+<style>
+/* ── TYPE-1 proposal: one font (Pulo Round) and the nine-size code from type.css. ── */
+*,*::before,*::after,input::placeholder{font-family:"Pulo Round",sans-serif!important;}
+body{font:var(--type-body);}
+.top h1,.done h2{font:var(--type-title);}
+.sheet h3,.done .who{font:var(--type-heading);}
+.amt input{font:var(--type-hero);}
+.big b,.done .sum b{font:var(--type-figure);}
+.due b,.pc b,.every,.tab,.go,.sh-go,.fb-main button,.col button.on,.wheel button.on{font:var(--type-strong);}
+.row input,.row .pfx,.wheel button,.col button{font:var(--type-body);}
+.plan,.tag,.pill,.cur,.seg button,.ex,.again,.fb-back{font:var(--type-label);}
+.plan,.pill{letter-spacing:.06em;}
+.row .lbl,.due span,.pc span.s,.big small,.first,.note,.fixed,.why,.sheet p,.opt small,.sh-lab,.done .sum small,.done .line,.toast{font:var(--type-small);}
+.note,.sheet p{line-height:1.5;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M14.6 5.4L9.1 10.5Q7.6 12 9.1 13.5L14.6 18.6"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M5.6 9.2L10.5 14.1Q12 15.6 13.5 14.1L18.4 9.2"/></symbol>
+<symbol id="i-dots" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18" cy="12" r="1.4"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M9.4 5.4L14.9 10.5Q16.4 12 14.9 13.5L9.4 18.6"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 4.9L3.3 17.2a2 2 0 001.7 3h14a2 2 0 001.7-3L13.7 4.9a2 2 0 00-3.4 0z"/><path d="M12 9.6v4M12 16.7v.15"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7.6V12l2.9 1.9"/></symbol>
+<symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.8" y="6.4" width="18.4" height="11.2" rx="2.2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.4 12h.15M17.45 12h.15"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.4v13.2M5.4 12h13.2"/></symbol>
+<symbol id="i-cam" viewBox="0 0 24 24"><path d="M3.4 8.6a2 2 0 012-2h1.9l1.3-2h6.8l1.3 2h1.9a2 2 0 012 2v8.8a2 2 0 01-2 2H5.4a2 2 0 01-2-2z"/><circle cx="12" cy="12.8" r="3.4"/></symbol>
+<symbol id="i-text" viewBox="0 0 24 24"><path d="M5 6.6h14M5 12h14M5 17.4h8.4"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5.4 12.4l4.4 4.4 8.8-9.6"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5.4" y="10.6" width="13.2" height="9" rx="2.4"/><path d="M8.6 10.6V7.9a3.4 3.4 0 016.8 0v2.7"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6.6 10.2a5.4 5.4 0 0110.8 0v3.4l1.5 2.6a1 1 0 01-.9 1.5H6a1 1 0 01-.9-1.5l1.5-2.6z"/><path d="M10.2 20.1a2 2 0 003.6 0"/></symbol>
+<symbol id="i-sync" viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-13.7 5.6M4 12a8 8 0 0113.7-5.6"/><path d="M17.7 3.2v3.2h-3.2M6.3 20.8v-3.2h3.2"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M4.4 8.6V6.2a1.8 1.8 0 011.8-1.8h2.4"/><path d="M15.4 4.4h2.4a1.8 1.8 0 011.8 1.8v2.4"/><path d="M19.6 15.4v2.4a1.8 1.8 0 01-1.8 1.8h-2.4"/><path d="M8.6 19.6H6.2a1.8 1.8 0 01-1.8-1.8v-2.4"/><path d="M4.4 12h15.2"/></symbol>
+</defs></svg>
+<div class="app" id="app">
+  <div class="body" id="body"></div>
+  <div class="foot" id="foot"><p class="why" id="why"></p><button class="go" type="button" id="go">Next</button></div>
+</div>
+<button class="scrim" id="scrim" type="button" aria-label="Close"></button>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="grab"></div><div id="shBody"></div></div>
+<script>
+(function () {
+  var W = window.Telegram && window.Telegram.WebApp;
+  var inTG = !!(W && W.platform && W.platform !== 'unknown');
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), body = $('body'), foot = $('foot'), go = $('go'), why = $('why');
+  /* pressing the bottom button never takes the focus away from the field, so the keyboard stays up */
+  ['pointerdown', 'mousedown'].forEach(function (ev) { go.addEventListener(ev, function (e) { e.preventDefault(); }); });
+  function ic(n, cls) { return '<svg class="i ' + (cls || '') + '" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+  var WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var WDL = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  function ord(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+  function addDays(n) { var d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() + n); return d; }
+  function dshort(d) { return WD[d.getDay()] + ' ' + d.getDate() + ' ' + MO[d.getMonth()]; }
+  function dlong(d) { return d.getDate() + ' ' + MO[d.getMonth()] + ' ' + d.getFullYear(); }
+  function group(s) { return String(s).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+  /* ── state ─────────────────────────────────────────────────────────── */
+  var S;
+  function reset() {
+    S = { from: S ? S.from : 'home', plan: S ? S.plan : 'free', amt: '', cur$: 'UZS', num: '', name: '', due: null,
+      mode: null, cad: 'm', day: 1, wd: 2, n: 12, at: 'amt', free: false, done: false, busy: false };
+  }
+  reset();
+  function steps() { return S.from === 'person' ? ['amt', 'when'] : ['amt', 'num', 'name', 'when']; }
+  function allowed(m) { return m === 'rep' ? S.plan !== 'free' : S.plan === 'pro'; }
+  function filled(k) {
+    if (k === 'amt') return Number(S.amt) > 0;
+    if (k === 'num') return S.num.length === 9;
+    if (k === 'name') return S.name.trim().length > 0;
+    if (k === 'when') return S.mode ? allowed(S.mode) : S.due !== null;
+    return true;
+  }
+  function complete() { return steps().every(filled); }
+  function nextEmpty(from) {
+    var st = steps(), i = st.indexOf(from);
+    for (var k = i + 1; k < st.length; k++) if (!filled(st[k])) return st[k];
+    for (var j = 0; j < st.length; j++) if (!filled(st[j])) return st[j];
+    return null;
+  }
+
+  /* ── the bottom button: its words follow what the person is doing ───── */
+  function finalWords() {
+    if (S.from === 'home') return 'Save and invite';
+    return S.mode === 'inst' ? 'Save the plan' : 'Save';
+  }
+  function button() {
+    if (S.done) return { t: 'Done', on: true, act: leave };
+    if (S.mode && !allowed(S.mode)) return { t: 'See plans', on: true, act: plans };
+    if (complete()) return { t: finalWords(), on: true, act: save };
+    if (S.free) return { t: finalWords(), on: false, act: null };
+    return { t: 'Next', on: filled(S.at), act: next };
+  }
+  var HINT = { amt: 'Enter the amount.', num: 'Enter their number, or scan their code.', name: 'Enter their name.',
+    when: 'Choose when it is due, or a repeat or a plan.' };
+  function hint() {
+    if (S.done) return '';
+    if (S.mode && !allowed(S.mode)) return S.mode === 'rep' ? 'Repeats come with Starter.' : 'Installments come with Pro.';
+    if (complete()) return '';
+    if (S.free) return 'Fill in every field to save.';
+    return filled(S.at) ? '' : HINT[S.at];
+  }
+  function paintFoot() {
+    var b = button();
+    go.textContent = b.t; go.disabled = !b.on; go.classList.toggle('busy', !!S.busy);
+    go.onclick = function () { if (b.act && !S.busy) { haptic('light'); b.act(); } };
+    why.textContent = hint();
+  }
+
+  /* ── drawing ─────────────────────────────────────────────────────────── */
+  function draw() {
+    if (S.done) { drawDone(); paintFoot(); return; }
+    var h = '';
+    h += '<div class="top"><h1 class="cf">Record a debt</h1><button class="plan" type="button" id="planPill">' + S.plan.toUpperCase() + '</button></div>';
+    h += '<section class="sec amt" data-k="amt"><input id="amt" inputmode="numeric" enterkeyhint="next" autocomplete="off" placeholder="0" aria-label="Amount" value="' + (S.amt ? group(S.amt) : '') + '">' +
+      '<button class="cur" type="button" id="curBtn">' + S.cur$ + ic('down') + '</button></section>';
+    if (S.from === 'home') {
+      h += '<section class="sec row" data-k="num"><span class="pfx">+998</span><input id="num" type="tel" inputmode="numeric" enterkeyhint="next" autocomplete="off" placeholder="90 123 45 67" aria-label="Their number" value="' + fmtNum(S.num) + '">' +
+        '<button class="scan" type="button" id="scanBtn" aria-label="Scan their code">' + ic('scan') + '</button></section>';
+      h += '<section class="sec row" data-k="name"><span class="lbl">New contact</span><input id="name" type="text" enterkeyhint="next" autocapitalize="words" autocomplete="off" placeholder="Their name" aria-label="Their name"></section>';
+    } else {
+      h += '<section class="row" style="flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:10px 16px">' +
+        '<b class="cf" style="font-size:var(--t-3)">Shuhrat Toshmatov</b><span style="font-size:var(--t-2);color:var(--text-3)">+998 90 412 18 04</span></section>';
+    }
+    h += '<div class="sec" data-k="when" id="whenWrap"></div>';
+    h += '<div class="extras"><button class="ex" type="button" data-ex="photo">' + ic('cam') + '<span>Add photo</span></button>' +
+      '<button class="ex" type="button" data-ex="note">' + ic('text') + '<span>Add note</span></button></div>';
+    body.innerHTML = h;
+    var nm = $('name'); if (nm) nm.value = S.name;
+    wire(); drawWhen(); paint();
+  }
+  function fmtNum(d) { return [d.slice(0, 2), d.slice(2, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean).join(' '); }
+  function lockTag(m) {
+    if (allowed(m)) return '';
+    return '<span class="tag">' + ic('lock') + (m === 'rep' ? 'Starter' : 'Pro') + '</span>';
+  }
+  function drawWhen() {
+    var w = $('whenWrap'); if (!w) return;
+    var h = '';
+    if (!S.mode) {
+      var lab = S.due === null ? 'When is it due?' : S.due === 0 ? 'Due today' : S.due === 1 ? 'Due tomorrow' : 'Due in ' + S.due + ' days';
+      h += '<div class="card"><div class="due"><b class="cf">' + lab + '</b><span>' + (S.due === null ? '' : dlong(addDays(S.due))) + '</span></div><div class="wheel" id="wheel">';
+      for (var i = 0; i <= 30; i++) h += '<button type="button" data-d="' + i + '"' + (S.due === i ? ' class="on"' : '') + ' aria-label="In ' + i + ' days">' + i + '</button>';
+      h += '</div></div>';
+      h += '<div class="paid"><button class="pc" type="button" data-m="rep">' + lockTag('rep') + ic('sync', 'ic') + '<b class="cf">Repeats</b><span class="s">Every week or month</span></button>' +
+        '<button class="pc pro" type="button" data-m="inst">' + lockTag('inst') + ic('cash', 'ic') + '<b class="cf">Installments</b><span class="s">Split into payments</span></button></div>';
+    } else {
+      h += '<div class="tabs"><button class="tab' + (S.mode === 'rep' ? ' on' : '') + '" type="button" data-m="rep"><span>Repeats</span>' + (allowed('rep') ? '' : '<i class="lk">' + ic('lock') + '</i>') + '</button>' +
+        '<button class="tab' + (S.mode === 'inst' ? ' on' : '') + '" type="button" data-m="inst"><span>Installments</span>' + (allowed('inst') ? '' : '<i class="lk">' + ic('lock') + '</i>') + '</button></div>';
+      h += '<div class="panel">';
+      if (!allowed(S.mode)) h += '<span class="pill' + (S.mode === 'inst' ? ' pro' : '') + '"><i>' + ic('lock') + '</i>' + (S.mode === 'rep' ? 'STARTER' : 'PRO') + '</span>';
+      var a = S.amt ? group(S.amt) : '0';
+      if (S.mode === 'rep') {
+        h += '<p class="big"><b>' + a + '</b><small>' + S.cur$ + '</small></p>';
+        h += '<p class="every cf">' + (S.cad === 'm' ? 'Every ' + ord(S.day) : 'Every ' + WDL[S.wd]) + ' until paid</p>';
+        h += '<p class="first">First one ' + dshort(firstRep()) + '</p>';
+        h += '<div class="vw vw-band"><div class="col" id="colA">' + ['Every month', 'Every week'].map(function (t, i) { return '<button type="button" data-v="' + (i ? 'w' : 'm') + '">' + t + '</button>'; }).join('') + '</div>' +
+          '<div class="col" id="colB">' + (S.cad === 'm' ? range(1, 28).map(function (d) { return '<button type="button" data-v="' + d + '">' + ord(d) + '</button>'; }).join('')
+            : WDL.map(function (t, i) { return '<button type="button" data-v="' + i + '">' + t + '</button>'; }).join('')) + '</div></div>';
+        if (S.due !== null) h += '<div class="note">' + ic('clock') + '<span>Replaces the one-time reminder on ' + addDays(S.due).getDate() + ' ' + MO[addDays(S.due).getMonth()] + '. Tap Repeats again to bring it back.</span></div>';
+      } else {
+        var per = Math.ceil((Number(S.amt) || 0) / S.n);
+        h += '<p class="big"><b>' + S.n + '</b><small>payments</small></p>';
+        h += '<p class="every cf">' + group(per) + ' ' + S.cur$ + ' each, monthly</p>';
+        h += '<p class="first">First one ' + dshort(firstRep()) + '</p>';
+        h += '<input class="slide" id="slide" type="range" min="2" max="60" step="1" value="' + S.n + '" aria-label="How many payments">';
+      }
+      h += '<p class="fixed">' + ic('lock') + '<span>Can’t be changed later</span></p></div>';
+    }
+    w.innerHTML = h;
+    wireWhen();
+  }
+  function range(a, b) { var r = []; for (var i = a; i <= b; i++) r.push(i); return r; }
+  function firstRep() {
+    var d = addDays(1);
+    if (S.mode === 'inst' || S.cad === 'm') { var day = S.mode === 'inst' ? 1 : S.day; while (d.getDate() !== day) d.setDate(d.getDate() + 1); return d; }
+    var want = (S.wd + 1) % 7; while (d.getDay() !== want) d.setDate(d.getDate() + 1); return d;
+  }
+  /* dim only what is still ahead of the guided path; finished fields never dim; nothing is ever locked */
+  function paint() {
+    [].forEach.call(document.querySelectorAll('.sec'), function (s) {
+      var k = s.getAttribute('data-k');
+      s.classList.toggle('dim', !S.free && k !== S.at && !filled(k));
+    });
+    paintFoot();
+  }
+
+  /* ── behaviour ───────────────────────────────────────────────────────── */
+  var inputs = { amt: 'amt', num: 'num', name: 'name' };
+  function choose(k) {
+    /* tapping a field by hand: earlier or finished fields keep the guided path; jumping ahead to an empty one switches to free hand */
+    if (k === S.at) return;
+    var target = nextEmpty(S.at);
+    if (!filled(k) && k !== target && steps().indexOf(k) > steps().indexOf(S.at)) S.free = true;
+    S.at = k; paint();
+  }
+  function next() {
+    var k = nextEmpty(S.at);
+    if (!k) { paint(); return; }
+    S.at = k; paint();
+    if (inputs[k]) { var el = $(inputs[k]); el.focus({ preventScroll: true }); centre(el.closest('.sec')); }
+    else { blurAll(); setTimeout(function () { centre($('whenWrap'), 0.08); }, 260); }
+  }
+  function blurAll() { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }
+  function wire() {
+    var amt = $('amt');
+    amt.addEventListener('input', function () {
+      S.amt = amt.value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 13); amt.value = S.amt ? group(S.amt) : ''; paint();
+    });
+    var num = $('num');
+    if (num) num.addEventListener('input', function () {
+      var was = S.num.length; S.num = num.value.replace(/\D/g, '').slice(0, 9); num.value = fmtNum(S.num);
+      paint(); if (S.num.length === 9 && was < 9 && !S.free && !filled('name')) next();
+    });
+    var nm = $('name'); if (nm) nm.addEventListener('input', function () { S.name = nm.value; paint(); });
+    ['amt', 'num', 'name'].forEach(function (k) {
+      var el = $(k); if (!el) return;
+      el.addEventListener('focus', function () { choose(k); centre(el.closest('.sec')); });
+      el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); var b = button(); if (b.on && b.act) b.act(); else if (filled(k)) next(); } });
+    });
+    [].forEach.call(document.querySelectorAll('.sec.row,.sec.amt'), function (s) {
+      s.addEventListener('click', function (e) {
+        var k = s.getAttribute('data-k'); var el = $(inputs[k]);
+        if (e.target.closest('button')) return;
+        if (el && document.activeElement !== el) el.focus({ preventScroll: true });
+      });
+    });
+    $('curBtn').onclick = function (e) { e.stopPropagation(); currency(); };
+    var sb = $('scanBtn'); if (sb) sb.onclick = function (e) { e.stopPropagation(); toast('The camera opens here in the app. Not part of this preview.'); };
+    $('planPill').onclick = function () { plans(); };
+    [].forEach.call(document.querySelectorAll('.ex'), function (b) { b.onclick = function () { toast((b.getAttribute('data-ex') === 'photo' ? 'Add photo' : 'Add note') + ' opens here in the app. Not part of this preview.'); }; });
+  }
+  var wheelT = 0, wheelTouch = false;
+  function wireWhen() {
+    var wh = $('wheel');
+    if (wh) {
+      [].forEach.call(wh.children, function (b) {
+        b.onclick = function () { pickDue(+b.getAttribute('data-d'), true); };
+      });
+      var on = wh.querySelector('.on') || wh.children[0];
+      wh.scrollLeft = on.offsetLeft - (wh.clientWidth - on.offsetWidth) / 2;
+      wh.addEventListener('touchstart', function () { wheelTouch = true; blurAll(); }, { passive: true });
+      wh.addEventListener('scroll', function () {
+        if (!wheelTouch) return;
+        clearTimeout(wheelT); wheelT = setTimeout(function () {
+          var mid = wh.scrollLeft + wh.clientWidth / 2, best = 0, bd = 1e9;
+          [].forEach.call(wh.children, function (b, i) { var c = b.offsetLeft + b.offsetWidth / 2, dd = Math.abs(c - mid); if (dd < bd) { bd = dd; best = i; } });
+          wheelTouch = false; pickDue(best, false);
+        }, 140);
+      }, { passive: true });
+    }
+    [].forEach.call(document.querySelectorAll('[data-m]'), function (b) {
+      b.onclick = function () { var m = b.getAttribute('data-m'); blurAll(); if (S.mode === m) closeMode(); else openMode(m); };
+    });
+    vwheel($('colA'), S.cad, function (v) { if (v !== S.cad) { S.cad = v; drawWhen(); paint(); } });
+    vwheel($('colB'), S.cad === 'm' ? String(S.day) : String(S.wd), function (v) {
+      if (S.cad === 'm') S.day = +v; else S.wd = +v;
+      var e = document.querySelector('.every'), f = document.querySelector('.first');
+      if (e) e.textContent = (S.cad === 'm' ? 'Every ' + ord(S.day) : 'Every ' + WDL[S.wd]) + ' until paid';
+      if (f) f.textContent = 'First one ' + dshort(firstRep());
+    });
+    var sl = $('slide');
+    if (sl) sl.oninput = function () {
+      S.n = +sl.value; var per = Math.ceil((Number(S.amt) || 0) / S.n);
+      document.querySelector('.big b').textContent = S.n;
+      document.querySelector('.every').textContent = group(per) + ' ' + S.cur$ + ' each, monthly';
+      haptic('select');
+    };
+  }
+  function vwheel(col, val, cb) {
+    if (!col) return;
+    var items = col.children, t = 0;
+    function mark(i) { [].forEach.call(items, function (b, j) { b.classList.toggle('on', j === i); }); }
+    var start = 0; [].forEach.call(items, function (b, i) { if (b.getAttribute('data-v') === String(val)) start = i; });
+    col.scrollTop = start * 44; mark(start);
+    col.addEventListener('scroll', function () {
+      var i = Math.round(col.scrollTop / 44); mark(i);
+      clearTimeout(t); t = setTimeout(function () { haptic('select'); cb(items[Math.max(0, Math.min(items.length - 1, i))].getAttribute('data-v')); }, 120);
+    }, { passive: true });
+    [].forEach.call(items, function (b, i) { b.onclick = function () { col.scrollTo({ top: i * 44, behavior: 'smooth' }); }; });
+  }
+  function pickDue(d, scroll) {
+    S.due = d; choose('when'); S.at = 'when'; haptic('select');
+    var wh = $('wheel');
+    [].forEach.call(wh.children, function (b, i) { b.classList.toggle('on', i === d); });
+    var lab = d === 0 ? 'Due today' : d === 1 ? 'Due tomorrow' : 'Due in ' + d + ' days';
+    var due = document.querySelector('.due'); due.querySelector('b').textContent = lab; due.querySelector('span').textContent = dlong(addDays(d));
+    if (scroll) { var b = wh.children[d]; wh.scrollTo({ left: b.offsetLeft - (wh.clientWidth - b.offsetWidth) / 2, behavior: 'smooth' }); }
+    paint();
+  }
+  function openMode(m) {
+    var was = S.mode; S.mode = m; if (S.at !== 'when') choose('when'); S.at = 'when';
+    if (!was) pushBack(closeMode);
+    haptic('light'); drawWhen(); paint(); setTimeout(function () { centre($('whenWrap'), 0.06); }, 30);
+  }
+  function closeMode() { if (!S.mode) return; S.mode = null; popBack(closeMode); haptic('light'); drawWhen(); paint(); }
+
+  function save() {
+    S.busy = true; paintFoot(); blurAll();
+    setTimeout(function () { S.busy = false; S.done = true; haptic('success'); if (S.mode) popBack(closeMode); draw(); body.scrollTop = 0; }, 650);
+  }
+  function drawDone() {
+    var who = S.from === 'person' ? 'Shuhrat Toshmatov' : (S.name.trim() || 'New contact');
+    var line = S.mode === 'rep' ? 'Reminds ' + (S.cad === 'm' ? 'every ' + ord(S.day) : 'every ' + WDL[S.wd]) + ' · the first ' + dshort(firstRep())
+      : S.mode === 'inst' ? S.n + ' payments · the first ' + dshort(firstRep())
+      : S.due === 0 ? 'Due today' : 'Due ' + dshort(addDays(S.due));
+    body.innerHTML = '<div class="done"><span class="ring"><svg viewBox="0 0 24 24" fill="none"><path d="M6 12.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+      '<h2 class="cf">' + (S.mode === 'inst' ? 'Plan saved' : 'Debt recorded') + '</h2><p class="who cf"></p>' +
+      '<p class="sum"><b>' + group(S.amt) + '</b><small>' + S.cur$ + '</small></p><p class="line">' + line + '</p>' +
+      (S.from === 'home' ? '<p class="line">Telegram opens next so you can send them the invite.</p>' : '') +
+      '<button class="again" type="button" id="again">Record another</button></div>';
+    body.querySelector('.who').textContent = who;
+    $('again').onclick = function () { reset(); draw(); };
+  }
+  function leave() { if (window.PT) PT.home(); }
+
+  /* ── sheets ──────────────────────────────────────────────────────────── */
+  var sheet = $('sheet'), scrim = $('scrim');
+  function openSheet(html) { $('shBody').innerHTML = html; blurAll(); sheet.classList.add('open'); scrim.classList.add('open'); pushBack(closeSheet); }
+  function closeSheet() { sheet.classList.remove('open'); scrim.classList.remove('open'); popBack(closeSheet); }
+  scrim.onclick = closeSheet;
+  function currency() {
+    openSheet('<h3 class="cf">Currency</h3>' + [['UZS', 'Uzbek som'], ['USD', 'US dollar'], ['EUR', 'Euro']].map(function (c) {
+      return '<button class="opt" type="button" data-c="' + c[0] + '"><span>' + c[0] + ' <small>' + c[1] + '</small></span>' + (S.cur$ === c[0] ? ic('check') : '') + '</button>';
+    }).join(''));
+    [].forEach.call(document.querySelectorAll('[data-c]'), function (b) { b.onclick = function () { S.cur$ = b.getAttribute('data-c'); $('curBtn').innerHTML = S.cur$ + ic('down'); haptic('select'); closeSheet(); if (S.mode) drawWhen(); }; });
+  }
+  function plans() {
+    openSheet('<h3 class="cf">Plans</h3><p>Repeats come with Starter. Installments come with Pro.</p>' +
+      '<p class="sh-lab">In this preview, switch the shop’s plan to try both:</p><div class="seg">' + ['free', 'starter', 'pro'].map(function (p) {
+        return '<button type="button" data-p="' + p + '"' + (S.plan === p ? ' class="on"' : '') + '>' + p.charAt(0).toUpperCase() + p.slice(1) + '</button>'; }).join('') + '</div>');
+    [].forEach.call(document.querySelectorAll('[data-p]'), function (b) { b.onclick = function () { S.plan = b.getAttribute('data-p'); closeSheet(); $('planPill').textContent = S.plan.toUpperCase(); drawWhen(); paint(); }; });
+  }
+  function options() {
+    openSheet('<h3 class="cf">Preview options</h3><p class="sh-lab">Opened from</p><div class="seg">' +
+      '<button type="button" data-f="home"' + (S.from === 'home' ? ' class="on"' : '') + '>Home · new number</button>' +
+      '<button type="button" data-f="person"' + (S.from === 'person' ? ' class="on"' : '') + '>A person</button></div>' +
+      '<p class="sh-lab">Shop’s plan</p><div class="seg">' + ['free', 'starter', 'pro'].map(function (p) {
+        return '<button type="button" data-p="' + p + '"' + (S.plan === p ? ' class="on"' : '') + '>' + p.charAt(0).toUpperCase() + p.slice(1) + '</button>'; }).join('') + '</div>' +
+      '<p class="sh-lab">Theme</p><div class="seg"><button type="button" data-t="light">Bright</button><button type="button" data-t="dark">Dark</button></div>' +
+      '<button class="sh-go" type="button" id="restart">Start again</button>');
+    [].forEach.call(document.querySelectorAll('[data-f]'), function (b) { b.onclick = function () { S.from = b.getAttribute('data-f'); closeSheet(); reset(); draw(); }; });
+    [].forEach.call(document.querySelectorAll('[data-p]'), function (b) { b.onclick = function () { S.plan = b.getAttribute('data-p'); closeSheet(); draw(); }; });
+    [].forEach.call(document.querySelectorAll('[data-t]'), function (b) { b.onclick = function () { if (window.PT) PT.setTheme(b.getAttribute('data-t')); closeSheet(); }; });
+    $('restart').onclick = function () { closeSheet(); reset(); draw(); };
+  }
+
+  /* ── Telegram: Back, Settings, vibration ────────────────────────────── */
+  var backStack = [];
+  function pushBack(fn) { backStack.push(fn); if (window.PT) PT.pushBack(fn); }
+  function popBack(fn) { var i = backStack.lastIndexOf(fn); if (i >= 0) backStack.splice(i, 1); if (window.PT) PT.popBack(fn); }
+  function haptic(k) { if (window.PT) PT.haptic(k); }
+  function toast(t) { if (window.PT) PT.toast(t); }
+
+  /* ── the visible area: above the keyboard, below Telegram's header ──── */
+  var tallest = 0;
+  function insets() {
+    var top = 0, bottom = 0;
+    if (inTG) {
+      var a = W.safeAreaInset || {}, c = W.contentSafeAreaInset || {};
+      top = (a.top || 0) + (c.top || 0); bottom = (a.bottom || 0) + (c.bottom || 0);
+    }
+    return { top: top, bottom: bottom };
+  }
+  function typing() { var a = document.activeElement; return !!(a && a.tagName === 'INPUT' && a.type !== 'range'); }
+  function layout() {
+    var vv = window.visualViewport, h = vv ? vv.height : innerHeight, off = vv ? vv.offsetTop : 0;
+    tallest = Math.max(tallest, innerHeight, h);
+    var kb = typing() && (tallest - h > 120);
+    var ins = insets();
+    app.style.height = h + 'px';
+    app.style.transform = off ? 'translateY(' + off + 'px)' : '';
+    document.documentElement.style.setProperty('--top', ins.top + 'px');
+    document.documentElement.style.setProperty('--bottom', (kb ? 0 : ins.bottom) + 'px');
+    if (focusEl && kb) centre(focusEl, null, true);
+  }
+  var focusEl = null;
+  /* centre: put the field a third of the way down the space left above the keyboard */
+  function centre(el, frac, instant) {
+    if (!el) return;
+    focusEl = el;
+    var run = function (smooth) {
+      var room = body.clientHeight, topPad = parseFloat(getComputedStyle(body).paddingTop) || 0;
+      var f = frac == null ? 0.30 : frac;
+      var y = el.offsetTop - topPad - Math.max(0, (room - topPad - el.offsetHeight) * f);
+      body.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+    };
+    run(!instant);
+    if (!instant) { setTimeout(function () { run(true); }, 280); setTimeout(function () { run(true); }, 560); }
+  }
+  document.addEventListener('focusout', function () { setTimeout(function () { if (!typing()) { focusEl = null; layout(); } }, 60); });
+  if (window.visualViewport) { visualViewport.addEventListener('resize', layout); visualViewport.addEventListener('scroll', layout); }
+  window.addEventListener('resize', layout);
+  window.addEventListener('scroll', function () { if (window.scrollY) window.scrollTo(0, 0); });
+  if (inTG) {
+    ['viewportChanged', 'safeAreaChanged', 'contentSafeAreaChanged', 'fullscreenChanged'].forEach(function (e) { try { W.onEvent(e, layout); } catch (x) {} });
+    try { W.SettingsButton.show(); W.SettingsButton.onClick(options); } catch (x) {}
+  } else {
+    var ob = document.createElement('button'); ob.className = 'opts-btn'; ob.type = 'button'; ob.textContent = 'Options'; ob.onclick = options; document.body.appendChild(ob);
+  }
+  window.addEventListener('load', function () {
+    if (window.PT) PT.main(null);            /* Telegram's own bottom button stays hidden: Pulo draws its own */
+    if (inTG) { try { W.setBottomBarColor && W.setBottomBarColor(getComputedStyle(document.documentElement).getPropertyValue('--ground').trim()); } catch (x) {} }
+    draw(); layout(); setTimeout(layout, 300);
+  });
+})();
+</script>
+<script src="../tg.js?v=202611131035"></script>
+</body>
+</html>

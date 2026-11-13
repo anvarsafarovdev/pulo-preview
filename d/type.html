@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Type: one font, one size code</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611131035">
+<link rel="stylesheet" href="../kit.css?v=202611131035">
+<link rel="stylesheet" href="../type.css?v=202611131035">
+<style>
+body{font:var(--type-body);}
+.app{padding-top:calc(var(--tg-safe-area-inset-top,0px) + var(--tg-content-safe-area-inset-top,0px));}
+.hd{padding:14px var(--gut) 6px;}
+.hd h1{margin:0;font:var(--type-title);}
+.hd p{margin:6px 0 0;font:var(--type-small);color:var(--text-2);}
+.role{padding:14px var(--gut);box-shadow:inset 0 -1px 0 var(--line);}
+.role .k{display:flex;justify-content:space-between;gap:10px;margin:0 0 6px;font:var(--type-small);color:var(--text-3);}
+.role .k b{font:var(--type-label);color:var(--text-2);white-space:nowrap;}
+.role p{margin:0;overflow:hidden;text-overflow:ellipsis;}
+.in{color:var(--in);}
+.dock{display:flex;justify-content:space-around;padding:8px 0;border-radius:14px;background:var(--surface);margin-top:4px;}
+.dock span{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-2);}
+.dock i{width:22px;height:22px;border-radius:7px;background:var(--track);}
+.pill{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:999px;background:var(--surface);letter-spacing:.06em;color:var(--text-2);}
+.btn{display:block;width:100%;height:52px;margin-top:4px;border:0;border-radius:12px;background:var(--text-1);color:var(--ground);font:var(--type-strong);}
+.big{font-size:44px;font-weight:700;line-height:1.15;margin:6px 0 0;}
+.sp{height:60px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="body">
+    <header class="hd"><h1>One font, one size code</h1>
+      <p>Pulo Round is Comfortaa with Ҳ ҳ added. Nine sizes for the whole app. Tap the bottom button to see Record a debt in it.</p></header>
+    <div class="role"><p class="k"><b>Hero · 36.8 bold</b><span>the amount you type</span></p><p class="ty-hero in">12 450 000</p></div>
+    <div class="role"><p class="k"><b>Figure · 28.7 bold</b><span>Done amount, panels</span></p><p class="ty-figure in">582 825 <span class="ty-small" style="color:var(--text-3)">UZS</span></p></div>
+    <div class="role"><p class="k"><b>Title · 23.3 bold</b><span>screen titles</span></p><p class="ty-title">Record a debt · Qarz yozish</p></div>
+    <div class="role"><p class="k"><b>Heading · 19.4 bold</b><span>a name on its page, sheets</span></p><p class="ty-heading">Ўткир Ғайратов · Раҳимов</p></div>
+    <div class="role"><p class="k"><b>Strong · 16.9 bold</b><span>rows, card titles, tabs, buttons</span></p><p class="ty-strong">Şahzoda Ğofurova · 1 250 000 UZS</p></div>
+    <div class="role"><p class="k"><b>Body · 16.9</b><span>fields and sentences</span></p>
+      <p class="ty-body">Ҳаммаси тўғри: қарз ёзилди, эслатма ҳар чоршанба келади.</p>
+      <p class="ty-body" style="margin-top:6px">Hammasi töğri: qarz yozildi, eslatma har çorşanba keladi.</p>
+      <p class="ty-body" style="margin-top:6px">Готово: долг записан, напоминание приходит каждую среду.</p></div>
+    <div class="role"><p class="k"><b>Label · 14.7 semi-bold</b><span>section labels, chips, pills, tags</span></p>
+      <p class="ty-label">People who owe you &nbsp; <span class="pill">STARTER</span></p></div>
+    <div class="role"><p class="k"><b>Small · 14.7</b><span>hints, dates, second lines</span></p><p class="ty-small" style="color:var(--text-2)">Enter their number, or scan their code. · Due Wed 18 Nov</p></div>
+    <div class="role"><p class="k"><b>Micro · 12.9 bold</b><span>dock labels and badge only</span></p>
+      <div class="dock ty-micro"><span><i></i>Home</span><span><i></i>Qarzlar</span><span><i></i>Долги</span><span><i></i>Ҳисоб</span></div></div>
+    <div class="role"><p class="k"><b>Easy to misread?</b><span>at a large size</span></p>
+      <p class="big">Ҳҳ Ққ Ўў Ғғ</p><p class="big">Şş Çç Ğğ Öö Oʻ</p><p class="big">Il1 O0 3 8 6 9</p></div>
+    <div class="sp"></div>
+  </div>
+</div>
+<script>
+window.addEventListener('load', function () {
+  PT.main({ text: 'See Record a debt in it', onClick: function () { location.href = 'record-debt-r9-type.html'; } });
+});
+</script>
+<script src="../tg.js?v=202611131035"></script>
+</body>
+</html>
