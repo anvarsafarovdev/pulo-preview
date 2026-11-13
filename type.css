@@ -17,3 +17,7 @@
 .ty-hero{font:var(--type-hero);} .ty-figure{font:var(--type-figure);} .ty-title{font:var(--type-title);}
 .ty-heading{font:var(--type-heading);} .ty-strong{font:var(--type-strong);} .ty-body{font:var(--type-body);}
 .ty-label{font:var(--type-label);} .ty-small{font:var(--type-small);} .ty-micro{font:var(--type-micro);}
+/* Text that sits in a box that cuts (overflow hidden or auto, an ellipsis, an input):
+   accents on capitals (Ğ Ö Ў Й) rise above Comfortaa's line box, so such a box gets
+   line-height 1.5 or more, which keeps every mark inside it. */
+.ty-cut{line-height:1.5!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}

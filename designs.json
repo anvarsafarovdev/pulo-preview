@@ -1,21 +1,21 @@
 {
- "updated": "13 Nov 10:35 (Tashkent)",
+ "updated": "13 Nov 11:16 (Tashkent)",
  "designs": [
   {
    "file": "record-debt-r9-type.html",
    "title": "Record a debt r9 in one font (Pulo Round)",
    "rev": "r9-type",
    "what": "Your approved r9, same behaviour, with Comfortaa everywhere (including buttons and Ҳ) and the new size code. Compare it with r9.",
-   "stamp": "202611131035",
-   "when": "13 Nov 10:35"
+   "stamp": "202611131116",
+   "when": "13 Nov 11:16"
   },
   {
    "file": "type.html",
-   "title": "Type: one font, one size code (to approve)",
-   "rev": "t1",
+   "title": "Type: one font, one size code (r2)",
+   "rev": "t2",
    "what": "The nine sizes for the whole app, in all four alphabets, with the new Ҳ ҳ. The bottom button opens Record a debt in it.",
-   "stamp": "202611131035",
-   "when": "13 Nov 10:35"
+   "stamp": "202611131116",
+   "when": "13 Nov 11:16"
   },
   {
    "file": "record-debt-r9.html",
