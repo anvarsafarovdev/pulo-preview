@@ -1,6 +1,14 @@
 {
- "updated": "14 Nov 00:33 (Tashkent)",
+ "updated": "14 Nov 00:48 (Tashkent)",
  "designs": [
+  {
+   "file": "frame-check-estimate.html",
+   "title": "Next button on Android: above the keyboard (estimated)",
+   "rev": "diag-c1",
+   "what": "Android full screen does not report the keyboard, so its height is estimated. Tap a field: Next should sit just above the keyboard, like on the iPhone.",
+   "stamp": "202611140048",
+   "when": "14 Nov 00:48"
+  },
   {
    "file": "frame-check-fixed.html",
    "title": "Next button: THE FIX (red box starts with FIX PAGE)",
