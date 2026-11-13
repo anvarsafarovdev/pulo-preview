@@ -6,10 +6,10 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Next button check (app code)</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611140048">
-<link rel="stylesheet" href="../appcss/app-tokens.css?v=202611140048">
-<link rel="stylesheet" href="../appcss/app-base.css?v=202611140048">
-<link rel="stylesheet" href="../appcss/app-rd.css?v=202611140048">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611140053">
+<link rel="stylesheet" href="../appcss/app-tokens.css?v=202611140053">
+<link rel="stylesheet" href="../appcss/app-base.css?v=202611140053">
+<link rel="stylesheet" href="../appcss/app-rd.css?v=202611140053">
 <style>
 html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
 #dbg { position: fixed; left: 8px; right: 8px; top: calc(var(--pulo-layout-inset-top, 0px) + 4px); z-index: 99; pointer-events: none; opacity: .85;
@@ -80,7 +80,7 @@ html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
   under.firstChild.addEventListener('pointerdown', function (e) { e.preventDefault(); });
   under.firstChild.addEventListener('mousedown', function (e) { e.preventDefault(); });
   under.firstChild.addEventListener('click', function () { under.firstChild.textContent = 'Tapped ' + (++n); });
-  var guessTimer = null, unknown = false, estimated = false, EST = 0.40;
+  var guessTimer = null, unknown = false, estimated = false, EST = 0.385;
   function setUnknown(on, field) {
     unknown = on; var foot = document.querySelector('.rd-foot');
     if (on && field) { var sec = field.closest('.rd-sec') || field; sec.after(under); under.style.display = 'block'; foot.style.visibility = 'hidden'; }
@@ -126,6 +126,6 @@ html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
   });
 })();
 </script>
-<script src="../tg.js?v=202611140048"></script>
+<script src="../tg.js?v=202611140053"></script>
 </body>
 </html>
