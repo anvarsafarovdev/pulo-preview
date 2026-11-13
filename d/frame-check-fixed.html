@@ -6,10 +6,10 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Next button check (app code)</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611132038">
-<link rel="stylesheet" href="../appcss/app-tokens.css?v=202611132038">
-<link rel="stylesheet" href="../appcss/app-base.css?v=202611132038">
-<link rel="stylesheet" href="../appcss/app-rd.css?v=202611132038">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611132047">
+<link rel="stylesheet" href="../appcss/app-tokens.css?v=202611132047">
+<link rel="stylesheet" href="../appcss/app-base.css?v=202611132047">
+<link rel="stylesheet" href="../appcss/app-rd.css?v=202611132047">
 <style>
 html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
 #dbg { position: fixed; left: 8px; right: 8px; bottom: 50%; z-index: 99; pointer-events: none;
@@ -70,9 +70,28 @@ html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
     if (SPACER) { spacerEl = document.createElement('div'); spacerEl.setAttribute('aria-hidden', 'true'); spacerEl.style.cssText = 'height:' + room + 'px;flex:none;pointer-events:none'; s.appendChild(spacerEl); }
     else s.style.paddingBottom = ((isFinite(base) ? base : 0) + room) + 'px'; runwayNode = s; }
   function place(c, smooth) { var s = scrollerOf(c); if (!s) return; giveRunway(s); var pt = parseFloat(getComputedStyle(s).paddingTop) || 0; var room = s.clientHeight - pt - c.offsetHeight; var y = c.offsetTop - pt - Math.max(0, room * 0.3); s.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' }); }
+  /* Android in Telegram full screen reports NO keyboard through the visible area.
+     Two more sources, in order: the browser's keyboard API, then (if the phone tells us nothing)
+     the button moves to sit right under the field being typed in, which is above any keyboard. */
+  var vk = navigator.virtualKeyboard, kbApi = 0, kbApiSeen = false, mode = 'visible area';
+  if (vk) { try { vk.overlaysContent = true; vk.addEventListener('geometrychange', function (e) { kbApiSeen = true; kbApi = Math.round(e.target.boundingRect.height || 0); measure({ type: 'keyboard API' }); }); } catch (x) {} }
+  var under = document.createElement('div'); under.className = 'rd-under'; under.style.cssText = 'display:none;padding:12px 0 0';
+  under.innerHTML = '<button type="button" class="rd-save" style="height:52px;width:100%;border-radius:12px">Next</button>';
+  under.firstChild.addEventListener('pointerdown', function (e) { e.preventDefault(); });
+  under.firstChild.addEventListener('mousedown', function (e) { e.preventDefault(); });
+  under.firstChild.addEventListener('click', function () { under.firstChild.textContent = 'Tapped ' + (++n); });
+  var guessTimer = null, unknown = false;
+  function setUnknown(on, field) {
+    unknown = on; var foot = document.querySelector('.rd-foot');
+    if (on && field) { var sec = field.closest('.rd-sec') || field; sec.after(under); under.style.display = 'block'; foot.style.visibility = 'hidden'; }
+    else { under.style.display = 'none'; foot.style.visibility = ''; }
+  }
   function measure(ev) {
     if (ev && ev.type) lastEv = ev.type;
     var h = measureHeight(), off = measureOffsetTop();
+    if (kbApi > 0 && isTextField(document.activeElement)) { h = view.innerHeight - kbApi; mode = 'keyboard API'; }
+    else if (unknown) mode = 'not reported: Next under the field';
+    else mode = 'visible area';
     tallest = Math.max(tallest, positive(view.innerHeight) ? view.innerHeight : 0, h || 0);
     var open = h !== null && isTextField(document.activeElement) && tallest - h > 120;
     if (h === null) root.style.removeProperty('height'); else root.style.height = h + 'px';
@@ -83,20 +102,22 @@ html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
   }
   root.addEventListener('focusin', function (e) { var t = e.target; if (!raisesKeyboard(t)) return; if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
     timers.forEach(clearTimeout); timers = []; focusEl = null; measure({ type: 'focusin' }); focusEl = t; place(t, true);
-    timers.push(setTimeout(function () { place(t, true); show(); }, 280)); timers.push(setTimeout(function () { place(t, true); show(); }, 560)); timers.push(setTimeout(show, 1200)); });
-  root.addEventListener('focusout', function () { if (blurTimer) clearTimeout(blurTimer); blurTimer = setTimeout(function () { blurTimer = null; var a = document.activeElement; if (!raisesKeyboard(a)) clearRunway(); if (isTextField(a)) return; focusEl = null; timers.forEach(clearTimeout); timers = []; measure({ type: 'blur' }); }, 60); });
+    timers.push(setTimeout(function () { place(t, true); show(); }, 280)); timers.push(setTimeout(function () { place(t, true); show(); }, 560)); timers.push(setTimeout(show, 1200));
+    if (guessTimer) clearTimeout(guessTimer);
+    guessTimer = setTimeout(function () { var h = measureHeight(); if (isTextField(document.activeElement) && !(kbApi > 0) && tallest - (h || 0) <= 120 && /android|ios/.test(inTG ? W.platform : '')) { setUnknown(true, document.activeElement); var sc = scrollerOf(document.activeElement); if (sc) { var sec = document.activeElement.closest('.rd-sec') || document.activeElement; sc.scrollTo({ top: Math.max(0, sec.offsetTop - 16), behavior: 'smooth' }); } measure({ type: 'no keyboard signal' }); } }, 450); });
+  root.addEventListener('focusout', function () { if (blurTimer) clearTimeout(blurTimer); blurTimer = setTimeout(function () { blurTimer = null; var a = document.activeElement; if (!raisesKeyboard(a)) clearRunway(); if (isTextField(a)) return; focusEl = null; timers.forEach(clearTimeout); timers = []; setUnknown(false); kbApi = 0; measure({ type: 'blur' }); }, 60); });
   if (vv) { vv.addEventListener('resize', measure); vv.addEventListener('scroll', measure); }
   view.addEventListener('resize', measure);
   view.addEventListener('scroll', function () { if (view.scrollY && view.scrollTo) view.scrollTo(0, 0); });
   if (inTG) ['viewportChanged', 'safeAreaChanged', 'contentSafeAreaChanged', 'fullscreenChanged'].forEach(function (e) { try { W.onEvent(e, function () { insets(); measure({ type: e }); }); } catch (x) {} });
 
   function show(open) {
-    var r = go.getBoundingClientRect(), vh = vv ? vv.height + vv.offsetTop : innerHeight;
+    var b = unknown ? under.firstChild : go, r = b.getBoundingClientRect(), vh = vv ? vv.height + vv.offsetTop : innerHeight;
     dbg.textContent =
-      (SPACER ? 'FIXED: runway as spacer' : 'A: app as shipped') + ' · ' + (inTG ? W.platform + ' ' + W.version + (W.isFullscreen ? ' full' : ' not-full') : 'browser') +
+      'FIX PAGE · ' + mode + ' · ' + (inTG ? W.platform + ' ' + W.version + (W.isFullscreen ? ' full' : ' not-full') : 'browser') +
       '\nvisual h ' + (vv ? Math.round(vv.height) : '-') + '  top ' + (vv ? Math.round(vv.offsetTop) : '-') + '  inner h ' + innerHeight + '  tallest ' + Math.round(tallest) +
       '\nframe h ' + (root.style.height || 'css') + '  tg h ' + (inTG ? Math.round(W.viewportHeight) : '-') + '  keyboard ' + (open === undefined ? '?' : open ? 'open' : 'closed') +
-      '\nbutton bottom ' + Math.round(r.bottom) + ' / visible to ' + Math.round(vh) + '  → ' + (r.bottom <= vh + 1 && r.top >= 0 ? 'VISIBLE' : 'HIDDEN') + '  (' + lastEv + ')';
+      '\nkeyboard API ' + (vk ? (kbApiSeen ? kbApi + 'px' : 'present, silent') : 'none') + '\nbutton bottom ' + Math.round(r.bottom) + ' / visible to ' + Math.round(vh) + '  → ' + (r.bottom <= vh + 1 && r.top >= 0 ? 'VISIBLE' : 'HIDDEN') + '  (' + lastEv + ')';
   }
   window.addEventListener('load', function () {
     if (window.PT) { PT.main(null); if (inTG && !W.isFullscreen) PT.fullscreen(true); }
@@ -104,6 +125,6 @@ html.fixbody, html.fixbody body { position: fixed; inset: 0; overflow: hidden; }
   });
 })();
 </script>
-<script src="../tg.js?v=202611132038"></script>
+<script src="../tg.js?v=202611132047"></script>
 </body>
 </html>
