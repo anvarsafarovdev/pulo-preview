@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Add note check (app code)</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611141638">
-<link rel="stylesheet" href="../appcss/app-full.css?v=202611141638">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611141648">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611141648">
 <style>
 /* Mode B and C: the fold's clipping box can no longer be scrolled by anyone (overflow: clip is not a scroll container). */
 html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner { overflow: hidden; overflow: clip; }
@@ -17,6 +17,7 @@ html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner {
 
 #mode { letter-spacing: 0.02em; }
 .nc-due-wheel { height: 150px; }
+#dbg.mini { top: 56%; }
 </style>
 </head>
 <body>
@@ -70,7 +71,7 @@ html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner {
     </div>
   </div>
 </div>
-<pre id="dbg">…</pre>
+<pre id="dbg" class="mini">…</pre>
 <script>
 (function () {
   var W = window.Telegram && Telegram.WebApp;
@@ -78,11 +79,11 @@ html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner {
   var root = document.getElementById('root'), body = document.getElementById('body'), dbg = document.getElementById('dbg');
   var fold = document.getElementById('fold'), foldIn = document.getElementById('foldIn'), chip = document.getElementById('noteChip');
   var modeBtn = document.getElementById('mode');
-  var MODE_WORDS = { A: 'A · APP NOW', B: 'B · CLIP', C: 'C · CLIP+RESET' };
-  var MODE = 'A';
-  try { MODE = localStorage.getItem('nc-mode') || 'A'; } catch (e) {}
-  if (!MODE_WORDS[MODE]) MODE = 'A';
-  function setMode(m) { MODE = m; document.documentElement.setAttribute('data-ncmode', m); modeBtn.textContent = MODE_WORDS[m]; try { localStorage.setItem('nc-mode', m); } catch (e) {} paint(); }
+  var MODE_WORDS = { D: 'D · NOTE AT TOP', A: 'A · APP NOW', B: 'B · CLIP', C: 'C · CLIP+RESET' };
+  var MODE = 'D';
+  try { MODE = localStorage.getItem('nc-mode2') || 'D'; } catch (e) {}
+  if (!MODE_WORDS[MODE]) MODE = 'D';
+  function setMode(m) { MODE = m; document.documentElement.setAttribute('data-ncmode', m); modeBtn.textContent = MODE_WORDS[m]; try { localStorage.setItem('nc-mode2', m); } catch (e) {} paint(); }
 
   /* ── the trace ── */
   var t0 = performance.now(), evs = [];
@@ -111,6 +112,7 @@ html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner {
          Mode C adds one thing to place(): every clipping box between the field and its scroller is put back to scrollTop 0. ═══ */
   var LAYOUT_INSET_BOTTOM = '--pulo-layout-inset-bottom';
   var ANDROID_KEYBOARD_SHARE = 0.385;
+  var NOTE_GAP = 12; /* mode D: the note's top sits 12px under the scroller's top padding */
   var tallest = 0;
   function isTextField(n) { if (!n || typeof n.tagName !== 'string') return false; var t = n.tagName.toUpperCase(); if (t === 'TEXTAREA') return true; return t === 'INPUT' && n.type !== 'range' && n.type !== 'checkbox' && n.type !== 'radio' && n.type !== 'button' && n.type !== 'submit'; }
   function raisesKeyboard(n) { if (!n || typeof n.tagName !== 'string') return false; var t = n.tagName.toUpperCase(); if (t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT') return true; return n.isContentEditable === true; }
@@ -149,7 +151,7 @@ html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner {
       var controlRect = control.getBoundingClientRect(), containerRect = container.getBoundingClientRect();
       var laidOut = controlRect.height !== 0 || controlRect.width !== 0 || containerRect.height !== 0 || containerRect.width !== 0;
       var top = laidOut ? controlRect.top - containerRect.top + container.scrollTop : control.offsetTop;
-      var y = top - paddingTop - Math.max(0, room * 0.3);
+      var y = (MODE === 'D' && control.tagName === 'TEXTAREA') ? top - paddingTop - NOTE_GAP : top - paddingTop - Math.max(0, room * 0.3);
       var before = container.scrollTop;
       if (typeof container.scrollTo === 'function') container.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
       tr('place' + (smooth ? '~' : '') + (why ? '(' + why + ')' : ''), 'y ' + r0(Math.max(0, y)) + ' from ' + r0(before) + (smooth ? '' : ' now ' + r0(container.scrollTop)));
@@ -277,7 +279,7 @@ html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner {
     tr(open ? 'Repeats OPEN' : 'Repeats closed');
   });
   modeBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); });
-  modeBtn.addEventListener('click', function () { setMode(MODE === 'A' ? 'B' : MODE === 'B' ? 'C' : 'A'); });
+  modeBtn.addEventListener('click', function () { setMode(MODE === 'D' ? 'A' : MODE === 'A' ? 'B' : MODE === 'B' ? 'C' : 'D'); });
   dbg.addEventListener('pointerdown', function (e) { e.preventDefault(); dbg.classList.toggle('mini'); paint(); });
   document.getElementById('save').addEventListener('pointerdown', function (e) { e.preventDefault(); });
 
@@ -319,6 +321,6 @@ html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner {
   });
 })();
 </script>
-<script src="../tg.js?v=202611141638"></script>
+<script src="../tg.js?v=202611141648"></script>
 </body>
 </html>

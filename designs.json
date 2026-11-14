@@ -1,13 +1,13 @@
 {
- "updated": "14 Nov 16:38 (Tashkent)",
+ "updated": "14 Nov 16:48 (Tashkent)",
  "designs": [
   {
    "file": "note-check.html",
-   "title": "Add note check (iPhone, Repeats open)",
-   "rev": "r1",
-   "what": "The app's real current keyboard code and stylesheet, with a red readout. Tap Add note and screenshot. The grey pill at the top switches A, B, C.",
-   "stamp": "202611141638",
-   "when": "14 Nov 16:38"
+   "title": "Add note check: note at the top (D)",
+   "rev": "r2",
+   "what": "Opens on D: Add note puts the box at the top, keyboard below. The grey pill switches D, A, B, C.",
+   "stamp": "202611141648",
+   "when": "14 Nov 16:48"
   },
   {
    "file": "frame-check-estimate.html",
