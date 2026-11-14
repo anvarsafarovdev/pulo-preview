@@ -1,6 +1,14 @@
 {
- "updated": "14 Nov 00:53 (Tashkent)",
+ "updated": "14 Nov 16:38 (Tashkent)",
  "designs": [
+  {
+   "file": "note-check.html",
+   "title": "Add note check (iPhone, Repeats open)",
+   "rev": "r1",
+   "what": "The app's real current keyboard code and stylesheet, with a red readout. Tap Add note and screenshot. The grey pill at the top switches A, B, C.",
+   "stamp": "202611141638",
+   "when": "14 Nov 16:38"
+  },
   {
    "file": "frame-check-estimate.html",
    "title": "Next button on Android: above the keyboard (estimated)",

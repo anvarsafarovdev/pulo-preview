@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="robots" content="noindex,nofollow">
+<title>Add note check (app code)</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611141638">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611141638">
+<style>
+/* Mode B and C: the fold's clipping box can no longer be scrolled by anyone (overflow: clip is not a scroll container). */
+html[data-ncmode="B"] .feel-fold-inner, html[data-ncmode="C"] .feel-fold-inner { overflow: hidden; overflow: clip; }
+#dbg { position: fixed; left: 6px; right: 6px; top: calc(var(--pulo-layout-inset-top, 0px) + 2px); z-index: 99; opacity: .86;
+  font: 600 9.5px/1.28 ui-monospace, Menlo, monospace; color: #fff; background: rgba(190,25,25,.9);
+  padding: 5px 7px; border-radius: 8px; white-space: pre-wrap; margin: 0; }
+
+#mode { letter-spacing: 0.02em; }
+.nc-due-wheel { height: 150px; }
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root">
+  <div class="rd-screen rd-own-foot" data-dir="in">
+    <div class="rd-body" id="body">
+      <div class="rd-top"><h1 class="rd-title">Record a debt</h1><button type="button" class="rd-plan press" id="mode">A</button></div>
+
+      <div class="rd-amt rd-sec" data-sec="amt">
+        <span class="feel-rise"><input aria-label="Amount" class="feel-rise-input cf" inputmode="numeric" enterkeyhint="next" placeholder="0" type="text" autocomplete="off" value="250 000" data-fit="t-7"></span>
+        <button type="button" class="rd-cur press"><span>UZS</span></button>
+        <p class="rd-cleared" role="status"></p>
+      </div>
+
+      <div class="rd-who rd-sec" data-sec="who"><span class="pfx">+998</span><span class="feel-rise"><input aria-label="Who" class="feel-rise-input" inputmode="numeric" enterkeyhint="next" placeholder="90 123 45 67" type="text" autocomplete="off" value="90 123 45 67"></span></div>
+
+      <label class="rd-new rd-sec" data-sec="name"><span>New contact</span><input aria-label="Their name" placeholder="Their name" type="text" autocomplete="off" autocapitalize="words" enterkeyhint="next" value="Aziz"></label>
+
+      <div class="rd-card rd-sec" data-sec="when" id="due" hidden>
+        <div class="rd-due"><b>Due in 7 days</b><span>21 Nov 2026</span></div>
+        <div class="nc-due-wheel"></div>
+      </div>
+
+      <div class="rd-paid compact" id="paid">
+        <button type="button" class="rd-pc open" data-p="REPEATS" aria-pressed="true" id="tabRep"><b>Repeats</b></button>
+        <button type="button" class="rd-pc pro" data-p="INSTALLMENTS" aria-pressed="false" id="tabIns"><b>Installments</b></button>
+      </div>
+
+      <div class="rd-card rd-sec" data-sec="rep" id="rep">
+        <p class="rd-big" data-rd="repeat-amount"><b class="cf" data-fit="t-7">250 000</b> <span class="c">UZS</span></p>
+        <p class="rd-rep-line" data-rd="repeat-line">Every month on the 1st, until it is paid</p>
+        <p class="rd-rep-first" data-rd="repeat-first">The first one: 1 Dec</p>
+        <div class="rd-pk">
+          <div class="rd-pk-band" aria-hidden="true"></div>
+          <div class="rd-pk-col" role="listbox" tabindex="0"><div class="rd-pk-opt" role="option" aria-selected="true">Every month</div><div class="rd-pk-opt" role="option">Every week</div></div>
+          <div class="rd-pk-col" role="listbox" tabindex="0"><div class="rd-pk-opt" role="option" aria-selected="true">1st</div><div class="rd-pk-opt">5th</div><div class="rd-pk-opt">10th</div><div class="rd-pk-opt">15th</div><div class="rd-pk-opt">20th</div><div class="rd-pk-opt">25th</div><div class="rd-pk-opt">28th</div><div class="rd-pk-opt">31st</div></div>
+        </div>
+        <p class="rd-lockline" data-rd="repeat-lock-line"><span>Stops by itself when the debt is paid</span></p>
+      </div>
+
+      <div class="rd-small">
+        <button type="button" class="rd-opt press" data-chip="photo" aria-pressed="false">Add photo</button>
+        <button type="button" class="rd-opt press" data-chip="note" aria-pressed="false" id="noteChip">Add note</button>
+      </div>
+
+      <div class="feel-fold" data-open="false" id="fold"><div class="feel-fold-inner" id="foldIn" inert aria-hidden="true"></div></div>
+    </div>
+    <div class="rd-foot">
+      <p class="rd-why" role="status"></p>
+      <button type="button" class="rd-save" id="save">Save debt</button>
+    </div>
+  </div>
+</div>
+<pre id="dbg">…</pre>
+<script>
+(function () {
+  var W = window.Telegram && Telegram.WebApp;
+  var inTG = !!(W && W.initData !== undefined && W.platform && W.platform !== 'unknown');
+  var root = document.getElementById('root'), body = document.getElementById('body'), dbg = document.getElementById('dbg');
+  var fold = document.getElementById('fold'), foldIn = document.getElementById('foldIn'), chip = document.getElementById('noteChip');
+  var modeBtn = document.getElementById('mode');
+  var MODE_WORDS = { A: 'A · APP NOW', B: 'B · CLIP', C: 'C · CLIP+RESET' };
+  var MODE = 'A';
+  try { MODE = localStorage.getItem('nc-mode') || 'A'; } catch (e) {}
+  if (!MODE_WORDS[MODE]) MODE = 'A';
+  function setMode(m) { MODE = m; document.documentElement.setAttribute('data-ncmode', m); modeBtn.textContent = MODE_WORDS[m]; try { localStorage.setItem('nc-mode', m); } catch (e) {} paint(); }
+
+  /* ── the trace ── */
+  var t0 = performance.now(), evs = [];
+  function tr(kind, detail) {
+    evs.unshift(Math.round(performance.now() - t0) + ' ' + kind + (detail ? ' ' + detail : ''));
+    if (evs.length > 10) evs.pop();
+    paint();
+  }
+  function r0(v) { return Math.round(v); }
+
+  /* ── the shell's insets, as the app publishes them ── */
+  function insets() {
+    var top = 0, bottom = 0;
+    if (inTG) { var a = W.safeAreaInset || {}, c = W.contentSafeAreaInset || {};
+      top = (a.top || 0) + (c.top || 0); bottom = (a.bottom || 0) + (c.bottom || 0); }
+    var d = document.documentElement.style;
+    d.setProperty('--pulo-layout-inset-top', top + 'px');
+    d.setProperty('--pulo-layout-inset-bottom', bottom + 'px');
+  }
+  var shell = {
+    getPlatform: function () { return inTG && typeof W.platform === 'string' && W.platform ? W.platform.toLowerCase() : 'unknown'; },
+    getState: function () { return { presentation: inTG && W.isFullscreen ? 'FULLSCREEN' : 'NORMAL' }; }
+  };
+
+  /* ═══ A line-for-line port of app/keyboard.ts useKeyboardFit as of MICRO-3 (14 Nov), plus trace() calls.
+         Mode C adds one thing to place(): every clipping box between the field and its scroller is put back to scrollTop 0. ═══ */
+  var LAYOUT_INSET_BOTTOM = '--pulo-layout-inset-bottom';
+  var ANDROID_KEYBOARD_SHARE = 0.385;
+  var tallest = 0;
+  function isTextField(n) { if (!n || typeof n.tagName !== 'string') return false; var t = n.tagName.toUpperCase(); if (t === 'TEXTAREA') return true; return t === 'INPUT' && n.type !== 'range' && n.type !== 'checkbox' && n.type !== 'radio' && n.type !== 'button' && n.type !== 'submit'; }
+  function raisesKeyboard(n) { if (!n || typeof n.tagName !== 'string') return false; var t = n.tagName.toUpperCase(); if (t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT') return true; return n.isContentEditable === true; }
+  function scrollerOf(control) { var node = control.parentElement; while (node) { var o = getComputedStyle(node).overflowY; if (o === 'auto' || o === 'scroll') return node; if (node === root) return null; node = node.parentElement; } return null; }
+  function positive(v) { return typeof v === 'number' && isFinite(v) && v > 0; }
+
+  var uninstall = null, installedFor = null, place = null;
+  function install(appHeight) {
+    var view = window, document_ = document, visualViewport = view.visualViewport;
+    var subscribable = visualViewport && typeof visualViewport.addEventListener === 'function' ? visualViewport : null;
+    function measureHeight() { var cs = [visualViewport && visualViewport.height, view.innerHeight, appHeight, document_.documentElement.clientHeight]; for (var i = 0; i < cs.length; i++) if (positive(cs[i])) return cs[i]; return null; }
+    function measureOffsetTop() { var r = visualViewport && visualViewport.offsetTop; return typeof r === 'number' && isFinite(r) ? r : 0; }
+    var runway = null;
+    function clearRunway() { if (runway === null) return; runway.spacer.remove(); runway = null; }
+    function giveRunway(scroller) {
+      if (runway !== null && runway.scroller === scroller) return;
+      clearRunway();
+      var room = scroller.clientHeight;
+      if (!isFinite(room) || room <= 0) return;
+      var spacer = document_.createElement('div');
+      spacer.style.height = room + 'px'; spacer.style.flex = 'none'; spacer.style.pointerEvents = 'none';
+      spacer.setAttribute('aria-hidden', 'true'); spacer.setAttribute('data-kb-runway', '');
+      scroller.appendChild(spacer);
+      runway = { scroller: scroller, spacer: spacer };
+    }
+    var focusEl = null, estimated = false, timers = [], blurTimer = null;
+    function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+
+    place = function (control, smooth, why) {
+      var container = scrollerOf(control);
+      if (container === null) { tr('place', 'NO SCROLLER'); return; }
+      if (MODE === 'C') { for (var n = control.parentElement; n && n !== container; n = n.parentElement) if (n.scrollTop !== 0) { tr('reset clip', n.className.split(' ')[0] + ' ' + r0(n.scrollTop) + '→0'); n.scrollTop = 0; } }
+      giveRunway(container);
+      var paddingTop = parseFloat(view.getComputedStyle(container).paddingTop) || 0;
+      var room = container.clientHeight - paddingTop - control.offsetHeight;
+      var controlRect = control.getBoundingClientRect(), containerRect = container.getBoundingClientRect();
+      var laidOut = controlRect.height !== 0 || controlRect.width !== 0 || containerRect.height !== 0 || containerRect.width !== 0;
+      var top = laidOut ? controlRect.top - containerRect.top + container.scrollTop : control.offsetTop;
+      var y = top - paddingTop - Math.max(0, room * 0.3);
+      var before = container.scrollTop;
+      if (typeof container.scrollTo === 'function') container.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+      tr('place' + (smooth ? '~' : '') + (why ? '(' + why + ')' : ''), 'y ' + r0(Math.max(0, y)) + ' from ' + r0(before) + (smooth ? '' : ' now ' + r0(container.scrollTop)));
+    };
+
+    function measure(ev) {
+      var real = measureHeight(), offsetTop = measureOffsetTop();
+      tallest = Math.max(tallest, positive(view.innerHeight) ? view.innerHeight : 0, real || 0);
+      var field = isTextField(document_.activeElement);
+      if (estimated && real !== null && tallest - real > 120) estimated = false;
+      var useEstimate = estimated && field && positive(view.innerHeight);
+      var h = useEstimate ? Math.round(view.innerHeight * (1 - ANDROID_KEYBOARD_SHARE)) : real;
+      var open = useEstimate || (h !== null && field && tallest - h > 120);
+      if (h === null) root.style.removeProperty('height'); else root.style.height = h + 'px';
+      if (offsetTop !== 0) root.style.transform = 'translateY(' + offsetTop + 'px)'; else root.style.removeProperty('transform');
+      if (open) root.style.setProperty(LAYOUT_INSET_BOTTOM, '0px'); else root.style.removeProperty(LAYOUT_INSET_BOTTOM);
+      tr('measure' + (ev ? '(' + ev + ')' : ''), 'h ' + (h === null ? '-' : r0(h)) + ' top ' + r0(offsetTop) + (open ? ' OPEN' : ' closed') + (useEstimate ? ' est' : ''));
+      if (focusEl !== null && document_.activeElement === focusEl) place(focusEl, false, 'm');
+    }
+    function onFocusIn(event) {
+      var target = event.target;
+      if (!raisesKeyboard(target)) return;
+      tr('focusin', target.className.split(' ')[0] || target.tagName.toLowerCase());
+      if (blurTimer !== null) { clearTimeout(blurTimer); blurTimer = null; }
+      clearTimers(); focusEl = null; measure('focus'); focusEl = target;
+      place(target, true, '0');
+      timers.push(setTimeout(function () { place(target, true, '280'); }, 280));
+      timers.push(setTimeout(function () { place(target, true, '560'); }, 560));
+      if (MODE === 'C') timers.push(setTimeout(function () { place(target, false, '900'); }, 900));
+      timers.push(setTimeout(function () {
+        if (!isTextField(document_.activeElement)) return;
+        var real = measureHeight(); if (real === null) return;
+        if (Math.max(tallest, real) - real > 120) return;
+        if (!shell.getPlatform().startsWith('android')) return;
+        if (shell.getState().presentation !== 'FULLSCREEN') return;
+        estimated = true; measure('est');
+      }, 450));
+    }
+    function onFocusOut() {
+      tr('focusout');
+      if (blurTimer !== null) clearTimeout(blurTimer);
+      blurTimer = setTimeout(function () {
+        blurTimer = null; var active = document_.activeElement;
+        if (!raisesKeyboard(active)) clearRunway();
+        if (isTextField(active)) return;
+        focusEl = null; estimated = false; clearTimers(); measure('blur');
+      }, 60);
+    }
+    function onWindowScroll() {
+      var y = view.scrollY || view.pageYOffset;
+      tr('WIN scroll', 'scrollY ' + r0(y) + (y ? ' → reset 0' : ''));
+      if (y && typeof view.scrollTo === 'function') view.scrollTo(0, 0);
+    }
+    function onVvResize() { measure('vv resize'); }
+    function onVvScroll() { measure('vv scroll'); }
+    function onWinResize() { measure('win resize'); }
+    function onTg() { measure('tg'); }
+    root.addEventListener('focusin', onFocusIn);
+    root.addEventListener('focusout', onFocusOut);
+    if (subscribable) { subscribable.addEventListener('resize', onVvResize); subscribable.addEventListener('scroll', onVvScroll); }
+    view.addEventListener('resize', onWinResize);
+    view.addEventListener('scroll', onWindowScroll);
+    var tgEvents = ['viewportChanged', 'safeAreaChanged', 'contentSafeAreaChanged', 'fullscreenChanged'];
+    if (inTG) tgEvents.forEach(function (e) { try { W.onEvent(e, onTg); } catch (x) {} });
+    var already = document_.activeElement;
+    if (raisesKeyboard(already) && root.contains(already)) focusEl = already;
+    measure('install');
+    return function () {
+      root.removeEventListener('focusin', onFocusIn);
+      root.removeEventListener('focusout', onFocusOut);
+      if (subscribable) { subscribable.removeEventListener('resize', onVvResize); subscribable.removeEventListener('scroll', onVvScroll); }
+      view.removeEventListener('resize', onWinResize);
+      view.removeEventListener('scroll', onWindowScroll);
+      if (inTG) tgEvents.forEach(function (e) { try { W.offEvent(e, onTg); } catch (x) {} });
+      estimated = false; clearTimers(); if (blurTimer !== null) clearTimeout(blurTimer);
+      root.style.removeProperty('height'); root.style.removeProperty('transform'); root.style.removeProperty(LAYOUT_INSET_BOTTOM);
+      clearRunway();
+    };
+  }
+  /* PuloApp re-runs the hook when Telegram re-publishes a new viewportHeight (the effect's appHeight dependency). */
+  function appHeightNow() { return inTG ? W.viewportHeight : 0; }
+  function reinstallIfNeeded() {
+    var h = appHeightNow();
+    if (installedFor === h && uninstall) return;
+    if (uninstall) { uninstall(); tr('RE-INSTALL', 'tg h ' + r0(installedFor) + '→' + r0(h)); }
+    installedFor = h; uninstall = install(h);
+  }
+  if (inTG) ['viewportChanged', 'safeAreaChanged', 'contentSafeAreaChanged'].forEach(function (e) {
+    try { W.onEvent(e, function () { insets(); setTimeout(reinstallIfNeeded, 0); }); } catch (x) {} });
+
+  /* ═══ The Fold (app/feel/Fold.tsx, mountWhenClosed=false) and useRevealFocus, in React's order for a tap:
+         content mounts closed → Fold's effect asks for the next frame → the screen's effect focuses the box (preventScroll). ═══ */
+  var notesOpen = false, unmountTimer = null;
+  function openNote() {
+    notesOpen = true;
+    if (unmountTimer) { clearTimeout(unmountTimer); unmountTimer = null; }
+    if (!foldIn.firstChild) foldIn.innerHTML = '<div><textarea class="rd-note" aria-label="Note" placeholder="What was it for? (only you see this)"></textarea><p class="rd-count">0 / 500</p></div>';
+    foldIn.inert = false; foldIn.removeAttribute('inert'); foldIn.removeAttribute('aria-hidden');
+    fold.setAttribute('data-open', 'false');
+    chip.textContent = 'Close note'; chip.setAttribute('aria-pressed', 'true');
+    requestAnimationFrame(function () { fold.setAttribute('data-open', 'true'); tr('fold opens'); });
+    var ta = foldIn.querySelector('textarea');
+    ta.focus({ preventScroll: true });
+    tr('focus()', document.activeElement === ta ? 'took' : 'NOT TAKEN');
+  }
+  function closeNote() {
+    notesOpen = false;
+    fold.setAttribute('data-open', 'false');
+    foldIn.inert = true; foldIn.setAttribute('inert', ''); foldIn.setAttribute('aria-hidden', 'true');
+    chip.textContent = 'Add note'; chip.setAttribute('aria-pressed', 'false');
+    unmountTimer = setTimeout(function () { foldIn.innerHTML = ''; unmountTimer = null; }, 320);
+  }
+  chip.addEventListener('click', function () {
+    if (!notesOpen) { t0 = performance.now(); evs = []; tr('TAP Add note'); openNote(); watch(); }
+    else { tr('TAP Close note'); closeNote(); }
+  });
+  fold.addEventListener('transitionend', function (e) { if (e.target === fold) tr('fold open done'); });
+
+  /* the panel can be closed to compare */
+  document.getElementById('tabRep').addEventListener('click', function () {
+    var rep = document.getElementById('rep'), due = document.getElementById('due'), open = rep.hidden;
+    rep.hidden = !open; due.hidden = open;
+    this.classList.toggle('open', open); this.setAttribute('aria-pressed', open ? 'true' : 'false');
+    document.getElementById('paid').classList.toggle('compact', open);
+    tr(open ? 'Repeats OPEN' : 'Repeats closed');
+  });
+  modeBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); });
+  modeBtn.addEventListener('click', function () { setMode(MODE === 'A' ? 'B' : MODE === 'B' ? 'C' : 'A'); });
+  dbg.addEventListener('pointerdown', function (e) { e.preventDefault(); dbg.classList.toggle('mini'); paint(); });
+  document.getElementById('save').addEventListener('pointerdown', function (e) { e.preventDefault(); });
+
+  /* scroll watchers: the body (logged once it settles) and every clipping box inside it (logged at once) */
+  var bodySettle = null;
+  body.addEventListener('scroll', function () { if (bodySettle) clearTimeout(bodySettle); bodySettle = setTimeout(function () { tr('body settled', r0(body.scrollTop)); }, 90); }, { passive: true });
+  root.addEventListener('scroll', function (e) { var t = e.target; if (t === body || t === document) return; if (t.classList && t.classList.contains('rd-pk-col')) return; tr('CLIP SCROLLED', (t.className || t.tagName).toString().split(' ')[0] + ' ' + r0(t.scrollTop)); }, { capture: true, passive: true });
+
+  var watchTimer = null;
+  function watch() { var k = 0; if (watchTimer) clearInterval(watchTimer); watchTimer = setInterval(function () { paint(); if (++k > 25) clearInterval(watchTimer); }, 200); }
+
+  /* ── the readout ── */
+  function paint() {
+    var vv = window.visualViewport, vh = vv ? vv.height : innerHeight, vt = vv ? vv.offsetTop : 0;
+    var ta = foldIn.querySelector('textarea'), a = document.activeElement;
+    var line5 = 'note: not open';
+    if (ta) {
+      var r = ta.getBoundingClientRect(), fi = foldIn.getBoundingClientRect(), b = body.getBoundingClientRect();
+      var top = Math.max(r.top, fi.top, b.top, vt), bot = Math.min(r.bottom, fi.bottom, b.bottom, vt + vh);
+      var seen = r.height > 0 ? Math.max(0, bot - top) / r.height : 0;
+      line5 = 'note ' + r0(r.top) + '..' + r0(r.bottom) + ' clip ' + r0(fi.top) + '..' + r0(fi.bottom) + ' see ' + r0(vt) + '..' + r0(vt + vh) +
+        '\nNOTE ' + (seen > 0.95 ? 'VISIBLE' : seen > 0 ? 'PART HIDDEN ' + r0(seen * 100) + '%' : 'HIDDEN') + (a === ta ? ' · has cursor' : ' · NO cursor');
+    }
+    var rw = body.querySelector('[data-kb-runway]');
+    if (dbg.classList.contains('mini')) { dbg.textContent = MODE_WORDS[MODE] + ' · ' + line5.split('\n').pop() + '  (tap: more)'; return; }
+    dbg.textContent =
+      MODE_WORDS[MODE] + ' · ' + (inTG ? W.platform + ' ' + W.version + (W.isFullscreen ? ' full' : ' NOT-full') : 'browser') + ' · +' + r0(performance.now() - t0) + 'ms' +
+      '\nvv h ' + r0(vh) + ' top ' + r0(vt) + ' · inner ' + innerHeight + ' · scrollY ' + r0(scrollY) + ' · tg ' + (inTG ? r0(W.viewportHeight) : '-') +
+      '\nframe ' + (root.style.height || 'css') + ' ' + (root.style.transform || '') + ' · body ' + r0(body.scrollTop) + '/' + body.clientHeight + '/' + body.scrollHeight + ' runway ' + (rw ? rw.style.height : 'none') +
+      '\nfold ' + fold.getAttribute('data-open') + ' h ' + r0(fold.getBoundingClientRect().height) + ' clip scrollTop ' + r0(foldIn.scrollTop) +
+      '\n' + line5 +
+      '\n' + evs.join('\n') + '\n(tap this box to shrink it)';
+  }
+
+  window.addEventListener('load', function () {
+    if (window.PT) { PT.main(null); if (inTG && !W.isFullscreen) PT.fullscreen(true); }
+    insets(); setMode(MODE); reinstallIfNeeded();
+    setTimeout(function () { insets(); reinstallIfNeeded(); paint(); }, 300);
+  });
+})();
+</script>
+<script src="../tg.js?v=202611141638"></script>
+</body>
+</html>
