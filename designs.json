@@ -1,13 +1,13 @@
 {
- "updated": "15 Nov 22:08 (Tashkent)",
+ "updated": "15 Nov 22:24 (Tashkent)",
  "designs": [
   {
    "file": "onboarding-short.html",
-   "title": "Onboarding: fewer words, one step less (proposal)",
-   "rev": "r1",
-   "what": "Welcome with no tickboxes, the Terms as a sheet from a link, and a shorter Name your store. \"Show today's\" switches to what is built now. Tap Get started to walk through.",
-   "stamp": "202611152208",
-   "when": "15 Nov 22:08"
+   "title": "Onboarding: fewer words, one step less (r2, the owl)",
+   "rev": "r2",
+   "what": "Welcome with the owl (its eyes tick left and right), your Terms wording in the sheet, and a clean name field. \"Show today's\" switches to what is built now.",
+   "stamp": "202611152224",
+   "when": "15 Nov 22:24"
   },
   {
    "file": "is-this-you.html",
