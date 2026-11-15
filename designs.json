@@ -1,13 +1,13 @@
 {
- "updated": "15 Nov 23:20 (Tashkent)",
+ "updated": "15 Nov 23:30 (Tashkent)",
  "designs": [
   {
    "file": "onboarding-short.html",
-   "title": "Onboarding: thin owl, blinks every 3 s (r9)",
-   "rev": "r9",
-   "what": "Your owl smaller, with much thinner lines and a thin perch, blinking every 3 seconds. \"Lines:\" chip compares thinner and thin.",
-   "stamp": "202611152320",
-   "when": "15 Nov 23:20"
+   "title": "Onboarding: the owl, clean lines (r10)",
+   "rev": "r10",
+   "what": "Your owl redrawn line by line: every line one even thin stroke, clean joins, a clean perch, blinking every 3 seconds. \"Show today's\" switches to what is built now.",
+   "stamp": "202611152330",
+   "when": "15 Nov 23:30"
   },
   {
    "file": "is-this-you.html",
