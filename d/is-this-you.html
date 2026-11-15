@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Is this you? (shorter words) r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611152130">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611152130">
+<style>
+#root{position:fixed;inset:0;padding-top:var(--pulo-layout-inset-top,0px);padding-bottom:var(--pulo-layout-inset-bottom,0px);background:var(--ground)}
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:50;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:6px;z-index:51;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.12);color:var(--text-3);font:700 12px/1 system-ui;opacity:.55}
+.old{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:51;font:700 10px/1 system-ui;color:#c9a227;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root"><div class="iy-screen"><div class="iy-scroll" id="sc"></div></div></div>
+<span class="old" id="oldtag" hidden>OLD WORDS</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview states">···</button>
+<div class="pv" id="pv">
+  <button data-s="ask" aria-pressed="true">1 Is this you?</button>
+  <button data-s="notme">2 After "No"</button>
+  <button data-s="refused">3 Wrong person</button>
+  <button data-s="dead">Old link</button>
+  <button id="ow">Show old words</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var USER='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 20.2a7.2 7.2 0 0 1 14.4 0"/></svg>';
+  var STOP='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M8.6 8.6l6.8 6.8M15.4 8.6l-6.8 6.8"/></svg>';
+  var CLOCK='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.8"/></svg>';
+  var SHOP='Grapeshop', NUM='+998 •• ••• 63 38';
+  /* Made-up shop and number. NEW = MICRO-14's proposed words; OLD = what is built today. */
+  var NEW={ask:{lead:null,wrote:'Debt for',fine:'Check the last four digits.',yes:"Yes, it's me",no:'No, not me'},
+    notme:{title:'Nothing was linked.',lead:'This link is now closed.',fine:null},
+    refused:{title:"This link didn't connect you.",lead:'If the debt is yours, show the shop your Pulo code.',btn:"This isn't my debt"},
+    dead:{title:'This link no longer works.',lead:'Ask the shop for a new one.',fine:null}};
+  var OLD={ask:{lead:'From now on, Pulo will send this shop’s messages to this Telegram account. It should be the right one.',wrote:'Wrote the debt for',fine:'Only the last four digits are shown. If they are not yours, say no. Nothing is linked and the link stops working.',yes:'Yes, that is my number',no:'No, this is not mine'},
+    notme:{title:'Nothing was linked.',lead:'This link is now dead and no debt has been attached to your account. You will hear nothing further.',fine:SHOP+' is not told who opened it.'},
+    refused:{title:'Nothing has been linked.',lead:'If this is your record, show the shop your Pulo code next time you are there.',btn:'No, this is not mine'},
+    dead:{title:'This link no longer works.',lead:'Ask the shop for a new one.',fine:'Used, expired, or opened too late: all three show this message by design. Specifying the exact reason would also reveal it to an attacker.'}};
+  var state='ask', old=false, sc=document.getElementById('sc');
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function draw(){
+    var W=(old?OLD:NEW)[state], h='';
+    if(state==='ask'){
+      h='<div class="iy-mid"><span class="iy-ic">'+USER+'</span><h1 class="iy-q">Is this you?</h1>'+
+        (W.lead?'<p class="iy-lead">'+esc(W.lead)+'</p>':'')+
+        '<div class="iy-card"><p class="k">The shop</p><p class="v">'+SHOP+'</p><div class="sep"><p class="k">'+esc(W.wrote)+'</p><p class="num">'+NUM+'</p></div></div>'+
+        '<p class="iy-fine">'+esc(W.fine)+'</p></div>'+
+        '<div class="iy-acts"><button class="iy-yes" type="button" data-go="notme-yes">'+esc(W.yes)+'</button><button class="iy-no" type="button" data-go="notme">'+esc(W.no)+'</button></div>';
+    } else if(state==='notme'){
+      h='<div class="iy-mid"><span class="iy-ic warn">'+STOP+'</span><h1 class="iy-q">'+esc(W.title)+'</h1><p class="iy-lead">'+esc(W.lead)+'</p>'+
+        (W.fine?'<p class="iy-fine">'+esc(W.fine)+'</p>':'')+'</div>';
+    } else if(state==='refused'){
+      h='<div class="iy-mid"><span class="iy-ic">'+STOP+'</span><h1 class="iy-q">'+esc(W.title)+'</h1><p class="iy-lead">'+esc(W.lead)+'</p></div>'+
+        '<div class="iy-acts"><button class="iy-no" type="button" data-go="notme">'+esc(W.btn)+'</button></div>';
+    } else {
+      h='<div class="iy-mid"><span class="iy-ic">'+CLOCK+'</span><h1 class="iy-q">'+esc(W.title)+'</h1><p class="iy-lead">'+esc(W.lead)+'</p>'+
+        (W.fine?'<p class="iy-fine">'+esc(W.fine)+'</p>':'')+'</div>';
+    }
+    sc.innerHTML=h;
+    [].forEach.call(sc.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){ if(b.dataset.go==='notme') set('notme'); })});
+    document.getElementById('oldtag').hidden=!old;
+    [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.setAttribute('aria-pressed',b.dataset.s===state?'true':'false')});
+  }
+  function set(s){state=s;draw()}
+  [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){set(b.dataset.s)})});
+  document.getElementById('ow').addEventListener('click',function(){old=!old;this.textContent=old?'Show new words':'Show old words';draw()});
+  document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
+  draw();
+  window.addEventListener('load',function(){ if(window.PT){PT.main(null);} var T=window.Telegram&&Telegram.WebApp;
+    if(T&&T.platform&&T.platform!=='unknown'){var a=T.safeAreaInset||{},c=T.contentSafeAreaInset||{};
+      document.documentElement.style.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');
+      document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
+})();
+</script>
+<script src="../tg.js?v=202611152130"></script>
+</body>
+</html>

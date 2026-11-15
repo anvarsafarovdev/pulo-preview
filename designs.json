@@ -1,6 +1,14 @@
 {
- "updated": "15 Nov 13:18 (Tashkent)",
+ "updated": "15 Nov 21:30 (Tashkent)",
  "designs": [
+  {
+   "file": "is-this-you.html",
+   "title": "Is this you? shorter words (MICRO-14)",
+   "rev": "r1",
+   "what": "The four screens a link can show, with the proposed shorter words. Tap the chips to switch; \"Show old words\" compares with what is built today.",
+   "stamp": "202611152130",
+   "when": "15 Nov 21:30"
+  },
   {
    "file": "invite-sms-app.html",
    "title": "Send the invite: the page inside Pulo (r4)",
