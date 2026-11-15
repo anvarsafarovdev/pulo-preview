@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Send the invite (in the app) r1</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611151314">
-<link rel="stylesheet" href="../appcss/app-full.css?v=202611151314">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611151318">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611151318">
 <style>
 /* ══ THE INVITE PAGE (inside the app). Shown after "Save and invite", in place of the Done page,
       only for a first contact. Tokens and type roles are the app's own; nothing new. ══ */
@@ -25,7 +25,7 @@
 .iv-bub{position:relative;width:104px;height:104px;animation:ivPop 520ms var(--ease-done-pop) 120ms both,ivFloat 3.2s ease-in-out 700ms infinite}
 @keyframes ivFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @keyframes ivPop{from{transform:scale(.6) translateY(10px);opacity:0}to{transform:none;opacity:1}}
-.iv-bub path{fill:var(--surface);stroke:var(--text-1);stroke-width:2.6;stroke-linejoin:round}
+.iv-bub path{fill:var(--raised);stroke:none}
 .iv-bub circle{fill:var(--text-1);animation:ivDot 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 .iv-bub circle:nth-child(3){animation-delay:.2s}.iv-bub circle:nth-child(4){animation-delay:.4s}
 @keyframes ivDot{0%,70%,100%{transform:scale(.72);opacity:.3}30%{transform:scale(1.18);opacity:1}}
@@ -137,6 +137,6 @@
       document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
 })();
 </script>
-<script src="../tg.js?v=202611151314"></script>
+<script src="../tg.js?v=202611151318"></script>
 </body>
 </html>
