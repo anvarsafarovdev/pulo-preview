@@ -1,13 +1,13 @@
 {
- "updated": "15 Nov 22:43 (Tashkent)",
+ "updated": "15 Nov 22:50 (Tashkent)",
  "designs": [
   {
    "file": "onboarding-short.html",
-   "title": "Onboarding: fewer words, one step less (r4, Pulo owl)",
-   "rev": "r4",
-   "what": "The Pulo owl after your shape, solid or line (\"Owl:\" chip), eyes ticking left and right; a shorter first Terms point. \"Show today's\" switches to what is built now.",
-   "stamp": "202611152243",
-   "when": "15 Nov 22:43"
+   "title": "Onboarding: fewer words, one step less (r5, the new owl)",
+   "rev": "r5",
+   "what": "The owl after your drawing, on a short perch or none (\"Perch:\" chip), eyes ticking; the Terms sheet ends with a \"full terms\" link to the public page. \"Show today's\" switches to what is built now.",
+   "stamp": "202611152250",
+   "when": "15 Nov 22:50"
   },
   {
    "file": "is-this-you.html",
