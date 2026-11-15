@@ -1,13 +1,13 @@
 {
- "updated": "15 Nov 23:10 (Tashkent)",
+ "updated": "15 Nov 23:16 (Tashkent)",
  "designs": [
   {
    "file": "onboarding-short.html",
-   "title": "Onboarding: your owl, blinking (r7)",
-   "rev": "r7",
-   "what": "Your owl on a single line, blinking every few seconds. Terms sheet ends \"Read the full terms before you join.\" \"Show today's\" switches to what is built now.",
-   "stamp": "202611152310",
-   "when": "15 Nov 23:10"
+   "title": "Onboarding: your owl, two blinks (r8)",
+   "rev": "r8",
+   "what": "Chips \"Blink A\" (lids close with a soft lash line) and \"Blink B\" (a line lid slides from top to bottom and back). \"Blink often\" makes it blink every 2 s so you can judge it.",
+   "stamp": "202611152316",
+   "when": "15 Nov 23:16"
   },
   {
    "file": "is-this-you.html",
