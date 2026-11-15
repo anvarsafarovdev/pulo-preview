@@ -1,13 +1,13 @@
 {
- "updated": "15 Nov 22:29 (Tashkent)",
+ "updated": "15 Nov 22:43 (Tashkent)",
  "designs": [
   {
    "file": "onboarding-short.html",
-   "title": "Onboarding: fewer words, one step less (r3, line-drawn owl)",
-   "rev": "r3",
-   "what": "A line-drawn owl with wings (no fill; its eyes tick left and right), the Terms sheet with no long dashes, and the approved name field. \"Show today's\" switches to what is built now.",
-   "stamp": "202611152229",
-   "when": "15 Nov 22:29"
+   "title": "Onboarding: fewer words, one step less (r4, Pulo owl)",
+   "rev": "r4",
+   "what": "The Pulo owl after your shape, solid or line (\"Owl:\" chip), eyes ticking left and right; a shorter first Terms point. \"Show today's\" switches to what is built now.",
+   "stamp": "202611152243",
+   "when": "15 Nov 22:43"
   },
   {
    "file": "is-this-you.html",
