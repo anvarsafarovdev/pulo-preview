@@ -1,6 +1,14 @@
 {
- "updated": "15 Nov 21:30 (Tashkent)",
+ "updated": "15 Nov 22:08 (Tashkent)",
  "designs": [
+  {
+   "file": "onboarding-short.html",
+   "title": "Onboarding: fewer words, one step less (proposal)",
+   "rev": "r1",
+   "what": "Welcome with no tickboxes, the Terms as a sheet from a link, and a shorter Name your store. \"Show today's\" switches to what is built now. Tap Get started to walk through.",
+   "stamp": "202611152208",
+   "when": "15 Nov 22:08"
+  },
   {
    "file": "is-this-you.html",
    "title": "Is this you? shorter words (MICRO-14)",
