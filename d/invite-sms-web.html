@@ -7,7 +7,7 @@
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#F4F5F6">
 <title>Pulo</title>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611151258">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611151314">
 <style>
 /* ══ THE BROWSER PAGE (www.pulo.uz/s/…), r2 after the founder's marks of 15 Nov:
       the wordmark centred in the middle; the debt's own numbers large in Pulo Round; no title, no lede,
@@ -22,18 +22,18 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--ink);
 .wrap{width:100%;max-width:28rem;min-height:100vh;min-height:100dvh;margin:0 auto;display:flex;flex-direction:column;align-items:center;
   padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(18px + env(safe-area-inset-bottom,0px));text-align:center}
 .grow{flex:1 1 0;min-height:16px}
-.grow.b{flex-grow:1.3}
+.grow.b{flex-grow:1}
 
-.wm{display:block;width:150px;height:auto;color:var(--ink)}
+.wm{display:block;width:96px;height:auto;color:var(--ink)}
 .shop{margin:12px 0 0;font-size:.86rem;font-weight:600;color:var(--ink-3)}
 
-.card{width:100%;margin:28px 0 0;padding:24px 20px 22px;background:var(--card);border:1px solid var(--line);border-radius:22px;
+.card{width:100%;margin:18px 0 0;container-type:inline-size;padding:24px 20px 22px;background:var(--card);border:1px solid var(--line);border-radius:22px;
   box-shadow:0 1px 2px rgba(27,29,32,.04),0 10px 30px rgba(27,29,32,.05)}
 .step{display:inline-flex;align-items:center;gap:7px;padding:4px 11px 4px 9px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:.76rem;font-weight:700}
 .step i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(0,112,54,.18)}
 .lbl{display:block;margin:16px 0 0;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);line-height:1.5}
-.amt{display:block;margin:2px 0 0;font-size:3rem;font-weight:700;line-height:1.5;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
-.amt em{font-style:normal;font-size:.36em;font-weight:700;letter-spacing:.04em;color:var(--ink-2);margin-left:.3em}
+.amt{display:block;margin:2px 0 0;font-size:min(3rem,calc((100cqi - 8px) / (var(--n,6) * .64 + 1.5)));font-weight:700;line-height:1.5;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.amt em{font-style:normal;font-size:max(.36em,13px);font-weight:700;letter-spacing:.04em;color:var(--ink-2);margin-left:.3em}
 .rule{height:1px;margin:14px auto 0;width:64%;background:var(--line)}
 .when{display:block;margin:2px 0 0;font-size:1.5rem;font-weight:700;line-height:1.5;font-variant-numeric:tabular-nums}
 .sub{display:block;font-size:.88rem;color:var(--ink-2);line-height:1.5}
@@ -47,14 +47,14 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--ink);
 .btn:active{transform:scale(.985)}
 .btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .pc{margin:0;padding:14px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:var(--ink-2);font-size:.92rem}
-.fine{margin:12px 0 0;color:var(--ink-3);font-size:.8rem;line-height:1.5}
+.fine{margin:0 0 10px;color:var(--ink-3);font-size:.8rem;line-height:1.5}
 
 .gone .ic{display:grid;place-items:center;width:64px;height:64px;margin:28px auto 0;border-radius:50%;background:var(--card);border:1px solid var(--line)}
 .gone .ic svg{width:28px;height:28px;fill:none;stroke:var(--ink);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .gone h1{margin:14px 0 0;font-size:1.3rem;line-height:1.5}
 .gone p{margin:4px auto 0;max-width:19rem;color:var(--ink-2);font-size:.95rem}
-@media (max-width:359px){.wrap{padding-left:16px;padding-right:16px}.amt{font-size:2.5rem}.when{font-size:1.3rem}.wm{width:132px}}
-@media (max-height:640px){.card{margin-top:18px;padding:18px 18px 16px}.amt{font-size:2.5rem}}
+@media (max-width:359px){.wrap{padding-left:16px;padding-right:16px}.when{font-size:1.3rem}.wm{width:84px}}
+@media (max-height:640px){.card{padding:18px 18px 16px}}
 
 /* preview-only controls, tucked away */
 .pvh{position:fixed;top:calc(6px + env(safe-area-inset-top,0px));left:6px;z-index:51;width:34px;height:22px;border-radius:999px;border:0;background:rgba(0,0,0,.05);color:#999;font:700 12px/1 system-ui;opacity:.7}
@@ -70,17 +70,17 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--ink);
 <div class="pv hide" id="pv">
   <button data-v="phone" aria-pressed="true">Phone</button><button data-v="pc">Computer</button><button data-v="gone">Expired</button>
   <button data-k="due" aria-pressed="true">Due date</button><button data-k="rep">Repeats</button><button data-k="ins">Installments</button><button data-k="none">No date</button>
+  <button data-a="34 000|UZS" aria-pressed="true">34 000</button><button data-a="1 250 000|UZS">1 250 000</button><button data-a="125 000 000|UZS">125 000 000</button><button data-a="2 500 000 000|UZS">2 500 000 000</button><button data-a="1 250.50|USD">1 250.50 USD</button>
 </div>
 
 <main class="wrap">
   <div class="grow"></div>
   <svg class="wm" viewBox="0 0 1298 609" role="img" aria-label="Pulo"><title>Pulo</title><path fill="currentColor" d="M58.0674 246.667C49.7558 263.967 45.5996 283.344 45.5996 304.8C45.5996 328.4 50.8002 349.8 61.2002 369C71.6002 387.8 86.0005 402.599 104.4 413.399C122.8 424.199 143.4 429.6 166.2 429.6C188.389 429.6 208.382 424.66 226.181 414.78L258.701 447.301C257.286 448.219 255.853 449.119 254.4 450C230 464.4 202.4 471.6 171.6 471.6C144.8 471.6 120.4 466 98.4004 454.8C76.8004 443.2 59.4002 427.999 46.2002 409.199V585.6C46.2002 592.8 43.9996 598.399 39.5996 602.399C35.5997 606.799 30.2002 609 23.4004 609C16.2004 609 10.4 606.799 6 602.399C2.00007 598.399 0 592.8 0 585.6V302.399C0.400028 271.199 7.80023 243.199 22.2002 218.399C23.1381 216.802 24.0952 215.226 25.0732 213.673L58.0674 246.667ZM699.019 140.399C705.819 140.399 711.418 142.6 715.818 147C720.218 151 722.419 156.399 722.419 163.199V445.199C722.419 452.399 720.218 458.2 715.818 462.6C711.418 466.599 705.818 468.6 699.019 468.6C692.219 468.6 686.619 466.6 682.219 462.6C678.219 458.2 676.219 452.399 676.219 445.199V424.758C665.622 436.975 652.823 447.189 637.818 455.399C616.618 466.599 593.018 472.199 567.019 472.199C538.619 472.199 513.218 466.4 490.818 454.8C468.418 442.8 450.619 425.399 437.419 402.6C424.619 379.8 418.219 351.999 418.219 319.199V163.199C418.219 156.8 420.419 151.4 424.818 147C429.218 142.6 434.619 140.399 441.019 140.399C447.819 140.399 453.418 142.6 457.818 147C462.218 151.4 464.419 156.799 464.419 163.199V319.199C464.419 343.999 469.019 364.399 478.219 380.399C487.819 396.399 500.619 408.399 516.619 416.399C533.019 424.399 551.419 428.399 571.818 428.399C591.418 428.399 609.019 424.6 624.619 417C640.619 409.4 653.219 399 662.419 385.8C671.331 373.012 675.927 358.535 676.205 342.369L676.219 340.8V163.199C676.219 156.4 678.219 151 682.219 147C686.619 142.6 692.219 140.399 699.019 140.399ZM1016.41 259.01C1011.5 273.045 1009.04 288.309 1009.04 304.8C1009.04 328.8 1014.25 350.2 1024.65 369C1035.45 387.8 1050.05 402.599 1068.45 413.399C1086.85 424.199 1107.65 429.6 1130.85 429.6C1147.94 429.6 1163.72 426.669 1178.21 420.809L1210.48 453.078C1187.02 465.425 1160.48 471.6 1130.85 471.6C1098.85 471.6 1070.24 464.4 1045.04 450C1019.85 435.6 1000.05 415.8 985.646 390.6C971.246 365.4 964.045 336.8 964.045 304.8C964.045 275.106 970.094 248.436 982.189 224.789L1016.41 259.01ZM841.073 0C847.873 0 853.273 2.19962 857.273 6.59961C861.673 10.5996 863.873 15.9998 863.873 22.7998V364.8C863.873 382 867.273 396 874.073 406.8C881.273 417.6 890.273 423 901.073 423H916.073C922.073 423 926.874 425.2 930.474 429.6C934.074 433.6 935.873 439 935.873 445.8C935.873 452.6 933.273 458.2 928.073 462.6C923.273 466.6 916.873 468.6 908.873 468.6H901.073C885.073 468.6 870.673 464.199 857.873 455.399C845.473 446.599 835.674 434.4 828.474 418.8C821.674 403.2 818.273 385.2 818.273 364.8V22.7998C818.273 15.9998 820.273 10.5996 824.273 6.59961C828.673 2.19966 834.273 4.249e-05 841.073 0ZM1130.85 137.399C1162.85 137.399 1191.25 144.6 1216.04 159C1241.24 173.4 1261.05 193.199 1275.45 218.399C1289.85 243.599 1297.25 272.4 1297.65 304.8C1297.65 336.8 1290.25 365.4 1275.45 390.6C1273.71 393.635 1271.9 396.59 1270.01 399.469L1237.53 366.992C1247.21 348.68 1252.04 327.95 1252.04 304.8C1252.04 280.8 1246.85 259.4 1236.45 240.6C1226.05 221.4 1211.65 206.4 1193.25 195.6C1174.85 184.8 1154.05 179.399 1130.85 179.399C1107.65 179.399 1086.85 184.8 1068.45 195.6C1067.96 195.884 1067.48 196.172 1067 196.462L1035.45 164.915C1038.56 162.851 1041.76 160.88 1045.04 159C1070.24 144.6 1098.85 137.399 1130.85 137.399ZM166.2 137.399C198.2 137.399 226.8 144.8 252 159.6C277.2 174 297 193.8 311.4 219C326.2 244.2 333.6 272.8 333.6 304.8C333.6 335.723 326.703 363.581 312.913 388.376L278.84 354.303C284.946 339.045 288 322.545 288 304.8C288 280.8 282.6 259.4 271.8 240.6C261.4 221.8 247 206.999 228.6 196.199C210.2 184.999 189.4 179.399 166.2 179.399C147.687 179.399 130.625 183.092 115.013 190.476L82.8369 158.3C107.722 144.366 135.51 137.399 166.2 137.399Z"/></svg>
-  <p class="shop" data-for="live">For Malika Store</p>
 
   <section class="card" data-for="live">
     <span class="step"><i></i>Last step</span>
     <span class="lbl">Debt</span>
-    <b class="amt">34 000<em>UZS</em></b>
+    <b class="amt" id="amt" style="--n:6"><span id="af">34 000</span><em id="ac">UZS</em></b>
     <div id="sched">
       <div class="rule"></div>
       <span class="lbl" id="sl">Due</span>
@@ -98,9 +98,9 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--ink);
 
   <div class="grow b"></div>
   <div class="cta" data-for="live">
+    <p class="fine">This page works for one hour.</p>
     <a class="btn" data-for="phone" href="sms:+998901234567?&body=preview"><svg viewBox="0 0 24 24"><path d="M7 5h10a4 4 0 0 1 4 4v4a4 4 0 0 1-4 4h-6l-4 3.4V17a4 4 0 0 1-3-3.9V9a4 4 0 0 1 4-4z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Open Messages</a>
     <p class="pc" data-for="pc" hidden>Open this link on your phone to send the SMS.</p>
-    <p class="fine">This page works for one hour.</p>
   </div>
 </main>
 <script>
@@ -121,6 +121,10 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--ink);
   document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
   var f=document.querySelector('.fine'),keep=f.textContent;
   document.querySelector('.btn').addEventListener('click',function(e){e.preventDefault();f.textContent='Preview: Messages would open here, filled in.';setTimeout(function(){f.textContent=keep},2200)});
+  function amt(v){var a=v.split('|');document.getElementById('af').textContent=a[0];document.getElementById('ac').textContent=a[1];
+    document.getElementById('amt').style.setProperty('--n',a[0].length);
+    document.querySelectorAll('.pv [data-a]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.a===v?'true':'false')});}
+  document.querySelectorAll('.pv [data-a]').forEach(function(b){b.addEventListener('click',function(){amt(b.dataset.a)})});
   show('phone');kind('due');
 })();
 </script>
