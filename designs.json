@@ -1,13 +1,13 @@
 {
- "updated": "16 Nov 00:22 (Tashkent)",
+ "updated": "16 Nov 00:34 (Tashkent)",
  "designs": [
   {
    "file": "home-iowe.html",
-   "title": "Home: I owe is yours, suppliers get a row (proposal)",
-   "rev": "r1",
+   "title": "Home: I owe is yours, suppliers get a row (approved r2)",
+   "rev": "r2",
    "what": "The I owe tile shows what you personally owe (0 when nothing) and opens your list; suppliers move to a thin row. Chips: owes nobody, personal debt, personal + suppliers, assistant view, offline.",
-   "stamp": "202611160022",
-   "when": "16 Nov 00:22"
+   "stamp": "202611160034",
+   "when": "16 Nov 00:34"
   },
   {
    "file": "onboarding-short.html",
