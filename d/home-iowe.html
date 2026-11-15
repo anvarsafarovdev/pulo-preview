@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Home: I owe is yours, suppliers get a row r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611160022">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611160022">
+<style>
+#root{position:fixed;inset:0;overflow-y:auto;padding-top:var(--pulo-layout-inset-top,0px);background:var(--ground)}
+/* NEW (preview only) */
+.hm-book.solo{grid-template-columns:1fr}
+.hm-book-cell.tap{cursor:pointer;text-align:left;border:0;font:inherit;color:inherit;background:inherit;width:100%}
+.x-zero{color:var(--text-2)!important}
+.x-off{font-size:var(--t-2);color:var(--text-3);margin:6px 0 0}
+.x-sup{display:flex;align-items:center;gap:10px;width:calc(100% - 2 * var(--gut));box-sizing:border-box;margin:var(--s3) var(--gut) 0;padding:10px 4px;border:0;border-bottom:1px solid var(--line,rgba(128,128,128,.18));background:none;color:var(--text-2);font:inherit;font-size:var(--t-2);text-align:left;cursor:pointer}
+.x-sup svg{width:20px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.x-sup .t{flex:1}.x-sup b{font-weight:600;color:var(--text-1)}
+.x-sup .r{color:var(--out);font-weight:700;font-variant-numeric:tabular-nums}
+.x-sup .go svg{width:16px;height:16px;stroke-width:2}
+.x-sup.static{cursor:default}
+.hm-amt.in .v{color:var(--in)}
+/* the personal page */
+.x-pg{padding:calc(var(--s5)) var(--gut) var(--s7)}
+.x-pg h1{margin:var(--s4) 0 0;font-size:var(--t-6);font-weight:700;color:var(--text-1);letter-spacing:-.02em}
+.x-pg .tot{margin:var(--s2) 0 var(--s5);font-size:var(--t-3);color:var(--text-2)}
+.x-pg .tot b{color:var(--out);font-weight:700}
+.x-shop{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line,rgba(128,128,128,.18))}
+.x-shop .bdg{width:40px;height:40px;border-radius:var(--r-btn);background:var(--surface);display:grid;place-items:center;font-size:var(--t-2);font-weight:600;color:var(--text-1)}
+.x-shop .n{flex:1}.x-shop .n b{display:block;font-size:var(--t-3);color:var(--text-1)}.x-shop .n span{font-size:var(--t-2);color:var(--text-3)}
+.x-shop .a{color:var(--out);font-weight:700;font-variant-numeric:tabular-nums}
+.x-back{border:0;background:none;color:var(--text-2);font:inherit;font-size:var(--t-2);padding:6px 0;cursor:pointer}
+.x-note{margin:var(--s6) 0 0;font-size:var(--t-2);color:var(--text-3);line-height:1.5}
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:50;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:6px;z-index:51;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.12);color:var(--text-3);font:700 12px/1 system-ui;opacity:.55}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:51;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a}
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root"></div>
+<span class="tag" id="tag">PROPOSED</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <button data-s="zero">Owes nobody</button>
+  <button data-s="personal" aria-pressed="true">Personal debt</button>
+  <button data-s="both">Personal + suppliers</button>
+  <button data-s="assistant">Assistant</button>
+  <button data-s="offline">Offline</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  /* Made-up shops, people and amounts only. */
+  function ic(d,cls){return '<svg class="i '+(cls||'')+'" viewBox="0 0 24 24" aria-hidden="true">'+d+'</svg>'}
+  var IN=ic('<path d="M17 7L7 17M16.4 17H7V7.6"/>','xs'), OUT=ic('<path d="M7 17L17 7M7.6 7H17v9.4"/>','xs');
+  var CHEV=ic('<path d="M9.4 5.4L14.9 10.5Q16.4 12 14.9 13.5L9.4 18.6"/>','sm');
+  var MOON=ic('<path d="M20.3 14.3A8.6 8.6 0 019.7 3.7a8.6 8.6 0 1010.6 10.6z"/>','sm moon')+ic('<circle cx="12" cy="12" r="4.3"/><path d="M12 2.6v2.3M12 19.1v2.3M21.4 12h-2.3M4.9 12H2.6M18.6 5.4l-1.6 1.6M7 17l-1.6 1.6M18.6 18.6L17 17M7 7L5.4 5.4"/>','sm sun');
+  var QR=ic('<rect x="4" y="4" width="6.4" height="6.4" rx="1.4"/><rect x="13.6" y="4" width="6.4" height="6.4" rx="1.4"/><rect x="4" y="13.6" width="6.4" height="6.4" rx="1.4"/><path d="M13.6 13.6h2.6v2.6h-2.6zM18 18h2v2h-2zM13.6 18.4v1.6M18.4 13.6H20"/>','sm');
+  var USER=ic('<circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 20.2a7.2 7.2 0 0114.4 0"/>','sm');
+  var SEARCH=ic('<circle cx="11" cy="11" r="6.6"/><path d="M19.6 19.6l-3.9-3.9"/>','sm mg');
+  var SCAN=ic('<path d="M4.4 8.6V6.2a1.8 1.8 0 011.8-1.8h2.4"/><path d="M15.4 4.4h2.4a1.8 1.8 0 011.8 1.8v2.4"/><path d="M19.6 15.4v2.4a1.8 1.8 0 01-1.8 1.8h-2.4"/><path d="M8.6 19.6H6.2a1.8 1.8 0 01-1.8-1.8v-2.4"/><path d="M4.4 12h15.2"/>','sm');
+  var LOCK=ic('<rect x="5.4" y="10.6" width="13.2" height="9" rx="2.4"/><path d="M8.6 10.6V7.9a3.4 3.4 0 016.8 0v2.7"/>','xs');
+  var TRUCK='<svg viewBox="1.9 6.3 18.8 14.6" aria-hidden="true"><rect x="2.6" y="7" width="11" height="9.4" rx="1.4"/><path d="M13.6 10.4h3.6l2.8 3v3h-6.4z"/><circle cx="7" cy="18.4" r="1.8"/><circle cx="17" cy="18.4" r="1.8"/></svg>';
+  var root=document.getElementById('root'), s='personal', page='home';
+  var PEOPLE=[['Lenovo Phone','Overdue · 1 day','71 200'],['Andrew Goota','Overdue · 14 days','31 670'],['Malika Yusupova','Due in 3 days','45 000']];
+  function person(p){return '<div class="hm-person"><div class="hm-top"><p class="hm-name cf">'+p[0]+'</p><div class="hm-slot"></div></div><p class="hm-when" style="margin:0;color:var(--text-2);font-size:var(--t-2)">'+p[1]+'</p><div class="hm-amts"><div class="hm-amt in"><span class="v cf">'+p[2]+'</span> <span class="cur" style="font-size:.8em;color:var(--text-3)">uzs</span></div></div></div>'}
+  function home(){
+    var asst=s==='assistant', off=s==='offline';
+    var inCell='<div class="hm-book-cell"><p class="hm-book-lab hm-in">'+IN+'<span class="hm-book-words">They owe me</span></p><p class="hm-book-num hm-in cf">147 870 <span class="cur">UZS</span></p></div>';
+    var owe = s==='zero' ? '<p class="hm-book-num hm-out cf x-zero">0 <span class="cur">UZS</span></p>'
+            : off ? '<p class="hm-book-num hm-out cf x-zero">—</p><p class="x-off">Not available offline</p>'
+            : '<p class="hm-book-num hm-out cf">258 000 <span class="cur">UZS</span></p>';
+    var outCell='<button class="hm-book-cell tap" type="button" data-go="mine" '+(off?'disabled':'')+'><p class="hm-book-lab hm-out">'+OUT+'<span class="hm-book-words">I owe</span></p>'+owe+'</button>';
+    var book='<section class="hm-book'+(asst?' solo':'')+'">'+inCell+(asst?'':outCell)+'</section>';
+    var hasSup=(s==='both'||s==='assistant');
+    var sup='';
+    if(hasSup) sup='<button class="x-sup'+(asst?' static':'')+'" type="button">'+TRUCK+'<span class="t"><b>Suppliers</b> · to 3</span><span class="r">720 000 UZS</span>'+(asst?'':'<span class="go">'+CHEV+'</span>')+'</button>';
+    else if(!asst) sup='<button class="x-sup" type="button">'+TRUCK+'<span class="t">Add a supplier</span><span class="go">'+CHEV+'</span></button>';
+    var chips=['All','Owes me','Suppliers','Active','Overdue'].map(function(c,i){return '<button class="hm-chip"'+(i?' data-gated="true"':' aria-pressed="true"')+'>'+(i?LOCK:'')+c+'</button>'}).join('');
+    return '<div class="hm-screen redrawn"><header class="hm-appbar"><div class="hm-who"><p class="hm-store cf"><span class="nm">Teddys</span></p></div><div class="hm-appbar-acts"><button class="hm-iconbtn">'+MOON+'</button>'+(asst?'':'<button class="hm-iconbtn hm-qrbtn">'+QR+'</button>')+'<button class="hm-iconbtn">'+USER+'</button></div></header>'+
+      '<div class="hm-body">'+book+sup+
+      '<div class="hm-findrow"><div class="hm-find">'+SEARCH+'<span class="pfx">+998</span><input type="text" placeholder="90 123 45 67" inputmode="numeric"></div><button class="hm-scan">'+SCAN+'</button></div>'+
+      '<div class="hm-chiprow" style="display:flex;gap:8px;overflow:hidden">'+chips+'</div>'+
+      '<div class="hm-seclab"><span>Parties</span><span class="n">3</span></div>'+PEOPLE.map(person).join('')+'</div></div>';
+  }
+  function mine(){
+    return '<div class="x-pg"><button class="x-back" data-go="home">‹ Back</button><h1>What I owe</h1><p class="tot">To 2 shops · <b>258 000 UZS</b></p>'+
+      '<div class="x-shop"><span class="bdg">MM</span><span class="n"><b>Malika Market</b><span>Due in 5 days</span></span><span class="a">158 000 UZS</span></div>'+
+      '<div class="x-shop"><span class="bdg">CB</span><span class="n"><b>Chorsu Bakery</b><span>Overdue · 2 days</span></span><span class="a">100 000 UZS</span></div>'+
+      '<p class="x-note">Only you see this. Your assistants never do.</p></div>';
+  }
+  function draw(){
+    root.innerHTML = page==='home'?home():mine();
+    [].forEach.call(root.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){page=b.dataset.go==='mine'?'mine':'home';draw();root.scrollTop=0})});
+    [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.setAttribute('aria-pressed',b.dataset.s===s?'true':'false')});
+  }
+  [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){s=b.dataset.s;page='home';draw()})});
+  document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
+  draw();
+  window.addEventListener('load',function(){ if(window.PT){PT.main(null);} var T=window.Telegram&&Telegram.WebApp;
+    if(T&&T.platform&&T.platform!=='unknown'){var a=T.safeAreaInset||{},c=T.contentSafeAreaInset||{};
+      document.documentElement.style.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');}});
+})();
+</script>
+<script src="../tg.js?v=202611160022"></script>
+</body>
+</html>

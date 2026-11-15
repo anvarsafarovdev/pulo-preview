@@ -1,6 +1,14 @@
 {
- "updated": "15 Nov 23:30 (Tashkent)",
+ "updated": "16 Nov 00:22 (Tashkent)",
  "designs": [
+  {
+   "file": "home-iowe.html",
+   "title": "Home: I owe is yours, suppliers get a row (proposal)",
+   "rev": "r1",
+   "what": "The I owe tile shows what you personally owe (0 when nothing) and opens your list; suppliers move to a thin row. Chips: owes nobody, personal debt, personal + suppliers, assistant view, offline.",
+   "stamp": "202611160022",
+   "when": "16 Nov 00:22"
+  },
   {
    "file": "onboarding-short.html",
    "title": "Onboarding: the owl, clean lines (r10)",
