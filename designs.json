@@ -1,21 +1,21 @@
 {
- "updated": "15 Nov 12:35 (Tashkent)",
+ "updated": "15 Nov 12:58 (Tashkent)",
  "designs": [
   {
    "file": "invite-sms-web.html",
-   "title": "Send the invite: the browser page (redesign)",
-   "rev": "r1",
-   "what": "The page the browser opens. Pulo wordmark, who it goes to, the exact SMS, one button. Top pills: Phone, Computer, Expired.",
-   "stamp": "202611151235",
-   "when": "15 Nov 12:35"
+   "title": "Send the invite: the browser page (r2)",
+   "rev": "r2",
+   "what": "Your marks: wordmark centred, debt in big Pulo Round numbers, due date or Repeats or Installments, one button, 'This page works for one hour'. The ··· top-left shows the states.",
+   "stamp": "202611151258",
+   "when": "15 Nov 12:58"
   },
   {
    "file": "invite-sms-app.html",
-   "title": "Send the invite: the page inside Pulo",
-   "rev": "r1",
-   "what": "Replaces the Done page after Save and invite. Bottom pills: Ready, Getting ready, After the tap, Offline, name on/off, theme. Tap the button to see it move.",
-   "stamp": "202611151235",
-   "when": "15 Nov 12:35"
+   "title": "Send the invite: the page inside Pulo (r2)",
+   "rev": "r2",
+   "what": "'Later' removed: Telegram's Back leaves. The ··· top-left shows the states.",
+   "stamp": "202611151258",
+   "when": "15 Nov 12:58"
   },
   {
    "file": "note-check.html",

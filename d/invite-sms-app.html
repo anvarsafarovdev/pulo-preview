@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Send the invite (in the app) r1</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611151235">
-<link rel="stylesheet" href="../appcss/app-full.css?v=202611151235">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611151258">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611151258">
 <style>
 /* ══ THE INVITE PAGE (inside the app). Shown after "Save and invite", in place of the Done page,
       only for a first contact. Tokens and type roles are the app's own; nothing new. ══ */
@@ -67,7 +67,8 @@
 .pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit}
 .pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
 .pv.hide{display:none}
-.iv-foot{margin-bottom:44px}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:6px;z-index:51;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.12);color:var(--text-3);font:700 12px/1 system-ui;opacity:.55}
+.pv{bottom:auto;top:calc(var(--pulo-layout-inset-top,0px) + 34px)}
 </style>
 </head>
 <body>
@@ -88,11 +89,12 @@
   </div>
   <div class="iv-foot">
     <button class="iv-btn" id="go" type="button"></button>
-    <button class="iv-later" id="later" type="button"></button>
+    
   </div>
 </div>
 </div>
-<div class="pv" id="pv">
+<button class="pvh" id="pvh" type="button" aria-label="Preview states">···</button>
+<div class="pv hide" id="pv">
   <button data-s="ready" aria-pressed="true">Ready</button>
   <button data-s="busy">Getting ready</button>
   <button data-s="sent">After the tap</button>
@@ -103,7 +105,7 @@
 </div>
 <script>
 (function(){
-  var iv=document.getElementById('iv'),t=document.getElementById('t'),p=document.getElementById('p'),go=document.getElementById('go'),later=document.getElementById('later');
+  var iv=document.getElementById('iv'),t=document.getElementById('t'),p=document.getElementById('p'),go=document.getElementById('go');
   var SMS='<svg viewBox="0 0 24 24"><path d="M7 5h10a4 4 0 0 1 4 4v4a4 4 0 0 1-4 4h-6l-4 3.4V17a4 4 0 0 1-3-3.9V9a4 4 0 0 1 4-4z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>';
   var RING='<svg class="ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>';
   var name='Aziz', state='ready';
@@ -113,10 +115,10 @@
     var W={
       ready:  {t: name?'Send '+name+' the invite':'Send the invite', p:'They are not on Pulo yet. One SMS from you lets them see this debt and connect.', b:SMS+'<span>Send SMS now</span>', l:'Later, from Home'},
       busy:   {t: name?'Send '+name+' the invite':'Send the invite', p:'They are not on Pulo yet. One SMS from you lets them see this debt and connect.', b:RING+'<span>Getting it ready</span>', l:'Later, from Home'},
-      sent:   {t:'Your SMS app is open', p:'Press Send there. Pulo shows '+(name?name:'them')+' as connected once they tap the link.', b:SMS+'<span>Open it again</span>', l:'Done'},
+      sent:   {t:'Your SMS app is open', p:'Press Send there. Pulo shows '+(name?name:'them')+' as connected once they tap the link.', b:SMS+'<span>Open it again</span>', l:''},
       offline:{t:'Invite when you are online', p:'The debt is saved. When you are back online, tap Invite next to '+(name?name:'this contact')+' on Home.', b:'<span>Back to Home</span>', l:''}
     }[state];
-    t.textContent=W.t; p.textContent=W.p; go.innerHTML=W.b; later.textContent=W.l; later.style.display=W.l?'':'none';
+    t.textContent=W.t; p.textContent=W.p; go.innerHTML=W.b;
     go.setAttribute('aria-busy',state==='busy'?'true':'false');
   }
   function setState(s){state=s;iv.setAttribute('data-state',s);
@@ -127,7 +129,7 @@
   [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){setState(b.dataset.s)})});
   document.getElementById('nm').addEventListener('click',function(){name=name?'':'Aziz';this.textContent=name?'Name: Aziz':'No name';words()});
   document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
-  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide');document.querySelector('.iv-foot').style.marginBottom='0'});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
   words();
   window.addEventListener('load',function(){ if(window.PT){PT.main(null);} var W=window.Telegram&&Telegram.WebApp;
     if(W&&W.platform&&W.platform!=='unknown'){var a=W.safeAreaInset||{},c=W.contentSafeAreaInset||{};
@@ -135,6 +137,6 @@
       document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
 })();
 </script>
-<script src="../tg.js?v=202611151235"></script>
+<script src="../tg.js?v=202611151258"></script>
 </body>
 </html>
