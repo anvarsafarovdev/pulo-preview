@@ -1,13 +1,13 @@
 {
- "updated": "15 Nov 22:56 (Tashkent)",
+ "updated": "15 Nov 23:10 (Tashkent)",
  "designs": [
   {
    "file": "onboarding-short.html",
-   "title": "Onboarding: pick the owl (r6, A B C D)",
-   "rev": "r6",
-   "what": "Four owls to choose from (chips Owl A to D), each on a short perch or none (\"Perch:\" chip), eyes ticking. Terms sheet ends \"Read the full terms before you join.\" \"Show today's\" switches to what is built now.",
-   "stamp": "202611152256",
-   "when": "15 Nov 22:56"
+   "title": "Onboarding: your owl, blinking (r7)",
+   "rev": "r7",
+   "what": "Your owl on a single line, blinking every few seconds. Terms sheet ends \"Read the full terms before you join.\" \"Show today's\" switches to what is built now.",
+   "stamp": "202611152310",
+   "when": "15 Nov 23:10"
   },
   {
    "file": "is-this-you.html",
