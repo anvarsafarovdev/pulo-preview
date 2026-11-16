@@ -1,13 +1,13 @@
 {
- "updated": "16 Nov 11:23 (Tashkent)",
+ "updated": "16 Nov 11:59 (Tashkent)",
  "designs": [
   {
    "file": "customer-first.html",
-   "title": "The customer's first minutes (r2)",
-   "rev": "r2",
-   "what": "Your marks applied: owe/paid tabs, the \"Do people owe you money?\" button under them, Pay pinned at the bottom, sums on their own line, and a menu bar with Updates. Tap ··· to switch screens; tap the tabs and buttons.",
-   "stamp": "202611161123",
-   "when": "16 Nov 11:23"
+   "title": "The customer's first minutes (r3)",
+   "rev": "r3",
+   "what": "Your r2 marks: lower arrival, squarer tabs, the owner's menu bar with a badge that stays until each update is opened, a page for each debt and each payment, the Pay sheet, and the waiting state. 5b draws Pay inside a debt so you can compare. Tap ··· to switch screens.",
+   "stamp": "202611161159",
+   "when": "16 Nov 11:59"
   },
   {
    "file": "home-iowe.html",
