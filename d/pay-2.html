@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Paying one debt: the owner's screens r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611162358">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611162358">
+<style>
+
+#root{position:fixed;inset:0;overflow-y:auto;padding-top:var(--pulo-layout-inset-top,0px);background:var(--ground);color:var(--text-1)}
+.scr{min-height:100%;display:flex;flex-direction:column;padding:var(--s5) var(--gut) calc(var(--s5) + var(--pulo-layout-inset-bottom,0px));box-sizing:border-box}
+.scr.dk{padding-bottom:calc(96px + var(--pulo-layout-inset-bottom,0px))}
+.scr.dk.pb{padding-bottom:calc(160px + var(--pulo-layout-inset-bottom,0px))}
+/* owl */
+.x-owl{width:112px;height:112px;color:var(--text-1);margin:var(--s4) auto 0;display:block}
+.x-owl .ln{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.x-owl .pu{fill:currentColor}.x-owl .hlx{fill:var(--ground)}
+.x-owl .lidf{fill:var(--ground);transform-box:view-box;transform-origin:0 18px;transform:scaleY(0);animation:owlLid 3s infinite}
+.x-owl .lash{fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;opacity:0;animation:owlLash 3s infinite}
+@keyframes owlLid{0%,90%{transform:scaleY(0)}93%,96%{transform:scaleY(1)}99%,100%{transform:scaleY(0)}}
+@keyframes owlLash{0%,91.5%{opacity:0}93%,96%{opacity:1}97.5%,100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.x-owl .lidf,.x-owl .lash{animation:none}}
+.mk{display:block;width:120px;margin:0 auto;color:var(--text-1)}.mk svg{width:100%;height:auto;display:block;fill:currentColor}
+/* arrival: the whole block sits lower */
+.hero{margin-top:clamp(36px,11vh,96px)}
+.ar-h{margin:var(--s5) 0 0;text-align:center;font-size:var(--t-5);font-weight:700;line-height:1.25}
+.card{margin:var(--s5) 0 0;padding:var(--s4);border-radius:var(--r-1);background:var(--surface)}
+.card .k{margin:0;font-size:var(--t-2);color:var(--text-3)}.card .v{margin:2px 0 0;font-size:var(--t-4);font-weight:700}
+.card .sep{margin:var(--s3) 0 0;padding:var(--s3) 0 0;border-top:1px solid var(--line,rgba(128,128,128,.18))}
+.card .num{margin:2px 0 0;font-size:var(--t-4);font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.foot{margin-top:auto;padding-top:var(--s5)}
+.agree{margin:0 0 var(--s3);text-align:center;font-size:var(--t-2);line-height:1.5;color:var(--text-3)}
+.agree u{color:var(--text-1);text-underline-offset:2px}
+/* buttons: the app's own corner (--r-btn, 8px) */
+.btn{display:block;width:100%;height:var(--field-h);border-radius:var(--r-btn);border:0;font:inherit;font-size:var(--t-3);font-weight:600;cursor:pointer}
+.btn.pri{background:var(--text-1);color:var(--ground)}
+.btn.ghost{background:transparent;color:var(--text-2);margin-top:var(--s1)}
+.btn.dis{background:var(--surface);color:var(--text-2);cursor:default}
+/* top row */
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:38px}
+.ibtn{width:38px;height:38px;border-radius:50%;background:var(--surface);display:grid;place-items:center;border:0;cursor:pointer}
+.ibtn svg{width:18px;height:18px;fill:none;stroke:var(--text-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.conn{display:flex;align-items:center;gap:8px;margin:var(--s3) 0 0;padding:10px 12px;border-radius:var(--r-btn);background:color-mix(in srgb,var(--in) 12%,transparent);color:var(--text-1);font-size:var(--t-2)}
+.conn svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:var(--in);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+/* tabs: square-ish like the app's own segmented control */
+.seg{display:flex;gap:2px;margin:var(--s3) 0 0;padding:3px;border-radius:var(--r-1);background:var(--dim-plate)}
+.seg button{flex:1;min-height:40px;border:0;border-radius:7px;background:transparent;color:var(--text-dim);font:inherit;font-size:var(--t-2);font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ground);color:var(--text-1);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+/* promo */
+.promo{display:flex;align-items:center;gap:12px;width:100%;margin:var(--s3) 0 0;padding:12px 14px;border:0;border-radius:var(--r-1);background:var(--text-1);color:var(--ground);font:inherit;text-align:left;cursor:pointer}
+.promo .pi{flex:0 0 auto;width:36px;height:36px;border-radius:var(--r-btn);background:color-mix(in srgb,var(--ground) 16%,transparent);display:grid;place-items:center}
+.promo .pi svg{width:20px;height:20px;fill:none;stroke:var(--ground);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.promo .pt{flex:1}.promo .pt b{display:block;font-size:var(--t-3);font-weight:700}.promo .pt span{font-size:var(--t-2);opacity:.75}
+.promo .pg svg{width:16px;height:16px;fill:none;stroke:var(--ground);stroke-width:2;stroke-linecap:round;opacity:.7}
+.go .pg svg{width:16px;height:16px;fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round}
+/* hero */
+.shop{margin:var(--s5) 0 0;font-size:var(--t-3);color:var(--text-2)}
+.shop b{display:block;margin-top:2px;font-size:var(--t-6);color:var(--text-1);letter-spacing:-.02em}
+.owe{margin:var(--s3) 0 0}.owe .k{margin:0;font-size:var(--t-2);color:var(--text-3)}
+.owe .a{margin:2px 0 0;font-size:calc(var(--t-6) * 1.15);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.owe .a.g{color:var(--in)}
+.a small,.amt small{font-size:.55em;font-weight:500;margin-left:4px}
+.owe .d{margin:2px 0 0;font-size:var(--t-2);color:var(--text-2)}
+.pend{display:flex;align-items:center;gap:8px;margin:var(--s2) 0 0;font-size:var(--t-2);color:var(--text-2)}
+.pend i,.wt i{width:8px;height:8px;border-radius:50%;background:#c9a227;display:inline-block;flex:0 0 auto}
+.lab{margin:var(--s5) 0 var(--s2);font-size:var(--t-2);color:var(--text-3)}
+/* tappable cards: sum first, then what, then when, chevron at the right */
+.go{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 8px;padding:14px;border:0;border-radius:var(--r-1);background:var(--surface);color:var(--text-1);font:inherit;text-align:left;cursor:pointer}
+.go .bx{flex:1;min-width:0}
+.go .amt{display:block;font-size:var(--t-4);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.go .amt.g{color:var(--in)}
+.go .t{display:block;margin-top:4px;font-size:var(--t-3);font-weight:600}
+.go .r2{display:block;margin-top:2px;font-size:var(--t-2);color:var(--text-3)}
+.go .r2 .od,.row .od{color:var(--text-2);font-weight:700}
+.ok,.wt{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:var(--t-2);color:var(--text-2)}
+.ok svg{width:14px;height:14px;fill:none;stroke:var(--in);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+/* list home */
+.row{display:flex;align-items:flex-start;gap:12px;width:100%;padding:14px 0;border:0;border-bottom:1px solid var(--line,rgba(128,128,128,.18));background:none;color:var(--text-1);font:inherit;text-align:left;cursor:pointer}
+.row .bdg{width:40px;height:40px;flex:0 0 auto;border-radius:var(--r-btn);background:var(--surface);display:grid;place-items:center;font-size:var(--t-2);font-weight:600}
+.row .n{flex:1}.row .n b{display:block;font-size:var(--t-3)}.row .n span{display:block;font-size:var(--t-2);color:var(--text-3)}
+.row .n span.wt{display:flex;color:var(--text-2)}
+.row .n .amt{display:block;margin:4px 0 0;font-size:var(--t-4);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.row > svg{width:16px;height:16px;margin-top:12px;fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round}
+.empty{margin:var(--s7) 0 0;text-align:center;color:var(--text-2);font-size:var(--t-3);line-height:1.5}
+.empty b{display:block;font-size:var(--t-5);color:var(--text-1);margin-bottom:var(--s2)}
+/* detail pages */
+.dh{margin:var(--s4) 0 0;font-size:var(--t-6);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.ds{margin:4px 0 0;font-size:var(--t-3);color:var(--text-2)}
+.facts{margin:var(--s5) 0 0;padding:4px var(--s4);border-radius:var(--r-1);background:var(--surface)}
+.facts p{display:flex;justify-content:space-between;gap:12px;margin:0;padding:12px 0;font-size:var(--t-3);border-bottom:1px solid var(--line,rgba(128,128,128,.18))}
+.facts p:last-child{border-bottom:0}
+.facts p span{color:var(--text-2)}.facts p b{font-weight:700;font-variant-numeric:tabular-nums}
+.alloc{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line,rgba(128,128,128,.18))}
+.alloc b{display:block;font-size:var(--t-3);font-weight:600}.alloc span{display:block;margin-top:2px;font-size:var(--t-2);color:var(--text-3)}
+.alloc .r{text-align:right}.alloc .r b{font-variant-numeric:tabular-nums}
+.warnbar{margin:var(--s5) 0 0;padding:10px 12px;border-radius:var(--r-btn);border:1.5px dashed #c9a227;font-size:12px;line-height:1.45;color:var(--text-2);font-family:system-ui}
+/* bottom bar sits above the floating dock */
+.paybar{position:fixed;left:0;right:0;bottom:calc(82px + var(--pulo-layout-inset-bottom,0px));padding:10px var(--gut) 6px;background:var(--ground);box-shadow:0 -14px 14px -2px var(--ground);z-index:19}
+.paybar.nodock{bottom:0;padding-bottom:calc(14px + var(--pulo-layout-inset-bottom,0px))}
+/* the owner's dock, borrowed as is (.hm-dock / .hm-tab from the app's own stylesheet) */
+.hm-dock{position:fixed}
+.hm-tab svg.f{fill:currentColor;stroke:none}
+.hm-tab svg.f .st{fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+/* updates */
+.pgt{margin:var(--s3) 0 0;font-size:var(--t-6);font-weight:700;letter-spacing:-.02em}
+.up{display:flex;align-items:flex-start;gap:12px;width:100%;padding:14px 0;border:0;border-bottom:1px solid var(--line,rgba(128,128,128,.18));background:none;color:var(--text-1);font:inherit;text-align:left}
+.up.act{cursor:pointer}
+.up .dot{flex:0 0 auto;width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--out)}
+.up .dot.seen{background:transparent}
+.up .tx{flex:1}.up .tx b{display:block;font-size:var(--t-3);font-weight:600}.up.read .tx b{font-weight:500;color:var(--text-2)}
+.up .tx span{display:block;margin-top:2px;font-size:var(--t-2);color:var(--text-2);line-height:1.45}
+.up .tx em{display:block;margin-top:4px;font-style:normal;font-size:12px;color:var(--text-3)}
+.up > svg{flex:0 0 auto;width:16px;height:16px;margin-top:4px;fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round}
+/* pay sheet */
+.scrim{position:fixed;inset:0;z-index:40;background:var(--scrim)}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;padding:var(--s5) var(--gut) calc(var(--s5) + var(--pulo-layout-inset-bottom,0px));border-radius:16px 16px 0 0;background:var(--ground)}
+.sheet h2{margin:0;font-size:var(--t-5);font-weight:700}
+.sheet .fl{margin:var(--s4) 0 6px;font-size:var(--t-2);color:var(--text-3)}
+.sheet .in{display:flex;align-items:baseline;gap:6px;height:56px;padding:0 14px;border-radius:var(--r-btn);background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--text-1)}
+.sheet .in input{flex:1;min-width:0;border:0;background:none;color:var(--text-1);font:inherit;font-size:var(--t-6);font-weight:700;line-height:56px;outline:none;font-variant-numeric:tabular-nums}
+.sheet .in span{font-size:var(--t-3);color:var(--text-2)}
+.sheet .use{margin:var(--s2) 0 0;font-size:var(--t-2);color:var(--text-1);text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0;font-family:inherit;cursor:pointer}
+.sheet .err{margin:var(--s2) 0 0;font-size:var(--t-2);color:var(--out)}
+.sheet .why{margin:var(--s4) 0 var(--s4);font-size:var(--t-2);color:var(--text-2);line-height:1.5}
+.scr.dk.pb2{padding-bottom:calc(214px + var(--pulo-layout-inset-bottom,0px))}
+.scr.pb{padding-bottom:calc(96px + var(--pulo-layout-inset-bottom,0px))}
+.dh.one{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.go .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar{display:flex;align-items:center;gap:8px;width:100%;margin:0 0 8px;padding:12px 14px;border:0;border-radius:var(--r-btn);background:var(--surface);color:var(--text-1);font:inherit;font-size:var(--t-2);font-weight:600;text-align:left;cursor:pointer}
+.wbar i{width:8px;height:8px;border-radius:50%;background:#c9a227;flex:0 0 auto}
+.wbar span{flex:1}.wbar svg{width:16px;height:16px;fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round}
+.sheet .for{margin:4px 0 0;font-size:var(--t-2);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* r5: lists are plain rows with a ">" (no fill); only things you press as a button get a fill */
+.go{background:transparent;border-radius:0;margin:0;padding:14px 2px;border-bottom:1px solid var(--line,rgba(128,128,128,.18))}
+.go.fill{background:var(--surface);border-radius:var(--r-1);border-bottom:0;padding:14px;margin:0 0 8px}
+.facts{background:transparent;padding:0;border-top:1px solid var(--line,rgba(128,128,128,.18));border-bottom:1px solid var(--line,rgba(128,128,128,.18));border-radius:0}
+.facts p{padding:12px 0}
+.facts b.cut{max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar{margin:var(--s4) 0 0;padding:12px 14px;background:color-mix(in srgb,#c9a227 12%,var(--surface))}
+.wbar span em{display:block;margin-top:2px;font-style:normal;font-weight:500;color:var(--text-2)}
+.btn.call{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--in);color:var(--ground);text-decoration:none}
+.btn.call svg{width:18px;height:18px;fill:currentColor}
+/* r6: a filled running total, a clear selected tab, no lines anywhere, the approved page's bottom button */
+.tot{margin:var(--s4) 0 0;padding:var(--s4);border-radius:var(--r-1);background:var(--surface)}
+.tot .shop{margin:0}
+.seg{background:var(--dim-plate)}
+.seg button{color:var(--text-dim)}
+.seg button[aria-pressed="true"]{background:var(--text-1);color:var(--ground);box-shadow:none}
+.go,.row,.up,.alloc{border-bottom:0}
+.go{padding:12px 2px;margin:0 0 6px}
+.facts{border:0}.facts p{border-bottom:0;padding:9px 0}
+.card .sep{border-top:0}
+.go .pg,.row > svg,.up > svg{align-self:center;margin-top:0;color:var(--text-3)}
+.paybar,.paybar.nodock{position:fixed;left:0;right:0;bottom:0;z-index:19;background:var(--ground);box-shadow:none;padding:var(--s3) calc(var(--pulo-layout-inset-right,0px) + var(--gut)) calc(var(--pulo-layout-inset-bottom,0px) + var(--s5)) calc(var(--pulo-layout-inset-left,0px) + var(--gut))}
+.paybar::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:24px;pointer-events:none;background:linear-gradient(to top,var(--ground),transparent)}
+.scr.pb{padding-bottom:calc(120px + var(--pulo-layout-inset-bottom,0px))}
+.dd-pay svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dd-pay.call{background:var(--in);color:var(--ground);text-decoration:none;box-sizing:border-box}
+.dd-pay.call svg{fill:currentColor;stroke:none}
+.sheet .dd-pay{margin-top:0}
+/*
+ * REDESIGN-5 PART C: Record payment as a tall sheet (the kit's Sheet, `tall`).
+ * The drawing's rules (redesign-5-debt-payment-plan.html, 16) on the kit and
+ * the tokens: no literal colour, duration or curve. The old `rp-*` page rules in
+ * design/components.css are left untouched; this block uses its own `rps-`
+ * names so the two never meet, and a later task removes the old ones.
+ *
+ * The Sheet owns the panel, the grab zone and the keyboard (its own tall CSS
+ * sits above the keyboard through `.pulo-app`), so nothing here positions the
+ * panel. `.rps-scroll` is bounded in px by RecordPaymentScreen.tsx from the
+ * visual viewport; Confirm and the line above it sit below it, at the foot.
+ */
+.rps {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.rps-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.rps-scroll::-webkit-scrollbar {
+  display: none;
+}
+.rps-title {
+  margin: 0;
+  font-size: var(--t-4);
+  font-weight: 700;
+  color: var(--text-1);
+}
+.rps-to {
+  margin: var(--s1) 0 0;
+  font-size: var(--t-2);
+  color: var(--text-3);
+  overflow-wrap: break-word;
+}
+.rps-q {
+  margin: var(--s4) 0 var(--s2);
+  font-size: var(--t-2);
+  color: var(--text-2);
+}
+
+/* One balance: its label and its remaining figure on one row. */
+.rps-bal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s3);
+  margin-top: var(--s3);
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-1);
+  background: var(--ground);
+  font-size: var(--t-2);
+  color: var(--text-2);
+}
+.rps-bal b {
+  font-size: var(--t-4);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: break-word;
+  text-align: right;
+}
+.rps-in {
+  color: var(--in);
+}
+.rps-out {
+  color: var(--out);
+}
+.rps-done {
+  color: var(--text-3);
+}
+
+/* The choice: one row per balance with its own figure; the chosen one is outlined (the outline glides on the kit's plate). */
+.rps-kinds .rps-kindlist {
+  display: grid;
+  gap: var(--s2);
+}
+.rps-kindlist.feel-pill {
+  --pill-plate: transparent;
+  position: relative;
+}
+.rps-kindlist .feel-pill-plate {
+  box-shadow: inset 0 0 0 2px var(--text-1);
+  border-radius: var(--r-1);
+}
+.rps-kind {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s3);
+  width: 100%;
+  padding: var(--s3) var(--s4);
+  border: 0;
+  border-radius: var(--r-1);
+  background: var(--ground);
+  color: var(--text-1);
+  text-align: left;
+  cursor: pointer;
+}
+.rps-kind .t {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: var(--t-2);
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+.rps-kind .a {
+  flex: 0 1 auto;
+  font-size: var(--t-3);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: break-word;
+  text-align: right;
+}
+.rps-kind[aria-pressed='true'] {
+  font-weight: 700;
+}
+.rps-kind:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.rps-kindwhy {
+  margin: var(--s2) 0 0;
+  font-size: var(--t-2);
+  color: var(--text-3);
+}
+
+/* A payment already waiting. */
+.rps-wait {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s2);
+  margin-top: var(--s4);
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-1);
+  background: var(--ground);
+  font-size: var(--t-2);
+  color: var(--text-3);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+.rps-wait b {
+  display: block;
+  color: var(--text-1);
+  font-weight: 600;
+}
+
+/* The amount: empty, in the display face, with the currency beside it. */
+.rps-field {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--s2);
+  margin-top: var(--s4);
+  padding: var(--s4);
+  border-radius: var(--r-1);
+  background: var(--ground);
+  min-height: 86px;
+  /* The app's own face is Comfortaa (base.css), which the figure inherits. */
+}
+.rps-field .feel-rise {
+  padding: 0;
+  line-height: 1.1;
+}
+.rps-field .feel-rise input {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  outline: none;
+  text-align: right;
+  font-size: var(--t-7);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.rps-field .feel-rise-ov {
+  padding: 0;
+  justify-content: flex-end;
+  font-size: var(--t-7);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--in);
+}
+.rps-field.rps-out .feel-rise-ov {
+  color: var(--out);
+}
+.rps-field.rps-done .feel-rise-ov {
+  color: var(--text-3);
+}
+.rps-field .feel-rise input[data-fit='t-6'],
+.rps-field .feel-rise input[data-fit='t-6'] + .feel-rise-ov {
+  font-size: var(--t-6);
+}
+.rps-field .feel-rise input[data-fit='t-5'],
+.rps-field .feel-rise input[data-fit='t-5'] + .feel-rise-ov {
+  font-size: var(--t-5);
+}
+.rps-field .feel-rise input[data-fit='t-4'],
+.rps-field .feel-rise input[data-fit='t-4'] + .feel-rise-ov {
+  font-size: var(--t-4);
+}
+.rps-field .feel-rise input[data-fit='t-3'],
+.rps-field .feel-rise input[data-fit='t-3'] + .feel-rise-ov {
+  font-size: var(--t-3);
+}
+.rps-field .feel-rise input[data-fit='t-2'],
+.rps-field .feel-rise input[data-fit='t-2'] + .feel-rise-ov {
+  font-size: var(--t-2);
+}
+.rps-field .feel-rise input[data-fit='t-1'],
+.rps-field .feel-rise input[data-fit='t-1'] + .feel-rise-ov {
+  font-size: var(--t-2);
+}
+.rps-field input::placeholder {
+  color: var(--text-3);
+  opacity: 1;
+}
+.rps-field .cur {
+  flex: 0 0 auto;
+  margin: 0;
+  font-size: var(--t-3);
+  color: var(--text-3);
+}
+
+/* The quick chips; Clear rides in the row and is never lit. */
+.rps-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  margin-top: var(--s2);
+}
+.rps-chips.feel-pill {
+  --pill-plate: var(--ground);
+}
+.rps-chip {
+  flex: 1 1 auto;
+  min-height: var(--tap);
+  padding: 0 var(--s4);
+  border: 0;
+  border-radius: var(--r-btn);
+  background: var(--dim-plate);
+  color: var(--text-dim);
+  font-size: var(--t-2);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--dur-press) var(--ease-out),
+    color var(--dur-press) var(--ease-out);
+}
+.rps-chip[aria-pressed='true'] {
+  background: var(--ground);
+  color: var(--text-1);
+  font-weight: 600;
+}
+.rps-chip:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* The foot: the line above Confirm, then Confirm. Fixed below the scrolling content. */
+.rps-foot {
+  flex: 0 0 auto;
+  padding-top: var(--s3);
+  background: var(--surface);
+}
+.rps-after {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s2);
+  min-height: 1.5em;
+  margin: 0 0 var(--s2);
+  font-size: var(--t-2);
+  line-height: 1.5;
+  color: var(--text-2);
+  overflow-wrap: break-word;
+}
+.rps-after[data-tone='idle'] {
+  color: var(--text-3);
+}
+.rps-after b {
+  display: block;
+  color: var(--text-1);
+  font-weight: 600;
+}
+.rps-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  width: 100%;
+  min-height: 52px;
+  padding: var(--s3) var(--s4);
+  border: 0;
+  border-radius: var(--r-1);
+  background: var(--text-1);
+  color: var(--ground);
+  font-size: var(--t-3);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.rps-confirm:active {
+  transform: scale(0.985);
+}
+.rps-confirm:disabled {
+  background: var(--dim-plate);
+  color: var(--text-3);
+  cursor: default;
+  transform: none;
+}
+
+/* Inline SVG, sized once (the drawing carries no icon font). */
+.rps svg.i {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.rps svg.i.sm {
+  width: 17px;
+  height: 17px;
+  stroke-width: 2;
+}
+.rps svg.i.xs {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+  margin-top: 2px;
+}
+.rps svg.f {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+/* ── PAY-2 r1: the owner's side ── */
+.owe .a.in{color:var(--in)}
+.owe .a.outc{color:var(--out)}
+.alloc{padding:10px 2px}
+.alloc .r b.in{color:var(--in)}
+.alloc .nm{display:inline-block;margin-top:2px;font-size:12px;color:var(--text-2)}
+/* the real sheet: the app's own .rps rules, inside a plain panel */
+.psheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:92%;display:flex;flex-direction:column;padding:var(--s3) var(--gut) calc(var(--s4) + var(--pulo-layout-inset-bottom,0px));border-radius:16px 16px 0 0;background:var(--surface)}
+.psheet .grab{width:36px;height:4px;border-radius:2px;background:var(--text-3);opacity:.4;margin:0 auto var(--s3)}
+.rps-kind[aria-pressed='true']{box-shadow:inset 0 0 0 2px var(--text-1)}
+.rps-kind .t small{display:block;margin-top:2px;font-weight:500;color:var(--text-3)}
+.rps-field input{width:7.5ch;border:0;background:none;outline:none;text-align:right;font:inherit;font-size:var(--t-7);font-weight:700;letter-spacing:-.02em;color:var(--in);font-variant-numeric:tabular-nums}
+.rps-field.rps-out input{color:var(--out)}
+.rps-field input::placeholder{color:var(--text-3)}
+.rps-chip{font:inherit;font-size:var(--t-2);font-weight:600}
+.rps-confirm{font:inherit;font-size:var(--t-3);font-weight:700}
+.rps-kind{font:inherit}
+/* approvals card, drawn with the app's own .ap-* rules */
+.apwrap{margin-top:var(--s4)}
+.ap-for{margin:2px 0 0;font-size:var(--t-2);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ap-for b{color:var(--text-1);font-weight:600}
+.new{outline:2px dashed #c9a227;outline-offset:3px;border-radius:6px}
+.nonew .new{outline:0}
+.ap-kind svg{fill:none;stroke:currentColor;stroke-width:2}
+.sec{margin:var(--s5) 0 var(--s2);font-size:var(--t-2);color:var(--text-3)}
+/* preview chrome */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:50;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:51;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.12);color:var(--text-3);font:700 12px/1 system-ui;opacity:.55}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:51;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a}
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root"></div>
+<span class="tag">PROPOSED r1</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <button data-s="debt">1 A debt</button>
+  <button data-s="sheet">2 Record payment</button>
+  <button data-s="all">3 Everything</button>
+  <button data-s="waitdebt">4 Waiting on it</button>
+  <button data-s="approve">5 Approvals</button>
+  <button data-s="bill">6 A supplier’s bill</button>
+  <button data-s="billsheet">7 Pay the bill</button>
+  <button data-s="supplier">8 Supplier’s Approvals</button>
+  <button id="marks">Marks</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  /* Made-up people, shops and amounts only. */
+  var BACK='<svg viewBox="0 0 24 24"><path d="M14.6 5.4L9.1 10.5Q7.6 12 9.1 13.5L14.6 18.6"/></svg>';
+  var WALLET='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.4a2 2 0 012-2h11.6a2 2 0 012 2v9.2a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M15.6 12h.15"/></svg>';
+  var CHECK='<svg class="i xs" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var CLOCK='<svg class="i xs" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>';
+  var CHECKS='<svg class="f" viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zm4.3 7.2l-5 5.3a1 1 0 01-1.45.02L7.7 12.8a1 1 0 111.4-1.42l1.43 1.42 4.3-4.5a1 1 0 011.47 1.38z"/></svg>';
+  function num(v){return parseInt(String(v).replace(/\D/g,''),10)||0}
+  function fmt(v){return String(v).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+
+  /* Jahongir owes the shop 250 000 over three debts; the one opened is "3 bags of cement". */
+  var P={name:'Jahongir',total:250000,debt:{t:'3 bags of cement',left:60000,orig:120000,paid:60000,rec:'2 Nov',due:'30 Nov'}};
+  /* The shop owes BrickSupply 3 000 000; one bill is opened. */
+  var B={name:'BrickSupply',total:3000000,bill:{t:'Bill of 14 Nov',left:1200000,orig:1200000,paid:0,rec:'14 Nov'}};
+  var st={s:'debt',choice:'debt',amt:'',chip:null,wait:false};
+
+  function topBack(){return '<div class="top"><button class="ibtn" aria-label="Back">'+BACK+'</button><span></span></div>'}
+
+  function debtPage(bill){var who=bill?B:P, d=bill?B.bill:P.debt;
+    var h='<div class="scr pb">'+topBack()+
+      '<h1 class="dh one">'+d.t+'</h1><p class="ds">'+(bill?'From '+who.name:who.name)+'</p>'+
+      '<div class="owe" style="margin-top:var(--s5)"><p class="k">'+(bill?'Left to pay':'Left to collect')+'</p><p class="a '+(bill?'outc':'in')+'">'+fmt(d.left)+'<small>UZS</small></p>'+
+      (!bill?'<p class="d">Due '+d.due+'</p>':'')+
+      (st.wait&&!bill?'<p class="pend new"><i></i>20 000 UZS waiting for you to confirm</p>':'')+'</div>'+
+      '<div class="facts"><p><span>Recorded</span><b>'+d.rec+'</b></p><p><span>Amount</span><b>'+fmt(d.orig)+' UZS</b></p><p><span>'+(bill?'Paid so far':'Collected so far')+'</span><b>'+fmt(d.paid)+' UZS</b></p></div>';
+    if(!bill){h+='<div class="new"><p class="lab">Payments that went to it</p>'+
+      '<div class="alloc"><span><b class="in" style="color:var(--in)">40 000 UZS</b><span>5 Nov · oldest first</span></span></div>'+
+      '<div class="alloc"><span><b class="in" style="color:var(--in)">20 000 UZS</b><span>12 Nov · for this debt</span></span></div></div>'}
+    else h+='<p class="lab">Payments that went to it</p><p class="ds" style="margin:0">Nothing paid yet.</p>';
+    h+='</div><div class="paybar nodock"><button class="dd-pay" data-open="'+(bill?'billsheet':'sheet')+'">'+WALLET+'Record payment</button></div>';
+    return h}
+
+  function sheet(bill){var who=bill?B:P, d=bill?B.bill:P.debt, one=st.choice==='debt';
+    var bal=one?d.left:who.total, pend=st.wait&&!bill&&one;
+    var a=num(st.amt), left=bal-a;
+    var h='<div class="scrim" data-close></div><div class="psheet" role="dialog"><div class="grab"></div><div class="rps"><div class="rps-scroll">'+
+      '<h2 class="rps-title">Record payment</h2><p class="rps-to">'+(bill?'To '+who.name:'From '+who.name)+'</p>'+
+      '<div class="rps-kinds new"><p class="rps-q">What are you paying for?</p><div class="rps-kindlist" style="display:grid;gap:var(--s2)">'+
+        '<button class="rps-kind" data-c="debt" aria-pressed="'+one+'"><span class="t">'+d.t+'<small>'+(bill?'This bill':'This debt')+'</small></span><span class="a">'+fmt(d.left)+'</span></button>'+
+        '<button class="rps-kind" data-c="all" aria-pressed="'+!one+'"><span class="t">Everything, oldest first<small>'+(bill?'All you owe '+who.name:'All '+who.name+' owes')+'</small></span><span class="a">'+fmt(who.total)+'</span></button>'+
+      '</div></div>';
+    if(pend){h+='<div class="rps-wait new">'+CLOCK+'<span><b>A payment is already waiting on this debt</b>20 000 UZS was claimed for '+d.t+'. Confirm or dispute it first, or pay towards everything.</span></div>'}
+    else{
+      h+='<div class="rps-field '+(bill?'rps-out':'rps-in')+'"><input id="amt" inputmode="numeric" placeholder="0" value="'+(st.amt?fmt(a):'')+'"><p class="cur">UZS</p></div>'+
+        '<div class="rps-chips">'+
+        '<button class="rps-chip" data-chip="full" aria-pressed="'+(st.chip==='full')+'">Full · '+fmt(bal)+'</button>'+
+        '<button class="rps-chip" data-chip="half" aria-pressed="'+(st.chip==='half')+'">Half · '+fmt(Math.round(bal/2))+'</button>'+
+        '<button class="rps-chip" data-chip="clear" aria-pressed="false">Clear</button></div>'}
+    h+='</div><div class="rps-foot">';
+    var over=a>bal;
+    if(pend) h+='<div class="rps-after" data-tone="idle">Confirm or dispute the payment already waiting on this debt first.</div>';
+    else if(over) h+='<div class="rps-after">'+(one?(bill?'This bill has ':'This debt has ')+fmt(bal)+' UZS left. You cannot record more than that.':(bill?'You owe '+who.name+' ':who.name+' owes ')+fmt(bal)+' UZS. You cannot record more than that.')+'</div>';
+    else if(!a) h+='<div class="rps-after" data-tone="idle">'+(bill?'Enter the amount you paid.':'Enter the amount you received.')+'</div>';
+    else if(bill) h+='<div class="rps-after new" data-tone="wait">'+CLOCK+'<span><b>The balance does not change yet</b>'+who.name+' confirms it'+(one?', and it goes to '+d.t+'.':'.')+'</span></div>';
+    else h+='<div class="rps-after new" data-tone="now">'+CHECK+'<span>'+(one?(left===0?'This settles '+d.t+'.':'Goes to '+d.t+'. Leaves '+fmt(left)+' UZS on it.'):(left===0?'This settles the balance.':'Leaves '+fmt(left)+' UZS.'))+'</span></div>';
+    h+='<button class="rps-confirm" '+((pend||!a||over)?'disabled':'')+'>'+CHECKS+'Confirm payment</button></div></div></div>';
+    return h}
+
+  function card(o){return '<div class="ap-card" data-tone="loud" data-dir="'+o.dir+'"><p class="ap-kind">'+WALLET.replace('<svg','<svg class="i xs"')+'<span class="ap-kind-word">Payment</span><span class="ap-when">Today, 10:40</span></p>'+
+    '<p class="ap-name">'+o.name+'</p><p class="ap-amt"><span class="ap-fig">'+o.amt+'</span> <span class="ap-cur">UZS</span></p>'+
+    (o.for?'<p class="ap-for new">For: <b>'+o.for+'</b></p>':'')+
+    (o.meta?'<p class="ap-meta">'+o.meta+'</p>':'')+
+    
+    '<div class="ap-acts"><button class="ap-no" type="button">Dispute</button><button class="ap-yes" type="button">Confirm</button></div></div>'}
+
+  function approvals(supplier){
+    return '<div class="scr">'+topBack()+'<h1 class="dh">Approvals</h1>'+
+      (supplier?'<p class="sec">From businesses you supply</p>'+card({dir:'in',name:'Mirzo Market',amt:'1 200 000',for:'your bill of 14 Nov',meta:'Recorded by the owner',after:'Confirming applies it to that bill.'})
+        :'<p class="sec">Payments to confirm</p>'+card({dir:'in',name:'Jahongir',amt:'20 000',for:'3 bags of cement',meta:'Recorded by Aziz · Chilonzor',after:'Confirming applies it to that debt.'})+
+          card({dir:'in',name:'Dilnoza',amt:'15 000',for:null,meta:'Recorded by Aziz · Chilonzor',after:'Confirming applies it oldest first.'}))+
+      '</div>'}
+
+  var root=document.getElementById('root');
+  function draw(){var s=st.s,h='';
+    if(s==='debt')h=debtPage(false);
+    else if(s==='sheet'||s==='all')h=debtPage(false)+sheet(false);
+    else if(s==='waitdebt')h=debtPage(false)+(st.open?sheet(false):'');
+    else if(s==='approve')h=approvals(false);
+    else if(s==='bill')h=debtPage(true);
+    else if(s==='billsheet')h=debtPage(true)+sheet(true);
+    else if(s==='supplier')h=approvals(true);
+    root.innerHTML=h;wire();
+    [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.setAttribute('aria-pressed',b.dataset.s===st.s?'true':'false')})}
+  function wire(){
+    [].forEach.call(root.querySelectorAll('[data-open]'),function(b){b.addEventListener('click',function(){
+      if(st.s==='waitdebt'){st.open=true}else st.s=b.dataset.open;st.choice='debt';st.amt='';st.chip=null;draw()})});
+    [].forEach.call(root.querySelectorAll('[data-close]'),function(b){b.addEventListener('click',function(){
+      if(st.s==='waitdebt')st.open=false;else st.s=st.s==='billsheet'?'bill':'debt';draw()})});
+    [].forEach.call(root.querySelectorAll('[data-c]'),function(b){b.addEventListener('click',function(){st.choice=b.dataset.c;st.amt='';st.chip=null;draw()})});
+    [].forEach.call(root.querySelectorAll('[data-chip]'),function(b){b.addEventListener('click',function(){
+      var bill=st.s==='billsheet', who=bill?B:P, d=bill?B.bill:P.debt, bal=st.choice==='debt'?d.left:who.total, c=b.dataset.chip;
+      if(c==='clear'){st.amt='';st.chip=null}else{st.chip=c;st.amt=String(c==='full'?bal:Math.round(bal/2))}draw()})});
+    var inp=document.getElementById('amt');
+    if(inp)inp.addEventListener('input',function(){st.amt=String(num(inp.value)||'');st.chip=null;draw();var n=document.getElementById('amt');n.focus();n.setSelectionRange(n.value.length,n.value.length)});
+  }
+  [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){
+    var s=b.dataset.s;st={s:s,choice:s==='all'?'all':'debt',amt:'',chip:null,wait:s==='waitdebt',open:false};draw()})});
+  document.getElementById('marks').addEventListener('click',function(){document.body.classList.toggle('nonew')});
+  document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
+  draw();
+  window.addEventListener('load',function(){var T=window.Telegram&&Telegram.WebApp;
+    if(T&&T.platform&&T.platform!=='unknown'){var a=T.safeAreaInset||{},c=T.contentSafeAreaInset||{};
+      document.documentElement.style.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');
+      document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
+})();
+</script>
+<script src="../tg.js?v=202611162358"></script>
+</body>
+</html>

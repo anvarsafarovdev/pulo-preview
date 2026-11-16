@@ -1,6 +1,14 @@
 {
- "updated": "16 Nov 13:34 (Tashkent)",
+ "updated": "16 Nov 23:58 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-2.html",
+   "title": "Paying one debt: the owner's screens (r1)",
+   "rev": "r1",
+   "what": "Record payment from a debt names that debt, with \"Everything, oldest first\" one tap away; the debt lists the payments that went to it; Approvals says what a payment is for; the same for a supplier's bill. Dashed outlines mark what is new (Marks hides them). Tap ··· to switch screens.",
+   "stamp": "202611162358",
+   "when": "16 Nov 23:58"
+  },
   {
    "file": "home-empty.html",
    "title": "Home with nothing recorded (r1)",
