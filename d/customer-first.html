@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>The customer's first minutes r1</title>
+<title>The customer's first minutes r2</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611161102">
-<link rel="stylesheet" href="../appcss/app-full.css?v=202611161102">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611161123">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611161123">
 <style>
 #root{position:fixed;inset:0;overflow-y:auto;padding-top:var(--pulo-layout-inset-top,0px);background:var(--ground);color:var(--text-1)}
 .scr{min-height:100%;display:flex;flex-direction:column;padding:var(--s5) var(--gut) calc(var(--s5) + var(--pulo-layout-inset-bottom,0px));box-sizing:border-box}
@@ -68,6 +68,40 @@
 .empty{margin:var(--s7) 0 0;text-align:center;color:var(--text-2);font-size:var(--t-3);line-height:1.5}
 .empty b{display:block;font-size:var(--t-5);color:var(--text-1);margin-bottom:var(--s2)}
 .note{margin:var(--s3) 0 0;font-size:11px;color:#c9a227;font-family:system-ui;text-align:center}
+
+/* r2 */
+.scr.dk{padding-bottom:calc(150px + var(--pulo-layout-inset-bottom,0px))}
+.tabs{display:flex;gap:4px;margin:var(--s3) 0 0;padding:4px;border-radius:999px;background:var(--surface)}
+.tabs button{flex:1;height:36px;border:0;border-radius:999px;background:transparent;color:var(--text-2);font:inherit;font-size:var(--t-2);font-weight:600;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ground);color:var(--text-1);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.promo{display:flex;align-items:center;gap:12px;width:100%;margin:var(--s3) 0 0;padding:12px 14px;border:0;border-radius:var(--r-1);background:var(--text-1);color:var(--ground);font:inherit;text-align:left;cursor:pointer}
+.promo .pi{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:color-mix(in srgb,var(--ground) 16%,transparent);display:grid;place-items:center}
+.promo .pi svg{width:20px;height:20px;fill:none;stroke:var(--ground);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.promo .pt{flex:1}.promo .pt b{display:block;font-size:var(--t-3);font-weight:700}.promo .pt span{font-size:var(--t-2);opacity:.75}
+.promo .pg svg{width:16px;height:16px;fill:none;stroke:var(--ground);stroke-width:2;opacity:.7}
+.debt .amt{margin:6px 0 0;font-size:var(--t-4);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.debt .amt small{font-size:.6em;font-weight:500;margin-left:3px}
+.debt .t{font-size:var(--t-3);font-weight:600;margin:0}
+.row{align-items:flex-start}.row .n .amt2{display:block;margin:4px 0 0;font-size:var(--t-4);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.row .n .amt2 small{font-size:.6em;font-weight:500;margin-left:3px}
+.row > svg{margin-top:12px}
+.paid .amt{color:var(--in)}
+.ok{display:flex;align-items:center;gap:6px;margin:6px 0 0;font-size:var(--t-2);color:var(--text-2)}
+.ok svg{width:14px;height:14px;fill:none;stroke:var(--in);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.paybar{position:fixed;left:0;right:0;bottom:calc(64px + var(--pulo-layout-inset-bottom,0px));padding:10px var(--gut);background:linear-gradient(to top,var(--ground) 70%,transparent);z-index:20}
+.btn.dis{background:var(--surface);color:var(--text-2);cursor:default}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:21;display:flex;justify-content:space-around;padding:6px var(--gut) calc(8px + var(--pulo-layout-inset-bottom,0px));background:var(--ground);border-top:1px solid var(--line,rgba(128,128,128,.18))}
+.dock button{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:76px;padding:6px 0;border:0;background:none;color:var(--text-3);font:inherit;font-size:11px;font-weight:600;cursor:pointer}
+.dock button[aria-current="true"]{color:var(--text-1)}
+.dock svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dock .bd{position:absolute;top:0;left:calc(50% + 6px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--out);color:#fff;font-size:10px;line-height:16px;text-align:center;box-sizing:border-box}
+.up{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line,rgba(128,128,128,.18))}
+.up .dot{flex:0 0 auto;width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--out)}
+.up .dot.seen{background:transparent}
+.up .tx{flex:1}.up .tx b{display:block;font-size:var(--t-3);font-weight:600}.up .tx span{display:block;margin-top:2px;font-size:var(--t-2);color:var(--text-2);line-height:1.45}
+.up .tx em{display:block;margin-top:4px;font-style:normal;font-size:12px;color:var(--text-3)}
+.up .act{align-self:center;height:34px;padding:0 14px;border-radius:999px;border:1.5px solid var(--text-3);background:none;color:var(--text-1);font:inherit;font-size:var(--t-2);font-weight:600}
+.pgt{margin:var(--s3) 0 0;font-size:var(--t-6);font-weight:700;letter-spacing:-.02em}
 .pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:50;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif}
 .pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit}
 .pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
@@ -86,6 +120,7 @@
   <button data-s="paid">3 After "I paid"</button>
   <button data-s="list">4 Two shops</button>
   <button data-s="none">5 Owes nothing</button>
+  <button data-s="updates">6 Updates</button>
   <button id="th">Theme</button>
   <button id="hide">Hide</button>
 </div>
@@ -97,39 +132,53 @@
   var CHECK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
   var CHEV='<svg viewBox="0 0 24 24"><path d="M9.4 5.4L14.9 10.5Q16.4 12 14.9 13.5L9.4 18.6"/></svg>';
   var root=document.getElementById('root'), s='arrive';
+  var STORE='<svg viewBox="0 0 24 24"><path d="M4 9.5l1.4-4.2A1.6 1.6 0 017 4.2h10a1.6 1.6 0 011.6 1.1L20 9.5M4 9.5h16M4 9.5a2.7 2.7 0 005.3 0 2.7 2.7 0 005.4 0 2.7 2.7 0 005.3 0M5.4 12.3V19a.8.8 0 00.8.8h11.6a.8.8 0 00.8-.8v-6.7M10 19.8v-4.6h4v4.6"/></svg>';
+  var LIST='<svg viewBox="0 0 24 24"><path d="M8 6.5h11M8 12h11M8 17.5h11M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01"/></svg>';
+  var SCANI='<svg viewBox="0 0 24 24"><path d="M4.4 8.6V6.2a1.8 1.8 0 011.8-1.8h2.4M15.4 4.4h2.4a1.8 1.8 0 011.8 1.8v2.4M19.6 15.4v2.4a1.8 1.8 0 01-1.8 1.8h-2.4M8.6 19.6H6.2a1.8 1.8 0 01-1.8-1.8v-2.4M4.4 12h15.2"/></svg>';
+  var BELL='<svg viewBox="0 0 24 24"><path d="M6.5 16.5V11a5.5 5.5 0 0111 0v5.5l1.5 1.8H5zM10 20.2a2.2 2.2 0 004 0"/></svg>';
+  var tab='owe';
+  function tabs(){return '<div class="tabs" role="tablist"><button data-tab="owe" aria-pressed="'+(tab==='owe')+'">What I owe</button><button data-tab="paid" aria-pressed="'+(tab==='paid')+'">What I paid</button></div>'}
+  function promo(){return '<button class="promo"><span class="pi">'+STORE+'</span><span class="pt"><b>Do people owe you money?</b><span>Keep track of it here. It’s free.</span></span><span class="pg">'+CHEV+'</span></button>'}
+  function dock(cur,badge){return '<nav class="dock"><button data-go="'+(cur==='list'?'list':'shop')+'" aria-current="'+(cur!=='updates')+'">'+LIST+'My debts</button><button>'+SCANI+'Scan</button><button data-go="updates" aria-current="'+(cur==='updates')+'">'+BELL+'Updates'+(badge?'<span class="bd">'+badge+'</span>':'')+'</button></nav>'}
+  function top(){return '<div class="top"><button class="ibtn" aria-label="Account">'+USER+'</button></div>'}
   function arrive(){return '<div class="scr"><span class="mk">'+MARK+'</span>'+OWL+
-    '<h1 class="ar-h">BrickShop recorded a debt for you</h1><p class="ar-s">See it right here in Telegram.</p>'+
+    '<h1 class="ar-h">BrickShop recorded a debt for you</h1>'+
     '<div class="card"><p class="k">The shop</p><p class="v">BrickShop</p><div class="sep"><p class="k">Debt for</p><p class="num">+998 •• ••• 63 38</p></div></div>'+
     '<div class="foot"><p class="agree">By tapping Yes, it’s me, you share <u>your number</u> and accept the <u>Terms</u>.</p>'+
-    '<button class="btn pri" data-go="shop">Yes, it’s me</button><button class="btn ghost">No, not me</button>'+
-    '<p class="note">Preview note: this one screen replaces three today (Is this you? → Welcome → Connected). Telegram’s own “share your number” prompt follows the tap.</p></div></div>'}
-  function shop(paid){return '<div class="scr"><div class="top"><button class="ibtn" aria-label="Account">'+USER+'</button></div>'+
-    (paid?'':'<p class="conn">'+CHECK+'<span>You’re connected to BrickShop.</span></p>')+
-    '<p class="shop">You owe<b>BrickShop</b></p>'+
-    '<div class="owe"><p class="a">46 000<small>UZS</small></p><p class="d">Due in 3 days</p></div>'+
-    '<p class="lab">What it’s for</p>'+
-    '<div class="debt"><div class="r1"><b>3 bags of cement</b><span>46 000 UZS</span></div><p class="r2">12 Nov · due 19 Nov</p>'+
-      (paid?'<p class="wait"><i></i>You said you paid. Waiting for BrickShop to confirm.</p>':'')+'</div>'+
-    (paid?'':'<button class="btn sec" style="margin-top:var(--s4)" data-go="paid">I paid</button>')+
-    '<button class="lnk">What you’ve paid</button>'+
-    '<p class="start">Run a shop? <u>Start your own book</u></p></div>'}
-  function list(){return '<div class="scr"><div class="top"><button class="ibtn" aria-label="Account">'+USER+'</button></div>'+
-    '<p class="h1">You owe</p><div class="owe" style="margin-top:2px"><p class="a">146 000<small>UZS</small></p><p class="d">to 2 shops</p></div>'+
-    '<div style="margin-top:var(--s4)">'+
-    '<div class="row"><span class="bdg">BS</span><span class="n"><b>BrickShop</b><span>Due in 3 days</span></span><span class="a">46 000 UZS</span>'+CHEV+'</div>'+
-    '<div class="row"><span class="bdg">GS</span><span class="n"><b>Grapeshop</b><span class="od">Overdue · 2 days</span></span><span class="a">100 000 UZS</span>'+CHEV+'</div></div>'+
-    '<button class="lnk">What you’ve paid</button>'+
-    '<p class="start">Run a shop? <u>Start your own book</u></p></div>'}
-  function none(){return '<div class="scr"><div class="top"><button class="ibtn" aria-label="Account">'+USER+'</button></div>'+
-    '<div class="empty"><b>You owe nothing</b>When a shop records a debt for you, it shows here.</div>'+
-    '<button class="lnk" style="align-self:center">What you’ve paid</button>'+
-    '<p class="start">Run a shop? <u>Start your own book</u></p></div>'}
+    '<button class="btn pri" data-go="shop">Yes, it’s me</button><button class="btn ghost">No, not me</button></div></div>'}
+  function paidList(){return '<p class="lab">Payments BrickShop confirmed</p>'+
+    '<div class="debt paid"><p class="t">Cash</p><p class="r2">5 Nov</p><p class="amt">20 000<small>UZS</small></p><p class="ok">'+CHECK+'Confirmed by BrickShop</p></div>'+
+    '<div class="debt paid"><p class="t">Cash</p><p class="r2">28 Oct</p><p class="amt">15 000<small>UZS</small></p><p class="ok">'+CHECK+'Confirmed by BrickShop</p></div>'}
+  function shop(paid){
+    var body = tab==='paid' ? paidList() :
+      '<p class="shop">You owe<b>BrickShop</b></p>'+
+      '<div class="owe"><p class="a">46 000<small>UZS</small></p><p class="d">Due in 3 days</p></div>'+
+      '<p class="lab">What it’s for</p>'+
+      '<div class="debt"><p class="t">3 bags of cement</p><p class="r2">12 Nov · due 19 Nov</p><p class="amt">46 000<small>UZS</small></p>'+
+        (paid?'<p class="wait"><i></i>You said you paid. Waiting for BrickShop to confirm.</p>':'')+'</div>';
+    var bar = tab==='paid' ? '' : (paid?'<div class="paybar"><button class="btn dis">Waiting for BrickShop to confirm</button></div>':'<div class="paybar"><button class="btn pri" data-go="paid">Pay</button></div>');
+    return '<div class="scr dk">'+top()+(paid?'':'<p class="conn">'+CHECK+'<span>You’re connected to BrickShop.</span></p>')+tabs()+promo()+body+'</div>'+bar+dock('shop',paid?0:0)}
+  function list(){
+    var body = tab==='paid' ? '<p class="lab">Payments shops confirmed</p><div class="debt paid"><p class="t">BrickShop · Cash</p><p class="r2">5 Nov</p><p class="amt">20 000<small>UZS</small></p><p class="ok">'+CHECK+'Confirmed</p></div><div class="debt paid"><p class="t">Grapeshop · Card</p><p class="r2">1 Nov</p><p class="amt">50 000<small>UZS</small></p><p class="ok">'+CHECK+'Confirmed</p></div>' :
+      '<div class="owe"><p class="k">You owe 2 shops</p><p class="a">146 000<small>UZS</small></p></div>'+
+      '<div style="margin-top:var(--s3)">'+
+      '<div class="row"><span class="bdg">BS</span><span class="n"><b>BrickShop</b><span>Due in 3 days</span><span class="amt2">46 000<small>UZS</small></span></span>'+CHEV+'</div>'+
+      '<div class="row"><span class="bdg">GS</span><span class="n"><b>Grapeshop</b><span class="od">Overdue · 2 days</span><span class="amt2">100 000<small>UZS</small></span></span>'+CHEV+'</div></div>';
+    return '<div class="scr dk">'+top()+tabs()+promo()+body+'</div>'+dock('list',2)}
+  function none(){return '<div class="scr dk">'+top()+tabs()+promo()+
+    '<div class="empty"><b>You owe nothing</b>When a shop records a debt for you, it shows here.</div></div>'+dock('list',0)}
+  function updates(){return '<div class="scr dk">'+top()+'<h1 class="pgt">Updates</h1>'+
+    '<div class="up"><span class="dot"></span><span class="tx"><b>Grapeshop didn’t confirm your payment</b><span>You said you paid 30 000 UZS. Talk to the shop, or tell Pulo it’s wrong.</span><em>Today, 10:12</em></span><button class="act">Open</button></div>'+
+    '<div class="up"><span class="dot"></span><span class="tx"><b>Grapeshop recorded a new debt</b><span>100 000 UZS · due 14 Nov.</span><em>Yesterday</em></span><button class="act">Open</button></div>'+
+    '<div class="up"><span class="dot seen"></span><span class="tx"><b>BrickShop confirmed your payment</b><span>20 000 UZS, 5 Nov.</span><em>5 Nov</em></span></div>'+
+    '</div>'+dock('updates',2)}
   function draw(){
-    root.innerHTML = s==='arrive'?arrive():s==='shop'?shop(false):s==='paid'?shop(true):s==='list'?list():none();
-    [].forEach.call(root.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){s=b.dataset.go;draw();root.scrollTop=0})});
+    root.innerHTML = s==='arrive'?arrive():s==='shop'?shop(false):s==='paid'?shop(true):s==='list'?list():s==='updates'?updates():none();
+    [].forEach.call(document.querySelectorAll('#root [data-go]'),function(b){b.addEventListener('click',function(){s=b.dataset.go;tab='owe';draw();root.scrollTop=0})});
+    [].forEach.call(root.querySelectorAll('[data-tab]'),function(b){b.addEventListener('click',function(){tab=b.dataset.tab;draw()})});
     [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.setAttribute('aria-pressed',b.dataset.s===s?'true':'false')});
   }
-  [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){s=b.dataset.s;draw()})});
+  [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){s=b.dataset.s;tab='owe';draw()})});
   document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
   document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
   document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
@@ -140,6 +189,6 @@
       document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
 })();
 </script>
-<script src="../tg.js?v=202611161102"></script>
+<script src="../tg.js?v=202611161123"></script>
 </body>
 </html>

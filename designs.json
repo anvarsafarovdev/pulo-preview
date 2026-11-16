@@ -1,13 +1,13 @@
 {
- "updated": "16 Nov 11:02 (Tashkent)",
+ "updated": "16 Nov 11:23 (Tashkent)",
  "designs": [
   {
    "file": "customer-first.html",
-   "title": "The customer's first minutes (proposal)",
-   "rev": "r1",
-   "what": "From the SMS link to Home: one arrival screen, the shop page as Home for one shop, \"I paid\" waiting, the two-shop list, owing nothing. Tap the ··· to switch; tap the buttons to walk through.",
-   "stamp": "202611161102",
-   "when": "16 Nov 11:02"
+   "title": "The customer's first minutes (r2)",
+   "rev": "r2",
+   "what": "Your marks applied: owe/paid tabs, the \"Do people owe you money?\" button under them, Pay pinned at the bottom, sums on their own line, and a menu bar with Updates. Tap ··· to switch screens; tap the tabs and buttons.",
+   "stamp": "202611161123",
+   "when": "16 Nov 11:23"
   },
   {
    "file": "home-iowe.html",
