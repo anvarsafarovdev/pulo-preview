@@ -1,13 +1,13 @@
 {
- "updated": "16 Nov 12:17 (Tashkent)",
+ "updated": "16 Nov 12:38 (Tashkent)",
  "designs": [
   {
    "file": "customer-first.html",
-   "title": "The customer's first minutes (r4)",
-   "rev": "r4",
-   "what": "r3 marks: Pay inside each debt, several payments can wait at once (tap the waiting bar for the list), debt pages without the menu bar, a debt with no note shows the shop's name. Tap ··· to switch screens; try Pay on a debt.",
-   "stamp": "202611161217",
-   "when": "16 Nov 12:17"
+   "title": "The customer's first minutes (r5)",
+   "rev": "r5",
+   "what": "r4 marks: lists without fill and with \">\", the waiting bar under the total, green Call on a waiting debt and a waiting payment, the shop page opens from My debts with Back and no menu bar. Tap ··· to switch screens.",
+   "stamp": "202611161238",
+   "when": "16 Nov 12:38"
   },
   {
    "file": "home-iowe.html",

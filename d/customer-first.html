@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>The customer's first minutes r4</title>
+<title>The customer's first minutes r5</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611161217">
-<link rel="stylesheet" href="../appcss/app-full.css?v=202611161217">
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611161238">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611161238">
 <style>
 #root{position:fixed;inset:0;overflow-y:auto;padding-top:var(--pulo-layout-inset-top,0px);background:var(--ground);color:var(--text-1)}
 .scr{min-height:100%;display:flex;flex-direction:column;padding:var(--s5) var(--gut) calc(var(--s5) + var(--pulo-layout-inset-bottom,0px));box-sizing:border-box}
@@ -132,6 +132,16 @@
 .wbar i{width:8px;height:8px;border-radius:50%;background:#c9a227;flex:0 0 auto}
 .wbar span{flex:1}.wbar svg{width:16px;height:16px;fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round}
 .sheet .for{margin:4px 0 0;font-size:var(--t-2);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* r5: lists are plain rows with a ">" (no fill); only things you press as a button get a fill */
+.go{background:transparent;border-radius:0;margin:0;padding:14px 2px;border-bottom:1px solid var(--line,rgba(128,128,128,.18))}
+.go.fill{background:var(--surface);border-radius:var(--r-1);border-bottom:0;padding:14px;margin:0 0 8px}
+.facts{background:transparent;padding:0;border-top:1px solid var(--line,rgba(128,128,128,.18));border-bottom:1px solid var(--line,rgba(128,128,128,.18));border-radius:0}
+.facts p{padding:12px 0}
+.facts b.cut{max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar{margin:var(--s4) 0 0;padding:12px 14px;background:color-mix(in srgb,#c9a227 12%,var(--surface))}
+.wbar span em{display:block;margin-top:2px;font-style:normal;font-weight:500;color:var(--text-2)}
+.btn.call{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--in);color:var(--ground);text-decoration:none}
+.btn.call svg{width:18px;height:18px;fill:currentColor}
 /* preview chrome */
 .pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:50;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif}
 .pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit;cursor:pointer}
@@ -143,7 +153,7 @@
 </head>
 <body>
 <div class="pulo-app" id="root"></div>
-<span class="tag">PROPOSED r4</span>
+<span class="tag">PROPOSED r5</span>
 <button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
 <div class="pv hide" id="pv">
   <button data-s="arrive">1 Arrival</button>
@@ -153,6 +163,8 @@
   <button data-s="waitlist">4b Waiting list</button>
   <button data-s="debt">5 A debt</button>
   <button data-s="debtnn">5b A debt, no note</button>
+  <button data-s="debtw">5c A debt, waiting</button>
+  <button data-s="pend">5d A waiting payment</button>
   <button data-s="payment">6 A payment</button>
   <button data-s="list">7 Two shops</button>
   <button data-s="updates">8 Updates</button>
@@ -212,6 +224,7 @@
   function plural(n){return n===1?'1 payment':n+' payments'}
 
   /* ── pieces ─────────────────────────────────────────────────── */
+  var PHONE='<svg viewBox="0 0 24 24"><path d="M6.6 3.6h2.6l1.4 4.1-2 1.4a11.5 11.5 0 005.3 5.3l1.4-2 4.1 1.4v2.6a1.8 1.8 0 01-1.9 1.8A15.6 15.6 0 014.8 5.5a1.8 1.8 0 011.8-1.9z"/></svg>';
   function amt(v,cls){return '<span class="amt'+(cls?' '+cls:'')+'">'+v+'<small>UZS</small></span>'}
   function seg(){return '<div class="seg" role="tablist"><button data-tab="owe" aria-pressed="'+(st.tab==='owe')+'">What I owe</button><button data-tab="paid" aria-pressed="'+(st.tab==='paid')+'">What I paid</button></div>'}
   function promo(){return '<button class="promo"><span class="pi">'+STORE+'</span><span class="pt"><b>Do people owe you money?</b><span>Keep track of it here. It’s free.</span></span><span class="pg">'+CHEV+'</span></button>'}
@@ -223,6 +236,7 @@
     '</nav>'}
   function topAcc(){return '<div class="top"><span></span><button class="ibtn" aria-label="Account">'+USER+'</button></div>'}
   function topBack(){return '<div class="top"><button class="ibtn" data-back aria-label="Back">'+BACK+'</button><span></span></div>'}
+  function callBtn(S){return '<a class="btn call" href="#" onclick="return false">'+PHONE+'<span>Call '+S.name+'</span></a>'}
   function debtCard(k,d){var w=pendSum(k,d.id);
     return '<button class="go" data-go="debt" data-shop="'+k+'" data-debt="'+d.id+'"><span class="bx">'+amt(d.left)+
       '<span class="t">'+dTitle(d)+'</span><span class="r2">'+(d.t?d.rec+' · ':'')+'due '+d.due+'</span>'+
@@ -230,8 +244,9 @@
   function payCard(p,withShop){var sh=SHOPS[p.shop].name;
     return '<button class="go" data-go="payment" data-pay="'+p.id+'"><span class="bx">'+amt(p.amt,'g')+
       '<span class="r2">'+(withShop?sh+' · ':'')+p.date+'</span><span class="ok">'+CHECK+p.how+'</span></span><span class="pg">'+CHEV+'</span></button>'}
-  function pendCard(k,p,withShop){var S=SHOPS[k], d=p.debt?debtOf(k,p.debt):null;
-    return '<div class="go" style="cursor:default"><span class="bx">'+amt(p.amt,'g')+'<span class="t">'+(d?dTitle(d):'Towards everything you owe')+'</span><span class="r2">'+(withShop?S.name+' · ':'')+'Today</span><span class="wt"><i></i>Waiting for '+S.name+' to confirm</span></span></div>'}
+  function pendCard(k,i,withShop){var S=SHOPS[k], p=pending[k][i], d=p.debt?debtOf(k,p.debt):null;
+    return '<button class="go" data-go="pend" data-shop="'+k+'" data-pi="'+i+'"><span class="bx">'+amt(p.amt,'g')+'<span class="t">'+(d?dTitle(d):'Towards everything you owe')+'</span><span class="r2">'+(withShop?S.name+' · ':'')+'Today</span><span class="wt"><i></i>Waiting for '+S.name+' to confirm</span></span><span class="pg">'+CHEV+'</span></button>'}
+  function pendCards(k,withShop){return (pending[k]||[]).map(function(p,i){return pendCard(k,i,withShop)}).join('')}
 
   /* ── screens ────────────────────────────────────────────────── */
   function arrive(){return '<div class="scr"><div class="hero"><span class="mk">'+MARK+'</span>'+OWL+
@@ -240,18 +255,18 @@
     '<div class="foot"><p class="agree">By tapping Yes, it’s me, you share <u>your number</u> and accept the <u>Terms</u>.</p>'+
     '<button class="btn pri" data-go="shop" data-shop="bs" data-first="1">Yes, it’s me</button><button class="btn ghost">No, not me</button></div></div>'}
 
-  function shop(){var S=SHOPS[st.shop], k=st.shop, P=pending[k]||[], w=pendSum(k), left=num(S.total)-w, body, bar;
+  /* One shop's page: opened from My debts (or straight after arrival). Back goes to My debts; no menu bar here. */
+  function shop(){var S=SHOPS[st.shop], k=st.shop, P=pending[k]||[], w=pendSum(k), left=num(S.total)-w, body, bar='';
     if(st.tab==='paid'){
-      body='<div style="height:var(--s4)"></div>'+P.map(function(p){return pendCard(k,p,false)}).join('')+PAYMENTS.filter(function(x){return x.shop===k}).map(function(x){return payCard(x,false)}).join('');
+      body='<div style="height:var(--s3)"></div>'+pendCards(k,false)+PAYMENTS.filter(function(x){return x.shop===k}).map(function(x){return payCard(x,false)}).join('');
     } else {
       body='<p class="shop">You owe<b>'+S.name+'</b></p>'+
-        '<div class="owe"><p class="a">'+S.total+'<small>UZS</small></p><p class="d">'+S.due+'</p>'+
-        (w?'<p class="pend"><i></i>'+fmt(w)+' UZS waiting to confirm</p>':'')+'</div>'+
-        '<div style="height:var(--s5)"></div>'+S.debts.slice().reverse().map(function(d){return debtCard(k,d)}).join('');
+        '<div class="owe"><p class="a">'+S.total+'<small>UZS</small></p><p class="d">'+S.due+'</p></div>'+
+        (P.length?'<button class="wbar" data-go="waitlist" data-shop="'+k+'"><i></i><span>'+plural(P.length)+' waiting for '+S.name+' to confirm<em>'+fmt(w)+' UZS</em></span>'+CHEV+'</button>':'')+
+        '<div style="height:var(--s3)"></div>'+S.debts.slice().reverse().map(function(d){return debtCard(k,d)}).join('');
+      if(left>0)bar='<div class="paybar nodock"><button class="btn pri" data-sheet="">Pay</button></div>';
     }
-    bar='<div class="paybar">'+(P.length?'<button class="wbar" data-go="waitlist" data-shop="'+k+'"><i></i><span>'+plural(P.length)+' waiting for '+S.name+' to confirm</span>'+CHEV+'</button>':'')+
-      (left>0?'<button class="btn pri" data-sheet="">Pay</button>':'')+'</div>';
-    return '<div class="scr dk pb'+(P.length?' pb2':'')+'">'+topAcc()+(st.first?'<p class="conn">'+CHECK+'<span>You’re connected to '+S.name+'.</span></p>':'')+seg()+promo()+body+'</div>'+bar+dock('home')}
+    return '<div class="scr'+(bar?' pb':'')+'">'+topBack()+(st.first?'<p class="conn">'+CHECK+'<span>You’re connected to '+S.name+'.</span></p>':'')+seg()+promo()+body+'</div>'+bar}
 
   function sheet(){var S=SHOPS[st.shop], d=st.sheetDebt?debtOf(st.shop,st.sheetDebt):null;
     var max=d?num(d.left)-pendSum(st.shop,d.id):num(S.total)-pendSum(st.shop);
@@ -269,13 +284,19 @@
       '<div class="owe" style="margin-top:var(--s5)"><p class="k">Left to pay</p><p class="a">'+d.left+'<small>UZS</small></p><p class="d">Due '+d.due+' · '+d.dueIn+'</p>'+
       (w?'<p class="pend"><i></i>'+fmt(w)+' UZS waiting for '+S.name+' to confirm</p>':'')+'</div>'+
       '<div class="facts"><p><span>Recorded</span><b>'+d.rec+'</b></p><p><span>Amount</span><b>'+d.orig+' UZS</b></p><p><span>Paid so far</span><b>'+d.paid+' UZS</b></p></div>';
-    if(went.length){html+='<p class="lab">Payments that went to it</p>'+went.map(function(x){return '<button class="go" data-go="payment" data-pay="'+x.p.id+'"><span class="bx">'+amt(x.w.a,'g')+'<span class="r2">'+x.p.date+'</span></span><span class="pg">'+CHEV+'</span></button>'}).join('')}
-    html+='</div><div class="paybar nodock">'+(w?'<button class="btn dis">Waiting for '+S.name+' to confirm</button>':'<button class="btn pri" data-sheet="'+d.id+'">Pay</button>')+'</div>';
+    if(went.length){html+='<p class="lab">Payments that went to it</p>'+went.map(function(x){return '<button class="go fill" data-go="payment" data-pay="'+x.p.id+'"><span class="bx">'+amt(x.w.a,'g')+'<span class="r2">'+x.p.date+'</span></span><span class="pg">'+CHEV+'</span></button>'}).join('')}
+    html+='</div><div class="paybar nodock">'+(w?callBtn(S):'<button class="btn pri" data-sheet="'+d.id+'">Pay</button>')+'</div>';
     return html+(st.s==='debtsheet'?sheet():'')}
+
+  function pend(){var S=SHOPS[st.shop], p=(pending[st.shop]||[])[st.pi]||{amt:'0'}, d=p.debt?debtOf(st.shop,p.debt):null;
+    return '<div class="scr pb">'+topBack()+'<h1 class="dh">Payment to '+S.name+'</h1>'+
+      '<div class="owe" style="margin-top:var(--s4)"><p class="a g">'+p.amt+'<small>UZS</small></p><p class="d">Today, 10:40</p><p class="pend"><i></i>Waiting for '+S.name+' to confirm</p></div>'+
+      '<div class="facts"><p><span>For</span><b class="cut">'+(d?dTitle(d):'Everything you owe')+'</b></p><p><span>You told them</span><b>Today, 10:40</b></p></div>'+
+      '</div><div class="paybar nodock">'+callBtn(S)+'</div>'}
 
   function waitlist(){var S=SHOPS[st.shop], P=pending[st.shop]||[];
     return '<div class="scr">'+topBack()+'<h1 class="dh">Waiting for '+S.name+'</h1><p class="ds">'+plural(P.length)+' · '+fmt(pendSum(st.shop))+' UZS</p>'+
-      '<div style="height:var(--s4)"></div>'+P.map(function(p){return pendCard(st.shop,p,false)}).join('')+'</div>'}
+      '<div style="height:var(--s3)"></div>'+pendCards(st.shop,false)+'</div>'}
 
   function payment(){var p=PAYMENTS.filter(function(x){return x.id===st.pay})[0], S=SHOPS[p.shop];
     return '<div class="scr">'+topBack()+
@@ -284,9 +305,10 @@
       '<p class="lab">Where it went</p>'+p.went.map(function(w){return '<div class="alloc"><span><b>'+w.t+'</b><span>'+w.d+'</span></span><span class="r"><b>'+w.a+' UZS</b><span>'+w.s+'</span></span></div>'}).join('')+
       '</div>'}
 
+  /* My debts: the home, with the menu bar. */
   function list(){var body;
     if(st.tab==='paid'){
-      body='<div style="height:var(--s4)"></div>'+['bs','gs'].map(function(k){return (pending[k]||[]).map(function(p){return pendCard(k,p,true)}).join('')}).join('')+PAYMENTS.map(function(x){return payCard(x,true)}).join('');
+      body='<div style="height:var(--s3)"></div>'+pendCards('bs',true)+pendCards('gs',true)+PAYMENTS.map(function(x){return payCard(x,true)}).join('');
     } else {
       body='<div class="owe" style="margin-top:var(--s5)"><p class="k">You owe 2 shops</p><p class="a">176 000<small>UZS</small></p></div><div style="margin-top:var(--s3)">'+
         ['bs','gs'].map(function(k){var S=SHOPS[k], n=(pending[k]||[]).length;return '<button class="row" data-go="shop" data-shop="'+k+'"><span class="bdg">'+S.ini+'</span><span class="n"><b>'+S.name+'</b><span>'+S.due+'</span>'+
@@ -302,7 +324,6 @@
       return '<'+(n.act?'button':'div')+' class="up'+(n.act?' act':'')+(u?'':' read')+'"'+(n.act?' data-note="'+n.id+'"':'')+'>'+
         '<span class="dot'+(u?'':' seen')+'"></span><span class="tx"><b>'+n.b+'</b><span>'+n.s+'</span><em>'+n.w+'</em></span>'+(n.act?CHEV:'')+'</'+(n.act?'button':'div')+'>'}).join('')+
       '</div>'+dock('updates')}
-
   /* ── navigation ─────────────────────────────────────────────── */
   var hist=[];
   function go(next,push){
@@ -319,6 +340,7 @@
     else if(s==='shop'||s==='sheet')html=shop()+(s==='sheet'?sheet():'');
     else if(s==='debt'||s==='debtsheet')html=debt();
     else if(s==='waitlist')html=waitlist();
+    else if(s==='pend')html=pend();
     else if(s==='payment')html=payment();
     else if(s==='list')html=list();
     else if(s==='updates')html=updates();
@@ -326,17 +348,18 @@
     root.innerHTML=html;
     [].forEach.call(root.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){
       var g=b.dataset.go, n={s:g};
-      if(g==='home'){n.s=st.home||'shop';n.shop='bs'}
+      if(g==='home'){n.s='list'}
       if(b.dataset.shop)n.shop=b.dataset.shop;
       if(b.dataset.debt)n.debt=b.dataset.debt;
       if(b.dataset.pay)n.pay=b.dataset.pay;
+      if(b.dataset.pi)n.pi=+b.dataset.pi;
       n.first=!!b.dataset.first;
       go(n)})});
     [].forEach.call(root.querySelectorAll('[data-tab]'),function(b){b.addEventListener('click',function(){st.tab=b.dataset.tab;draw()})});
     [].forEach.call(root.querySelectorAll('[data-note]'),function(b){b.addEventListener('click',function(){
       var n=NOTES.filter(function(x){return x.id===b.dataset.note})[0]; unread[n.id]=0;
       var nx=JSON.parse(JSON.stringify(n.go)); go(nx)})});
-    [].forEach.call(root.querySelectorAll('[data-back]'),function(b){b.addEventListener('click',function(){var p=hist.pop();if(p){st=p;draw()}})});
+    [].forEach.call(root.querySelectorAll('[data-back]'),function(b){b.addEventListener('click',function(){var p=hist.pop();if(p&&p.s==='arrive')p={s:'list',shop:'bs',tab:'owe'};if(!p)p={s:'list',shop:'bs',tab:'owe'};st=p;draw()})});
     [].forEach.call(root.querySelectorAll('[data-sheet]'),function(b){b.addEventListener('click',function(){st.sheetDebt=b.dataset.sheet||null;st.s=st.s==='debt'?'debtsheet':'sheet';draw()})});
     [].forEach.call(root.querySelectorAll('[data-close]'),function(b){b.addEventListener('click',function(){st.s=st.s==='debtsheet'?'debt':'shop';draw()})});
     var inp=document.getElementById('amt');
@@ -353,14 +376,15 @@
   }
   [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){
     var s=b.dataset.s, n={s:s,tab:'owe',first:false};
-    if(s==='shop'){n.shop='bs';n.first=true;st.home='shop';pending.bs=[]}
-    if(s==='sheet'){n.shop='bs';n.sheetDebt=null;pending.bs=[];st.home='shop'}
-    if(s==='waiting'){n.s='shop';n.shop='bs';st.home='shop';pending.bs=[{amt:'10 000',debt:'glue'},{amt:'20 000',debt:'cement'},{amt:'5 000',debt:null}]}
+    if(s==='shop'){n.shop='bs';n.first=true;pending.bs=[]}
+    if(s==='sheet'){n.shop='bs';n.sheetDebt=null;pending.bs=[]}
+    if(s==='waiting'){n.s='shop';n.shop='bs';pending.bs=[{amt:'10 000',debt:'glue'},{amt:'20 000',debt:'cement'},{amt:'5 000',debt:null}]}
     if(s==='debt'){n.shop='bs';n.debt='glue';pending.bs=[]}
+    if(s==='debtw'){n.s='debt';n.shop='bs';n.debt='glue';pending.bs=[{amt:'10 000',debt:'glue'}]}
+    if(s==='pend'){n.shop='bs';n.pi=0;pending.bs=[{amt:'10 000',debt:'glue'},{amt:'20 000',debt:'cement'},{amt:'5 000',debt:null}]}
     if(s==='debtnn'){n.s='debt';n.shop='bs';n.debt='cement';pending.bs=[]}
     if(s==='waitlist'){n.shop='bs';pending.bs=[{amt:'10 000',debt:'glue'},{amt:'20 000',debt:'cement'},{amt:'5 000',debt:null}]}
     if(s==='payment')n.pay='p1';
-    if(s==='list')st.home='list';
     hist=[];go(n,false)})});
   document.getElementById('reset').addEventListener('click',function(){fresh();hist=[];draw()});
   document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
@@ -373,6 +397,6 @@
       document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
 })();
 </script>
-<script src="../tg.js?v=202611161217"></script>
+<script src="../tg.js?v=202611161238"></script>
 </body>
 </html>
