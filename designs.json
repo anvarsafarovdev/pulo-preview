@@ -1,13 +1,13 @@
 {
- "updated": "16 Nov 12:38 (Tashkent)",
+ "updated": "16 Nov 12:56 (Tashkent)",
  "designs": [
   {
    "file": "customer-first.html",
-   "title": "The customer's first minutes (r5)",
-   "rev": "r5",
-   "what": "r4 marks: lists without fill and with \">\", the waiting bar under the total, green Call on a waiting debt and a waiting payment, the shop page opens from My debts with Back and no menu bar. Tap ··· to switch screens.",
-   "stamp": "202611161238",
-   "when": "16 Nov 12:38"
+   "title": "The customer's first minutes (r6)",
+   "rev": "r6",
+   "what": "r5 marks: the running total in a grey plate, the selected tab filled, no lines anywhere, Pay and Call built exactly like the approved debt page's button. Tap ··· to switch screens; try Theme.",
+   "stamp": "202611161256",
+   "when": "16 Nov 12:56"
   },
   {
    "file": "home-iowe.html",
