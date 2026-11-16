@@ -1,6 +1,14 @@
 {
- "updated": "16 Nov 00:41 (Tashkent)",
+ "updated": "16 Nov 11:02 (Tashkent)",
  "designs": [
+  {
+   "file": "customer-first.html",
+   "title": "The customer's first minutes (proposal)",
+   "rev": "r1",
+   "what": "From the SMS link to Home: one arrival screen, the shop page as Home for one shop, \"I paid\" waiting, the two-shop list, owing nothing. Tap the ··· to switch; tap the buttons to walk through.",
+   "stamp": "202611161102",
+   "when": "16 Nov 11:02"
+  },
   {
    "file": "home-iowe.html",
    "title": "Home: I owe is yours, suppliers get a row (r3)",

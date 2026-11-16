@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>The customer's first minutes r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611161102">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611161102">
+<style>
+#root{position:fixed;inset:0;overflow-y:auto;padding-top:var(--pulo-layout-inset-top,0px);background:var(--ground);color:var(--text-1)}
+.scr{min-height:100%;display:flex;flex-direction:column;padding:var(--s5) var(--gut) calc(var(--s5) + var(--pulo-layout-inset-bottom,0px));box-sizing:border-box}
+/* owl */
+.x-owl{width:112px;height:112px;color:var(--text-1);margin:var(--s4) auto 0;display:block}
+.x-owl .ln{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.x-owl .pu{fill:currentColor}.x-owl .hlx{fill:var(--ground)}
+.x-owl .lidf{fill:var(--ground);transform-box:view-box;transform-origin:0 18px;transform:scaleY(0);animation:owlLid 3s infinite}
+.x-owl .lash{fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;opacity:0;animation:owlLash 3s infinite}
+@keyframes owlLid{0%,90%{transform:scaleY(0)}93%,96%{transform:scaleY(1)}99%,100%{transform:scaleY(0)}}
+@keyframes owlLash{0%,91.5%{opacity:0}93%,96%{opacity:1}97.5%,100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.x-owl .lidf,.x-owl .lash{animation:none}}
+.mk{display:block;width:120px;margin:var(--s5) auto 0;color:var(--text-1)}.mk svg{width:100%;height:auto;display:block;fill:currentColor}
+/* arrival */
+.ar-h{margin:var(--s5) 0 0;text-align:center;font-size:var(--t-5);font-weight:700;line-height:1.25}
+.ar-s{margin:var(--s2) 0 0;text-align:center;font-size:var(--t-3);color:var(--text-2)}
+.card{margin:var(--s5) 0 0;padding:var(--s4);border-radius:var(--r-1);background:var(--surface)}
+.card .k{margin:0;font-size:var(--t-2);color:var(--text-3)}.card .v{margin:2px 0 0;font-size:var(--t-4);font-weight:700}
+.card .sep{margin:var(--s3) 0 0;padding:var(--s3) 0 0;border-top:1px solid var(--line,rgba(128,128,128,.18))}
+.card .num{margin:2px 0 0;font-size:var(--t-4);font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.foot{margin-top:auto;padding-top:var(--s5)}
+.agree{margin:0 0 var(--s3);text-align:center;font-size:var(--t-2);line-height:1.5;color:var(--text-3)}
+.agree u{color:var(--text-1);text-underline-offset:2px}
+.btn{display:block;width:100%;height:var(--field-h,52px);border-radius:var(--r-btn,14px);border:0;font:inherit;font-size:var(--t-3);font-weight:600;cursor:pointer}
+.btn.pri{background:var(--text-1);color:var(--ground)}
+.btn.sec{margin-top:var(--s2);background:transparent;color:var(--text-1);border:1.5px solid var(--text-3)}
+.btn.ghost{background:transparent;color:var(--text-2);margin-top:var(--s1)}
+/* shop page = one-shop Home */
+.top{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.ibtn{width:38px;height:38px;border-radius:50%;background:var(--surface);display:grid;place-items:center;border:0}
+.ibtn svg{width:18px;height:18px;fill:none;stroke:var(--text-2);stroke-width:1.8;stroke-linecap:round}
+.conn{display:flex;align-items:center;gap:8px;margin:var(--s3) 0 0;padding:10px 12px;border-radius:var(--r-1);background:color-mix(in srgb,var(--in) 12%,transparent);color:var(--text-1);font-size:var(--t-2)}
+.conn svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:var(--in);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.shop{margin:var(--s4) 0 0;font-size:var(--t-3);color:var(--text-2)}
+.shop b{display:block;margin-top:2px;font-size:var(--t-6);color:var(--text-1);letter-spacing:-.02em}
+.owe{margin:var(--s4) 0 0}.owe .k{margin:0;font-size:var(--t-2);color:var(--text-3)}
+.owe .a{margin:2px 0 0;font-size:calc(var(--t-6) * 1.15);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.owe .a small{font-size:.5em;font-weight:500;margin-left:4px}
+.owe .d{margin:2px 0 0;font-size:var(--t-2);color:var(--text-2)}
+.lab{margin:var(--s5) 0 var(--s2);font-size:var(--t-2);color:var(--text-3)}
+.debt{padding:14px;border-radius:var(--r-1);background:var(--surface);margin:0 0 8px}
+.debt .r1{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.debt .r1 b{font-size:var(--t-3);font-weight:600}.debt .r1 span{font-weight:700;font-variant-numeric:tabular-nums;color:var(--out)}
+.debt .r2{margin:4px 0 0;font-size:var(--t-2);color:var(--text-3)}
+.debt .wait{display:flex;align-items:center;gap:6px;margin:8px 0 0;font-size:var(--t-2);color:var(--text-2)}
+.debt .wait i{width:8px;height:8px;border-radius:50%;background:#c9a227;display:inline-block}
+.lnk{display:inline-block;margin:var(--s3) 0 0;font-size:var(--t-2);color:var(--text-1);text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0;font-family:inherit}
+.start{margin-top:auto;padding-top:var(--s6);text-align:center;font-size:var(--t-2);color:var(--text-3)}
+.start u{color:var(--text-2)}
+/* list Home */
+.h1{margin:var(--s3) 0 0;font-size:var(--t-3);color:var(--text-2)}
+.row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line,rgba(128,128,128,.18))}
+.row .bdg{width:40px;height:40px;border-radius:var(--r-btn);background:var(--surface);display:grid;place-items:center;font-size:var(--t-2);font-weight:600}
+.row .n{flex:1}.row .n b{display:block;font-size:var(--t-3)}.row .n span{font-size:var(--t-2);color:var(--text-3)}
+.row .n span.od{color:var(--out)}
+.row .a{color:var(--out);font-weight:700;font-variant-numeric:tabular-nums}
+.row svg{width:16px;height:16px;fill:none;stroke:var(--text-3);stroke-width:2}
+.empty{margin:var(--s7) 0 0;text-align:center;color:var(--text-2);font-size:var(--t-3);line-height:1.5}
+.empty b{display:block;font-size:var(--t-5);color:var(--text-1);margin-bottom:var(--s2)}
+.note{margin:var(--s3) 0 0;font-size:11px;color:#c9a227;font-family:system-ui;text-align:center}
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:50;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:6px;z-index:51;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.12);color:var(--text-3);font:700 12px/1 system-ui;opacity:.55}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:51;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a}
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root"></div>
+<span class="tag">PROPOSED</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <button data-s="arrive" aria-pressed="true">1 Arrival</button>
+  <button data-s="shop">2 Connected (1 shop)</button>
+  <button data-s="paid">3 After "I paid"</button>
+  <button data-s="list">4 Two shops</button>
+  <button data-s="none">5 Owes nothing</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  /* Made-up shops, numbers and amounts only. */
+  var OWL="<svg class=\"x-owl\" viewBox=\"0 0 128 128\" aria-hidden=\"true\"><defs><clipPath id=\"owlEL\"><path d=\"M63.17 31.07 L63.15 31.26 L63.10 31.82 L63.00 32.38 L62.88 32.93 L62.71 33.46 L62.52 33.99 L62.28 34.50 L62.02 35.00 L61.72 35.48 L61.39 35.94 L61.04 36.37 L60.65 36.78 L60.24 37.17 L59.81 37.52 L59.35 37.85 L58.87 38.15 L58.37 38.41 L57.86 38.65 L57.33 38.84 L56.80 39.01 L56.25 39.13 L55.69 39.23 L55.13 39.28 L54.57 39.30 L54.01 39.28 L53.45 39.23 L52.89 39.13 L52.34 39.01 L51.81 38.84 L51.28 38.65 L50.77 38.41 L50.27 38.15 L49.79 37.85 L49.33 37.52 L48.90 37.17 L48.49 36.78 L48.10 36.37 L47.75 35.94 L47.42 35.48 L47.12 35.00 L46.86 34.50 L46.62 33.99 L46.43 33.46 L46.26 32.93 L46.14 32.38 L46.04 31.82 L45.99 31.26 L45.97 30.70 L45.99 30.14 L46.04 29.58 L46.14 29.02 L46.26 28.47 L46.43 27.94 L46.62 27.41 L46.86 26.90 L47.12 26.40 L47.42 25.92 L47.75 25.46 L48.10 25.03 L48.49 24.75 L48.90 24.93 L49.33 25.11 L49.79 25.31 L50.27 25.52 L50.77 25.73 L51.28 25.95 L51.81 26.18 L52.34 26.41 L52.89 26.65 L53.45 26.89 L54.01 27.13 L54.57 27.37 L55.13 27.61 L55.69 27.85 L56.25 28.09 L56.80 28.33 L57.33 28.56 L57.86 28.78 L58.37 29.01 L58.87 29.22 L59.35 29.42 L59.81 29.62 L60.24 29.81 L60.65 29.99 L61.04 30.15 L61.39 30.30 L61.72 30.45 L62.02 30.57 L62.28 30.69 L62.52 30.79 L62.71 30.87 L62.88 30.94 L63.00 31.00 L63.10 31.04 L63.15 31.06Z\"/></clipPath><clipPath id=\"owlER\"><path d=\"M82.03 30.70 L82.01 31.26 L81.96 31.82 L81.86 32.38 L81.74 32.93 L81.57 33.46 L81.38 33.99 L81.14 34.50 L80.88 35.00 L80.58 35.48 L80.25 35.94 L79.90 36.37 L79.51 36.78 L79.10 37.17 L78.67 37.52 L78.21 37.85 L77.73 38.15 L77.23 38.41 L76.72 38.65 L76.19 38.84 L75.66 39.01 L75.11 39.13 L74.55 39.23 L73.99 39.28 L73.43 39.30 L72.87 39.28 L72.31 39.23 L71.75 39.13 L71.20 39.01 L70.67 38.84 L70.14 38.65 L69.63 38.41 L69.13 38.15 L68.65 37.85 L68.19 37.52 L67.76 37.17 L67.35 36.78 L66.96 36.37 L66.61 35.94 L66.28 35.48 L65.98 35.00 L65.72 34.50 L65.48 33.99 L65.29 33.46 L65.12 32.93 L65.00 32.38 L64.90 31.82 L64.85 31.26 L64.83 31.07 L64.85 31.06 L64.90 31.04 L65.00 31.00 L65.12 30.94 L65.29 30.87 L65.48 30.79 L65.72 30.69 L65.98 30.57 L66.28 30.45 L66.61 30.30 L66.96 30.15 L67.35 29.99 L67.76 29.81 L68.19 29.62 L68.65 29.42 L69.13 29.22 L69.63 29.01 L70.14 28.78 L70.67 28.56 L71.20 28.33 L71.75 28.09 L72.31 27.85 L72.87 27.61 L73.43 27.37 L73.99 27.13 L74.55 26.89 L75.11 26.65 L75.66 26.41 L76.19 26.18 L76.72 25.95 L77.23 25.73 L77.73 25.52 L78.21 25.31 L78.67 25.11 L79.10 24.93 L79.51 24.75 L79.90 25.03 L80.25 25.46 L80.58 25.92 L80.88 26.40 L81.14 26.90 L81.38 27.41 L81.57 27.94 L81.74 28.47 L81.86 29.02 L81.96 29.58 L82.01 30.14Z\"/></clipPath></defs><g class=\"ln\"><path d=\"M47.2 5.75A33.75 33.75 0 0 1 80.8 5.75\"/><path d=\"M2 109.25H126\"/><path d=\"M24.29 13.59A28.53 28.53 0 0 1 47.2 5.75\"/><path d=\"M47.2 5.75C55 8.3 63.4 15.5 64 30.68\"/><path d=\"M24.29 13.59L64 30.68\"/><path d=\"M35.02 18.2A33.75 33.75 0 0 0 34.1 49.6\"/><path d=\"M34.1 49.6C39 54.8 50.5 59.25 64 59.25\"/><path d=\"M34.1 49.6A38.6 38.6 0 0 0 60.1 109.25\"/><path d=\"M44.1 59C43.3 63.5 43 67 43 70C43 90.9 52.5 109.25 64 109.25\"/><path d=\"M48.15 23.86A9.38 9.38 0 1 0 63.95 30.66\"/><path d=\"M45.6 109.25C44 115 44.3 121.5 46.8 123.2C49.3 124.7 53.2 123 56.5 119.6C57.8 123.9 60.5 126.6 64 126.6\"/><path d=\"M 103.71 13.59 A 28.53 28.53 0 0 0 80.80 5.75\"/><path d=\"M 80.80 5.75 C 73.00 8.3 64.60 15.5 64.00 30.68\"/><path d=\"M 103.71 13.59 L 64.00 30.68\"/><path d=\"M 92.98 18.2 A 33.75 33.75 0 0 1 93.90 49.6\"/><path d=\"M 93.90 49.6 C 89.00 54.8 77.50 59.25 64.00 59.25\"/><path d=\"M 93.90 49.6 A 38.6 38.6 0 0 1 67.90 109.25\"/><path d=\"M 83.90 59 C 84.70 63.5 85.00 67 85.00 70 C 85.00 90.9 75.50 109.25 64.00 109.25\"/><path d=\"M 79.85 23.86 A 9.38 9.38 0 1 1 64.05 30.66\"/><path d=\"M 82.40 109.25 C 84.00 115 83.70 121.5 81.20 123.2 C 78.70 124.7 74.80 123 71.50 119.6 C 70.20 123.9 67.50 126.6 64.00 126.6\"/><path d=\"M59.26 38.82C60.2 43 61.8 46.3 64 48.6C66.2 46.3 67.8 43 68.74 38.82\"/></g><circle class=\"pu\" cx=\"54.6\" cy=\"30.7\" r=\"2.6\"/><circle class=\"pu\" cx=\"73.4\" cy=\"30.7\" r=\"2.6\"/><circle class=\"hlx\" cx=\"54.6\" cy=\"30.7\" r=\"0.5\"/><circle class=\"hlx\" cx=\"73.4\" cy=\"30.7\" r=\"0.5\"/><g class=\"lid\" clip-path=\"url(#owlEL)\"><rect class=\"lidf\" x=\"44\" y=\"18\" width=\"22\" height=\"24\"/><path class=\"lash\" d=\"M46.4 33.4Q54.6 39.6 62.8 33.4\"/></g><g class=\"lid\" clip-path=\"url(#owlER)\"><rect class=\"lidf\" x=\"62\" y=\"18\" width=\"22\" height=\"24\"/><path class=\"lash\" d=\"M65.2 33.4Q73.4 39.6 81.6 33.4\"/></g></svg>", MARK="<svg  viewBox=\"0 0 1298 609\" role=\"img\" aria-label=\"Pulo\"><title>Pulo</title><path fill=\"currentColor\" d=\"M58.0674 246.667C49.7558 263.967 45.5996 283.344 45.5996 304.8C45.5996 328.4 50.8002 349.8 61.2002 369C71.6002 387.8 86.0005 402.599 104.4 413.399C122.8 424.199 143.4 429.6 166.2 429.6C188.389 429.6 208.382 424.66 226.181 414.78L258.701 447.301C257.286 448.219 255.853 449.119 254.4 450C230 464.4 202.4 471.6 171.6 471.6C144.8 471.6 120.4 466 98.4004 454.8C76.8004 443.2 59.4002 427.999 46.2002 409.199V585.6C46.2002 592.8 43.9996 598.399 39.5996 602.399C35.5997 606.799 30.2002 609 23.4004 609C16.2004 609 10.4 606.799 6 602.399C2.00007 598.399 0 592.8 0 585.6V302.399C0.400028 271.199 7.80023 243.199 22.2002 218.399C23.1381 216.802 24.0952 215.226 25.0732 213.673L58.0674 246.667ZM699.019 140.399C705.819 140.399 711.418 142.6 715.818 147C720.218 151 722.419 156.399 722.419 163.199V445.199C722.419 452.399 720.218 458.2 715.818 462.6C711.418 466.599 705.818 468.6 699.019 468.6C692.219 468.6 686.619 466.6 682.219 462.6C678.219 458.2 676.219 452.399 676.219 445.199V424.758C665.622 436.975 652.823 447.189 637.818 455.399C616.618 466.599 593.018 472.199 567.019 472.199C538.619 472.199 513.218 466.4 490.818 454.8C468.418 442.8 450.619 425.399 437.419 402.6C424.619 379.8 418.219 351.999 418.219 319.199V163.199C418.219 156.8 420.419 151.4 424.818 147C429.218 142.6 434.619 140.399 441.019 140.399C447.819 140.399 453.418 142.6 457.818 147C462.218 151.4 464.419 156.799 464.419 163.199V319.199C464.419 343.999 469.019 364.399 478.219 380.399C487.819 396.399 500.619 408.399 516.619 416.399C533.019 424.399 551.419 428.399 571.818 428.399C591.418 428.399 609.019 424.6 624.619 417C640.619 409.4 653.219 399 662.419 385.8C671.331 373.012 675.927 358.535 676.205 342.369L676.219 340.8V163.199C676.219 156.4 678.219 151 682.219 147C686.619 142.6 692.219 140.399 699.019 140.399ZM1016.41 259.01C1011.5 273.045 1009.04 288.309 1009.04 304.8C1009.04 328.8 1014.25 350.2 1024.65 369C1035.45 387.8 1050.05 402.599 1068.45 413.399C1086.85 424.199 1107.65 429.6 1130.85 429.6C1147.94 429.6 1163.72 426.669 1178.21 420.809L1210.48 453.078C1187.02 465.425 1160.48 471.6 1130.85 471.6C1098.85 471.6 1070.24 464.4 1045.04 450C1019.85 435.6 1000.05 415.8 985.646 390.6C971.246 365.4 964.045 336.8 964.045 304.8C964.045 275.106 970.094 248.436 982.189 224.789L1016.41 259.01ZM841.073 0C847.873 0 853.273 2.19962 857.273 6.59961C861.673 10.5996 863.873 15.9998 863.873 22.7998V364.8C863.873 382 867.273 396 874.073 406.8C881.273 417.6 890.273 423 901.073 423H916.073C922.073 423 926.874 425.2 930.474 429.6C934.074 433.6 935.873 439 935.873 445.8C935.873 452.6 933.273 458.2 928.073 462.6C923.273 466.6 916.873 468.6 908.873 468.6H901.073C885.073 468.6 870.673 464.199 857.873 455.399C845.473 446.599 835.674 434.4 828.474 418.8C821.674 403.2 818.273 385.2 818.273 364.8V22.7998C818.273 15.9998 820.273 10.5996 824.273 6.59961C828.673 2.19966 834.273 4.249e-05 841.073 0ZM1130.85 137.399C1162.85 137.399 1191.25 144.6 1216.04 159C1241.24 173.4 1261.05 193.199 1275.45 218.399C1289.85 243.599 1297.25 272.4 1297.65 304.8C1297.65 336.8 1290.25 365.4 1275.45 390.6C1273.71 393.635 1271.9 396.59 1270.01 399.469L1237.53 366.992C1247.21 348.68 1252.04 327.95 1252.04 304.8C1252.04 280.8 1246.85 259.4 1236.45 240.6C1226.05 221.4 1211.65 206.4 1193.25 195.6C1174.85 184.8 1154.05 179.399 1130.85 179.399C1107.65 179.399 1086.85 184.8 1068.45 195.6C1067.96 195.884 1067.48 196.172 1067 196.462L1035.45 164.915C1038.56 162.851 1041.76 160.88 1045.04 159C1070.24 144.6 1098.85 137.399 1130.85 137.399ZM166.2 137.399C198.2 137.399 226.8 144.8 252 159.6C277.2 174 297 193.8 311.4 219C326.2 244.2 333.6 272.8 333.6 304.8C333.6 335.723 326.703 363.581 312.913 388.376L278.84 354.303C284.946 339.045 288 322.545 288 304.8C288 280.8 282.6 259.4 271.8 240.6C261.4 221.8 247 206.999 228.6 196.199C210.2 184.999 189.4 179.399 166.2 179.399C147.687 179.399 130.625 183.092 115.013 190.476L82.8369 158.3C107.722 144.366 135.51 137.399 166.2 137.399Z\"/></svg>";
+  var USER='<svg viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 20.2a7.2 7.2 0 0114.4 0"/></svg>';
+  var CHECK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var CHEV='<svg viewBox="0 0 24 24"><path d="M9.4 5.4L14.9 10.5Q16.4 12 14.9 13.5L9.4 18.6"/></svg>';
+  var root=document.getElementById('root'), s='arrive';
+  function arrive(){return '<div class="scr"><span class="mk">'+MARK+'</span>'+OWL+
+    '<h1 class="ar-h">BrickShop recorded a debt for you</h1><p class="ar-s">See it right here in Telegram.</p>'+
+    '<div class="card"><p class="k">The shop</p><p class="v">BrickShop</p><div class="sep"><p class="k">Debt for</p><p class="num">+998 •• ••• 63 38</p></div></div>'+
+    '<div class="foot"><p class="agree">By tapping Yes, it’s me, you share <u>your number</u> and accept the <u>Terms</u>.</p>'+
+    '<button class="btn pri" data-go="shop">Yes, it’s me</button><button class="btn ghost">No, not me</button>'+
+    '<p class="note">Preview note: this one screen replaces three today (Is this you? → Welcome → Connected). Telegram’s own “share your number” prompt follows the tap.</p></div></div>'}
+  function shop(paid){return '<div class="scr"><div class="top"><button class="ibtn" aria-label="Account">'+USER+'</button></div>'+
+    (paid?'':'<p class="conn">'+CHECK+'<span>You’re connected to BrickShop.</span></p>')+
+    '<p class="shop">You owe<b>BrickShop</b></p>'+
+    '<div class="owe"><p class="a">46 000<small>UZS</small></p><p class="d">Due in 3 days</p></div>'+
+    '<p class="lab">What it’s for</p>'+
+    '<div class="debt"><div class="r1"><b>3 bags of cement</b><span>46 000 UZS</span></div><p class="r2">12 Nov · due 19 Nov</p>'+
+      (paid?'<p class="wait"><i></i>You said you paid. Waiting for BrickShop to confirm.</p>':'')+'</div>'+
+    (paid?'':'<button class="btn sec" style="margin-top:var(--s4)" data-go="paid">I paid</button>')+
+    '<button class="lnk">What you’ve paid</button>'+
+    '<p class="start">Run a shop? <u>Start your own book</u></p></div>'}
+  function list(){return '<div class="scr"><div class="top"><button class="ibtn" aria-label="Account">'+USER+'</button></div>'+
+    '<p class="h1">You owe</p><div class="owe" style="margin-top:2px"><p class="a">146 000<small>UZS</small></p><p class="d">to 2 shops</p></div>'+
+    '<div style="margin-top:var(--s4)">'+
+    '<div class="row"><span class="bdg">BS</span><span class="n"><b>BrickShop</b><span>Due in 3 days</span></span><span class="a">46 000 UZS</span>'+CHEV+'</div>'+
+    '<div class="row"><span class="bdg">GS</span><span class="n"><b>Grapeshop</b><span class="od">Overdue · 2 days</span></span><span class="a">100 000 UZS</span>'+CHEV+'</div></div>'+
+    '<button class="lnk">What you’ve paid</button>'+
+    '<p class="start">Run a shop? <u>Start your own book</u></p></div>'}
+  function none(){return '<div class="scr"><div class="top"><button class="ibtn" aria-label="Account">'+USER+'</button></div>'+
+    '<div class="empty"><b>You owe nothing</b>When a shop records a debt for you, it shows here.</div>'+
+    '<button class="lnk" style="align-self:center">What you’ve paid</button>'+
+    '<p class="start">Run a shop? <u>Start your own book</u></p></div>'}
+  function draw(){
+    root.innerHTML = s==='arrive'?arrive():s==='shop'?shop(false):s==='paid'?shop(true):s==='list'?list():none();
+    [].forEach.call(root.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){s=b.dataset.go;draw();root.scrollTop=0})});
+    [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.setAttribute('aria-pressed',b.dataset.s===s?'true':'false')});
+  }
+  [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){s=b.dataset.s;draw()})});
+  document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
+  draw();
+  window.addEventListener('load',function(){ if(window.PT){PT.main(null);} var T=window.Telegram&&Telegram.WebApp;
+    if(T&&T.platform&&T.platform!=='unknown'){var a=T.safeAreaInset||{},c=T.contentSafeAreaInset||{};
+      document.documentElement.style.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');
+      document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
+})();
+</script>
+<script src="../tg.js?v=202611161102"></script>
+</body>
+</html>
