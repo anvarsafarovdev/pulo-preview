@@ -1,6 +1,14 @@
 {
- "updated": "16 Nov 12:56 (Tashkent)",
+ "updated": "16 Nov 13:34 (Tashkent)",
  "designs": [
+  {
+   "file": "home-empty.html",
+   "title": "Home with nothing recorded (r1)",
+   "rev": "r1",
+   "what": "Only the icon and \"Nothing recorded yet\", centred on the screen; a pointer floats gently above Record. ··· switches between an arrow (A) and three chevrons (B), and the theme.",
+   "stamp": "202611161334",
+   "when": "16 Nov 13:34"
+  },
   {
    "file": "customer-first.html",
    "title": "The customer's first minutes (r6)",

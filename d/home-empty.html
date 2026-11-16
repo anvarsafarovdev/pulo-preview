@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Home, empty book r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611161334">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611161334">
+<style>
+#root{position:fixed;inset:0;overflow:hidden;padding-top:var(--pulo-layout-inset-top,0px);background:var(--ground);color:var(--text-1)}
+.hd{display:flex;align-items:center;gap:10px;padding:var(--s4) var(--gut) 0}
+.hd b{flex:1;font-size:var(--t-5);font-weight:600}
+.rb{width:44px;height:44px;border-radius:50%;background:var(--surface);display:grid;place-items:center}
+.rb svg{width:20px;height:20px;fill:none;stroke:var(--text-2);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.find{display:flex;gap:10px;padding:var(--s3) var(--gut) 0}
+.find .f{flex:1;height:52px;border-radius:var(--r-1);background:var(--surface);display:flex;align-items:center;gap:10px;padding:0 14px;color:var(--text-3);font-size:var(--t-4)}
+.find .f svg,.find .s svg{width:20px;height:20px;fill:none;stroke:var(--text-2);stroke-width:1.8;stroke-linecap:round}
+.find .s{width:52px;height:52px;border-radius:var(--r-1);background:var(--surface);display:grid;place-items:center}
+.chips{display:flex;gap:10px;padding:var(--s4) var(--gut) 0;overflow:hidden;white-space:nowrap}
+.chips span{padding:12px 18px;border-radius:var(--r-1);background:var(--surface);color:var(--text-2);font-size:var(--t-3);display:inline-flex;align-items:center;gap:8px}
+.chips span:first-child{color:var(--text-1)}
+.chips svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.parties{display:flex;justify-content:space-between;padding:var(--s5) var(--gut) 0;color:var(--text-2);font-size:var(--t-3)}
+/* the empty state: icon + one line, centred on the SCREEN, not on the space left */
+.first{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;pointer-events:none}
+.first svg{width:30px;height:30px;fill:none;stroke:var(--text-2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.first p{margin:var(--s4) 0 0;font-size:var(--t-4);font-weight:700;letter-spacing:-.015em;color:var(--text-1)}
+/* the dock: the app's own (.hm-dock / .hm-tab) */
+.hm-dock{position:fixed}
+.hm-tab svg.f{fill:currentColor}
+/* the pointer: floats above Record and bobs gently */
+.ptr{position:fixed;left:50%;bottom:calc(var(--pulo-layout-inset-bottom,0px) + 10px + 62px + 6px);width:28px;height:44px;margin-left:-14px;color:var(--text-2);animation:bob 1.6s ease-in-out infinite;pointer-events:none}
+.ptr svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ptr.b svg{display:none}.ptr.b .ch{display:flex}
+.ptr .ch{display:none;flex-direction:column;align-items:center;gap:0}
+.ptr .ch i{display:block;width:12px;height:12px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;animation:fade 1.6s ease-in-out infinite}
+.ptr .ch i:nth-child(1){animation-delay:0s}.ptr .ch i:nth-child(2){animation-delay:.2s}.ptr .ch i:nth-child(3){animation-delay:.4s}
+@keyframes bob{0%,100%{transform:translateY(-6px)}50%{transform:translateY(2px)}}
+@keyframes fade{0%,100%{opacity:.25}50%{opacity:1}}
+@media (prefers-reduced-motion: reduce){.ptr,.ptr .ch i{animation:none}}
+/* preview chrome */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:50;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.14);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:51;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.12);color:var(--text-3);font:700 12px/1 system-ui;opacity:.55}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:51;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a}
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root">
+  <div class="hd"><b>Brickshop</b>
+    <span class="rb"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.6"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6"/></svg></span>
+    <span class="rb"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><path d="M13.5 13.5h3v3h-3zM18.5 18.5H20V20"/></svg></span>
+    <span class="rb"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 20.2a7.2 7.2 0 0114.4 0"/></svg></span>
+  </div>
+  <div class="find"><span class="f"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L20 20"/></svg>+998 90 123 45 67</span>
+    <span class="s"><svg viewBox="0 0 24 24"><path d="M4.4 8.6V6.2a1.8 1.8 0 011.8-1.8h2.4M15.4 4.4h2.4a1.8 1.8 0 011.8 1.8v2.4M19.6 15.4v2.4a1.8 1.8 0 01-1.8 1.8h-2.4M8.6 19.6H6.2a1.8 1.8 0 01-1.8-1.8v-2.4M4.4 12h15.2"/></svg></span></div>
+  <div class="chips"><span>All</span><span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Owes me</span><span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Suppliers</span><span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Assistants</span></div>
+  <div class="parties"><span>Parties</span><span>0</span></div>
+
+  <div class="first">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11a1.6 1.6 0 011.6 1.6v13.8a1.6 1.6 0 01-1.6 1.6h-11A1.6 1.6 0 014.9 18.9V5.1A1.6 1.6 0 016.5 3.5z"/><path d="M8.6 3.5v17"/><path d="M11.8 8.2h4.2M11.8 12h4.2"/></svg>
+    <p>Nothing recorded yet</p>
+  </div>
+
+  <div class="ptr" id="ptr" aria-hidden="true">
+    <svg viewBox="0 0 28 44"><path d="M14 3v34"/><path d="M5 28l9 10 9-10"/></svg>
+    <span class="ch"><i></i><i></i><i></i></span>
+  </div>
+
+  <nav class="hm-dock" aria-label="Menu">
+    <button type="button" class="hm-tab" aria-current="page"><span class="puck"><svg class="f" viewBox="0 0 24 24"><path d="M11.02 2.79a1.6 1.6 0 011.96 0l7.4 5.75c.39.3.62.77.62 1.26v9.3c0 .99-.8 1.8-1.8 1.8h-3.8a1 1 0 01-1-1v-4.6a2.4 2.4 0 00-4.8 0v4.6a1 1 0 01-1 1H4.8c-1 0-1.8-.81-1.8-1.8V9.8c0-.5.23-.96.62-1.26z"/></svg></span><span class="lb">Home</span></button>
+    <button type="button" class="hm-tab" data-seat="create"><span class="puck"><svg class="f" viewBox="0 0 24 24"><path d="M12 3.2c.83 0 1.5.67 1.5 1.5v5.8h5.8a1.5 1.5 0 010 3h-5.8v5.8a1.5 1.5 0 01-3 0v-5.8H4.7a1.5 1.5 0 010-3h5.8V4.7c0-.83.67-1.5 1.5-1.5z"/></svg></span><span class="lb">Record</span></button>
+    <button type="button" class="hm-tab"><span class="puck"><svg class="f" viewBox="0 0 24 24"><path d="M9.4 3.4h5.2c1.4 0 2.6 1.16 2.6 2.6v.8h2.2c1.4 0 2.6 1.16 2.6 2.6v8.6c0 1.44-1.2 2.6-2.6 2.6H4.6C3.2 20.6 2 19.44 2 18V9.4c0-1.44 1.2-2.6 2.6-2.6h2.2V6c0-1.44 1.2-2.6 2.6-2.6zm5.6 3.4V6a.6.6 0 00-.6-.6H9.4a.6.6 0 00-.6.6v.8z"/></svg></span><span class="lb">Business</span></button>
+  </nav>
+</div>
+<span class="tag">PROPOSED</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <button data-p="a" aria-pressed="true">A Arrow</button>
+  <button data-p="b">B Three chevrons</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var ptr=document.getElementById('ptr');
+  function place(){var r=document.querySelector('[data-seat=create] .puck').getBoundingClientRect();ptr.style.left=(r.left+r.width/2)+'px'}
+  place();window.addEventListener('resize',place);setTimeout(place,300);
+  [].forEach.call(document.querySelectorAll('.pv [data-p]'),function(b){b.addEventListener('click',function(){
+    ptr.className='ptr'+(b.dataset.p==='b'?' b':'');
+    [].forEach.call(document.querySelectorAll('.pv [data-p]'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});})});
+  document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light')});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
+  window.addEventListener('load',function(){ if(window.PT){PT.main(null);} var T=window.Telegram&&Telegram.WebApp;
+    if(T&&T.platform&&T.platform!=='unknown'){var a=T.safeAreaInset||{},c=T.contentSafeAreaInset||{};
+      document.documentElement.style.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');
+      document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}});
+})();
+</script>
+<script src="../tg.js?v=202611161334"></script>
+</body>
+</html>
