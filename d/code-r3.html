@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Your Pulo code r3</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611190100">
+<!-- The app's own stylesheet as it stands today (type, tokens, motion, base, components), unedited. -->
+<link rel="stylesheet" href="../appcss/app-now.css?v=202611190100">
+<script src="../vendor/qrcode-generator.js?v=202611190100"></script>
+<style>
+/* ══ The app's own sheet (src/client/mini-app/app/feel/Sheet.css), copied as it is. ══ */
+.feel-sheet-layer{position:absolute;inset:0;overflow:hidden;overflow:clip;pointer-events:none}
+.feel-scrim{position:absolute;inset:0;z-index:30;background:var(--scrim);border:0;padding:0;width:100%;cursor:pointer;opacity:0;pointer-events:none;transition:opacity var(--dur-scrim) var(--ease-out)}
+.feel-scrim.open{opacity:1;pointer-events:auto}
+.feel-sheet{position:absolute;left:0;right:0;bottom:0;z-index:31;background:var(--surface);border-radius:20px 20px 0 0;padding-top:var(--s3);padding-bottom:calc(var(--s6) + var(--pulo-layout-inset-bottom,0px));padding-left:calc(var(--pulo-layout-inset-left,0px) + var(--gut));padding-right:calc(var(--pulo-layout-inset-right,0px) + var(--gut));outline:none;pointer-events:auto;transform:translateY(105%);transition:transform var(--dur-sheet-out) var(--ease-in)}
+.feel-sheet.open{transform:translateY(0);transition:transform var(--dur-sheet-in) var(--ease-out)}
+.feel-sheet-grab{height:44px;margin:calc(-1 * var(--s3)) 0 0;position:relative;touch-action:none}
+.feel-sheet-grab::before{content:'';position:absolute;top:var(--s3);left:50%;width:38px;height:4px;margin-left:-19px;border-radius:2px;background:var(--track)}
+/* ══ The app's own bottom bar (CustomerShopPage.css .cs-paybar / .cs-pay), copied as it is. ══ */
+.cs-paybar{flex:0 0 auto;display:flex;flex-direction:column;gap:var(--s3);padding:var(--s3) calc(var(--pulo-layout-inset-right,0px) + var(--gut)) calc(var(--pulo-layout-inset-bottom,0px) + var(--s4)) calc(var(--pulo-layout-inset-left,0px) + var(--gut));background:var(--ground)}
+.cs-pay{width:100%;min-height:52px;border:0;border-radius:var(--r-1);background:var(--text-1);color:var(--ground);font-size:var(--t-3);font-weight:700;cursor:pointer}
+
+/* ════ WHAT CHANGES ON THIS PAGE (your marks of 18 Nov) — everything else above is the app's own ════ */
+/* 1. The line under the title: one step bigger (was --t-2). */
+.cc-head p.new{font-size:var(--t-3)}
+/* r2 (your marks of 18 Nov, second round) */
+/* a. The page name at the app's page-name size: the one Updates uses (h1.up-title: --t-6, 700). */
+.cc-head h1{font-size:var(--t-6);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+/* b. Everything a little lower: more room above the title, between the title and the code, and under the code. */
+.cc-head{padding-top:var(--s7)}
+.cc-head p.new{margin-top:var(--s3)}
+.cc-plate{margin-top:var(--s6)}
+.cc-note{margin-top:var(--s6)}
+/* c. 'This is your new code', bold, the same size as the line under it. */
+.cc-done.new{margin:var(--s6) 0 0;font-size:var(--t-3);line-height:1.5}
+.cc-done.new + .cc-note{margin-top:var(--s2)}
+.cc-done.new b{font-weight:700}
+/* r3: no plate. The code sits on the page itself: black on the light page, white on the dark one.
+   The 4-module quiet zone is still inside the picture, now in the page's own colour. */
+.cc-qr{background:none;padding:0;border-radius:0}
+.cc-qr .bg{fill:var(--ground)}
+.cc-qr .mod{fill:#000000}
+:root[data-theme="dark"] .cc-qr .mod{fill:#FFFFFF}
+/* for comparison only (··· → Dark: old white plate) */
+body.oldplate :root[data-theme="dark"] .cc-qr{}
+:root[data-theme="dark"] body.oldplate .cc-qr{background:#fff;padding:10px;border-radius:var(--r-btn)}
+:root[data-theme="dark"] body.oldplate .cc-qr .bg{fill:#fff}
+:root[data-theme="dark"] body.oldplate .cc-qr .mod{fill:#000}
+/* 2. One short line in place of the two paragraphs, one step bigger (was --t-2). */
+.cc-note{margin:var(--s5) 0 0;font-size:var(--t-3);line-height:1.5;color:var(--text-3);text-align:center}
+/* 3. Both actions are buttons in the app's bottom bar, fixed at the foot of the page.
+      Scan first, filled (dark in the light theme, light in the dark one: --text-1 on --ground).
+      Replace under it, the same size, outlined as the app's own .qr-rot is. */
+.cs-pay.out{background:none;color:var(--text-1);box-shadow:inset 0 0 0 1px var(--text-2)}
+/* 4. A code that is not a shop's: said at once, above the buttons, not after the camera closes. */
+.cc-warn{margin:0;text-align:center;font-size:var(--t-2);color:var(--out);line-height:1.4}
+
+/* the shop's own request page stands in for the real one (unchanged, not part of this page) */
+.stub{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--gut);gap:var(--s3)}
+.stub h1{margin:0;font-size:var(--t-5);font-weight:700}.stub p{margin:0;font-size:var(--t-3);color:var(--text-2);line-height:1.5}
+/* the fake camera, for a browser without Telegram's scanner */
+.cam{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.86);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font:600 14px/1.4 system-ui}
+.cam .box{width:220px;height:220px;border:3px solid #fff;border-radius:18px}
+.cam button{min-width:240px;padding:12px 16px;border-radius:12px;border:0;font:600 14px system-ui;cursor:pointer}
+
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:80;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="pulo-app" id="app"></div>
+<span class="tag">PROPOSED r3</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p>r3: no white plate. The code sits on the page: black in the light theme, white in the dark one.<br>r2: the page name at the app’s page-name size · everything a little lower · the line under the title is now only “Show this at the counter.” · the button says “Scan the shop’s QR” · Replace asks in two short lines · after a replace: “This is your new code”, bold, the size of the line under it.<br>r1 (kept): bigger lines · one short line instead of two paragraphs · both buttons in the bottom bar, Scan first and filled · a scan acts at once.<br>Everything else is the page as built today: the code is made fresh on every opening, Replace asks first, a shop’s scan brings up “Is this you?”.</p>
+  <button data-x="open">Open again (new code)</button>
+  <button data-x="slow">Slow connection</button>
+  <button data-x="fail">No connection</button>
+  <button data-x="replfail">Next Replace fails</button>
+  <button data-x="ask">A shop scans you</button>
+  <button id="op">Dark: old white plate</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  /* ── words: the app's own catalogue (copy.ts), unchanged, except the one new line ── */
+  var W={
+    title:'Your Pulo code',
+    lead:'Show this at the counter.',
+    note:'It carries no money details. A shop sees only what it records for you.',   /* NEW, provisional */
+    loading:'Generating Your Code…',
+    replace:'Replace this code',
+    scan:'Scan the shop’s QR',
+    notShop:'That isn’t a Pulo shop code.',
+    replaceTitle:'Replace your code?',
+    replaceOld:'The old code stops working immediately.',
+    replaceSame:'Your account remains the same for every shop.',
+    replaceNoWayBack:'There is no way back to the old code.',
+    replaceGo:'Replace it', replaceKeep:'Keep the one I have', replacing:'Replacing…',
+    newCode:'This is your new code',replacedLead:'Your New Code', replacedBody:'All previous codes have expired, including any saved photos of them.',
+    failLead:'Nothing was replaced.', failBody:'Unable to reach Pulo, so your code was not changed. The code below is still active. Try again when connection is restored.',
+    probTitle:'Pulo could not be reached', probBody:'This page is not saved on your phone. It is read fresh every time. Try again when you have signal.',
+    tryAgain:'Try again',
+    askTitle:'Is this you?', shopLabel:'The shop', wroteFor:'Debt for', askFine:'Only the last four digits are shown. If this isn\'t correct, decline to disconnect.',
+    yes:'Yes, it’s me', no:'No, not me', sending:'Sending…',
+    notMeTitle:'Nothing was linked.', notMeLead:'No Debt Added', notMeFine:'The shop is told that you did not confirm it.', cont:'Continue'
+  };
+  var ROT='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 12a7.4 7.4 0 1 1-2.2-5.2"/><path d="M18 3.6v3.8h-3.8"/></svg>';
+  var LOCK='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.6" y="10.4" width="14.8" height="9.4" rx="2.2"/><path d="M8.4 10.4V7.8a3.6 3.6 0 0 1 7.2 0v2.6"/></svg>';
+  var WARN='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.2l7.6 13.2H4.4z"/><path d="M12 10.2v3.6M12 16.4h.15"/></svg>';
+  var USERM='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 20.2a7.2 7.2 0 0 1 14.4 0"/></svg>';
+  var STOPM='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M8.6 8.6l6.8 6.8M15.4 8.6l-6.8 6.8"/></svg>';
+
+  /* ── the plate: the app's own QrPlate (qr-plate.tsx + data/qr.ts): level M, a 4-module quiet zone ── */
+  function plate(value){var q=qrcode(0,'M');q.addData(value);q.make();var n=q.getModuleCount(),Z=4,S=n+Z*2,r='';
+    for(var y=0;y<n;y++)for(var x=0;x<n;x++)if(q.isDark(y,x))r+='<rect x="'+(x+Z)+'" y="'+(y+Z)+'" width="1" height="1"/>';
+    return '<div class="cc-qr" aria-label="'+W.title+'"><svg viewBox="0 0 '+S+' '+S+'" shape-rendering="crispEdges" aria-hidden="true"><rect class="bg" width="'+S+'" height="'+S+'"/><g class="mod">'+r+'</g></svg></div>'}
+  function newCode(){var a='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_',s='pulo-id:';for(var i=0;i<43;i++)s+=a[Math.floor(Math.random()*64)];return s}   /* made up */
+
+  /* ── the shop-code reader: shop-scan.ts + start-param.ts, rule for rule ── */
+  function readShop(text){var t=String(text).trim(),p;
+    if(t.indexOf('://')<0)p=t;else{if(t.indexOf('#')>=0)return null;var u;try{u=new URL(t)}catch(e){return null}
+      if(u.protocol!=='https:'||u.hostname!=='t.me'||u.port||u.username||u.password)return null;
+      var sg=u.pathname.split('/');if(sg.length!==3||sg[0]!==''||!sg[1]||!sg[2])return null;
+      var ks=[];u.searchParams.forEach(function(v,k){ks.push(k)});if(ks.length!==1||ks[0]!=='startapp')return null;p=u.searchParams.get('startapp')}
+    return /^q-[A-Za-z0-9_-]{44}$/.test(p||'')?p:null}
+
+  var app=document.getElementById('app'), PT=function(){return window.PT}, TG=window.Telegram&&Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  var st={stage:'LOADING',code:'',replaced:false,replFail:false,replacing:false,asking:false,notShop:false,question:null,qstage:'ASK',sending:false,shop:null,cam:false};
+  var opt={slow:false,fail:false,replfail:false};
+
+  function open(){st.stage='LOADING';st.notShop=false;st.replaced=false;st.replFail=false;draw();
+    setTimeout(function(){if(opt.fail){st.stage='PROBLEM'}else{st.stage='READY';st.code=newCode()}draw()},opt.slow?2600:350)}
+  function canScan(){return inTG?(TG.isVersionAtLeast&&TG.isVersionAtLeast('6.4')&&typeof TG.showScanQrPopup==='function'):true}
+
+  /* THE FIX: the camera closes on the first code it reads, and the page answers at once. */
+  function scan(){st.notShop=false;draw();
+    if(inTG){TG.showScanQrPopup({text:W.scan},function(text){
+        var code=readShop(text);
+        try{TG.closeScanQrPopup()}catch(e){}
+        setTimeout(function(){answer(code)},0);
+        return true});}
+    else{st.cam=true;draw()}}
+  function answer(code){if(code){PT()&&PT().haptic('light');st.shop=code;PT()&&PT().pushBack(backFromShop);draw()}
+    else{PT()&&PT().haptic('warning');st.notShop=true;draw()}}
+  function backFromShop(){st.shop=null;PT()&&PT().popBack(backFromShop);draw()}
+
+  function closeSheet(){st.asking=false;PT()&&PT().popBack(closeSheet);draw()}
+  function replace(){if(st.replacing||!st.asking)return;st.replacing=true;draw();
+    setTimeout(function(){st.replacing=false;st.asking=false;PT()&&PT().popBack(closeSheet);
+      if(opt.replfail){opt.replfail=false;st.replFail=true}else{st.code=newCode();st.replaced=true;st.replFail=false}draw()},900)}
+  function retryReplace(){st.replacing=true;draw();setTimeout(function(){st.replacing=false;st.code=newCode();st.replaced=true;st.replFail=false;draw()},900)}
+
+  function codePage(){var h='<div class="cb-screen"><div class="cb-scroll"><header class="cc-head"><h1>'+W.title+'</h1><p class="new">'+W.lead+'</p></header>';
+    if(st.stage==='LOADING')h+='<div class="pulo-empty">'+W.loading+'</div>';
+    if(st.stage==='PROBLEM')h+='<div class="cb-problem"><p><b>'+W.probTitle+'</b> '+W.probBody+'</p><button class="cb-cancel" type="button" data-a="retry">'+W.tryAgain+'</button></div>';
+    if(st.stage==='READY'&&st.replFail)h+='<div class="cb-problem"><p><b>'+W.failLead+'</b> '+W.failBody+'</p><button class="cb-cancel" type="button" data-a="retryrepl"'+(st.replacing?' disabled':'')+'>'+(st.replacing?W.replacing:W.tryAgain)+'</button></div>';
+    if(st.stage==='READY'){h+='<div class="cc-plate">'+plate(st.code)+'</div>';
+      if(st.replaced&&!st.replFail)h+='<p class="cc-done new"><b>'+W.newCode+'</b></p>';
+      h+='<p class="cc-note">'+W.note+'</p>'}
+    h+='</div>';
+    if(st.stage==='READY'){h+='<div class="cs-paybar">'+(st.notShop?'<p class="cc-warn" role="status">'+W.notShop+'</p>':'')+
+      (canScan()?'<button class="cs-pay" type="button" data-a="scan">'+W.scan+'</button>':'')+
+      '<button class="cs-pay out" type="button" data-a="ask">'+W.replace+'</button></div>'}
+    h+='<div class="feel-sheet-layer"><button type="button" class="feel-scrim'+(st.asking?' open':'')+'" aria-label="'+W.replaceKeep+'" data-a="keep"></button>'+
+      '<div role="dialog" aria-modal="true" aria-label="'+W.replaceTitle+'" class="feel-sheet cb-sheet'+(st.asking?' open':'')+'"><div class="feel-sheet-grab" aria-hidden="true"></div>'+
+      '<h3>'+W.replaceTitle+'</h3><div class="cb-fx"><p>'+ROT+'<span>'+W.replaceOld+'</span></p><p>'+LOCK+'<span>'+W.replaceSame+'</span></p></div>'+
+      '<button class="cb-commit" type="button" data-a="go">'+(st.replacing?W.replacing:W.replaceGo)+'</button><button class="cb-cancel" type="button" data-a="keep">'+W.replaceKeep+'</button></div></div>';
+    return h+'</div>'}
+
+  /* 33, reused as it is built (IsThisYouScreen, the scan's path) */
+  function question(){var q=st.question,h='<div class="iy-screen"><div class="iy-scroll">';
+    if(st.qstage==='ASK')h+='<div class="iy-mid"><span class="iy-ic">'+USERM+'</span><h1 class="iy-q">'+W.askTitle+'</h1><div class="iy-card"><p class="k">'+W.shopLabel+'</p><p class="v">'+q.shop+'</p><div class="sep"><p class="k">'+W.wroteFor+'</p><p class="num">'+q.masked+'</p></div></div><p class="iy-fine">'+W.askFine+'</p></div>'+
+      '<div class="iy-acts"><button class="iy-yes" type="button" data-a="yes"'+(st.sending?' disabled':'')+'>'+(st.sending?W.sending:W.yes)+'</button><button class="iy-no" type="button" data-a="no"'+(st.sending?' disabled':'')+'>'+W.no+'</button></div>';
+    if(st.qstage==='NOT_ME')h+='<div class="iy-mid"><span class="iy-ic warn">'+STOPM+'</span><h1 class="iy-q">'+W.notMeTitle+'</h1><p class="iy-lead">'+W.notMeLead+'</p><p class="iy-fine">'+W.notMeFine+'</p></div><div class="iy-acts"><button class="iy-back" type="button" data-a="cont">'+W.cont+'</button></div>';
+    return h+'</div></div>'}
+
+  function draw(){var h;
+    if(st.shop)h='<div class="cb-screen"><div class="stub"><h1>BrickShop</h1><p>The shop’s own request page opens here, exactly as it does today (not part of this design).<br>Back returns to your code.</p></div></div>';
+    else if(st.linked)h='<div class="cb-screen"><div class="stub"><h1>Grapeshop</h1><p>You’re linked: that shop’s page opens here, as it does today.<br>Back returns to your code.</p></div></div>';
+    else if(st.question)h=question();
+    else h=codePage();
+    app.innerHTML=h;
+    /* the sheet rises, as the app's Sheet does: drawn closed, then opened on the next frame */
+    if(st.asking&&!st.sheetUp){var L=app.querySelector('.feel-sheet'),S=app.querySelector('.feel-scrim');L.classList.remove('open');S.classList.remove('open');void L.offsetWidth;
+      requestAnimationFrame(function(){L.classList.add('open');S.classList.add('open')});st.sheetUp=true}
+    if(!st.asking)st.sheetUp=false;
+    if(st.cam){var c=document.createElement('div');c.className='cam';c.innerHTML='<div>'+W.scan+'</div><div class="box"></div><button data-c="shop">Point it at a shop’s code</button><button data-c="other">Point it at some other code</button><button data-c="x">Close</button>';document.body.appendChild(c);
+      c.addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;c.remove();st.cam=false;
+        if(b.dataset.c==='shop')answer(readShop('https://t.me/PuloBot/app?startapp=q-'+'aB3dE5gH7jK9mN1pQ3sT5vX7zA9cE1gI3kM5oQ7sU9wY'));else if(b.dataset.c==='other')answer(readShop('https://example.com/menu'));else draw()})}
+  }
+  app.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a;
+    if(a==='scan')scan();
+    else if(a==='ask'){st.asking=true;st.notShop=false;PT()&&PT().pushBack(closeSheet);draw()}
+    else if(a==='keep')closeSheet();
+    else if(a==='go')replace();
+    else if(a==='retry')open();
+    else if(a==='retryrepl')retryReplace();
+    else if(a==='yes'){st.sending=true;draw();setTimeout(function(){st.sending=false;st.question=null;st.linked=true;PT()&&PT().pushBack(function f(){st.linked=false;PT().popBack(f);open()});draw()},800)}
+    else if(a==='no'){st.sending=true;draw();setTimeout(function(){st.sending=false;st.qstage='NOT_ME';draw()},600)}
+    else if(a==='cont'){st.question=null;draw()}
+  });
+
+  document.getElementById('pv').addEventListener('click',function(e){var b=e.target.closest('[data-x]');if(!b)return;var x=b.dataset.x;
+    if(x==='open'){opt.fail=false;opt.slow=false;open()}
+    else if(x==='slow'){opt.slow=true;opt.fail=false;open()}
+    else if(x==='fail'){opt.fail=true;open()}
+    else if(x==='replfail'){opt.replfail=true;b.setAttribute('aria-pressed','true')}
+    else if(x==='ask'){if(st.stage!=='READY')return;st.question={shop:'Grapeshop',masked:'+998 •• ••• 63 38'};st.qstage='ASK';draw()}
+    document.getElementById('pv').classList.add('hide')});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('op').addEventListener('click',function(){document.body.classList.toggle('oldplate');this.setAttribute('aria-pressed',document.body.classList.contains('oldplate'))});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
+
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');
+    if(TG.viewportStableHeight)r.setProperty('--pulo-viewport-height',TG.viewportStableHeight+'px')}
+  if(inTG){try{TG.onEvent('safeAreaChanged',insets);TG.onEvent('contentSafeAreaChanged',insets);TG.onEvent('viewportChanged',insets);TG.onEvent('fullscreenChanged',insets)}catch(e){}}
+  window.addEventListener('load',insets);
+  open();
+})();
+</script>
+<script src="../tg.js?v=202611190100"></script>
+</body>
+</html>

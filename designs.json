@@ -1,6 +1,14 @@
 {
- "updated": "19 Nov 01:45 (Tashkent)",
+ "updated": "19 Nov 02:10 (Tashkent)",
  "designs": [
+  {
+   "file": "code-r3.html",
+   "title": "Your Pulo code (r3), working",
+   "rev": "r3",
+   "what": "No white plate: the code sits on the page, black in light, white in dark. Test it: scan this page's code with Pulo Dev's Scan on an iPhone and on an Android, in both themes. ··· → Dark: old white plate, to compare.",
+   "stamp": "202611190210",
+   "when": "19 Nov 02:10"
+  },
   {
    "file": "code-r2.html",
    "title": "Your Pulo code (r2), working",
