@@ -1,6 +1,14 @@
 {
- "updated": "19 Nov 01:10 (Tashkent)",
+ "updated": "19 Nov 01:45 (Tashkent)",
  "designs": [
+  {
+   "file": "code-r2.html",
+   "title": "Your Pulo code (r2), working",
+   "rev": "r2",
+   "what": "Your second marks: the page name at the app's page-name size, everything a little lower, \"Show this at the counter.\" only, \"Scan the shop's QR\", Replace asks in two short lines, and after a replace \"This is your new code\" in bold. The scan uses Telegram's real camera. ··· lists the changes and lets you try a slow or failed connection, a failed replace and a shop scanning you.",
+   "stamp": "202611190145",
+   "when": "19 Nov 01:45"
+  },
   {
    "file": "code-r1.html",
    "title": "Your Pulo code (r1), working",
