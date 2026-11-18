@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Your review of 18 Nov, every mark fixed r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611182330">
+<link rel="stylesheet" href="../appcss/app-full.css?v=202611182330">
+<style>
+/* ══ Your review of 18 Nov: every mark, fixed. Made-up shops, people and amounts only. ══ */
+html,body{margin:0}
+#root{position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;padding-top:var(--pulo-layout-inset-top,0px);background:var(--ground);color:var(--text-1)}
+.scr{min-height:100%;display:flex;flex-direction:column;padding:var(--s4) var(--gut) calc(var(--s5) + var(--pulo-layout-inset-bottom,0px));box-sizing:border-box}
+.scr.dk{padding-bottom:calc(110px + var(--pulo-layout-inset-bottom,0px))}
+.scr.pb{padding-bottom:calc(120px + var(--pulo-layout-inset-bottom,0px))}
+.cf{font-family:"Comfortaa","IBM Plex Sans",sans-serif}
+svg.i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── buttons ── */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:52px;border-radius:12px;border:0;font:inherit;font-size:var(--t-3);font-weight:600;cursor:pointer;box-sizing:border-box}
+.btn svg{width:20px;height:20px}
+.btn.pri{background:var(--text-1);color:var(--ground)}        /* black in light, white in dark */
+.btn.sec{background:transparent;color:var(--text-1);box-shadow:inset 0 0 0 1.5px var(--text-2)}
+.btn.off{background:var(--surface);color:var(--text-dim);cursor:default}
+.btn + .btn{margin-top:var(--s2)}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:var(--s3) var(--gut) calc(var(--pulo-layout-inset-bottom,0px) + var(--s5));background:var(--ground)}
+.foot::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:24px;pointer-events:none;background:linear-gradient(to top,var(--ground),transparent)}
+
+/* ── 1 Your Pulo code ── */
+.cd-h{margin:var(--s4) 0 0;font-size:var(--t-6);font-weight:700;letter-spacing:-.01em}
+.cd-s{margin:var(--s2) 0 0;font-size:var(--t-4);line-height:1.45;color:var(--text-2)}
+.qr{margin:var(--s6) auto 0;width:min(72vw,280px);aspect-ratio:1;padding:22px;box-sizing:border-box;border-radius:16px;background:#fff}
+.qr svg{width:100%;height:100%;display:block}
+.cd-n{margin:var(--s4) 0 0;text-align:center;font-size:var(--t-3);color:var(--text-2)}
+.toast{position:fixed;left:var(--gut);right:var(--gut);bottom:calc(var(--pulo-layout-inset-bottom,0px) + 150px);z-index:30;padding:12px 14px;border-radius:12px;background:var(--text-1);color:var(--ground);font-size:var(--t-2);text-align:center}
+
+/* ── 2/3 Record a debt (owner) ── */
+.rd-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:4px}
+.rd-top h1{margin:0;font-size:var(--t-6);font-weight:700}
+.plan{height:30px;padding:0 12px;border-radius:999px;border:0;background:var(--surface);color:var(--text-3);font-size:var(--t-1);font-weight:700;letter-spacing:.07em}
+.amt{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:16px;padding:18px 16px 16px;border-radius:14px;background:var(--surface);cursor:text}
+.amt .fig{font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-7);font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--text-2);min-height:1.2em}
+.amt .fig.typed{color:var(--in)}
+.amt.on{box-shadow:inset 0 0 0 1.5px var(--text-2)}
+/* THE BLINKING ZERO: while the box waits for a number, the 0 itself blinks like a cursor */
+.blink{animation:zeroBlink 1.06s steps(1,end) infinite}
+@keyframes zeroBlink{0%{opacity:1}50%{opacity:0}}
+.caret{display:inline-block;width:2px;height:.9em;margin-left:3px;vertical-align:-.08em;background:var(--text-1);animation:zeroBlink 1.06s steps(1,end) infinite}
+@media (prefers-reduced-motion: reduce){.blink,.caret{animation:none}}
+.cur{height:34px;padding:0 12px 0 14px;border-radius:10px;border:0;background:var(--ground);color:var(--text-2);font:inherit;font-size:var(--t-2);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.cur svg{width:14px;height:14px}
+.rrow{display:flex;align-items:center;gap:12px;margin-top:10px;padding:0 8px 0 16px;min-height:56px;border-radius:14px;background:var(--surface)}
+.rrow .pfx{font-size:var(--t-3);color:var(--text-2)}
+.rrow .ph{flex:1;font-size:var(--t-3);color:var(--text-2);opacity:.75}
+.scan{width:44px;height:44px;border-radius:10px;border:0;background:var(--ground);color:var(--text-2);display:inline-flex;align-items:center;justify-content:center}
+.scan svg{width:22px;height:22px}
+.card{margin-top:10px;padding:14px 16px 12px;border-radius:14px;background:var(--surface)}
+.due{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.due b{font-size:var(--t-3);font-weight:700}.due b.q{font-weight:500;color:var(--text-2)}
+.due span{font-size:var(--t-2);color:var(--text-3);white-space:nowrap}
+.wheel{display:flex;justify-content:center;gap:4px;margin:10px 0 0}
+.wheel button{flex:0 0 46px;height:46px;border-radius:12px;border:0;background:none;color:var(--text-3);font:inherit;font-size:var(--t-3)}
+.wheel button.on{background:var(--ground);color:var(--text-1);font-weight:700}
+.paid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.pc{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:12px 14px 14px;min-height:96px;border-radius:14px;border:0;text-align:left;color:var(--text-1);background:var(--surface);overflow:hidden;font:inherit;cursor:pointer}
+.pc::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(46,182,125,.20),rgba(46,182,125,0) 70%);pointer-events:none}
+.pc.pro::before{background:linear-gradient(135deg,rgba(124,108,240,.22),rgba(124,108,240,0) 70%)}
+.pc > *{position:relative}
+.pc .ic{width:24px;height:24px;color:var(--in)}.pc.pro .ic{color:#9b8cff}
+.pc b{margin-top:4px;font-size:var(--t-3);font-weight:700}
+.pc span.s{font-size:var(--t-2);color:var(--text-3);line-height:1.35}
+.ptag{position:absolute!important;top:10px;right:10px;height:24px;padding:0 9px 0 7px;border-radius:999px;background:var(--ground);color:var(--text-2);font-size:var(--t-1);font-weight:600;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.ptag svg{width:12px;height:12px}
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.ex{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border:0;border-radius:12px;background:none;color:var(--text-1);font:inherit;font-size:var(--t-2);font-weight:500}
+.ex svg{width:18px;height:18px}
+.why{min-height:1.4em;margin:0 0 6px;text-align:center;font-size:var(--t-2);color:var(--text-3)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tab{height:52px;padding:0 8px 0 14px;border-radius:14px;border:0;background:var(--surface);color:var(--text-2);display:flex;align-items:center;justify-content:space-between;gap:8px;font:inherit;font-size:var(--t-3);font-weight:600;min-width:0;cursor:pointer}
+.tab span{white-space:nowrap}
+.tab.on{color:var(--text-1);box-shadow:inset 0 0 0 1.5px var(--text-2)}
+.tab .lk{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--ground);display:inline-flex;align-items:center;justify-content:center}
+.tab .lk svg{width:13px;height:13px}
+/* the paid panel: everything stays usable but DIM; the PRO pill alone keeps full strength and its pulse */
+.panel{margin-top:10px;padding:16px;border-radius:14px;background:var(--surface);text-align:center;overflow:hidden;box-sizing:border-box;max-width:100%}
+.panel .dimmed{opacity:.38;transition:opacity .2s}
+.pill{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px 0 5px;border-radius:999px;background:rgba(124,108,240,.18);color:var(--text-1);font-size:var(--t-2);font-weight:700;letter-spacing:.07em}
+.pill i{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#8f80f5;color:#fff;animation:pulseP 1.8s ease-out infinite}
+.pill i svg{width:14px;height:14px;stroke-width:2.4}
+@keyframes pulseP{0%{box-shadow:0 0 0 0 rgba(143,128,245,.55)}70%{box-shadow:0 0 0 9px rgba(143,128,245,0)}100%{box-shadow:0 0 0 0 rgba(143,128,245,0)}}
+.pseg{display:flex;gap:6px;margin:14px 0 0}
+.pseg button{flex:1 1 0;min-width:0;height:42px;border:0;border-radius:10px;background:var(--ground);color:var(--text-2);font:inherit;font-size:var(--t-2);font-weight:600}
+.pseg button.on{background:var(--text-1);color:var(--ground)}
+/* the summary now WRAPS inside its card: nothing can run past the edge, and the page can't slide sideways */
+.psum{margin:12px 0 0;padding:14px 12px;border-radius:12px;background:var(--ground);overflow-wrap:anywhere}
+.psum .big{margin:0;line-height:1.35}
+.psum .big b{font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-6);font-weight:700;color:var(--in);font-variant-numeric:tabular-nums;white-space:nowrap}
+.psum .big span,.psum .big small{font-size:var(--t-3);color:var(--text-2)}
+.psum .every{margin:6px 0 0;font-size:var(--t-3);font-weight:600;line-height:1.4}
+.psum .first{margin:2px 0 0;font-size:var(--t-2);color:var(--text-2)}
+.cnt-row{display:flex;justify-content:space-between;align-items:baseline;margin:16px 0 0;gap:12px}
+.cnt-row b{font-size:var(--t-5);font-weight:600}.cnt-row span{font-size:var(--t-2);color:var(--text-3)}
+.slide{width:100%;margin:16px 0 4px;accent-color:var(--text-1)}
+.fixed{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;padding-top:12px;border-top:1px solid var(--track);font-size:var(--t-2);color:var(--text-2)}
+.fixed svg{width:16px;height:16px}
+
+/* ── 4 Send the invite ── */
+.iv{min-height:100%;display:flex;flex-direction:column;box-sizing:border-box;padding:0 var(--gut) calc(130px + var(--pulo-layout-inset-bottom,0px))}
+.iv-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.iv-bub{width:104px;height:104px;margin-bottom:var(--s3);transform-origin:30% 90%;animation:bubAppear 2s var(--ease-out) infinite}
+.iv-bub path{fill:var(--raised)}
+.iv-bub circle{fill:var(--text-2)}                       /* the dots: still, never pulsing */
+@keyframes bubAppear{0%{transform:scale(.55) translateY(10px);opacity:0}16%{transform:scale(1.06);opacity:1}24%,82%{transform:none;opacity:1}100%{transform:scale(.92);opacity:0}}
+@media (prefers-reduced-motion: reduce){.iv-bub{animation:none}}
+.chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px;border-radius:999px;background:var(--surface);color:var(--text-2);font-size:var(--t-2)}
+.chip b{color:var(--text-1);font-weight:600}
+.iv h1{margin:var(--s4) 0 0;font-size:var(--t-6);font-weight:700;line-height:1.25}
+.iv p.l{margin:var(--s3) 0 0;font-size:var(--t-3);color:var(--text-2);line-height:1.5}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spin .7s linear infinite;box-sizing:border-box}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── 5–7 I owe (the customer's own pages) ── */
+.pt{margin:var(--s2) 0 0;font-size:var(--t-6);font-weight:700;letter-spacing:-.02em}
+.seg{display:flex;gap:2px;margin:var(--s4) 0 0;padding:3px;border-radius:var(--r-1);background:var(--surface)}
+.seg button{flex:1;min-height:40px;border:0;border-radius:7px;background:transparent;color:var(--text-2);font:inherit;font-size:var(--t-2);font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ground);color:var(--text-1);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.box{margin:var(--s4) 0 0;padding:var(--s4);border-radius:14px;background:var(--surface)}
+.box .k{margin:0;font-size:var(--t-3);color:var(--text-2)}
+.box .a{margin:4px 0 0;font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:calc(var(--t-7) * 1.05);font-weight:700;font-variant-numeric:tabular-nums;color:var(--out);line-height:1.15}
+.box .a.g{color:var(--in)}
+.box .a small{margin-left:6px;font-size:.42em;font-weight:500}
+.box .a + .a{margin-top:2px}
+.box .only{margin:var(--s3) 0 0;font-size:var(--t-2);color:var(--text-3)}
+.sh{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:14px 2px;border:0;background:none;color:var(--text-1);font:inherit;text-align:left;cursor:pointer}
+.sh .n{flex:1;min-width:0}
+.sh .n b{display:block;font-size:var(--t-4);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sh .n .v{display:block;margin-top:4px;font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-5);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.sh .n .v.g{color:var(--in)}
+.sh .n .v small{margin-left:5px;font-size:.6em;font-weight:500}
+.sh .n .w{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:var(--t-2);color:var(--text-2)}
+.sh .n .w i{width:8px;height:8px;border-radius:50%;background:#c9a227}
+.sh > svg{flex:0 0 auto;width:18px;height:18px;color:var(--text-3)}
+.lab{margin:var(--s5) 0 var(--s1);font-size:var(--t-2);color:var(--text-3)}
+/* one empty state for both tabs: an icon, a short title, one plain line */
+.empty{margin:var(--s7) 0 0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.empty .ei{width:72px;height:72px;border-radius:50%;background:var(--surface);display:grid;place-items:center;color:var(--text-2)}
+.empty .ei svg{width:30px;height:30px}
+.empty b{margin:var(--s4) 0 0;font-size:var(--t-5);font-weight:700}
+.empty span{margin:var(--s2) 0 0;font-size:var(--t-3);color:var(--text-2);line-height:1.45;max-width:280px}
+.hm-dock{position:fixed}
+.hm-tab svg.f{fill:currentColor;stroke:none}
+.hm-tab svg.f .st{fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 8 One shop, 10 A debt (customer) ── */
+.you{margin:var(--s3) 0 0;font-size:var(--t-3);color:var(--text-2)}
+.you b{display:block;margin-top:2px;font-size:var(--t-6);color:var(--text-1);letter-spacing:-.02em}
+.dcard{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 8px;padding:14px;border:0;border-radius:14px;background:var(--surface);color:var(--text-1);font:inherit;text-align:left;cursor:pointer}
+.dcard .bx{flex:1;min-width:0}
+.dcard .v{display:block;font-size:var(--t-4);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.dcard .t{display:block;margin-top:4px;font-size:var(--t-3);font-weight:600}
+.dcard .r2{display:block;margin-top:2px;font-size:var(--t-2);color:var(--text-3)}
+.dcard > svg{width:18px;height:18px;color:var(--text-3)}
+.dh{margin:var(--s3) 0 0;font-size:var(--t-6);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.ds{margin:4px 0 0;font-size:var(--t-3);color:var(--text-2)}
+.left{margin:var(--s5) 0 0}.left .k{margin:0;font-size:var(--t-2);color:var(--text-3)}
+.left .a{margin:2px 0 0;font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-7);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.left .a small{margin-left:6px;font-size:.45em;font-weight:500}
+.left .d{margin:2px 0 0;font-size:var(--t-2);color:var(--text-2)}
+.facts{margin:var(--s5) 0 0}
+.facts p{display:flex;justify-content:space-between;gap:12px;margin:0;padding:9px 0;font-size:var(--t-3)}
+.facts p span{color:var(--text-2)}.facts p b{font-weight:700;font-variant-numeric:tabular-nums}
+
+/* ── 9–11 the payment sheet (customer and owner): one solid sheet, sitting ON the keyboard ── */
+.scrim{position:fixed;inset:0;z-index:40;background:var(--scrim)}
+.kb{position:fixed;left:0;right:0;bottom:0;z-index:42;padding:6px 6px calc(var(--pulo-layout-inset-bottom,0px) + 22px);background:#d1d3d9;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+:root[data-theme="dark"] .kb{background:#2b2b2d}
+.kb .key{height:46px;border-radius:7px;background:#fff;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;font:500 24px/1 system-ui,sans-serif;box-shadow:0 1px 0 rgba(0,0,0,.25)}
+:root[data-theme="dark"] .kb .key{background:#6a6a6d;color:#fff}
+.kb .key small{font:600 9px/1 system-ui;letter-spacing:.12em;margin-top:2px}
+.kb .key.e,:root[data-theme="dark"] .kb .key.e{background:transparent;box-shadow:none}
+.kb{position:fixed}.kb-lab{position:absolute;left:0;right:0;top:-14px;text-align:center;font:600 10px/1 system-ui;color:#999;letter-spacing:.04em}
+.ps{position:fixed;left:0;right:0;z-index:41;bottom:var(--kbh,262px);padding:12px var(--gut) var(--s4);border-radius:20px 20px 0 0;background:var(--ground);box-shadow:0 -8px 30px rgba(0,0,0,.18)}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--track);margin:0 auto 12px}
+.ps h2{margin:0;font-size:var(--t-5);font-weight:700}
+.ps .sub{margin:3px 0 0;font-size:var(--t-2);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps .bal{display:flex;justify-content:space-between;align-items:baseline;margin:var(--s3) 0 0;padding:12px 14px;border-radius:12px;background:var(--surface);font-size:var(--t-2);color:var(--text-2)}
+.ps .bal b{font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-4);font-weight:700;color:var(--out);font-variant-numeric:tabular-nums}
+.ps .bal b.g{color:var(--in)}
+.ps .in{display:flex;align-items:baseline;justify-content:flex-end;gap:6px;margin:var(--s2) 0 0;height:58px;padding:0 14px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--text-2)}
+.ps .in .fig{font-family:"Comfortaa","IBM Plex Sans",sans-serif;font-size:var(--t-6);font-weight:700;line-height:58px;font-variant-numeric:tabular-nums;color:var(--text-2)}
+.ps .in .fig.typed{color:var(--text-1)}
+.ps .in span.u{font-size:var(--t-3);color:var(--text-2)}
+.ps .hint{margin:var(--s3) 0 var(--s3);font-size:var(--t-2);color:var(--text-2);text-align:center}
+.ps .err{color:var(--out)}
+
+/* ── updates ── */
+.up{display:flex;align-items:flex-start;gap:12px;width:100%;padding:14px 0;border:0;background:none;color:var(--text-1);font:inherit;text-align:left;cursor:pointer}
+.up .dot{flex:0 0 auto;width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--out)}
+.up .tx{flex:1}.up .tx b{display:block;font-size:var(--t-3);font-weight:600}.up .tx em{display:block;margin-top:2px;font-style:normal;font-size:var(--t-2);color:var(--text-3)}
+.up > svg{flex:0 0 auto;width:16px;height:16px;align-self:center;color:var(--text-3)}
+
+/* ── preview chrome (not part of the design) ── */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:60;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;max-height:70vh;overflow:auto;padding:8px;border-radius:14px;background:rgba(128,128,128,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:61;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:61;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a}
+.fx{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.4 system-ui;color:#2e9a5a;text-align:left}
+body.nomarks .fx{display:none}
+</style>
+</head>
+<body>
+<div class="pulo-app" id="root"></div>
+<span class="tag">PROPOSED r1</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p class="fx" id="fx"></p>
+  <button data-s="code">1 Your code</button>
+  <button data-s="rd">2 Record: amount</button>
+  <button data-s="inst">3 Record: Installments</button>
+  <button data-s="ivwait">4 Invite: getting ready</button>
+  <button data-s="ivready">4b Invite: ready</button>
+  <button data-s="ivoff">4c Invite: offline</button>
+  <button data-s="owe">5 I owe</button>
+  <button data-s="oweown">5b I owe (a shop owner)</button>
+  <button data-s="paidt">6 What I paid</button>
+  <button data-s="owe0">7 Owe nothing</button>
+  <button data-s="paid0">7b Paid nothing</button>
+  <button data-s="shop">8 One shop</button>
+  <button data-s="paysheet">9 Pay</button>
+  <button data-s="debt">10 A debt</button>
+  <button data-s="paydebt">10b Pay this debt</button>
+  <button data-s="owner">11 Owner: Record payment</button>
+  <button data-s="updates">12 Updates</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  /* Made-up shops, people, numbers and amounts only. */
+  function I(p,cls){return '<svg class="i'+(cls?' '+cls:'')+'" viewBox="0 0 24 24" aria-hidden="true">'+p+'</svg>'}
+  var CHEV=I('<path d="M9.4 5.4L14.9 10.5Q16.4 12 14.9 13.5L9.4 18.6"/>');
+  var SCAN=I('<path d="M4 8.8V6.4A2.4 2.4 0 016.4 4h2.4M15.2 4h2.4A2.4 2.4 0 0120 6.4v2.4M20 15.2v2.4a2.4 2.4 0 01-2.4 2.4h-2.4M8.8 20H6.4A2.4 2.4 0 014 17.6v-2.4M7.6 12h8.8"/>');
+  var ROT=I('<path d="M20 11.5A8 8 0 006.3 6.3L4 8.6M4 4v4.6h4.6M4 12.5a8 8 0 0013.7 5.2L20 15.4M20 20v-4.6h-4.6"/>');
+  var SMS=I('<path d="M4.5 6.5A2.5 2.5 0 017 4h10a2.5 2.5 0 012.5 2.5v7A2.5 2.5 0 0117 16h-6.2L7 19.5V16a2.5 2.5 0 01-2.5-2.5z"/><path d="M8.6 10h.01M12 10h.01M15.4 10h.01" stroke-width="2.6"/>');
+  var NOCLOUD=I('<path d="M7.2 18.4h9.4a3.6 3.6 0 00.9-7.08A5.6 5.6 0 007.6 9.1 4.2 4.2 0 007.2 18.4z"/><path d="M4 4l16 16"/>');
+  var LOCK=I('<rect x="5.5" y="10.5" width="13" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 017 0v2.5"/>');
+  var REP=I('<path d="M19.5 9.5A7.6 7.6 0 006.2 6.6L4.5 8.3M4.5 4.4v3.9h3.9M4.5 14.5a7.6 7.6 0 0013.3 2.9l1.7-1.7M19.5 19.6v-3.9h-3.9"/>','ic');
+  var CAL=I('<rect x="4.5" y="5.5" width="15" height="14" rx="2.5"/><path d="M8.5 3.5v4M15.5 3.5v4M4.5 10h15"/>','ic');
+  var CAM=I('<path d="M4 8.5A1.5 1.5 0 015.5 7h2.3l1.5-2h5.4l1.5 2h2.3A1.5 1.5 0 0120 8.5v9a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 17.5z"/><circle cx="12" cy="12.8" r="3.3"/>');
+  var NOTE=I('<path d="M5 7h14M5 12h14M5 17h9"/>');
+  var DOWN=I('<path d="M6 9.5l6 6 6-6"/>');
+  var QRI=I('<rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><path d="M14 14h2.5v2.5M20 14v.01M14 20h.01M17.5 20H20v-2.5"/>');
+  var RECEIPT=I('<path d="M6.5 3.5h11v17l-2.75-1.8-2.75 1.8-2.75-1.8-2.75 1.8z"/><path d="M9.5 8.5h5M9.5 12h5"/>');
+  var BOOK=I('<path d="M4.5 5.5h6a2 2 0 012 2v12a2 2 0 00-2-2h-6zM19.5 5.5h-6a2 2 0 00-2 2v12a2 2 0 012-2h6z"/>');
+  var WALLET=I('<path d="M4 7.4a2 2 0 012-2h11.6a2 2 0 012 2v9.2a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M15.6 12h.15" stroke-width="2.6"/>');
+  var CHECKI=I('<path d="M5 12.5l4.5 4.5L19 7.5"/>');
+  var I_HOME='<svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.02 2.79a1.6 1.6 0 011.96 0l7.4 5.75c.39.3.62.77.62 1.26v9.3c0 .99-.8 1.8-1.8 1.8h-3.8a1 1 0 01-1-1v-4.6a2.4 2.4 0 00-4.8 0v4.6a1 1 0 01-1 1H4.8c-1 0-1.8-.81-1.8-1.8V9.8c0-.5.23-.96.62-1.26z"/></svg>';
+  var I_SCAN='<svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path class="st" d="M4 8.8V6.4A2.4 2.4 0 016.4 4h2.4M15.2 4h2.4A2.4 2.4 0 0120 6.4v2.4M20 15.2v2.4a2.4 2.4 0 01-2.4 2.4h-2.4M8.8 20H6.4A2.4 2.4 0 014 17.6v-2.4"/><rect x="7.6" y="10.6" width="8.8" height="2.8" rx="1.4"/></svg>';
+  var I_BELL='<svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6a6.1 6.1 0 00-6.1 6.1v3.7l-1.7 2.9a1.3 1.3 0 001.1 2h13.4a1.3 1.3 0 001.1-2l-1.7-2.9V8.7A6.1 6.1 0 0012 2.6z"/><path d="M9.3 18.9h5.4a2.7 2.7 0 01-5.4 0z"/></svg>';
+
+  /* a made-up QR picture (not a real code) */
+  function qr(){var n=25,s='',seed=7;function r(){seed=(seed*9301+49297)%233280;return seed/233280}
+    function fin(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7" fill="#000"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" fill="#000"/>'}
+    for(var y=0;y<n;y++)for(var x=0;x<n;x++){var f=(x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16);if(!f&&r()>.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="#000"/>'}
+    return '<svg viewBox="0 0 25 25" shape-rendering="crispEdges">'+s+fin(0,0)+fin(18,0)+fin(0,18)+'</svg>'}
+
+  var st={s:'code',focus:false,typed:'',dueSet:false,nav:[]};
+  var root=document.getElementById('root'), fx=document.getElementById('fx');
+  var FX={
+    code:'Bigger lines · one short line, not four · both buttons at the bottom · Scan first, filled · Scan works',
+    rd:'Tap the amount box: the 0 blinks until you type',
+    inst:'Dim but usable · PRO stays bright and pulsing · nothing runs off the card · no note · your due date is kept',
+    ivwait:'Still bubble, it pops in every 2 s · no tick · button grey until the link is ready',
+    ivready:'Ready: the button turns on',
+    ivoff:'Offline: on at once, with the broken cloud',
+    owe:'Title “I owe” · no account button · no “Your shop” row · total in a grey box · rows unfilled, no badge · moved up',
+    oweown:'A shop owner: “Only you see this” sits inside the grey box',
+    paidt:'Same page, same title, same box: what you paid, then by shop',
+    owe0:'Same empty design on both tabs: an icon, a title, one line',
+    paid0:'Same empty design on both tabs',
+    shop:'The button says Pay',
+    paysheet:'Half sheet ON the keyboard · your words · no Full/Half/Clear · the 0 blinks · Confirm above the keyboard',
+    debt:'Pay is here too, for this debt only · “in 1 day”, not “in 1 days”',
+    paydebt:'Pay one debt: the sheet names it',
+    owner:'The owner’s sheet, the same fixes: no chips, the 0 blinks, Confirm above the keyboard',
+    updates:'Each update opens where you can act: a new debt opens that debt'
+  };
+
+  function dock(cur,n){return '<nav class="hm-dock" aria-label="Menu">'+
+    '<button type="button" class="hm-tab" data-go="owe"'+(cur==='home'?' aria-current="page"':'')+'><span class="puck">'+I_HOME+'</span><span class="lb">My debts</span></button>'+
+    '<button type="button" class="hm-tab" data-go="code"><span class="puck">'+I_SCAN+'</span><span class="lb">Scan</span></button>'+
+    '<button type="button" class="hm-tab" data-go="updates"'+(cur==='updates'?' aria-current="page"':'')+'><span class="puck">'+I_BELL+'</span>'+(n?'<span class="cnt">'+n+'</span>':'')+'<span class="lb">Updates</span></button></nav>'}
+  function seg(tab,owner){return '<div class="seg" role="tablist"><button data-go="'+(owner?'oweown':'owe')+'" aria-pressed="'+(tab==='owe')+'">What I owe</button><button data-go="'+(tab==='owe'?'paidt':'paidt')+'" aria-pressed="'+(tab==='paid')+'">What I paid</button></div>'}
+  function fig(cls){return st.focus?(st.typed?'<span class="fig typed '+(cls||'')+'">'+st.typed+'<i class="caret"></i></span>':'<span class="fig"><span class="blink">0</span></span>'):'<span class="fig">0</span>'}
+
+  /* 1 ── Your Pulo code (Scan) */
+  function code(){return '<div class="scr pb" style="padding-bottom:calc(190px + var(--pulo-layout-inset-bottom,0px))">'+
+    '<h1 class="cd-h">Your Pulo code</h1>'+
+    '<p class="cd-s">Show it at the counter. The shop scans it to see your balance with them.</p>'+
+    '<div class="qr">'+qr()+'</div>'+
+    '<p class="cd-n">It holds no money details.</p></div>'+
+    '<div class="foot"><button class="btn pri" data-scan>'+SCAN+'Scan the shop’s code</button><button class="btn sec">'+ROT+'Replace this code</button></div>'+
+    (st.scanned?'<div class="toast">Opening BrickShop…</div>':'')}
+
+  /* 2 ── Record a debt: the amount */
+  function rd(){return '<div class="scr" style="padding-bottom:calc(140px + var(--pulo-layout-inset-bottom,0px))">'+
+    '<div class="rd-top"><h1>Record a debt</h1><button class="plan">FREE</button></div>'+
+    '<div class="amt'+(st.focus?' on':'')+'" data-focus>'+fig('')+'<button class="cur">UZS '+DOWN+'</button></div>'+
+    '<div class="rrow"><span class="pfx">+998</span><span class="ph">90 123 45 67</span><button class="scan">'+QRI+'</button></div>'+
+    (st.dueSet?'<div class="card"><div class="due"><b>Due in 7 days</b><span>Wed 25 Nov</span></div><div class="wheel"><button>5</button><button>6</button><button class="on">7</button><button>8</button><button>9</button></div></div>'
+      :'<div class="card"><div class="due"><b class="q">When is it due?</b></div><div class="wheel"><button data-day>0</button><button data-day>1</button><button data-day>2</button><button data-day>7</button></div></div>')+
+    '<div class="paid"><button class="pc"><span class="ptag">'+LOCK+'Starter</span>'+REP+'<b>Repeats</b><span class="s">Every week or month</span></button>'+
+    '<button class="pc pro" data-go="inst"><span class="ptag">'+LOCK+'Pro</span>'+CAL+'<b>Installments</b><span class="s">Split into payments</span></button></div>'+
+    '<div class="extras"><button class="ex">'+CAM+'Add photo</button><button class="ex">'+NOTE+'Add note</button></div></div>'+
+    '<div class="foot"><p class="why">Enter the amount.</p><button class="btn off">'+CHECKI+'Next</button></div>'}
+
+  /* 3 ── Record a debt: Installments (Pro) */
+  function inst(){return '<div class="scr" style="padding-bottom:calc(140px + var(--pulo-layout-inset-bottom,0px))">'+
+    '<div class="tabs"><button class="tab"><span>Repeats</span><i class="lk">'+LOCK+'</i></button><button class="tab on" data-go="rd" data-due="1"><span>Installments</span><i class="lk">'+LOCK+'</i></button></div>'+
+    '<div class="panel"><span class="pill"><i>'+LOCK+'</i>PRO</span>'+
+      '<div class="dimmed">'+
+      '<div class="pseg"><button class="on">Every month</button><button>Every week</button></div>'+
+      '<div class="psum"><p class="big"><span>12 payments of </span><b>3 500</b> <small>UZS</small></p>'+
+        '<p class="every">Every 18th of the month, until 18&nbsp;Nov&nbsp;2027</p><p class="first">First one Fri 18 Dec</p></div>'+
+      '<div class="cnt-row"><b>12 payments</b><span>1 year</span></div>'+
+      '<input class="slide" type="range" min="2" max="36" value="12">'+
+      '<div class="fixed">'+LOCK+'Can’t be changed later</div>'+
+      '</div></div>'+
+    '<div class="extras"><button class="ex">'+CAM+'Add photo</button><button class="ex">'+NOTE+'Add note</button></div></div>'+
+    '<div class="foot"><p class="why">Installments come with Pro.</p><button class="btn pri">'+CHECKI+'See plans</button></div>'}
+
+  /* 4 ── Send the invite */
+  function iv(mode){var b;
+    if(mode==='wait')b='<button class="btn off" disabled><span class="spin"></span>Send SMS now</button>';
+    else if(mode==='off')b='<button class="btn pri">'+NOCLOUD+'Send SMS now</button>';
+    else b='<button class="btn pri">'+SMS+'Send SMS now</button>';
+    return '<div class="iv"><div class="iv-mid">'+
+      '<svg class="iv-bub" viewBox="0 0 104 104" aria-hidden="true"><path d="M20 22h64a12 12 0 0112 12v26a12 12 0 01-12 12H46L30 86V72H20A12 12 0 018 60V34a12 12 0 0112-12z"/><circle cx="36" cy="47" r="5"/><circle cx="52" cy="47" r="5"/><circle cx="68" cy="47" r="5"/></svg>'+
+      '<span class="chip">Debt saved · <b>42 000 UZS</b></span>'+
+      '<h1>Send Lenovo A7 the invite</h1><p class="l">They are not on Pulo yet.<br>One SMS from you lets them see this debt and connect.</p></div></div>'+
+      '<div class="foot">'+b+'</div>'}
+
+  /* 5–7 ── I owe */
+  function iowe(tab,owner,empty){var body, n=3;
+    var only=owner?'<p class="only">Only you see this. Your assistants never do.</p>':'';
+    if(tab==='owe'){
+      body=empty?'<div class="empty"><span class="ei">'+RECEIPT+'</span><b>You owe nothing</b><span>Debts a shop records for you show up here.</span></div>':
+        '<div class="box"><p class="k">You owe 2 shops</p><p class="a">123 000<small>UZS</small></p>'+only+'</div>'+
+        '<div style="height:var(--s2)"></div>'+
+        '<button class="sh" data-go="shop"><span class="n"><b>GrapeStore</b><span class="v">23 000<small>UZS</small></span></span>'+CHEV+'</button>'+
+        '<button class="sh" data-go="shop"><span class="n"><b>BrickShop</b><span class="v">100 000<small>UZS</small></span><span class="w"><i></i>1 payment waiting to confirm</span></span>'+CHEV+'</button>';
+    } else {
+      body=empty?'<div class="empty"><span class="ei">'+BOOK+'</span><b>No payments yet</b><span>Payments you make show up here.</span></div>':
+        '<div class="box"><p class="k">You’ve paid 2 shops</p><p class="a g">65 000<small>UZS</small></p>'+only+'</div>'+
+        '<div style="height:var(--s2)"></div>'+
+        '<button class="sh" data-go="shop"><span class="n"><b>BrickShop</b><span class="v g">35 000<small>UZS</small></span><span class="w"><i></i>1 payment waiting to confirm</span></span>'+CHEV+'</button>'+
+        '<button class="sh" data-go="shop"><span class="n"><b>GrapeStore</b><span class="v g">30 000<small>UZS</small></span></span>'+CHEV+'</button>';
+    }
+    return '<div class="scr dk"><h1 class="pt">I owe</h1>'+seg(tab,owner)+body+'</div>'+dock('home',empty?0:n)}
+
+  /* 8 ── One shop */
+  function shop(){return '<div class="scr pb">'+
+    '<div class="seg"><button aria-pressed="true">What I owe</button><button>What I paid</button></div>'+
+    '<p class="you">You owe<b>GrapeStore</b></p>'+
+    '<div class="left"><p class="k">You owe them</p><p class="a">23 000<small>UZS</small></p><p class="d">Due 19 Nov 2026</p></div>'+
+    '<p class="lab">Ordinary debts</p>'+
+    '<button class="dcard" data-go="debt"><span class="bx"><span class="v">23 000 UZS</span><span class="t">Kilo of orange</span><span class="r2">Written 18 Nov 2026 · due 19 Nov 2026</span></span>'+CHEV+'</button></div>'+
+    '<div class="foot"><button class="btn pri" data-go="paysheet">'+WALLET+'Pay</button></div>'}
+
+  /* 10 ── A debt */
+  function debt(){return '<div class="scr pb"><h1 class="dh">Kilo of orange</h1><p class="ds">GrapeStore</p>'+
+    '<div class="left"><p class="k">Left to pay</p><p class="a">23 000<small>UZS</small></p><p class="d">Due 19 Nov 2026 · in 1 day</p></div>'+
+    '<div class="facts"><p><span>Recorded</span><b>18 Nov 2026</b></p><p><span>Amount</span><b>23 000 UZS</b></p><p><span>Paid so far</span><b>0 UZS</b></p></div></div>'+
+    '<div class="foot"><button class="btn pri" data-go="paydebt">'+WALLET+'Pay</button></div>'}
+
+  /* 9 / 10b / 11 ── the payment sheet, sitting on the phone's own keyboard */
+  function kb(){var k=[['1',''],['2','ABC'],['3','DEF'],['4','GHI'],['5','JKL'],['6','MNO'],['7','PQRS'],['8','TUV'],['9','WXYZ'],['',''],['0',''],['⌫','']];
+    return '<div class="kb" id="kb"><div class="kb-lab">the phone’s own keyboard</div>'+k.map(function(x){return '<span class="key'+(x[0]?'" data-k="'+x[0]+'"':' e"')+'>'+x[0]+(x[1]?'<small>'+x[1]+'</small>':'')+'</span>'}).join('')+'</div>'}
+  function sheet(kind){var title,sub,balK,balV,green=false,hint,max;
+    if(kind==='owner'){title='Record payment';sub='From Lenovo A7';balK='They owe me';balV='40 000';green=true;hint='Enter the amount you received.';max=40000}
+    else if(kind==='debt'){title='Pay GrapeStore';sub='For: Kilo of orange';balK='Left to pay';balV='23 000';hint='GrapeStore confirms it, then your balance changes.';max=23000}
+    else {title='Pay GrapeStore';sub='Towards everything you owe';balK='You owe';balV='23 000';hint='GrapeStore confirms it, then your balance changes.';max=23000}
+    var n=parseInt((st.typed||'0').replace(/\D/g,''),10)||0, over=n>max;
+    if(over)hint='That’s more than '+balV+' UZS.';
+    var ok=n>0&&!over;
+    return '<div class="scrim" data-close></div><div class="ps" role="dialog"><div class="grab"></div><h2>'+title+'</h2><p class="sub">'+sub+'</p>'+
+      '<div class="bal"><span>'+balK+' · UZS</span><b'+(green?' class="g"':'')+'>'+balV+'</b></div>'+
+      '<div class="in">'+(st.typed?'<span class="fig typed">'+st.typed+'<i class="caret"></i></span>':'<span class="fig"><span class="blink">0</span></span>')+'<span class="u">UZS</span></div>'+
+      '<p class="hint'+(over?' err':'')+'">'+hint+'</p>'+
+      '<button class="btn '+(ok?'pri':'off')+'">'+CHECKI+'Confirm payment</button></div>'+kb()}
+
+  /* 12 ── Updates */
+  function updates(){return '<div class="scr dk"><h1 class="pt">Updates</h1><div style="height:var(--s3)"></div>'+
+    '<button class="up" data-go="debt"><span class="dot"></span><span class="tx"><b>GrapeStore recorded a new debt</b><em>18 November</em></span>'+CHEV+'</button></div>'+dock('updates',1)}
+
+  function draw(){var s=st.s,h='';
+    if(s==='code')h=code();else if(s==='rd')h=rd();else if(s==='inst')h=inst();
+    else if(s==='ivwait')h=iv('wait');else if(s==='ivready')h=iv('ready');else if(s==='ivoff')h=iv('off');
+    else if(s==='owe')h=iowe('owe',false,false);else if(s==='oweown')h=iowe('owe',true,false);
+    else if(s==='paidt')h=iowe('paid',false,false);else if(s==='owe0')h=iowe('owe',false,true);else if(s==='paid0')h=iowe('paid',false,true);
+    else if(s==='shop')h=shop();else if(s==='paysheet')h=shop()+sheet('pool');
+    else if(s==='debt')h=debt();else if(s==='paydebt')h=debt()+sheet('debt');
+    else if(s==='owner')h='<div class="scr"><h1 class="dh">Lenovo A7</h1><p class="ds">+998 •• ••• 49 70</p></div>'+sheet('owner');
+    else if(s==='updates')h=updates();
+    root.innerHTML=h;fx.textContent=FX[s]||'';
+    var k=document.getElementById('kb');if(k)document.documentElement.style.setProperty('--kbh',k.offsetHeight+'px');
+    [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.setAttribute('aria-pressed',b.dataset.s===s?'true':'false')});
+    wire()}
+  function go(s){st.nav.push(st.s);st.s=s;st.typed='';st.focus=(s==='paysheet'||s==='paydebt'||s==='owner');st.scanned=false;draw()}
+  function wire(){
+    [].forEach.call(root.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(e){e.stopPropagation();go(b.dataset.go)})});
+    [].forEach.call(root.querySelectorAll('[data-day]'),function(b){b.addEventListener('click',function(e){e.stopPropagation();st.dueSet=true;draw()})});
+    [].forEach.call(root.querySelectorAll('[data-focus]'),function(b){b.addEventListener('click',function(){st.focus=true;draw()})});
+    [].forEach.call(root.querySelectorAll('[data-close]'),function(b){b.addEventListener('click',function(){st.s=st.s==='paydebt'?'debt':st.s==='owner'?'owner':'shop';st.typed='';draw()})});
+    [].forEach.call(root.querySelectorAll('[data-k]'),function(b){b.addEventListener('click',function(){var k=b.dataset.k,raw=st.typed.replace(/\D/g,'');
+      if(k==='⌫')raw=raw.slice(0,-1);else if(raw.length<9&&!(raw===''&&k==='0'))raw+=k;
+      st.typed=raw?raw.replace(/\B(?=(\d{3})+(?!\d))/g,' '):'';draw()})});
+    [].forEach.call(root.querySelectorAll('[data-scan]'),function(b){b.addEventListener('click',function(){st.scanned=true;draw();setTimeout(function(){go('shop')},900)})});
+    /* the amount box on Record: typing with the real keyboard */
+    if(st.s==='rd'&&st.focus){document.onkeydown=function(e){if(/^[0-9]$/.test(e.key)){var r=(st.typed.replace(/\D/g,'')+e.key).replace(/^0+/,'');st.typed=r?r.replace(/\B(?=(\d{3})+(?!\d))/g,' '):'';draw()}else if(e.key==='Backspace'){var r2=st.typed.replace(/\D/g,'').slice(0,-1);st.typed=r2?r2.replace(/\B(?=(\d{3})+(?!\d))/g,' '):'';draw()}}}else document.onkeydown=null;
+  }
+  [].forEach.call(document.querySelectorAll('.pv [data-s]'),function(b){b.addEventListener('click',function(){st={s:b.dataset.s,focus:(b.dataset.s==='paysheet'||b.dataset.s==='paydebt'||b.dataset.s==='owner'),typed:'',dueSet:false,nav:[]};draw();document.getElementById('pv').classList.add('hide')})});
+  document.getElementById('th').addEventListener('click',function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='light'?'dark':'light');draw()});
+  document.getElementById('hide').addEventListener('click',function(){document.getElementById('pv').classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){document.getElementById('pv').classList.toggle('hide')});
+  draw();
+  window.addEventListener('load',function(){var T=window.Telegram&&Telegram.WebApp;
+    if(T&&T.platform&&T.platform!=='unknown'){var a=T.safeAreaInset||{},c=T.contentSafeAreaInset||{};
+      document.documentElement.style.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');
+      document.documentElement.style.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');}
+    draw()});
+})();
+</script>
+<script src="../tg.js?v=202611182330"></script>
+</body>
+</html>
