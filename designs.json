@@ -1,6 +1,14 @@
 {
- "updated": "18 Nov 23:40 (Tashkent)",
+ "updated": "19 Nov 01:10 (Tashkent)",
  "designs": [
+  {
+   "file": "code-r1.html",
+   "title": "Your Pulo code (r1), working",
+   "rev": "r1",
+   "what": "The page as built, with only your marks changed: bigger line under the title, one short line instead of two paragraphs, Scan the shop's code first and filled, Replace under it, both in the bottom bar. Scan uses Telegram's real camera: a Pulo shop code opens the shop, any other code says so at once. ··· lists what changed and lets you try a slow or failed connection, a failed replace, and a shop scanning you.",
+   "stamp": "202611190110",
+   "when": "19 Nov 01:10"
+  },
   {
    "file": "fixes-r1.html",
    "title": "Your review of 18 Nov: every mark fixed (r1)",
