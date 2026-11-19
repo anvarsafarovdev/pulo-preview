@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 00:50 (Tashkent)",
+ "updated": "20 Nov 01:20 (Tashkent)",
  "designs": [
+  {
+   "file": "i-owe-shop-r7.html",
+   "title": "I owe + one shop + a payment (r7), working",
+   "rev": "r7",
+   "what": "r7: wording and placement from your reference (not its design): tabs Owed / Paid; 'Across 1 shop' with a lock and 'Private to you · Hidden from assistants' at the box's foot; 'Total confirmed' with '1 shop · Since 19 Nov 2026'; the shop page: 'Shop' + the name, 'Remaining balance', 'Due 22 Nov 2026' left and 'Part paid' right; the empty band in the shop's box gone. Payment page as r6.",
+   "stamp": "202611200120"
+  },
   {
    "file": "i-owe-shop-r6.html",
    "title": "I owe + one shop + a payment (r6), working",
