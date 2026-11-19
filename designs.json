@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 02:10 (Tashkent)",
+ "updated": "19 Nov 15:30 (Tashkent)",
  "designs": [
+  {
+   "file": "shopqr-test.html",
+   "title": "Shop QR camera test (A / B / C)",
+   "rev": "test",
+   "what": "Open on the Android. Point the iPhone's ordinary Camera at A, then B, then C. A banner appearing means it reads; tap it to see which one it read.",
+   "stamp": "202611191530"
+  },
   {
    "file": "code-r3.html",
    "title": "Your Pulo code (r3), working",

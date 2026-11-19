@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Shop QR camera test</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191200">
+<!-- The app's own stylesheet as it stands today, unedited. -->
+<link rel="stylesheet" href="../appcss/app-now.css?v=202611191200">
+<script src="../vendor/qrcode-generator.js?v=202611191200"></script>
+<style>
+body{margin:0;background:var(--ground);color:var(--text-1)}
+.tabs{display:flex;gap:8px;padding:12px var(--gut) 0}
+.tabs button{flex:1;min-height:44px;border:1.5px solid var(--text-1);border-radius:var(--r-1);background:none;color:var(--text-1);font:inherit;font-weight:700;font-size:var(--t-3)}
+.tabs button.on{background:var(--text-1);color:var(--ground)}
+.what{margin:10px var(--gut) 0;font-size:var(--t-2);color:var(--text-3);line-height:1.45;text-align:center}
+.mode{display:block;margin:8px auto 0;min-height:40px;border:0;background:none;color:var(--text-1);font:inherit;font-weight:600;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="tabs"><button data-v="A" class="on">A</button><button data-v="B">B</button><button data-v="C">C</button></div>
+<p class="what" id="what"></p>
+<button class="mode" id="mode" type="button">Show full screen</button>
+<!-- Drawn exactly as ShopQrScreen draws it: the same classes, the same plate, one square per module. -->
+<div class="rd-screen" id="screen">
+  <div class="rd-body">
+    <h1 class="rd-title sq-name">Your shop QR</h1>
+    <p class="sq-sub">Test Shop</p>
+    <div id="plate"></div>
+  </div>
+</div>
+<script>
+(function(){
+var MARK='M58.0674 109.268C49.7558 126.567 45.5996 145.945 45.5996 167.4C45.5996 191 50.8002 212.401 61.2002 231.601C71.6002 250.4 86.0005 265.2 104.4 276C122.8 286.8 143.4 292.2 166.2 292.2C188.389 292.2 208.382 287.26 226.181 277.381L258.701 309.901C257.286 310.819 255.853 311.72 254.4 312.601C230 327.001 202.4 334.2 171.6 334.2C144.8 334.2 120.4 328.6 98.4004 317.4C76.8004 305.8 59.4002 290.6 46.2002 271.8V448.2C46.2002 455.4 43.9996 461 39.5996 465C35.5997 469.4 30.2002 471.6 23.4004 471.601C16.2004 471.601 10.4 469.4 6 465C2.00007 461 0 455.4 0 448.2V165C0.400028 133.8 7.80023 105.8 22.2002 81C23.1381 79.403 24.0952 77.8271 25.0732 76.2734L58.0674 109.268ZM166.2 0C198.2 2.88538e-05 226.8 7.40023 252 22.2002C277.2 36.6002 297 56.4006 311.4 81.6006C326.2 106.8 333.6 135.401 333.6 167.4C333.6 198.324 326.703 226.182 312.913 250.977L278.84 216.903C284.946 201.646 288 185.145 288 167.4C288 143.4 282.6 122 271.8 103.2C261.4 84.4002 247 69.5998 228.6 58.7998C210.2 47.6 189.4 42 166.2 42C147.687 42 130.625 45.6921 115.013 53.0762L82.8369 20.9004C107.722 6.96685 135.51 0 166.2 0Z';
+var MARK_VB='0 0 334 472', ASPECT=334/472;
+var PAD='Kq7Zp2Xw9Rt4Vm8Lb3Nc6';
+var V={
+  A:{level:'H',mark:true, what:'A — as built today: highest error correction, Pulo mark in the middle.'},
+  B:{level:'Q',mark:true, what:'B — keeps the Pulo mark, one step less error correction (fewer, bigger squares).'},
+  C:{level:'M',mark:false,what:'C — no mark, same level as the customer code (fewest, biggest squares).'}
+};
+var cur='A', full=false;
+function fig(x){return Number(x.toFixed(4));}
+function squareSide(n){var s=Math.floor(n*Math.sqrt(0.1));if((n-s)%2!==0)s-=1;while(s>1&&s*s>0.1*n*n)s-=2;return Math.max(s,1);}
+function svg(value,level,mark){
+  var q=qrcode(0,level);q.addData(value,'Byte');q.make();
+  var n=q.getModuleCount(),Z=4,S=n+Z*2,r='';
+  r+='<svg viewBox="0 0 '+S+' '+S+'" shape-rendering="crispEdges" aria-hidden="true"><rect width="'+S+'" height="'+S+'" fill="#FFFFFF"/><g fill="#000000">';
+  for(var y=0;y<n;y++)for(var x=0;x<n;x++)if(q.isDark(y,x))r+='<rect x="'+(x+Z)+'" y="'+(y+Z)+'" width="1" height="1"/>';
+  r+='</g>';
+  if(mark){var side=squareSide(n),at=Z+(n-side)/2,mh=side-2*1.25,mw=mh*ASPECT,c=Z+n/2;
+    r+='<rect x="'+fig(at)+'" y="'+fig(at)+'" width="'+side+'" height="'+side+'" fill="#FFFFFF"/>';
+    r+='<svg x="'+fig(c-mw/2)+'" y="'+fig(c-mh/2)+'" width="'+fig(mw)+'" height="'+fig(mh)+'" viewBox="'+MARK_VB+'" fill="none"><path d="'+MARK+'" fill="#000000"/></svg>';}
+  return {html:r+'</svg>',n:n};
+}
+function draw(){
+  var v=V[cur];
+  // The same length as a real shop link (87 characters), so the code has the same number of squares.
+  var link='https://anvarsafarovdev.github.io/pulo-preview/d/qr-ok.html?v='+cur+'&x='+PAD;
+  var s=svg(link,v.level,v.mark);
+  document.getElementById('plate').innerHTML='<div class="sq-plate'+(full?' sq-plate-big':'')+'">'+s.html+'</div>';
+  document.getElementById('what').textContent=v.what+' '+s.n+' squares across.';
+  document.getElementById('screen').className='rd-screen'+(full?' sq-full':'');
+  document.getElementById('mode').textContent=full?'Show normal size':'Show full screen';
+  [].forEach.call(document.querySelectorAll('.tabs button'),function(b){b.className=b.dataset.v===cur?'on':'';});
+}
+[].forEach.call(document.querySelectorAll('.tabs button'),function(b){b.onclick=function(){cur=b.dataset.v;draw();};});
+document.getElementById('mode').onclick=function(){full=!full;draw();};
+draw();
+})();
+</script>
+<script src="../tg.js?v=202611191200"></script>
+</body>
+</html>
