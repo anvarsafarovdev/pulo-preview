@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 15:30 (Tashkent)",
+ "updated": "19 Nov 17:10 (Tashkent)",
  "designs": [
+  {
+   "file": "record-debt-paid-r1.html",
+   "title": "Record a debt: paid options (r1), working",
+   "rev": "r1",
+   "what": "The real Record a debt screen built from the app's own code. Changed only on Repeats and Installments: nothing runs off the side, the 'Replaces the due date' note is gone (your due date is still kept), and on a plan without the option the panel is much dimmer while the badge pulses bright. ··· → Free / Starter / Pro, and 'As built today' to compare.",
+   "stamp": "202611191710"
+  },
   {
    "file": "shopqr-test.html",
    "title": "Shop QR camera test (A / B / C)",
