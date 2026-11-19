@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 18:30 (Tashkent)",
+ "updated": "19 Nov 19:45 (Tashkent)",
  "designs": [
+  {
+   "file": "i-owe-r1.html",
+   "title": "I owe (r1), working",
+   "rev": "r1",
+   "what": "The app's own 'I owe' page, both tabs. Owner's view: page name 'I owe', no account button, no 'Your shop' door. Total in a grey box with 'Only you see this…' inside; shop rows with no fill and no badge; both empty tabs share one design with shorter words. ··· → Owner / Customer only, what you owe, what you've paid, As built today, Theme.",
+   "stamp": "202611191945"
+  },
   {
    "file": "invite-page-r1.html",
    "title": "Send the invite (r1), working",
