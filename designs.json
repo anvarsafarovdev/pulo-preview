@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 00:20 (Tashkent)",
+ "updated": "20 Nov 00:50 (Tashkent)",
  "designs": [
+  {
+   "file": "i-owe-shop-r6.html",
+   "title": "I owe + one shop + a payment (r6), working",
+   "rev": "r6",
+   "what": "r6: the payment's page re-laid on the app's own pattern: page name; one grey total ('You paid', the figure at the totals' size, weekday, date and time); Status and Recorded by; 'Applied to · 1 debt' with plain rows (amount applied, Part paid / Paid off, the debt, what is still owed now). Everything else as r5. ··· → start on 'A payment'.",
+   "stamp": "202611200050"
+  },
   {
    "file": "i-owe-shop-r5.html",
    "title": "I owe + one shop + a payment (r5), working",
