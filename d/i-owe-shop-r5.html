@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>I owe, shop, payment r5</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
+<!-- The app's own stylesheets as they are in the repository today, unedited. -->
+<link rel="stylesheet" href="../appcss/app-sp-0119.css?v=202611200010">
+<style id="chg">
+/* ════ WHAT CHANGES (your marks of 19 Nov, after MICRO-27). Everything else is the app as built today, from its own code. ════ */
+/* THE RULE, everywhere on these four pages: only a TOTAL has a fill; every other plate has none;
+   the arrow sits on the plate's LAST line at the right, as on Home (15px, --text-2); every date has its year. */
+
+/* 1. "I owe" → What you owe: the amount first, the shop under it (as on "What you've paid"). */
+.cb-row .cb-v{margin-top:0}
+.cb-under{margin-top:2px}
+.cb-under .cb-nm{font-size:var(--t-2);font-weight:600}
+.cb-last{justify-content:space-between;gap:var(--s3)}
+
+/* 2. "I owe" → What you've paid: the payments had a grey fill in the build (a button's own default
+      background was never cleared). Cleared. */
+.hp-e{background:none;-webkit-appearance:none;appearance:none;border-radius:0}
+
+/* 3. One shop's page → What you owe: the shop's name above; the total ("You owe them … due …")
+      in its own grey box; the debt plates have no fill, the arrow on their last line. "Pay", not "I paid". */
+.cs-shop-out{margin-top:var(--s5)}
+.cs-tot{margin-top:var(--s4);padding:var(--s4);border-radius:var(--r-1);background:var(--surface)}
+.cs-card,button.cs-tap{background:none;border-radius:0;padding:var(--s3) 0;-webkit-appearance:none;appearance:none}
+button.cs-tap{align-items:flex-end}
+.cs-chev{color:var(--text-2);margin-bottom:3px}
+.cs-chev svg{width:15px;height:15px}
+
+/* 4. One shop's page → What you've paid: the same plain plates, the date with its year, the arrow on the last line. */
+
+/* 5. A payment's page: the date with its year; "Debt of 19 Nov 2026"; the breakdown plate has no fill. */
+
+/* 6. Waiting means the soft yellow band, wherever a payment waits (as MICRO-27 drew it on "What you've paid"):
+      the shop page's "Waiting for …" bar and a waiting payment's line on the shop's paid tab. */
+.cs-wbar{background:var(--wait-bg)}
+.cs-tap:has(.rv-wait) .cs-chev{margin-bottom:calc(var(--s2) + 4px)}
+.cs-list .rv-wait{margin-top:var(--s2);padding:var(--s2) var(--s3);border-radius:var(--r-1);background:var(--wait-bg);color:var(--text-2)}
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:80;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv b.h{flex:1 1 100%;font:700 10px/1 system-ui;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+.tag.old{color:#c0392b}
+.fb-back{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:82;height:26px;padding:0 10px;border-radius:999px;border:0;background:rgba(128,128,128,.18);color:var(--text-2);font:600 12px/1 system-ui}
+.fb-back[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<span class="tag" id="tag">PROPOSED r5</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p>Four pages as built today (after MICRO-27), from the app's own code, with your marks applied. Tap through them as on the phone: a shop row opens the shop's page, a payment opens its own page, Back returns. Only a TOTAL has a fill; every other plate has none; the arrow sits on each plate's last line; every date has its year; the shop's button says "Pay".</p>
+  <b class="h">Start on</b>
+  <button data-k="start" data-v="OWE">I owe</button>
+  <button data-k="start" data-v="PAID">What you've paid</button>
+  <button data-k="start" data-v="SHOP">GrapeShop</button>
+  <b class="h">Data</b>
+  <button data-k="scn" data-v="ONE">One debt, one payment</button>
+  <button data-k="scn" data-v="MORE">More (two debts, a waiting payment)</button>
+  <b class="h">Compare</b>
+  <button id="old">As built today</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  if(inTG){try{TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}}
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');
+    if(TG.viewportStableHeight)r.setProperty('--pulo-viewport-height',TG.viewportStableHeight+'px')}
+  if(inTG){try{TG.onEvent('safeAreaChanged',insets);TG.onEvent('contentSafeAreaChanged',insets);TG.onEvent('viewportChanged',insets);TG.onEvent('fullscreenChanged',insets)}catch(e){}}
+  window.addEventListener('load',insets);
+  var q=new URLSearchParams(location.search), old=q.get('old')==='1', st={start:q.get('start')||'OWE',scn:q.get('scn')||'ONE'};
+  if(old){document.getElementById('chg').disabled=true;var t=document.getElementById('tag');t.textContent='AS BUILT TODAY';t.className='tag old';document.getElementById('old').setAttribute('aria-pressed','true')}
+  var pv=document.getElementById('pv');
+  [].forEach.call(document.querySelectorAll('[data-k]'),function(b){b.setAttribute('aria-pressed',st[b.getAttribute('data-k')]===b.getAttribute('data-v'))});
+  function go(){var u=new URLSearchParams();if(old)u.set('old','1');u.set('start',st.start);u.set('scn',st.scn);location.search=u.toString()}
+  [].forEach.call(document.querySelectorAll('[data-k]'),function(b){b.addEventListener('click',function(){st[b.getAttribute('data-k')]=b.getAttribute('data-v');go()})});
+  document.getElementById('old').addEventListener('click',function(){old=!old;go()});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+  window.__spInit={start:st.start,scn:st.scn,old:old};
+  var s=document.createElement('script');s.src=(old?'../js/sp-old-0119.js':'../js/sp-r5.js')+'?v=202611200010';document.body.appendChild(s);
+})();
+</script>
+<script src="../tg.js?v=202611191930"></script>
+</body>
+</html>

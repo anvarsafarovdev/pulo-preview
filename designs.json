@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 20:40 (Tashkent)",
+ "updated": "20 Nov 00:20 (Tashkent)",
  "designs": [
+  {
+   "file": "i-owe-shop-r5.html",
+   "title": "I owe + one shop + a payment (r5), working",
+   "rev": "r5",
+   "what": "The four pages as built after MICRO-27, with your marks: only totals filled; plain plates elsewhere (the paid tab's grey fill cleared); arrows on the last line; the amount first on I owe's rows; the shop's total in its own box; 'Pay'; every date with its year; waiting = the yellow band. Tap through: a shop row opens the shop, a payment opens its page. ··· → start page, data, As built today, Theme.",
+   "stamp": "202611200020"
+  },
   {
    "file": "i-owe-r4.html",
    "title": "I owe (r4), working",
