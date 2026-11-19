@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Send the invite r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191800">
+<!-- The app's own stylesheets as they are in the repository today, unedited. -->
+<link rel="stylesheet" href="../appcss/app-iv-0119.css?v=202611191800">
+<style>
+/* the two marks this preview adds to the app's own page, hidden unless a change below shows them */
+.iv-tick-f,.iv-cloud{display:none}
+</style>
+<style id="chg">
+/* ════ WHAT CHANGES (your marks of 19 Nov). Everything else is the app's own invite page, built from its own code. ════ */
+/* 1. "Debt saved · 42 000 UZS": no tick (··· → "Chip: app's check" shows the app's own filled check instead). */
+.iv-chip .iv-tick{display:none}
+.iv-chip{padding-left:12px}
+body.chipcheck .iv-chip{padding-left:9px}
+body.chipcheck .iv-chip .iv-tick-f{display:block;width:16px;height:16px;fill:var(--in);stroke:none}
+/* 2. The bubble: the three dots stay still and lit; the bubble itself pops in, rests, and pops in again, every 2 seconds. */
+.iv-bub{animation:ivAppear 2s var(--ease-out) var(--dur-invite-pop-delay) infinite both}
+.iv-bub circle{animation:none;opacity:1;transform:none}
+@keyframes ivAppear{
+  0%{transform:scale(.6) translateY(10px);opacity:0}
+  20%{transform:scale(1.05);opacity:1}
+  30%{transform:none;opacity:1}
+  86%{transform:none;opacity:1}
+  100%{transform:scale(.6) translateY(10px);opacity:0}
+}
+/* 3. While it is getting ready, the button is grey (the app's own inactive look, 0.35) with its spinner,
+      and nothing happens on a tap. It turns black, "Send SMS now", the moment it is ready. */
+.iv[data-state='busy'] .iv-btn{opacity:.35}
+.iv[data-state='busy'] .iv-btn:active{transform:none}
+.iv-btn{transition:transform var(--iv-press) var(--ease-out),opacity var(--dur-press) var(--ease-out)}
+/* 4. Offline: no spinner and no wait; the page opens straight in "Invite when you are online",
+      its button active at once, with the app's own cloud-off mark. */
+.iv[data-state='offline'] .iv-btn .iv-cloud{display:block}
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:80;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+.tag.old{color:#c0392b}
+.fb-back{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:82;height:26px;padding:0 10px;border-radius:999px;border:0;background:rgba(128,128,128,.18);color:var(--text-2);font:600 12px/1 system-ui}
+.fb-back[hidden]{display:none}
+.pv-home{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-size:var(--t-4);font-weight:700}
+.pv-home small{font-size:var(--t-2);font-weight:400;color:var(--text-3)}
+.pv-home button{min-height:48px;padding:0 20px;border-radius:12px;border:0;background:var(--text-1);color:var(--ground);font:inherit;font-size:var(--t-3)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<span class="tag" id="tag">PROPOSED r1</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p>This is the app's own invite page (after "Save and invite"), from its own code. Changed: (1) no tick in "Debt saved"; (2) the dots stay still, the bubble pops in every 2 seconds; (3) grey button while it gets ready, black when ready; (4) offline: straight to "Invite when you are online", button active at once with the cloud-off mark. Pick a connection to run it.</p>
+  <button data-run="ONLINE" aria-pressed="true">Online (ready in 2 s)</button>
+  <button data-run="SLOW">Slow (8 s)</button>
+  <button data-run="TIMEOUT">Not ready in time (15 s)</button>
+  <button data-run="OFFLINE">Offline</button>
+  <button id="chk">Chip: app's check</button>
+  <button id="old">As built today</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  if(inTG){try{TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}}
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');
+    if(TG.viewportStableHeight)r.setProperty('--pulo-viewport-height',TG.viewportStableHeight+'px')}
+  if(inTG){try{TG.onEvent('safeAreaChanged',insets);TG.onEvent('contentSafeAreaChanged',insets);TG.onEvent('viewportChanged',insets);TG.onEvent('fullscreenChanged',insets)}catch(e){}}
+  window.addEventListener('load',insets);
+  var pv=document.getElementById('pv'), cur='ONLINE';
+  function run(m){cur=m;[].forEach.call(document.querySelectorAll('[data-run]'),function(x){x.setAttribute('aria-pressed',x.getAttribute('data-run')===m)});if(window.__ivRun)window.__ivRun(m)}
+  [].forEach.call(document.querySelectorAll('[data-run]'),function(b){b.addEventListener('click',function(){run(b.getAttribute('data-run'))})});
+  document.getElementById('chk').addEventListener('click',function(){document.body.classList.toggle('chipcheck');this.setAttribute('aria-pressed',document.body.classList.contains('chipcheck'))});
+  document.getElementById('old').addEventListener('click',function(){var s=document.getElementById('chg');s.disabled=!s.disabled;this.setAttribute('aria-pressed',s.disabled);
+    var t=document.getElementById('tag');t.textContent=s.disabled?'AS BUILT TODAY':'PROPOSED r1';t.className=s.disabled?'tag old':'tag';run(cur)});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+})();
+</script>
+<script src="../tg.js?v=202611191800"></script>
+<script src="../js/iv-r1.js?v=202611191800"></script>
+</body>
+</html>

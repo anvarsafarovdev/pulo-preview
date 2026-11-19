@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 18:05 (Tashkent)",
+ "updated": "19 Nov 18:30 (Tashkent)",
  "designs": [
+  {
+   "file": "invite-page-r1.html",
+   "title": "Send the invite (r1), working",
+   "rev": "r1",
+   "what": "The app's own invite page after 'Save and invite'. No tick in 'Debt saved'; dots still, the bubble pops in every 2 s; grey button while getting ready, black when ready; offline goes straight to 'Invite when you are online' with the cloud-off mark. ··· → Online / Slow / Not ready in time / Offline, Chip: app's check, As built today, Theme.",
+   "stamp": "202611191830"
+  },
   {
    "file": "record-debt-paid-r3.html",
    "title": "Record a debt: paid options (r3), working",
