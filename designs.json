@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 17:45 (Tashkent)",
+ "updated": "19 Nov 18:05 (Tashkent)",
  "designs": [
+  {
+   "file": "record-debt-paid-r3.html",
+   "title": "Record a debt: paid options (r3), working",
+   "rev": "r3",
+   "what": "r3: the amount of each payment has its own row under '12 payments of'. Everything else as r2. ··· → Free / Starter / Pro, 'As built today', Theme.",
+   "stamp": "202611191805"
+  },
   {
    "file": "record-debt-paid-r2.html",
    "title": "Record a debt: paid options (r2), working",

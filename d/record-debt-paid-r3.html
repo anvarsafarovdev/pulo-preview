@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Record a debt: paid options r3</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191700">
+<!-- The app's own stylesheets as they are in the repository today, unedited. -->
+<link rel="stylesheet" href="../appcss/app-rd-0119.css?v=202611191700">
+<style id="chg">
+/* ════ WHAT CHANGES (your marks of 19 Nov). Everything else is the app's own screen, built from its own code. ════ */
+/* 1. Nothing in the paid panels runs off the side any more, so the page can never be dragged sideways.
+      A sentence that does not fit breaks after its comma ("Every 18th of the month," / "until 18 Nov 2027"),
+      at the same size; on a wide screen it stays on one line. */
+.rd-body{overflow-x:clip}
+.rd-plan-sum .rd-every{white-space:normal}
+.rd-every .rd-part{display:inline-block;max-width:100%}
+.rd-rep-line{display:block;white-space:normal;text-wrap:balance;text-align:center}
+.rd-lockline{white-space:normal}
+.rd-big{flex-wrap:wrap;row-gap:0}
+/* 2. The "Replaces the due date of … Tap Installments again to bring it back." note is gone (Repeats' too).
+      Your due date is still kept: tap the open tab again (or Back) and "When is it due?" returns with your day. */
+[data-rd='replaces-note']{display:none}
+/* 3. On a plan without the option, the open panel is dimmed to the app's own "not now" strength (0.42, the
+      same as a step that is not current). It still works: drag, tap, switch. The pulsing PRO / STARTER badge
+      stays at full strength. (r1 was 0.32; your note: "slightly reduce the dimming".) */
+.rd-card[data-sec]:has([data-rd='lock-pulse']) > :not(.rd-lk-row){opacity:.42;transition:opacity var(--dur-press) var(--ease-out)}
+/* 4. ONE SIZE CODE FOR BOTH PANELS (the app's nine type roles, design/type.css):
+      the amount = "figure" (--t-6, 700) in both, as before;
+      the schedule line ("Every 10th until paid" / "Every 19th of the month, until …") = "strong" (--t-3, 700),
+      the same size, weight and colour in both (Repeats' was --t-2 600, Installments' --t-3 700);
+      "First one …" = "small" (--t-2, 400) in both, as before;
+      "12 payments of" and "Enter the amount first" = "body" (--t-3, 400). */
+.rd-rep-line,.rd-plan-sum .rd-every{font-size:var(--type-strong-size);font-weight:var(--type-strong-weight);color:var(--text-1);line-height:1.35}
+.rd-rep-line{margin-top:6px}
+/* 6. r3: the amount of each payment has its own row, so a large figure never shares a line with words.
+      "21 payments of" sits on the row above it, centred. */
+.rd-plan-sum .rd-big{flex-wrap:wrap;row-gap:2px}
+.rd-plan-sum .rd-big .w{flex:1 0 100%}
+/* 5. The empty-amount line is shorter ("Enter the amount first", was "Enter the amount to see each payment")
+      and may wrap, so it can never run past the box. */
+.rd-big .w{white-space:normal;text-align:center}
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:80;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+.tag.old{color:#c0392b}
+.fb-back{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:82;height:26px;padding:0 10px;border-radius:999px;border:0;background:rgba(128,128,128,.18);color:var(--text-2);font:600 12px/1 system-ui}
+.fb-back[hidden]{display:none}
+.pv-done{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 var(--gut);text-align:center;font-size:var(--t-3);color:var(--text-2)}
+.pv-done button{min-height:48px;padding:0 20px;border-radius:12px;border:0;background:var(--text-1);color:var(--ground);font:inherit;font-weight:700}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<span class="tag" id="tag">PROPOSED r3</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p>This is the real Record a debt screen, built from the app's own code and stylesheets as they are today. Three things change, only on the paid options: (1) nothing runs off the side, and a long line goes onto two lines at the same size; (2) the "Replaces the due date…" note is gone, and your due date is still kept when you close the option; (3) on a plan without the option, the panel is dimmed (to the app's own 0.42) but still works, and the pulsing badge stays bright; (4) both panels use the same sizes; (5) "Enter the amount first" replaces the long line; (6) the amount of each payment has its own row, under "21 payments of". Add note now behaves as in the app (the app's own keyboard handling is included). Switch the plan below to see Starter and Pro.</p>
+  <button data-tier="FREE" aria-pressed="true">Free</button>
+  <button data-tier="STARTER">Starter</button>
+  <button data-tier="PRO">Pro</button>
+  <button id="old">As built today</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  if(inTG){try{TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}}
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');
+    if(TG.viewportStableHeight)r.setProperty('--pulo-viewport-height',TG.viewportStableHeight+'px')}
+  if(inTG){try{TG.onEvent('safeAreaChanged',insets);TG.onEvent('contentSafeAreaChanged',insets);TG.onEvent('viewportChanged',insets);TG.onEvent('fullscreenChanged',insets)}catch(e){}}
+  window.addEventListener('load',insets);
+  var pv=document.getElementById('pv');
+  [].forEach.call(document.querySelectorAll('[data-tier]'),function(b){b.addEventListener('click',function(){
+    [].forEach.call(document.querySelectorAll('[data-tier]'),function(x){x.setAttribute('aria-pressed',x===b)});
+    if(window.__pvSet)window.__pvSet(b.getAttribute('data-tier'));})});
+  document.getElementById('old').addEventListener('click',function(){var s=document.getElementById('chg');s.disabled=!s.disabled;this.setAttribute('aria-pressed',s.disabled);
+    var t=document.getElementById('tag');t.textContent=s.disabled?'AS BUILT TODAY':'PROPOSED r3';t.className=s.disabled?'tag old':'tag'});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+})();
+</script>
+<script src="../tg.js?v=202611191700"></script>
+<script src="../js/rd-r2.js?v=202611191700"></script>
+</body>
+</html>
