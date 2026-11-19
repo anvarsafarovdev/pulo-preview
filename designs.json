@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 17:10 (Tashkent)",
+ "updated": "19 Nov 17:45 (Tashkent)",
  "designs": [
+  {
+   "file": "record-debt-paid-r2.html",
+   "title": "Record a debt: paid options (r2), working",
+   "rev": "r2",
+   "what": "r2: one size code for both panels (the schedule line is the same size, weight and colour in Repeats and Installments); 'Enter the amount first' replaces the long line and can never run past the box; dimming eased to the app's own 0.42; Add note now uses the app's own keyboard handling. ··· → Free / Starter / Pro, 'As built today', Theme.",
+   "stamp": "202611191745"
+  },
   {
    "file": "record-debt-paid-r1.html",
    "title": "Record a debt: paid options (r1), working",
