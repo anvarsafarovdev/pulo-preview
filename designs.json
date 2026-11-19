@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 20:25 (Tashkent)",
+ "updated": "19 Nov 20:40 (Tashkent)",
  "designs": [
+  {
+   "file": "i-owe-r4.html",
+   "title": "I owe (r4), working",
+   "rev": "r4",
+   "what": "r4: on each payment the amount comes first (date at its right), the shop under it; a payment waiting for the shop sits in a soft yellow band. Everything else as r3.",
+   "stamp": "202611192040"
+  },
   {
    "file": "i-owe-r3.html",
    "title": "I owe (r3), working",
