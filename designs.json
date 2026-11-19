@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 20:10 (Tashkent)",
+ "updated": "19 Nov 20:25 (Tashkent)",
  "designs": [
+  {
+   "file": "i-owe-r3.html",
+   "title": "I owe (r3), working",
+   "rev": "r3",
+   "what": "r3: payments show the year ('17 Nov 2026'); a confirmed payment shows its weekday and time ('Tuesday, 14:32', Tashkent) instead of the tick and 'Paid —' line. Everything else as r2.",
+   "stamp": "202611192025"
+  },
   {
    "file": "i-owe-r2.html",
    "title": "I owe (r2), working",
