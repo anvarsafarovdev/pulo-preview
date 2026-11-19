@@ -1,6 +1,13 @@
 {
- "updated": "19 Nov 19:45 (Tashkent)",
+ "updated": "19 Nov 20:10 (Tashkent)",
  "designs": [
+  {
+   "file": "i-owe-r2.html",
+   "title": "I owe (r2), working",
+   "rev": "r2",
+   "what": "r2: page name on both views ('I owe' owner, 'My debts' customer, account button on the same row); only the totals are filled, both tabs; no fill and no lines elsewhere; arrows on each plate's last line as on Home; spacing on the app's steps. ··· → Owner / Customer, what you owe, what you've paid, As built today, Theme.",
+   "stamp": "202611192010"
+  },
   {
    "file": "i-owe-r1.html",
    "title": "I owe (r1), working",

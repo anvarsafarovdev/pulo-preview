@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>I owe r2</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
+<!-- The app's own stylesheets as they are in the repository today, unedited. -->
+<link rel="stylesheet" href="../appcss/app-cb-0119.css?v=202611191930">
+<style id="chg">
+/* ════ WHAT CHANGES (your marks of 19 Nov, rounds 1 and 2). Everything else is the app's own page, from its own code. ════ */
+/* THE PAGE'S SPACING, ON THE APP'S STEPS: name s3 below Telegram's bar (as Updates), tabs s3 under it,
+   the grey total s4 under the tabs, the list s4 under the total, s3 between rows. */
+/* 1. The page name, both views and both tabs: "I owe" for the owner (from Home), "My debts" for a customer
+      (the bottom bar's own word), with the customer's account button on the same row instead of a row of its own.
+      The owner's view has no account button and no "Your shop" door (Telegram's Back returns to the shop). */
+.cb-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);margin-top:var(--s3)}
+.cb-head .cb-title{margin:0;min-width:0}
+.cb-head .cc-top{min-height:0}
+/* 2. Only the totals have a fill (the app's --surface): "You owe …" and "Confirmed, all time".
+      "Only you see this. Your assistants never do." sits inside the owe total, under the amount. */
+.cb-hero,.hp-head{margin-top:var(--s4);padding:var(--s4);border-radius:var(--r-1);background:var(--surface)}
+.hp-head .hp-title{display:none}
+.hp-head .hp-k{margin-top:0}
+.cb-own{margin:var(--s3) 0 0;font-size:var(--t-2);line-height:1.5;color:var(--text-3);text-wrap:pretty}
+/* 3. Every other plate has no fill and no line between rows; space separates them. No round letter badge. */
+.cc-list{margin-top:var(--s4)}
+.cb-row,.hp-e{background:none;border-radius:0;padding:var(--s3) 0}
+.cb-row + .cb-row,.hp-e + .hp-e{margin-top:var(--s3)}
+@media (hover:hover) and (pointer:fine){.cb-row:hover,button.hp-e:hover{background:none}}
+/* 4. The arrow sits on the plate's LAST line, at the right, as on Home (.hm-amt .go). */
+.cb-line{display:flex;align-items:center;gap:var(--s3)}
+.cb-line .cb-v{margin-top:6px}
+.cb-line .cb-meta{margin-top:7px}
+.cb-line .go{margin-left:auto;display:inline-flex;color:var(--text-2)}
+.cb-line .go svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* 5. "You owe nothing" uses the same empty design as "What you've paid": an icon, a title, one short line. */
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:80;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv b.h{flex:1 1 100%;font:700 10px/1 system-ui;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+.tag.old{color:#c0392b}
+.fb-back{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:82;height:26px;padding:0 10px;border-radius:999px;border:0;background:rgba(128,128,128,.18);color:var(--text-2);font:600 12px/1 system-ui}
+.fb-back[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<span class="tag" id="tag">PROPOSED r2</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p>The app's own "I owe" page (both tabs), from its own code. r2: the page name on both views ("I owe" for the owner, "My debts" for a customer, with the account button on the same row); only the totals are filled, on both tabs; no fill and no lines on any other plate; the arrow on each plate's last line, as on Home; spacing on the app's steps. Kept from r1: no door and no account button for the owner, "Only you see this…" inside the total, one empty design for both tabs. Tap the tabs on the page to switch.</p>
+  <b class="h">Who is looking</b>
+  <button data-k="view" data-v="OWNER" aria-pressed="true">Owner (from Home)</button>
+  <button data-k="view" data-v="CUSTOMER">Customer only</button>
+  <b class="h">What you owe</b>
+  <button data-k="owe" data-v="ONE" aria-pressed="true">1 shop</button>
+  <button data-k="owe" data-v="SEVERAL">Several + paid off</button>
+  <button data-k="owe" data-v="NONE">Nothing</button>
+  <b class="h">What you've paid</b>
+  <button data-k="paid" data-v="NONE" aria-pressed="true">Nothing yet</button>
+  <button data-k="paid" data-v="SOME">Some payments</button>
+  <b class="h">Compare</b>
+  <button id="old">As built today</button>
+  <button id="th">Theme</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  if(inTG){try{TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}}
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');
+    if(TG.viewportStableHeight)r.setProperty('--pulo-viewport-height',TG.viewportStableHeight+'px')}
+  if(inTG){try{TG.onEvent('safeAreaChanged',insets);TG.onEvent('contentSafeAreaChanged',insets);TG.onEvent('viewportChanged',insets);TG.onEvent('fullscreenChanged',insets)}catch(e){}}
+  window.addEventListener('load',insets);
+  var q=new URLSearchParams(location.search), old=q.get('old')==='1', st={view:q.get('view')||'OWNER',owe:q.get('owe')||'ONE',paid:q.get('paid')||'NONE'};
+  if(old){document.getElementById('chg').disabled=true;var t=document.getElementById('tag');t.textContent='AS BUILT TODAY';t.className='tag old';document.getElementById('old').setAttribute('aria-pressed','true')}
+  var pv=document.getElementById('pv');
+  function sync(){[].forEach.call(document.querySelectorAll('[data-k]'),function(b){b.setAttribute('aria-pressed',st[b.getAttribute('data-k')]===b.getAttribute('data-v'))})}
+  sync();
+  [].forEach.call(document.querySelectorAll('[data-k]'),function(b){b.addEventListener('click',function(){var p={};p[b.getAttribute('data-k')]=b.getAttribute('data-v');st[b.getAttribute('data-k')]=b.getAttribute('data-v');sync();if(window.__cbSet)window.__cbSet(p)})});
+  document.getElementById('old').addEventListener('click',function(){var u=new URLSearchParams();if(!old)u.set('old','1');u.set('view',st.view);u.set('owe',st.owe);u.set('paid',st.paid);location.search=u.toString()});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+  window.__cbInit={view:st.view,owe:st.owe,paid:st.paid,old:old};
+  var s=document.createElement('script');s.src=(old?'../js/cb-old-0119.js':'../js/cb-r2.js')+'?v=202611191930';document.body.appendChild(s);
+})();
+</script>
+<script src="../tg.js?v=202611191930"></script>
+</body>
+</html>
