@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 13:30 (Tashkent)",
+ "updated": "20 Nov 14:10 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r2.html",
+   "title": "Pay sheet: one shop and one debt (r2), working",
+   "rev": "r2",
+   "what": "r2: inside Telegram 'Send to GrapeStore' is Telegram's own bottom button, which Telegram keeps on top of the keyboard; the sheet ends with its line right above it. 'Keyboard numbers' in the menu shows what the phone reports when the keyboard opens.",
+   "stamp": "202611201410"
+  },
   {
    "file": "pay-sheet-r1.html",
    "title": "Pay sheet: one shop and one debt (r1), working",
