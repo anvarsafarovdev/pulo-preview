@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 17:10 (Tashkent)",
+ "updated": "20 Nov 17:40 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r8.html",
+   "title": "Pay sheet: one shop and one debt (r8), working",
+   "rev": "r8",
+   "what": "r8: the real cause, from your numbers: the iPhone does report its keyboard, but the sheet's height limit took Telegram's top inset off twice, so Send was cut off. Fixed, and the sheet is a little more compact: everything above the keyboard, Send 12px over it.",
+   "stamp": "202611201740"
+  },
   {
    "file": "pay-sheet-r7.html",
    "title": "Pay sheet: one shop and one debt (r7), working + keyboard numbers",
