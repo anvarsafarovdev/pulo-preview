@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 22:00 (Tashkent)",
+ "updated": "20 Nov 22:30 (Tashkent)",
  "designs": [
+  {
+   "file": "opening-animation-r2.html",
+   "title": "Opening animation (r2): centre, o spins, rise to Welcome",
+   "rev": "r2",
+   "what": "r2, your flow: Telegram's still logo in the centre, ours takes over in the same place, the o spins. New person: at least two turns, the o stops upright, the mark rises to Welcome's place and Welcome appears. Signed up: the o spins as long as loading takes, finishes its turn upright, and the app appears.",
+   "stamp": "202611202230"
+  },
   {
    "file": "opening-animation-r1.html",
    "title": "Opening animation: 20 options (r1)",
