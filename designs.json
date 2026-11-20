@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 18:15 (Tashkent)",
+ "updated": "20 Nov 18:45 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-final.html",
+   "title": "Pay sheet (final, as approved r9), working",
+   "rev": "final",
+   "what": "The approved Pay sheet, clean: no numbers box, no label. Tapping Pay opens the sheet with the number pad up; Send 12px above the keyboard; the two-row line; the red edge on all four sides.",
+   "stamp": "202611201845"
+  },
   {
    "file": "pay-sheet-r9.html",
    "title": "Pay sheet: one shop and one debt (r9), working",
