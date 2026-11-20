@@ -80,19 +80,8 @@
   <b class="h">Compare</b>
   <button id="old">As built today</button>
   <button id="th">Theme</button>
-  <button id="kb">Keyboard numbers</button>
   <button id="hide">Hide</button>
 </div>
-<script>
-(function(){
-  var e=document.createElement('div');e.className='kbn';
-  function tick(){var vv=window.visualViewport||{},T=window.Telegram&&window.Telegram.WebApp||{},a=document.querySelector('.pulo-app'),sh=document.querySelector('.feel-sheet'),d=window.__payDiag||{},si=T.safeAreaInset||{},ci=T.contentSafeAreaInset||{};
-    if(!e.isConnected&&document.body)document.body.appendChild(e);
-    e.textContent='vv '+Math.round(vv.height||0)+' top '+Math.round(vv.offsetTop||0)+' | inner '+innerHeight+' | scr '+screen.height+'\ntg '+(T.platform||'-')+' '+Math.round(T.viewportHeight||0)+'/'+Math.round(T.viewportStableHeight||0)+' full '+(T.isFullscreen?1:0)+' safe '+(si.bottom||0)+'/'+(ci.bottom||0)+'\nframe '+(a?Math.round(a.getBoundingClientRect().height):0)+' sheetBot '+(sh?Math.round(sh.getBoundingClientRect().bottom):0)+'\nscroll '+(document.querySelector('.feel-sheet-body')?(document.querySelector('.feel-sheet-body').scrollHeight-document.querySelector('.feel-sheet-body').clientHeight):0)+' sendBot '+(document.querySelector('.rps-confirm')?Math.round(document.querySelector('.rps-confirm').getBoundingClientRect().bottom):0);
-    requestAnimationFrame(tick)}
-  requestAnimationFrame(tick);
-})();
-</script>
 <script>
 (function(){
   var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
