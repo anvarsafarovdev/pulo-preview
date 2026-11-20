@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 15:20 (Tashkent)",
+ "updated": "20 Nov 16:00 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r5.html",
+   "title": "Pay sheet: one shop and one debt (r5), working",
+   "rev": "r5",
+   "what": "r5: the sheet sits on the keyboard with a 12px gap under Send from the first moment; the line above Send is always two rows so Send never jumps when you type; the sheet no longer puts the cursor in the amount by itself (you tap it).",
+   "stamp": "202611201600"
+  },
   {
    "file": "pay-sheet-r4.html",
    "title": "Pay sheet: one shop and one debt (r4), working",
