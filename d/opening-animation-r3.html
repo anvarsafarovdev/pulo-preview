@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Opening animation r3</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
+<link rel="stylesheet" href="../appcss/app-splash-r1.css?v=202611202200">
+<style>
+/* ═══ THE OPENING (r2), the founder's flow of 20 Nov:
+   Telegram's still logo in the centre → ours takes over in the SAME place and size → the o spins.
+   New person: at least two turns, the o stops upright, the mark rises to where Welcome draws it, Welcome appears.
+   Signed up: the o spins for as long as loading takes, stops upright, the app appears. ═══ */
+.sp{position:fixed;inset:0;z-index:50;background:var(--ground);transition:opacity 320ms var(--ease-out,ease)}
+.sp.gone{opacity:0;pointer-events:none}
+.sp.keep.gone{opacity:1;background:transparent}
+.sp-m{position:absolute;color:var(--text-1);will-change:transform;transform-origin:0 0}
+:root{--tg-faint:#E0E0E0}[data-theme=dark]{--tg-faint:#303036}
+.sp-m.faint{color:var(--tg-faint)}
+.tgsim{color:var(--tg-faint)!important}
+.sp-m svg{display:block;width:100%;height:100%;overflow:visible}
+.sp-m .o{transform-box:view-box;transform-origin:1130.85px 304.8px}
+.tgsim{position:fixed;inset:0;z-index:60;background:var(--ground);color:var(--text-1)}
+.tgsim svg{position:absolute;display:block}
+.tgsim i{position:absolute;left:0;right:0;bottom:calc(var(--pulo-layout-inset-bottom,0px) + 70px);text-align:center;font:600 11px system-ui;color:var(--text-3);font-style:normal}
+.appsk{position:fixed;inset:0;z-index:40;background:var(--ground);padding:calc(var(--pulo-layout-inset-top,0px) + 56px) 20px 0;display:none}
+.appsk.on{display:block}
+.appsk em{display:block;font:600 11px system-ui;color:var(--text-3);font-style:normal;margin-bottom:12px}
+.appsk b{display:block;height:84px;border-radius:16px;background:var(--surface);margin-bottom:14px}
+.appsk b:nth-of-type(2){height:44px;width:70%}
+.appsk b:nth-of-type(n+3){height:56px}
+#app{visibility:hidden}
+#app.show{visibility:visible;animation:wl-in 380ms var(--ease-out,ease) both}
+@keyframes wl-in{from{opacity:0}to{opacity:1}}
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:85;max-height:70vh;overflow:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv b.h{flex:1 1 100%;font:700 10px/1 system-ui;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{z-index:90!important;position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+.tag.old{color:#c0392b}
+.fb-back{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:82;height:26px;padding:0 10px;border-radius:999px;border:0;background:rgba(128,128,128,.18);color:var(--text-2);font:600 12px/1 system-ui}
+.fb-back[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="appsk" id="appsk"><em>(the app's Home loads here)</em><b></b><b></b><b></b><b></b><b></b><b></b></div>
+<div class="sp" id="sp">
+  <div class="sp-m" id="spm"><svg viewBox="0 0 1298 609" aria-label="Pulo"><g fill="currentColor">
+    <path d="M58.0674 246.667C49.7558 263.967 45.5996 283.344 45.5996 304.8C45.5996 328.4 50.8002 349.8 61.2002 369C71.6002 387.8 86.0005 402.599 104.4 413.399C122.8 424.199 143.4 429.6 166.2 429.6C188.389 429.6 208.382 424.66 226.181 414.78L258.701 447.301C257.286 448.219 255.853 449.119 254.4 450C230 464.4 202.4 471.6 171.6 471.6C144.8 471.6 120.4 466 98.4004 454.8C76.8004 443.2 59.4002 427.999 46.2002 409.199V585.6C46.2002 592.8 43.9996 598.399 39.5996 602.399C35.5997 606.799 30.2002 609 23.4004 609C16.2004 609 10.4 606.799 6 602.399C2.00007 598.399 0 592.8 0 585.6V302.399C0.400028 271.199 7.80023 243.199 22.2002 218.399C23.1381 216.802 24.0952 215.226 25.0732 213.673L58.0674 246.667ZM166.2 137.399C198.2 137.399 226.8 144.8 252 159.6C277.2 174 297 193.8 311.4 219C326.2 244.2 333.6 272.8 333.6 304.8C333.6 335.723 326.703 363.581 312.913 388.376L278.84 354.303C284.946 339.045 288 322.545 288 304.8C288 280.8 282.6 259.4 271.8 240.6C261.4 221.8 247 206.999 228.6 196.199C210.2 184.999 189.4 179.399 166.2 179.399C147.687 179.399 130.625 183.092 115.013 190.476L82.8369 158.3C107.722 144.366 135.51 137.399 166.2 137.399Z"/><path d="M699.019 140.399C705.819 140.399 711.418 142.6 715.818 147C720.218 151 722.419 156.399 722.419 163.199V445.199C722.419 452.399 720.218 458.2 715.818 462.6C711.418 466.599 705.818 468.6 699.019 468.6C692.219 468.6 686.619 466.6 682.219 462.6C678.219 458.2 676.219 452.399 676.219 445.199V424.758C665.622 436.975 652.823 447.189 637.818 455.399C616.618 466.599 593.018 472.199 567.019 472.199C538.619 472.199 513.218 466.4 490.818 454.8C468.418 442.8 450.619 425.399 437.419 402.6C424.619 379.8 418.219 351.999 418.219 319.199V163.199C418.219 156.8 420.419 151.4 424.818 147C429.218 142.6 434.619 140.399 441.019 140.399C447.819 140.399 453.418 142.6 457.818 147C462.218 151.4 464.419 156.799 464.419 163.199V319.199C464.419 343.999 469.019 364.399 478.219 380.399C487.819 396.399 500.619 408.399 516.619 416.399C533.019 424.399 551.419 428.399 571.818 428.399C591.418 428.399 609.019 424.6 624.619 417C640.619 409.4 653.219 399 662.419 385.8C671.331 373.012 675.927 358.535 676.205 342.369L676.219 340.8V163.199C676.219 156.4 678.219 151 682.219 147C686.619 142.6 692.219 140.399 699.019 140.399Z"/><path d="M841.073 0C847.873 0 853.273 2.19962 857.273 6.59961C861.673 10.5996 863.873 15.9998 863.873 22.7998V364.8C863.873 382 867.273 396 874.073 406.8C881.273 417.6 890.273 423 901.073 423H916.073C922.073 423 926.874 425.2 930.474 429.6C934.074 433.6 935.873 439 935.873 445.8C935.873 452.6 933.273 458.2 928.073 462.6C923.273 466.6 916.873 468.6 908.873 468.6H901.073C885.073 468.6 870.673 464.199 857.873 455.399C845.473 446.599 835.674 434.4 828.474 418.8C821.674 403.2 818.273 385.2 818.273 364.8V22.7998C818.273 15.9998 820.273 10.5996 824.273 6.59961C828.673 2.19966 834.273 4.249e-05 841.073 0Z"/><path class="o" id="oo" d="M1016.41 259.01C1011.5 273.045 1009.04 288.309 1009.04 304.8C1009.04 328.8 1014.25 350.2 1024.65 369C1035.45 387.8 1050.05 402.599 1068.45 413.399C1086.85 424.199 1107.65 429.6 1130.85 429.6C1147.94 429.6 1163.72 426.669 1178.21 420.809L1210.48 453.078C1187.02 465.425 1160.48 471.6 1130.85 471.6C1098.85 471.6 1070.24 464.4 1045.04 450C1019.85 435.6 1000.05 415.8 985.646 390.6C971.246 365.4 964.045 336.8 964.045 304.8C964.045 275.106 970.094 248.436 982.189 224.789L1016.41 259.01ZM1130.85 137.399C1162.85 137.399 1191.25 144.6 1216.04 159C1241.24 173.4 1261.05 193.199 1275.45 218.399C1289.85 243.599 1297.25 272.4 1297.65 304.8C1297.65 336.8 1290.25 365.4 1275.45 390.6C1273.71 393.635 1271.9 396.59 1270.01 399.469L1237.53 366.992C1247.21 348.68 1252.04 327.95 1252.04 304.8C1252.04 280.8 1246.85 259.4 1236.45 240.6C1226.05 221.4 1211.65 206.4 1193.25 195.6C1174.85 184.8 1154.05 179.399 1130.85 179.399C1107.65 179.399 1086.85 184.8 1068.45 195.6C1067.96 195.884 1067.48 196.172 1067 196.462L1035.45 164.915C1038.56 162.851 1041.76 160.88 1045.04 159C1070.24 144.6 1098.85 137.399 1130.85 137.399Z"/>
+  </g></svg></div>
+</div>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p id="pvp"></p>
+  <b class="h">Who opens Pulo</b>
+  <button data-e="welcome">New person (ends on Welcome)</button><button data-e="app">Signed up (ends on the app)</button>
+  <b class="h">Loading takes</b>
+  <button data-t="500">0.5 s</button><button data-t="1500">1.5 s</button><button data-t="3000">3 s</button><button data-t="6000">6 s</button><button data-t="0">Until I tap Finish</button>
+  <b class="h">Play</b>
+  <button id="play">▶ Play again</button><button id="fin">Finish</button><button id="tgs">Telegram's still logo first</button><button id="th">Theme</button><button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  if(inTG){try{TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}}
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px')}
+  if(inTG){try{['safeAreaChanged','contentSafeAreaChanged','viewportChanged','fullscreenChanged'].forEach(function(e){TG.onEvent(e,insets)})}catch(e){}}
+  var TURN=1100, MIN_NEW=2, RISE=520;
+  var q=new URLSearchParams(location.search), st={t:q.has('t')?+q.get('t'):1500,e:q.get('e')||'welcome',tg:q.get('tg')!=='0'};
+  var sp=document.getElementById('sp'), spm=document.getElementById('spm'), oo=document.getElementById('oo'), pv=document.getElementById('pv'), app=document.getElementById('app'), sk=document.getElementById('appsk');
+  var W0=114,H0=114*609/1298,W=170,H=79.6875, spin=null, loaded=false, timer=null, run=0;
+  function centre(){var w=innerWidth,h=innerHeight;return {x:(w-W0)/2,y:(h-H0)/2}}
+  function welcomeRect(){var m=document.querySelector('#app .wl-mark');return m?m.getBoundingClientRect():null}
+  function put(x,y){spm.style.left=x+'px';spm.style.top=y+'px';spm.style.width=W0+'px';spm.style.height=H0+'px';spm.style.transform=''}
+  function mark(){[].forEach.call(document.querySelectorAll('[data-t]'),function(b){b.setAttribute('aria-pressed',+b.getAttribute('data-t')===st.t)});
+    [].forEach.call(document.querySelectorAll('[data-e]'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-e')===st.e)});
+    document.getElementById('tgs').setAttribute('aria-pressed',st.tg);
+    document.getElementById('pvp').textContent=(st.e==='welcome'
+      ?'New person: Telegram\'s faint still logo in the centre, then ours in the same place, size and tone; during the first turn it brightens to Pulo\'s colour; the o spins at least twice (longer if loading takes longer), stops upright, the mark rises to Welcome\'s place growing from 114 to Welcome\'s 170, and Welcome appears around it.'
+      :'Signed up: Telegram\'s faint still logo in the centre, then ours in the same place, size and tone; it brightens during the first turn; the o spins for as long as loading takes, finishes its turn upright, and the app appears.')+' Loading here: '+(st.t?(st.t/1000)+' s.':'until you tap Finish.')}
+  function maybeEnd(my){
+    if(my!==run||!loaded||!spin)return;
+    var turns=Math.floor((spin.currentTime||0)/TURN);
+    var need=st.e==='welcome'?Math.max(MIN_NEW,turns+1):turns+1;
+    spin.effect.updateTiming({iterations:need});
+    spin.finished.then(function(){if(my!==run)return;
+      if(st.e==='welcome'){
+        var r=welcomeRect(),c=centre();
+        var k=r.width/W0;var mv=spm.animate([{transform:'translate(0,0) scale(1)'},{transform:'translate('+(r.left-c.x)+'px,'+(r.top-c.y)+'px) scale('+k+')'}],{duration:RISE,easing:'cubic-bezier(.2,0,0,1)',fill:'forwards'});
+        mv.finished.then(function(){if(my!==run)return;app.classList.add('show');sp.classList.add('keep','gone');sp.style.background='transparent'});
+      }else{sk.classList.add('on');sp.classList.add('gone')}
+    })}
+  function finish(){loaded=true;maybeEnd(run)}
+  function play(){
+    run++;var my=run;clearTimeout(timer);loaded=false;mark();
+    if(spin){spin.cancel();spin=null}
+    spm.getAnimations().forEach(function(a){a.cancel()});
+    app.classList.remove('show');sk.classList.remove('on');sp.className='sp';sp.style.background='';
+    var c=centre();put(c.x,c.y);
+    var go=function(){if(my!==run)return;
+      spm.classList.add('faint');var tone=spm.animate([{color:getComputedStyle(document.documentElement).getPropertyValue('--tg-faint').trim()},{color:getComputedStyle(spm).getPropertyValue('--text-1').trim()||'currentColor'}],{duration:TURN,easing:'ease-in-out',fill:'forwards'});tone.finished.then(function(){if(my!==run)return;spm.classList.remove('faint');tone.cancel()});
+      spin=oo.animate([{transform:'rotate(0deg)'},{transform:'rotate(360deg)'}],{duration:TURN,iterations:Infinity,easing:'cubic-bezier(.5,.15,.5,.85)'});
+      if(st.t)timer=setTimeout(finish,st.t)};
+    if(st.tg){var s=document.createElement('div');s.className='tgsim';
+      s.innerHTML='<svg viewBox="0 0 1298 609" style="left:'+c.x+'px;top:'+c.y+'px;width:'+W0+'px;height:'+H0+'px"><path fill="currentColor" d="'+document.querySelector('#spm svg').innerHTML.match(/d="([^"]+)"/)[1]+'"/></svg>';
+      var full=document.querySelector('#spm svg g').innerHTML;s.querySelector('svg').innerHTML='<g fill="currentColor">'+full+'</g>';
+      s.insertAdjacentHTML('beforeend','<i>Telegram\'s own still logo (stand-in: 114 wide, Telegram\'s faint tone)</i>');
+      document.body.appendChild(s);setTimeout(function(){s.remove();go()},900)}else go();
+  }
+  [].forEach.call(document.querySelectorAll('[data-t]'),function(b){b.addEventListener('click',function(){st.t=+b.getAttribute('data-t');mark()})});
+  [].forEach.call(document.querySelectorAll('[data-e]'),function(b){b.addEventListener('click',function(){st.e=b.getAttribute('data-e');mark();pv.classList.add('hide');play()})});
+  document.getElementById('play').addEventListener('click',function(){pv.classList.add('hide');play()});
+  document.getElementById('fin').addEventListener('click',finish);
+  document.getElementById('tgs').addEventListener('click',function(){st.tg=!st.tg;mark()});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+  var s=document.createElement('script');s.src='../js/splash-r1.js?v=202611202200';s.onload=function(){var n=0;(function wait(){if(document.querySelector('#app .wl-mark')){insets();(document.fonts&&document.fonts.ready||Promise.resolve()).then(function(){setTimeout(play,150)})}else if(n++<100)setTimeout(wait,30)})()};document.body.appendChild(s);
+  mark();
+})();
+</script>
+<script src="../tg.js?v=202611191930"></script>
+</body>
+</html>

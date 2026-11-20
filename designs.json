@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 22:30 (Tashkent)",
+ "updated": "20 Nov 23:10 (Tashkent)",
  "designs": [
+  {
+   "file": "opening-animation-r3.html",
+   "title": "Opening animation (r3): starts as Telegram's faint logo",
+   "rev": "r3",
+   "what": "r3: r2 unchanged, except ours now takes over at Telegram's measured size (114 wide) and faint tone, brightens to Pulo's colour during the first turn, and for a new person grows to Welcome's 170 as it rises.",
+   "stamp": "202611202310"
+  },
   {
    "file": "opening-animation-r2.html",
    "title": "Opening animation (r2): centre, o spins, rise to Welcome",
