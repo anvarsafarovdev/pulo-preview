@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Opening animation r1</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
+<link rel="stylesheet" href="../appcss/app-splash-r1.css?v=202611202200">
+<style>
+/* ═══ THE OPENING ANIMATION (proposals). Underneath is the real Welcome page, from the app's own code.
+   The mark sits exactly where Welcome draws it (measured from that page), at its size (170 px wide). ═══ */
+.sp{position:fixed;inset:0;z-index:50;background:var(--ground);color:var(--text-1);transition:opacity 360ms var(--ease-out,ease)}
+.sp.gone{opacity:0;pointer-events:none}
+.sp-m{position:absolute;color:var(--text-1)}
+.sp-m svg{display:block;width:100%;height:100%;overflow:visible}
+.sp-m .L{transform-box:fill-box;transform-origin:50% 100%}
+.sp-x{position:absolute;inset:0;pointer-events:none}
+.sp-mask{position:absolute;inset:0;-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201298%20609%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M58.0674%20246.667C49.7558%20263.967%2045.5996%20283.344%2045.5996%20304.8C45.5996%20328.4%2050.8002%20349.8%2061.2002%20369C71.6002%20387.8%2086.0005%20402.599%20104.4%20413.399C122.8%20424.199%20143.4%20429.6%20166.2%20429.6C188.389%20429.6%20208.382%20424.66%20226.181%20414.78L258.701%20447.301C257.286%20448.219%20255.853%20449.119%20254.4%20450C230%20464.4%20202.4%20471.6%20171.6%20471.6C144.8%20471.6%20120.4%20466%2098.4004%20454.8C76.8004%20443.2%2059.4002%20427.999%2046.2002%20409.199V585.6C46.2002%20592.8%2043.9996%20598.399%2039.5996%20602.399C35.5997%20606.799%2030.2002%20609%2023.4004%20609C16.2004%20609%2010.4%20606.799%206%20602.399C2.00007%20598.399%200%20592.8%200%20585.6V302.399C0.400028%20271.199%207.80023%20243.199%2022.2002%20218.399C23.1381%20216.802%2024.0952%20215.226%2025.0732%20213.673L58.0674%20246.667ZM699.019%20140.399C705.819%20140.399%20711.418%20142.6%20715.818%20147C720.218%20151%20722.419%20156.399%20722.419%20163.199V445.199C722.419%20452.399%20720.218%20458.2%20715.818%20462.6C711.418%20466.599%20705.818%20468.6%20699.019%20468.6C692.219%20468.6%20686.619%20466.6%20682.219%20462.6C678.219%20458.2%20676.219%20452.399%20676.219%20445.199V424.758C665.622%20436.975%20652.823%20447.189%20637.818%20455.399C616.618%20466.599%20593.018%20472.199%20567.019%20472.199C538.619%20472.199%20513.218%20466.4%20490.818%20454.8C468.418%20442.8%20450.619%20425.399%20437.419%20402.6C424.619%20379.8%20418.219%20351.999%20418.219%20319.199V163.199C418.219%20156.8%20420.419%20151.4%20424.818%20147C429.218%20142.6%20434.619%20140.399%20441.019%20140.399C447.819%20140.399%20453.418%20142.6%20457.818%20147C462.218%20151.4%20464.419%20156.799%20464.419%20163.199V319.199C464.419%20343.999%20469.019%20364.399%20478.219%20380.399C487.819%20396.399%20500.619%20408.399%20516.619%20416.399C533.019%20424.399%20551.419%20428.399%20571.818%20428.399C591.418%20428.399%20609.019%20424.6%20624.619%20417C640.619%20409.4%20653.219%20399%20662.419%20385.8C671.331%20373.012%20675.927%20358.535%20676.205%20342.369L676.219%20340.8V163.199C676.219%20156.4%20678.219%20151%20682.219%20147C686.619%20142.6%20692.219%20140.399%20699.019%20140.399ZM1016.41%20259.01C1011.5%20273.045%201009.04%20288.309%201009.04%20304.8C1009.04%20328.8%201014.25%20350.2%201024.65%20369C1035.45%20387.8%201050.05%20402.599%201068.45%20413.399C1086.85%20424.199%201107.65%20429.6%201130.85%20429.6C1147.94%20429.6%201163.72%20426.669%201178.21%20420.809L1210.48%20453.078C1187.02%20465.425%201160.48%20471.6%201130.85%20471.6C1098.85%20471.6%201070.24%20464.4%201045.04%20450C1019.85%20435.6%201000.05%20415.8%20985.646%20390.6C971.246%20365.4%20964.045%20336.8%20964.045%20304.8C964.045%20275.106%20970.094%20248.436%20982.189%20224.789L1016.41%20259.01ZM841.073%200C847.873%200%20853.273%202.19962%20857.273%206.59961C861.673%2010.5996%20863.873%2015.9998%20863.873%2022.7998V364.8C863.873%20382%20867.273%20396%20874.073%20406.8C881.273%20417.6%20890.273%20423%20901.073%20423H916.073C922.073%20423%20926.874%20425.2%20930.474%20429.6C934.074%20433.6%20935.873%20439%20935.873%20445.8C935.873%20452.6%20933.273%20458.2%20928.073%20462.6C923.273%20466.6%20916.873%20468.6%20908.873%20468.6H901.073C885.073%20468.6%20870.673%20464.199%20857.873%20455.399C845.473%20446.599%20835.674%20434.4%20828.474%20418.8C821.674%20403.2%20818.273%20385.2%20818.273%20364.8V22.7998C818.273%2015.9998%20820.273%2010.5996%20824.273%206.59961C828.673%202.19966%20834.273%204.249e-05%20841.073%200ZM1130.85%20137.399C1162.85%20137.399%201191.25%20144.6%201216.04%20159C1241.24%20173.4%201261.05%20193.199%201275.45%20218.399C1289.85%20243.599%201297.25%20272.4%201297.65%20304.8C1297.65%20336.8%201290.25%20365.4%201275.45%20390.6C1273.71%20393.635%201271.9%20396.59%201270.01%20399.469L1237.53%20366.992C1247.21%20348.68%201252.04%20327.95%201252.04%20304.8C1252.04%20280.8%201246.85%20259.4%201236.45%20240.6C1226.05%20221.4%201211.65%20206.4%201193.25%20195.6C1174.85%20184.8%201154.05%20179.399%201130.85%20179.399C1107.65%20179.399%201086.85%20184.8%201068.45%20195.6C1067.96%20195.884%201067.48%20196.172%201067%20196.462L1035.45%20164.915C1038.56%20162.851%201041.76%20160.88%201045.04%20159C1070.24%20144.6%201098.85%20137.399%201130.85%20137.399ZM166.2%20137.399C198.2%20137.399%20226.8%20144.8%20252%20159.6C277.2%20174%20297%20193.8%20311.4%20219C326.2%20244.2%20333.6%20272.8%20333.6%20304.8C333.6%20335.723%20326.703%20363.581%20312.913%20388.376L278.84%20354.303C284.946%20339.045%20288%20322.545%20288%20304.8C288%20280.8%20282.6%20259.4%20271.8%20240.6C261.4%20221.8%20247%20206.999%20228.6%20196.199C210.2%20184.999%20189.4%20179.399%20166.2%20179.399C147.687%20179.399%20130.625%20183.092%20115.013%20190.476L82.8369%20158.3C107.722%20144.366%20135.51%20137.399%20166.2%20137.399Z%22/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201298%20609%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M58.0674%20246.667C49.7558%20263.967%2045.5996%20283.344%2045.5996%20304.8C45.5996%20328.4%2050.8002%20349.8%2061.2002%20369C71.6002%20387.8%2086.0005%20402.599%20104.4%20413.399C122.8%20424.199%20143.4%20429.6%20166.2%20429.6C188.389%20429.6%20208.382%20424.66%20226.181%20414.78L258.701%20447.301C257.286%20448.219%20255.853%20449.119%20254.4%20450C230%20464.4%20202.4%20471.6%20171.6%20471.6C144.8%20471.6%20120.4%20466%2098.4004%20454.8C76.8004%20443.2%2059.4002%20427.999%2046.2002%20409.199V585.6C46.2002%20592.8%2043.9996%20598.399%2039.5996%20602.399C35.5997%20606.799%2030.2002%20609%2023.4004%20609C16.2004%20609%2010.4%20606.799%206%20602.399C2.00007%20598.399%200%20592.8%200%20585.6V302.399C0.400028%20271.199%207.80023%20243.199%2022.2002%20218.399C23.1381%20216.802%2024.0952%20215.226%2025.0732%20213.673L58.0674%20246.667ZM699.019%20140.399C705.819%20140.399%20711.418%20142.6%20715.818%20147C720.218%20151%20722.419%20156.399%20722.419%20163.199V445.199C722.419%20452.399%20720.218%20458.2%20715.818%20462.6C711.418%20466.599%20705.818%20468.6%20699.019%20468.6C692.219%20468.6%20686.619%20466.6%20682.219%20462.6C678.219%20458.2%20676.219%20452.399%20676.219%20445.199V424.758C665.622%20436.975%20652.823%20447.189%20637.818%20455.399C616.618%20466.599%20593.018%20472.199%20567.019%20472.199C538.619%20472.199%20513.218%20466.4%20490.818%20454.8C468.418%20442.8%20450.619%20425.399%20437.419%20402.6C424.619%20379.8%20418.219%20351.999%20418.219%20319.199V163.199C418.219%20156.8%20420.419%20151.4%20424.818%20147C429.218%20142.6%20434.619%20140.399%20441.019%20140.399C447.819%20140.399%20453.418%20142.6%20457.818%20147C462.218%20151.4%20464.419%20156.799%20464.419%20163.199V319.199C464.419%20343.999%20469.019%20364.399%20478.219%20380.399C487.819%20396.399%20500.619%20408.399%20516.619%20416.399C533.019%20424.399%20551.419%20428.399%20571.818%20428.399C591.418%20428.399%20609.019%20424.6%20624.619%20417C640.619%20409.4%20653.219%20399%20662.419%20385.8C671.331%20373.012%20675.927%20358.535%20676.205%20342.369L676.219%20340.8V163.199C676.219%20156.4%20678.219%20151%20682.219%20147C686.619%20142.6%20692.219%20140.399%20699.019%20140.399ZM1016.41%20259.01C1011.5%20273.045%201009.04%20288.309%201009.04%20304.8C1009.04%20328.8%201014.25%20350.2%201024.65%20369C1035.45%20387.8%201050.05%20402.599%201068.45%20413.399C1086.85%20424.199%201107.65%20429.6%201130.85%20429.6C1147.94%20429.6%201163.72%20426.669%201178.21%20420.809L1210.48%20453.078C1187.02%20465.425%201160.48%20471.6%201130.85%20471.6C1098.85%20471.6%201070.24%20464.4%201045.04%20450C1019.85%20435.6%201000.05%20415.8%20985.646%20390.6C971.246%20365.4%20964.045%20336.8%20964.045%20304.8C964.045%20275.106%20970.094%20248.436%20982.189%20224.789L1016.41%20259.01ZM841.073%200C847.873%200%20853.273%202.19962%20857.273%206.59961C861.673%2010.5996%20863.873%2015.9998%20863.873%2022.7998V364.8C863.873%20382%20867.273%20396%20874.073%20406.8C881.273%20417.6%20890.273%20423%20901.073%20423H916.073C922.073%20423%20926.874%20425.2%20930.474%20429.6C934.074%20433.6%20935.873%20439%20935.873%20445.8C935.873%20452.6%20933.273%20458.2%20928.073%20462.6C923.273%20466.6%20916.873%20468.6%20908.873%20468.6H901.073C885.073%20468.6%20870.673%20464.199%20857.873%20455.399C845.473%20446.599%20835.674%20434.4%20828.474%20418.8C821.674%20403.2%20818.273%20385.2%20818.273%20364.8V22.7998C818.273%2015.9998%20820.273%2010.5996%20824.273%206.59961C828.673%202.19966%20834.273%204.249e-05%20841.073%200ZM1130.85%20137.399C1162.85%20137.399%201191.25%20144.6%201216.04%20159C1241.24%20173.4%201261.05%20193.199%201275.45%20218.399C1289.85%20243.599%201297.25%20272.4%201297.65%20304.8C1297.65%20336.8%201290.25%20365.4%201275.45%20390.6C1273.71%20393.635%201271.9%20396.59%201270.01%20399.469L1237.53%20366.992C1247.21%20348.68%201252.04%20327.95%201252.04%20304.8C1252.04%20280.8%201246.85%20259.4%201236.45%20240.6C1226.05%20221.4%201211.65%20206.4%201193.25%20195.6C1174.85%20184.8%201154.05%20179.399%201130.85%20179.399C1107.65%20179.399%201086.85%20184.8%201068.45%20195.6C1067.96%20195.884%201067.48%20196.172%201067%20196.462L1035.45%20164.915C1038.56%20162.851%201041.76%20160.88%201045.04%20159C1070.24%20144.6%201098.85%20137.399%201130.85%20137.399ZM166.2%20137.399C198.2%20137.399%20226.8%20144.8%20252%20159.6C277.2%20174%20297%20193.8%20311.4%20219C326.2%20244.2%20333.6%20272.8%20333.6%20304.8C333.6%20335.723%20326.703%20363.581%20312.913%20388.376L278.84%20354.303C284.946%20339.045%20288%20322.545%20288%20304.8C288%20280.8%20282.6%20259.4%20271.8%20240.6C261.4%20221.8%20247%20206.999%20228.6%20196.199C210.2%20184.999%20189.4%20179.399%20166.2%20179.399C147.687%20179.399%20130.625%20183.092%20115.013%20190.476L82.8369%20158.3C107.722%20144.366%20135.51%20137.399%20166.2%20137.399Z%22/%3E%3C/svg%3E") center/100% 100% no-repeat;opacity:0}
+/* the ending: to Welcome the screen fades and the mark stays exactly where it is; to the app it lifts away */
+.sp.toWelcome.gone .sp-m{opacity:1}
+.sp.toApp .sp-m{transition:transform 360ms var(--ease-out,ease),opacity 300ms}
+.sp.toApp.gone .sp-m{transform:scale(.92);opacity:0}
+.tgsim{position:fixed;inset:0;z-index:60;background:var(--ground);display:flex;align-items:center;justify-content:center}
+.tgsim svg{width:120px;height:56px;color:var(--text-1)}
+.tgsim i{position:absolute;bottom:calc(var(--pulo-layout-inset-bottom,0px) + 70px);font:600 11px system-ui;color:var(--text-3);font-style:normal}
+.appsk{position:fixed;inset:0;z-index:40;background:var(--ground);padding:calc(var(--pulo-layout-inset-top,0px) + 56px) 20px 0;display:none}
+.appsk.on{display:block}
+.appsk b{display:block;height:84px;border-radius:16px;background:var(--surface);margin-bottom:14px}
+.appsk b:nth-child(2){height:44px;width:70%}
+.appsk b:nth-child(n+3){height:56px}
+
+/* 1 breathe */
+.sp[data-a=breathe] .sp-m svg{animation:a-breathe 2.2s ease-in-out infinite}
+@keyframes a-breathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.97)}}
+/* 2 heartbeat */
+.sp[data-a=heartbeat] .sp-m svg{animation:a-beat 1.6s ease-in-out infinite}
+@keyframes a-beat{0%,40%,100%{transform:scale(1)}10%{transform:scale(1.07)}20%{transform:scale(1)}30%{transform:scale(1.045)}}
+/* 3 shimmer */
+.sp[data-a=shimmer] .sp-mask{opacity:1;background:linear-gradient(100deg,transparent 30%,var(--ground) 50%,transparent 70%) 0 0/250% 100%;mix-blend-mode:normal;animation:a-shim 1.8s linear infinite;opacity:.75}
+@keyframes a-shim{from{background-position:120% 0}to{background-position:-120% 0}}
+/* 4 cut light: a streak at the cuts' own 45° */
+.sp[data-a=cutlight] .sp-mask{opacity:1;background:linear-gradient(135deg,transparent 42%,var(--ground) 50%,transparent 58%) 0 0/300% 300%;animation:a-cut 1.6s ease-in-out infinite;opacity:.85}
+@keyframes a-cut{from{background-position:100% 100%}to{background-position:0 0}}
+/* 5 o spins */
+.sp[data-a=ospin] .L4{transform-box:view-box;transform-origin:1130.85px 304.8px;animation:a-spin 1.1s cubic-bezier(.5,.15,.5,.85) infinite}
+@keyframes a-spin{to{transform:rotate(360deg)}}
+/* 6 wave */
+.sp[data-a=wave] .L{animation:a-wave 1.4s ease-in-out infinite}
+.sp[data-a=wave] .L2{animation-delay:.12s}.sp[data-a=wave] .L3{animation-delay:.24s}.sp[data-a=wave] .L4{animation-delay:.36s}
+@keyframes a-wave{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-14%)}}
+/* 7 jump */
+.sp[data-a=jump] .L{animation:a-jump 1.8s cubic-bezier(.3,.7,.4,1) infinite}
+.sp[data-a=jump] .L2{animation-delay:.2s}.sp[data-a=jump] .L3{animation-delay:.4s}.sp[data-a=jump] .L4{animation-delay:.6s}
+@keyframes a-jump{0%,40%,100%{transform:translateY(0) scale(1,1)}8%{transform:translateY(0) scale(1.08,.9)}20%{transform:translateY(-22%) scale(.96,1.05)}32%{transform:translateY(0) scale(1.05,.94)}}
+/* 8 rise */
+.sp[data-a=rise] .L{animation:a-rise 2.6s cubic-bezier(.2,.8,.2,1) infinite;opacity:0}
+.sp[data-a=rise] .L2{animation-delay:.1s}.sp[data-a=rise] .L3{animation-delay:.2s}.sp[data-a=rise] .L4{animation-delay:.3s}
+@keyframes a-rise{0%{opacity:0;transform:translateY(40%)}22%,78%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(0)}}
+/* 9 typewriter */
+.sp[data-a=type] .L{animation:a-type 2.4s steps(1) infinite;opacity:0}
+.sp[data-a=type] .L1{animation-name:a-t1}.sp[data-a=type] .L2{animation-name:a-t2}.sp[data-a=type] .L3{animation-name:a-t3}.sp[data-a=type] .L4{animation-name:a-t4}
+@keyframes a-t1{0%{opacity:0}8%,88%{opacity:1}96%{opacity:0}}
+@keyframes a-t2{0%,20%{opacity:0}22%,88%{opacity:1}96%{opacity:0}}
+@keyframes a-t3{0%,34%{opacity:0}36%,88%{opacity:1}96%{opacity:0}}
+@keyframes a-t4{0%,48%{opacity:0}50%,88%{opacity:1}96%{opacity:0}}
+/* 10 draw */
+.sp[data-a=draw] .L{fill:transparent;stroke:currentColor;stroke-width:6;stroke-dasharray:1;stroke-dashoffset:1;animation:a-draw 2.8s ease-in-out infinite}
+@keyframes a-draw{0%{stroke-dashoffset:1;fill:transparent}55%{stroke-dashoffset:0;fill:transparent}75%,90%{stroke-dashoffset:0;fill:currentColor}100%{stroke-dashoffset:0;fill:transparent;opacity:0}}
+/* 11 fill */
+.sp[data-a=fill] .sp-m svg{opacity:.16}
+.sp[data-a=fill] .sp-fill{display:block;animation:a-fill 2.2s cubic-bezier(.45,0,.3,1) infinite}
+.sp-fill{display:none;position:absolute;inset:0}
+.sp-fill svg{opacity:1!important}
+@keyframes a-fill{0%{clip-path:inset(100% 0 0 0)}70%,90%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 0);opacity:0}}
+/* 12 focus */
+.sp[data-a=blur] .sp-m svg{animation:a-blur 2.6s ease-out infinite}
+@keyframes a-blur{0%{filter:blur(12px);opacity:0;transform:scale(1.08)}35%{filter:blur(0);opacity:1;transform:scale(1)}70%{opacity:1}100%{opacity:.6}}
+/* 13 drop */
+.sp[data-a=drop] .sp-m svg{animation:a-drop 1s cubic-bezier(.3,1.4,.5,1) both,a-breathe 2.2s ease-in-out 1s infinite}
+@keyframes a-drop{0%{transform:translateY(-140%);opacity:0}60%{opacity:1}100%{transform:translateY(0)}}
+/* 14 sway */
+.sp[data-a=sway] .sp-m{perspective:600px}
+.sp[data-a=sway] .sp-m svg{animation:a-sway 2.4s ease-in-out infinite}
+@keyframes a-sway{0%,100%{transform:rotateY(-18deg)}50%{transform:rotateY(18deg)}}
+/* 15 ripple */
+.sp-r{display:none;position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;border:1.5px solid var(--text-3);opacity:0}
+.sp[data-a=ripple] .sp-r{display:block;animation:a-rip 2.4s ease-out infinite}
+.sp[data-a=ripple] .sp-r+.sp-r{animation-delay:.8s}.sp[data-a=ripple] .sp-r+.sp-r+.sp-r{animation-delay:1.6s}
+@keyframes a-rip{0%{transform:scale(.6);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+/* 16 orbit */
+.sp-o{display:none;position:absolute;left:50%;top:50%;width:0;height:0}
+.sp-o::after{content:"";position:absolute;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:var(--text-1);transform:translateX(118px)}
+.sp[data-a=orbit] .sp-o{display:block;animation:a-orb 1.6s linear infinite;transform:scaleY(.42)}
+@keyframes a-orb{from{rotate:0deg}to{rotate:360deg}}
+/* 17 line */
+.sp-l{display:none;position:absolute;left:10%;right:10%;top:calc(100% + 26px);height:3px;border-radius:2px;background:var(--surface);overflow:hidden}
+.sp-l::after{content:"";position:absolute;top:0;bottom:0;width:40%;border-radius:2px;background:var(--text-1);animation:a-line 1.3s cubic-bezier(.6,0,.4,1) infinite}
+.sp[data-a=line] .sp-l{display:block}
+@keyframes a-line{from{left:-40%}to{left:100%}}
+/* 18 dots */
+.sp-d{display:none;position:absolute;left:0;right:0;top:calc(100% + 22px);justify-content:center;gap:8px}
+.sp-d i{width:8px;height:8px;border-radius:50%;background:var(--text-1);animation:a-dot 1.2s ease-in-out infinite}
+.sp-d i:nth-child(2){animation-delay:.15s}.sp-d i:nth-child(3){animation-delay:.3s}
+.sp[data-a=dots] .sp-d{display:flex}
+@keyframes a-dot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-6px)}}
+/* 19 spotlight */
+.sp[data-a=spot] .sp-m svg{opacity:.22}
+.sp[data-a=spot] .sp-mask{opacity:1;background:radial-gradient(circle at center,var(--text-1) 0,var(--text-1) 18%,transparent 34%) 0 0/60% 220% no-repeat;animation:a-spot 2s ease-in-out infinite alternate}
+@keyframes a-spot{from{background-position:-40% 50%}to{background-position:140% 50%}}
+/* 20 owl: the Welcome owl, in its own place, blinking (its own blink, sped up) */
+.sp-owl{display:none;position:absolute}
+.sp[data-a=owl] .sp-owl{display:block}
+.sp-owl .wl-owl{width:100%!important;height:auto!important;margin:0!important}
+.sp-owl .lid{animation:a-blink 2.4s infinite}
+@keyframes a-blink{0%,88%,100%{transform:translateY(-100%)}93%{transform:translateY(0)}}
+.sp-owl svg{animation:a-look 3.6s ease-in-out infinite}
+@keyframes a-look{0%,30%,100%{transform:rotate(0)}40%,55%{transform:rotate(-6deg)}65%,85%{transform:rotate(5deg)}}
+
+@media (prefers-reduced-motion: reduce){.sp *{animation-duration:4s!important}}
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:85;max-height:70vh;overflow:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv b.h{flex:1 1 100%;font:700 10px/1 system-ui;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{z-index:90!important;position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+.tag.old{color:#c0392b}
+.fb-back{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:82;height:26px;padding:0 10px;border-radius:999px;border:0;background:rgba(128,128,128,.18);color:var(--text-2);font:600 12px/1 system-ui}
+.fb-back[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="appsk" id="appsk"><b></b><b></b><b></b><b></b><b></b><b></b></div>
+<div class="sp toWelcome" id="sp" data-a="breathe">
+  <div class="sp-m" id="spm">
+    <div class="sp-r"></div><div class="sp-r"></div><div class="sp-r"></div>
+    <div class="sp-o"></div>
+    <svg viewBox="0 0 1298 609" aria-label="Pulo"><g fill="currentColor">
+      <path class="L L1" pathLength="1" d="M58.0674 246.667C49.7558 263.967 45.5996 283.344 45.5996 304.8C45.5996 328.4 50.8002 349.8 61.2002 369C71.6002 387.8 86.0005 402.599 104.4 413.399C122.8 424.199 143.4 429.6 166.2 429.6C188.389 429.6 208.382 424.66 226.181 414.78L258.701 447.301C257.286 448.219 255.853 449.119 254.4 450C230 464.4 202.4 471.6 171.6 471.6C144.8 471.6 120.4 466 98.4004 454.8C76.8004 443.2 59.4002 427.999 46.2002 409.199V585.6C46.2002 592.8 43.9996 598.399 39.5996 602.399C35.5997 606.799 30.2002 609 23.4004 609C16.2004 609 10.4 606.799 6 602.399C2.00007 598.399 0 592.8 0 585.6V302.399C0.400028 271.199 7.80023 243.199 22.2002 218.399C23.1381 216.802 24.0952 215.226 25.0732 213.673L58.0674 246.667ZM166.2 137.399C198.2 137.399 226.8 144.8 252 159.6C277.2 174 297 193.8 311.4 219C326.2 244.2 333.6 272.8 333.6 304.8C333.6 335.723 326.703 363.581 312.913 388.376L278.84 354.303C284.946 339.045 288 322.545 288 304.8C288 280.8 282.6 259.4 271.8 240.6C261.4 221.8 247 206.999 228.6 196.199C210.2 184.999 189.4 179.399 166.2 179.399C147.687 179.399 130.625 183.092 115.013 190.476L82.8369 158.3C107.722 144.366 135.51 137.399 166.2 137.399Z"/><path class="L L2" pathLength="1" d="M699.019 140.399C705.819 140.399 711.418 142.6 715.818 147C720.218 151 722.419 156.399 722.419 163.199V445.199C722.419 452.399 720.218 458.2 715.818 462.6C711.418 466.599 705.818 468.6 699.019 468.6C692.219 468.6 686.619 466.6 682.219 462.6C678.219 458.2 676.219 452.399 676.219 445.199V424.758C665.622 436.975 652.823 447.189 637.818 455.399C616.618 466.599 593.018 472.199 567.019 472.199C538.619 472.199 513.218 466.4 490.818 454.8C468.418 442.8 450.619 425.399 437.419 402.6C424.619 379.8 418.219 351.999 418.219 319.199V163.199C418.219 156.8 420.419 151.4 424.818 147C429.218 142.6 434.619 140.399 441.019 140.399C447.819 140.399 453.418 142.6 457.818 147C462.218 151.4 464.419 156.799 464.419 163.199V319.199C464.419 343.999 469.019 364.399 478.219 380.399C487.819 396.399 500.619 408.399 516.619 416.399C533.019 424.399 551.419 428.399 571.818 428.399C591.418 428.399 609.019 424.6 624.619 417C640.619 409.4 653.219 399 662.419 385.8C671.331 373.012 675.927 358.535 676.205 342.369L676.219 340.8V163.199C676.219 156.4 678.219 151 682.219 147C686.619 142.6 692.219 140.399 699.019 140.399Z"/><path class="L L3" pathLength="1" d="M841.073 0C847.873 0 853.273 2.19962 857.273 6.59961C861.673 10.5996 863.873 15.9998 863.873 22.7998V364.8C863.873 382 867.273 396 874.073 406.8C881.273 417.6 890.273 423 901.073 423H916.073C922.073 423 926.874 425.2 930.474 429.6C934.074 433.6 935.873 439 935.873 445.8C935.873 452.6 933.273 458.2 928.073 462.6C923.273 466.6 916.873 468.6 908.873 468.6H901.073C885.073 468.6 870.673 464.199 857.873 455.399C845.473 446.599 835.674 434.4 828.474 418.8C821.674 403.2 818.273 385.2 818.273 364.8V22.7998C818.273 15.9998 820.273 10.5996 824.273 6.59961C828.673 2.19966 834.273 4.249e-05 841.073 0Z"/><path class="L L4" pathLength="1" d="M1016.41 259.01C1011.5 273.045 1009.04 288.309 1009.04 304.8C1009.04 328.8 1014.25 350.2 1024.65 369C1035.45 387.8 1050.05 402.599 1068.45 413.399C1086.85 424.199 1107.65 429.6 1130.85 429.6C1147.94 429.6 1163.72 426.669 1178.21 420.809L1210.48 453.078C1187.02 465.425 1160.48 471.6 1130.85 471.6C1098.85 471.6 1070.24 464.4 1045.04 450C1019.85 435.6 1000.05 415.8 985.646 390.6C971.246 365.4 964.045 336.8 964.045 304.8C964.045 275.106 970.094 248.436 982.189 224.789L1016.41 259.01ZM1130.85 137.399C1162.85 137.399 1191.25 144.6 1216.04 159C1241.24 173.4 1261.05 193.199 1275.45 218.399C1289.85 243.599 1297.25 272.4 1297.65 304.8C1297.65 336.8 1290.25 365.4 1275.45 390.6C1273.71 393.635 1271.9 396.59 1270.01 399.469L1237.53 366.992C1247.21 348.68 1252.04 327.95 1252.04 304.8C1252.04 280.8 1246.85 259.4 1236.45 240.6C1226.05 221.4 1211.65 206.4 1193.25 195.6C1174.85 184.8 1154.05 179.399 1130.85 179.399C1107.65 179.399 1086.85 184.8 1068.45 195.6C1067.96 195.884 1067.48 196.172 1067 196.462L1035.45 164.915C1038.56 162.851 1041.76 160.88 1045.04 159C1070.24 144.6 1098.85 137.399 1130.85 137.399Z"/>
+    </g></svg>
+    <div class="sp-fill"><svg viewBox="0 0 1298 609"><path fill="currentColor" d="FUM841.073 0C847.873 0 853.273 2.19962 857.273 6.59961C861.673 10.5996 863.873 15.9998 863.873 22.7998V364.8C863.873 382 867.273 396 874.073 406.8C881.273 417.6 890.273 423 901.073 423H916.073C922.073 423 926.874 425.2 930.474 429.6C934.074 433.6 935.873 439 935.873 445.8C935.873 452.6 933.273 458.2 928.073 462.6C923.273 466.6 916.873 468.6 908.873 468.6H901.073C885.073 468.6 870.673 464.199 857.873 455.399C845.473 446.599 835.674 434.4 828.474 418.8C821.674 403.2 818.273 385.2 818.273 364.8V22.7998C818.273 15.9998 820.273 10.5996 824.273 6.59961C828.673 2.19966 834.273 4.249e-05 841.073 0Z"/></svg></div>
+    <div class="sp-mask"></div>
+    <div class="sp-l"></div>
+    <div class="sp-d"><i></i><i></i><i></i></div>
+  </div>
+  <div class="sp-owl" id="spowl"></div>
+</div>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv" id="pv">
+  <p id="pvp">Each button plays one opening animation. The Pulo mark sits exactly where the Welcome page draws it, at its size. When loading finishes the real Welcome page (from the app's own code) appears around the mark, or, for someone already signed up, the app.</p>
+  <b class="h">Animation</b>
+  <button data-a="breathe">1 · Breathe</button>
+  <button data-a="heartbeat">2 · Heartbeat</button>
+  <button data-a="shimmer">3 · Shimmer</button>
+  <button data-a="cutlight">4 · Cut light</button>
+  <button data-a="ospin">5 · o spins</button>
+  <button data-a="wave">6 · Wave</button>
+  <button data-a="jump">7 · Letter jump</button>
+  <button data-a="rise">8 · Rise in</button>
+  <button data-a="type">9 · Typewriter</button>
+  <button data-a="draw">10 · Draw</button>
+  <button data-a="fill">11 · Fill up</button>
+  <button data-a="blur">12 · Focus</button>
+  <button data-a="drop">13 · Drop</button>
+  <button data-a="sway">14 · Sway</button>
+  <button data-a="ripple">15 · Ripple</button>
+  <button data-a="orbit">16 · Orbit</button>
+  <button data-a="line">17 · Line</button>
+  <button data-a="dots">18 · Dots</button>
+  <button data-a="spot">19 · Spotlight</button>
+  <button data-a="owl">20 · Owl</button>
+  <b class="h">Loading takes</b>
+  <button data-t="1500">1.5 s</button><button data-t="3000">3 s</button><button data-t="6000">6 s</button><button data-t="0">Until I tap Finish</button>
+  <b class="h">Then</b>
+  <button data-e="welcome">Welcome (new person)</button><button data-e="app">The app (signed up)</button>
+  <b class="h">Play</b>
+  <button id="play">▶ Play again</button><button id="fin">Finish</button><button id="tgs">Telegram's still logo first</button><button id="th">Theme</button><button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  if(inTG){try{TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}}
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');place()}
+  if(inTG){try{['safeAreaChanged','contentSafeAreaChanged','viewportChanged','fullscreenChanged'].forEach(function(e){TG.onEvent(e,insets)})}catch(e){}}
+  var DESC={"breathe":"The mark gently fades and swells, like breathing.","heartbeat":"Two soft beats, a pause, repeat.","shimmer":"A soft light sweeps across the letters.","cutlight":"A light streak runs along the angle of the cuts in the P and the o.","ospin":"The o, with its two cuts, turns like a loading ring.","wave":"P, u, l, o bob up and down one after another.","jump":"Each letter hops in turn, with a little squash.","rise":"The letters rise into place one by one, then fade and repeat.","type":"P, u, l, o appear one at a time, then start again.","draw":"The outline of the mark is drawn, then filled in.","fill":"The mark fills from the bottom like a glass.","blur":"The mark comes into focus from a blur, then breathes.","drop":"The mark drops in, bounces once, then breathes.","sway":"The mark turns gently left and right in 3D.","ripple":"Soft rings spread out behind the mark.","orbit":"A small dot circles the mark.","line":"A thin line under the mark runs while it loads.","dots":"Three dots under the mark, like \"typing…\".","spot":"A spotlight moves across, lighting the letters.","owl":"The mark stays still; the owl below blinks and looks around."};
+  var q=new URLSearchParams(location.search), st={a:q.get('a')||'breathe',t:q.has('t')?+q.get('t'):3000,e:q.get('e')||'welcome',tg:q.get('tg')==='1'};
+  var sp=document.getElementById('sp'), spm=document.getElementById('spm'), owl=document.getElementById('spowl'), pv=document.getElementById('pv'), timer=null;
+  function place(){
+    var m=document.querySelector('#app .wl-mark'); if(!m)return;
+    var r=m.getBoundingClientRect(); spm.style.left=r.left+'px'; spm.style.top=r.top+'px'; spm.style.width=r.width+'px'; spm.style.height=r.height+'px';
+    var w=document.querySelector('#app .wl-owl');
+    if(w){var o=w.getBoundingClientRect();owl.style.left=o.left+'px';owl.style.top=o.top+'px';owl.style.width=o.width+'px';if(!owl.firstChild)owl.appendChild(w.cloneNode(true))}
+  }
+  function mark(){[].forEach.call(document.querySelectorAll('[data-a]'),function(b){if(b.tagName==='BUTTON')b.setAttribute('aria-pressed',b.getAttribute('data-a')===st.a)});
+    [].forEach.call(document.querySelectorAll('[data-t]'),function(b){b.setAttribute('aria-pressed',+b.getAttribute('data-t')===st.t)});
+    [].forEach.call(document.querySelectorAll('[data-e]'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-e')===st.e)});
+    document.getElementById('tgs').setAttribute('aria-pressed',st.tg);
+    document.getElementById('pvp').textContent=DESC[st.a]+' (Loading '+(st.t?(st.t/1000)+' s':'until you tap Finish')+'; then '+(st.e==='welcome'?'the Welcome page':'the app')+'.)'}
+  function finish(){clearTimeout(timer);sp.classList.add('gone');if(st.e==='app')document.getElementById('appsk').classList.add('on')}
+  function play(){
+    clearTimeout(timer);mark();place();
+    document.getElementById('appsk').classList.remove('on');
+    sp.className='sp '+(st.e==='welcome'?'toWelcome':'toApp');sp.removeAttribute('data-a');void sp.offsetWidth;sp.setAttribute('data-a',st.a);
+    var start=function(){if(st.t)timer=setTimeout(finish,st.t)};
+    if(st.tg){var s=document.createElement('div');s.className='tgsim';s.innerHTML='<svg viewBox="0 0 1298 609"><path fill="currentColor" d="'+document.querySelector('.sp-fill path').getAttribute('d')+'"/></svg><i>Telegram\'s own still logo (a guess at its size and place)</i>';document.body.appendChild(s);
+      sp.style.visibility='hidden';setTimeout(function(){s.remove();sp.style.visibility='';start()},900)}else start();
+  }
+  [].forEach.call(document.querySelectorAll('button[data-a]'),function(b){b.addEventListener('click',function(){st.a=b.getAttribute('data-a');pv.classList.add('hide');play()})});
+  [].forEach.call(document.querySelectorAll('[data-t]'),function(b){b.addEventListener('click',function(){st.t=+b.getAttribute('data-t');mark()})});
+  [].forEach.call(document.querySelectorAll('[data-e]'),function(b){b.addEventListener('click',function(){st.e=b.getAttribute('data-e');mark()})});
+  document.getElementById('play').addEventListener('click',function(){pv.classList.add('hide');play()});
+  document.getElementById('fin').addEventListener('click',finish);
+  document.getElementById('tgs').addEventListener('click',function(){st.tg=!st.tg;mark()});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+  sp.addEventListener('click',function(){if(sp.classList.contains('gone'))return});
+  document.addEventListener('click',function(ev){if(sp.classList.contains('gone')&&!pv.contains(ev.target)&&ev.target.id!=='pvh'&&!document.getElementById('app').contains(ev.target)){}});
+  window.addEventListener('resize',place);
+  var s=document.createElement('script');s.src='../js/splash-r1.js?v=202611202200';s.onload=function(){var n=0;(function wait(){if(document.querySelector('#app .wl-mark')){insets();setTimeout(function(){place();mark()},120);(document.fonts&&document.fonts.ready||Promise.resolve()).then(place)}else if(n++<100)setTimeout(wait,30)})()};document.body.appendChild(s);
+  mark();
+})();
+</script>
+<script src="../tg.js?v=202611191930"></script>
+</body>
+</html>

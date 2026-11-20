@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 21:00 (Tashkent)",
+ "updated": "20 Nov 22:00 (Tashkent)",
  "designs": [
+  {
+   "file": "opening-animation-r1.html",
+   "title": "Opening animation: 20 options (r1)",
+   "rev": "r1",
+   "what": "20 opening animations of the Pulo mark, each placed exactly where and as large as the Welcome page draws it. Pick one in the menu; choose how long loading takes and whether it ends on the Welcome page (it appears around the mark) or the app. 'Telegram's still logo first' adds a rough stand-in for Telegram's own splash before it.",
+   "stamp": "202611202200"
+  },
   {
    "file": "pay-sheet-r12.html",
    "title": "Pay sheet (r12): closing without the hanging Pay button",
