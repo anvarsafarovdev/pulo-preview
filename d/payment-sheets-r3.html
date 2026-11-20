@@ -82,9 +82,16 @@ html[data-kb-closing='on'] .pulo-app{height:var(--pay-full-h)!important;transfor
       Record payment; "New debt" (and an instalment plan's "Plan details") sits beside it at the same size. */
 .pp-acts{order:99;margin:0;padding:var(--s3) calc(var(--pulo-layout-inset-right,0px) + var(--gut)) calc(var(--pulo-layout-inset-bottom,0px) + var(--s5)) calc(var(--pulo-layout-inset-left,0px) + var(--gut));background:var(--ground);gap:var(--s2)}
 .pp-acts.pp-x-more{order:98;padding-bottom:0}
-.pp-acts .pp-pay{height:auto;min-height:56px;font-size:var(--t-3);font-weight:700;gap:9px;padding:var(--s3) var(--s4)}
-.pp-acts .pp-new{width:auto;flex:1 1 0;margin:0;min-height:56px;font-size:var(--t-3);font-weight:700}
+.pp-acts .pp-pay{height:auto;min-height:56px;font-size:var(--t-3);font-weight:700;gap:7px;padding:var(--s2)}
+.pp-acts .pp-new{padding:var(--s2);gap:7px}
+.pp-acts .pp-new{width:auto;margin:0;min-height:56px;font-size:var(--t-3);font-weight:700}
 .pp-acts .pp-pay svg.i,.pp-acts .pp-new svg.i{width:18px;height:18px}
+/*    Any language: the two buttons share the bar while both words fit on one line at the standard size;
+      when they do not (a long Russian or Uzbek word), the second button takes its own row under the first,
+      and a word longer than the whole bar breaks onto a second line inside its button. Never cut off. */
+.pp-acts{flex-wrap:wrap}
+.pp-acts>button.pp-pay,.pp-acts>button.pp-new{flex:1 1 auto;width:auto;min-width:auto;white-space:normal;text-align:center;line-height:1.25}
+.pp-acts>button.pp-pay{flex-grow:1.6}
 .cs-pay{min-height:56px}
 .cs-paybar{padding-bottom:calc(var(--pulo-layout-inset-bottom,0px) + var(--s5))}
 </style>
