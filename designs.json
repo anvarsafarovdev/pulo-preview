@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 23:10 (Tashkent)",
+ "updated": "20 Nov 23:40 (Tashkent)",
  "designs": [
+  {
+   "file": "opening-animation-r4.html",
+   "title": "Opening animation (r4): Telegram's measured tones",
+   "rev": "r4",
+   "what": "r4: r3 with Telegram's measured tones (light #EBEBEB on #F9F9F9, dark #313438 on #1A1D21) and size (113 wide).",
+   "stamp": "202611202340"
+  },
   {
    "file": "opening-animation-r3.html",
    "title": "Opening animation (r3): starts as Telegram's faint logo",
