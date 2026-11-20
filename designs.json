@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 01:20 (Tashkent)",
+ "updated": "20 Nov 13:30 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r1.html",
+   "title": "Pay sheet: one shop and one debt (r1), working",
+   "rev": "r1",
+   "what": "r1: Pay opens a half sheet laid out as the shop's Record payment: 'Pay GrapeStore', the balance it pays against, the amount field opening empty with the blinking 0, and a foot pinned above the keyboard with one line ('GrapeStore confirms it first. Then you owe 13 000 UZS.') and 'Send to GrapeStore'. No full-amount button, no paragraphs, no 'Not now'. A debt's own page gets a Pay bar that pays that debt.",
+   "stamp": "202611201320"
+  },
   {
    "file": "i-owe-shop-r7.html",
    "title": "I owe + one shop + a payment (r7), working",
