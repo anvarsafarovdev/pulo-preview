@@ -4,9 +4,9 @@
   {
    "file": "payment-sheets-r3.html",
    "title": "Every payment sheet, on the app's real pages (r3)",
-   "rev": "r2",
-   "what": "r2: the app's real pages from its own code (customer shop page and debt pages; the shop's person page, debt page, supplier page and bill page) with the one approved payment sheet on each. 'Record payment' when money comes in, 'Pay' when paying.",
-   "stamp": "202611210200"
+   "rev": "r3",
+   "what": "r3: your two marks of 20 Nov added. Money looks as on Home everywhere (plate: small currency in the figure's colour; rows: Home's row size, small grey 'uzs'; plate labels no longer repeat UZS). Each page's main button sits at the bottom as the standard 56px button. Adds the I owe Owed and Paid pages.",
+   "stamp": "202611201600"
   },
   {
    "file": "opening-animation-r4.html",
