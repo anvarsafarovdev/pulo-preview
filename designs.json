@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 20:10 (Tashkent)",
+ "updated": "20 Nov 21:00 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r12.html",
+   "title": "Pay sheet (r12): closing without the hanging Pay button",
+   "rev": "r12",
+   "what": "r12: r11 unchanged, except when you close the sheet (tap above it) the page's Pay button is at the bottom at once and the keyboard falls over it; before, on the iPhone, it hung mid-screen and then dropped.",
+   "stamp": "202611202100"
+  },
   {
    "file": "pay-sheet-r11.html",
    "title": "Pay sheet (r11): together with the keyboard on iPhone and Android",
