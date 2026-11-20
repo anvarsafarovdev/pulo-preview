@@ -1,12 +1,12 @@
 {
- "updated": "21 Nov 00:50 (Tashkent)",
+ "updated": "21 Nov 02:00 (Tashkent)",
  "designs": [
   {
-   "file": "payment-sheets-r1.html",
-   "title": "Every payment sheet, one design (r1)",
-   "rev": "r1",
-   "what": "All 11 places a payment sheet opens (customer: shop, plan, a debt with and without a note; shop: a customer's balance, plan, one debt, an assistant recording; a supplier's balance, plan, one bill), in the approved design: keypad opens with it, rises with the keyboard, Send 12 px above it, two-row line, nothing scrolls, one door = one target.",
-   "stamp": "202611210050"
+   "file": "payment-sheets-r2.html",
+   "title": "Every payment sheet, on the app's real pages (r2)",
+   "rev": "r2",
+   "what": "r2: the app's real pages from its own code (customer shop page and debt pages; the shop's person page, debt page, supplier page and bill page) with the one approved payment sheet on each. 'Record payment' when money comes in, 'Pay' when paying.",
+   "stamp": "202611210200"
   },
   {
    "file": "opening-animation-r4.html",
