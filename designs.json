@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 19:45 (Tashkent)",
+ "updated": "20 Nov 20:10 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r11.html",
+   "title": "Pay sheet (r11): together with the keyboard on iPhone and Android",
+   "rev": "r11",
+   "what": "r11: r10 unchanged on the iPhone; on Android the sheet now also rises with the keyboard to where it ends (the app's own Android keyboard figure, the one your Lenovo's Next button already uses), so it no longer stops at the bottom and then jumps.",
+   "stamp": "202611202010"
+  },
   {
    "file": "pay-sheet-r10.html",
    "title": "Pay sheet (r10): sheet and keyboard rise together",
