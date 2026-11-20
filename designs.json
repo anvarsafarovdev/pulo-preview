@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 14:50 (Tashkent)",
+ "updated": "20 Nov 15:20 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r4.html",
+   "title": "Pay sheet: one shop and one debt (r4), working",
+   "rev": "r4",
+   "what": "r4: the moment you tap the amount the sheet rises to just under Telegram's bar, with the title, what you owe, the amount, the line and Send together at its top, above the keyboard. No scrolling. It settles back to a half sheet when the keyboard closes.",
+   "stamp": "202611201520"
+  },
   {
    "file": "pay-sheet-r3.html",
    "title": "Pay sheet: one shop and one debt (r3), working",
