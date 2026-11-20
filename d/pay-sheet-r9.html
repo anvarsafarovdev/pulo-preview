@@ -67,7 +67,7 @@
 </head>
 <body>
 <div id="app"></div>
-<span class="tag" id="tag">PROPOSED r9</span>
+<span class="tag" id="tag" style="display:none">PROPOSED r9</span>
 <button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
 <div class="pv hide" id="pv">
   <p>The shop's page and a debt's page as built today, from the app's own code, with the new Pay sheet. Tap Pay at the bottom, or open the debt and tap Pay there. Type an amount and Send: the sheet closes and the waiting band appears (in the app the Done page shows first, unchanged).</p>
@@ -100,9 +100,6 @@
   [].forEach.call(document.querySelectorAll('[data-k]'),function(b){b.addEventListener('click',function(){st[b.getAttribute('data-k')]=b.getAttribute('data-v');go()})});
   document.getElementById('old').addEventListener('click',function(){old=!old;go()});
   document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
-  document.getElementById('kb').addEventListener('click',function(){var e=document.querySelector('.kbn');if(e){e.remove();return}e=document.createElement('div');e.className='kbn';document.body.appendChild(e);pv.classList.add('hide');
-    (function tick(){if(!e.isConnected)return;var vv=window.visualViewport||{},T=window.Telegram&&window.Telegram.WebApp||{},a=document.querySelector('.pulo-app'),sh=document.querySelector('.feel-sheet');
-      e.textContent='vv '+Math.round(vv.height||0)+' top '+Math.round(vv.offsetTop||0)+'\ninner '+innerHeight+'\ntg '+Math.round(T.viewportHeight||0)+' / '+Math.round(T.viewportStableHeight||0)+'\nframe '+(a?Math.round(a.getBoundingClientRect().height):0)+'\nsheet bottom '+(sh?Math.round(sh.getBoundingClientRect().bottom):0);requestAnimationFrame(tick)})()});
   document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
   document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
   window.__payInit={start:st.start,scn:st.scn,old:old};
