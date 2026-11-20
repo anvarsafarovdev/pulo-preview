@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 16:00 (Tashkent)",
+ "updated": "20 Nov 16:40 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r6.html",
+   "title": "Pay sheet: one shop and one debt (r6), working",
+   "rev": "r6",
+   "what": "r6: on an iPhone, tapping the amount lifts the sheet by the iPhone's number-pad height so it sits on the keyboard with Send 12px above it (the iPhone in Telegram's full screen never reports its keyboard). The red edge of a refused amount is drawn inside the box, so all four sides show: the rule for the whole app.",
+   "stamp": "202611201640"
+  },
   {
    "file": "pay-sheet-r5.html",
    "title": "Pay sheet: one shop and one debt (r5), working",
