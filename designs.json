@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 18:45 (Tashkent)",
+ "updated": "20 Nov 19:45 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r10.html",
+   "title": "Pay sheet (r10): sheet and keyboard rise together",
+   "rev": "r10",
+   "what": "r10: the approved sheet, unchanged, except it now rises together with the keyboard in one movement: it is placed where the keyboard will end and comes up from below the screen with it, so nothing jumps when the keyboard finishes.",
+   "stamp": "202611201945"
+  },
   {
    "file": "pay-sheet-final.html",
    "title": "Pay sheet (final, as approved r9), working",
