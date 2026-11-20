@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 17:40 (Tashkent)",
+ "updated": "20 Nov 18:15 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r9.html",
+   "title": "Pay sheet: one shop and one debt (r9), working",
+   "rev": "r9",
+   "what": "r9: r8 unchanged, except tapping Pay opens the sheet with the number pad already up and the cursor in the amount (one step less).",
+   "stamp": "202611201815"
+  },
   {
    "file": "pay-sheet-r8.html",
    "title": "Pay sheet: one shop and one debt (r8), working",
