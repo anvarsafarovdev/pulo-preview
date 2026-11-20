@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 23:40 (Tashkent)",
+ "updated": "21 Nov 00:50 (Tashkent)",
  "designs": [
+  {
+   "file": "payment-sheets-r1.html",
+   "title": "Every payment sheet, one design (r1)",
+   "rev": "r1",
+   "what": "All 11 places a payment sheet opens (customer: shop, plan, a debt with and without a note; shop: a customer's balance, plan, one debt, an assistant recording; a supplier's balance, plan, one bill), in the approved design: keypad opens with it, rises with the keyboard, Send 12 px above it, two-row line, nothing scrolls, one door = one target.",
+   "stamp": "202611210050"
+  },
   {
    "file": "opening-animation-r4.html",
    "title": "Opening animation (r4): Telegram's measured tones",
