@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 14:10 (Tashkent)",
+ "updated": "20 Nov 14:50 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r3.html",
+   "title": "Pay sheet: one shop and one debt (r3), working",
+   "rev": "r3",
+   "what": "r3: Pulo's own button again (Telegram's was ruled out on 13 Nov for its ghost shape on iOS). Where the phone does not report its keyboard, tapping the amount raises the sheet to just under Telegram's bar with the title, what you owe, the amount, the line and the button together at its top; it settles back when the keyboard closes. The button stays grey until an amount is typed.",
+   "stamp": "202611201450"
+  },
   {
    "file": "pay-sheet-r2.html",
    "title": "Pay sheet: one shop and one debt (r2), working",
