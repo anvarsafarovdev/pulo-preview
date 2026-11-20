@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Pay sheet r7</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
+<!-- The app's own stylesheets as they are in the repository today, unedited. -->
+<link rel="stylesheet" href="../appcss/app-pay-r7.css?v=202611201710">
+<style id="chg">
+/* ════ WHAT CHANGES (your marks of 20 Nov). The pages are the app as built today (MICRO-28), from its own code. ════
+   1. Pay opens a half sheet laid out as the shop's Record payment sheet: the title "Pay GrapeStore",
+      the balance it pays against, the amount field (opens EMPTY, the 0 blinks), and a foot pinned
+      above the keyboard: one line that says what happens, then the button.
+   2. Gone: "Use the full amount", the claim paragraph, the two grey notes, "Not now" (the sheet closes
+      by a drag down or a tap above it, as the shop's does).
+   3. A debt's own page gets a Pay bar: it pays THAT debt (the sheet names it). While a payment waits on
+      that debt, the Call bar shows instead, as today. */
+.pay-sheet .rps-bal{margin-top:var(--s4)}
+/* 4. The sheet is as tall as what is in it, and stays so when the field is tapped: the app's keyboard
+      "runway" (an empty block it adds under a tapped field so the field can be scrolled into view) is
+      not added inside this sheet. That block is what pushed "Confirm payment" under the keyboard. */
+.pay-sheet .rps-scroll{flex:0 1 auto}
+.pay-sheet [data-kb-runway]{display:none!important}
+/* 5. r5: the sheet sits on the keyboard with only a small gap (12px) under Send, from the first moment.
+      The line above Send is ALWAYS two rows, so Send never jumps when you start typing:
+      empty: "Enter the amount you paid." / "GrapeStore confirms it first."
+      typed: "GrapeStore confirms it first." / "Then you owe 22 800 UZS."
+      too much: "You owe 23 000 UZS." / "You cannot pay more than that."
+      (The sheet no longer puts the cursor in the amount by itself when it opens; you tap it.) */
+/* 6. r6: an iPhone in Telegram's full screen never tells the page its keyboard is open, so the moment you
+      tap the amount the sheet is lifted by the iPhone's own number-pad height (291pt with a home bar,
+      216pt with a Home button) and sits on the keyboard, 12px under Send. A phone that does report its
+      keyboard is not lifted: its report wins. */
+.pay-sheet:has(.pay-lift){bottom:var(--pay-kb,0px);max-height:calc(100% - var(--pay-kb,0px) - var(--pulo-layout-inset-top,0px) - var(--s3))}
+.pay-sheet:has(.pay-lift) .feel-sheet-body{padding-bottom:var(--s3)}
+/* 7. THE RED EDGE, EVERYWHERE IN THE APP (your rule of 20 Nov): a refused field's red line is drawn INSIDE
+      its own edge, so all four sides always show (it was drawn outside, and the sides were cut off). */
+.feel-bad{box-shadow:inset 0 0 0 1.5px var(--out)}
+.pay-sheet .feel-sheet-body{padding-bottom:calc(var(--s3) + var(--pulo-layout-inset-bottom,0px))}
+.pay-sheet .rps-after{min-height:3em;margin-bottom:var(--s3)}
+.pay-sheet .rps-after[data-tone='idle'] b,.pay-sheet .rps-after[data-tone='err'] b{font-weight:600}
+.kbn{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 4px);z-index:90;padding:6px 8px;border-radius:8px;background:rgba(0,0,0,.75);color:#7f7;font:600 11px/1.4 ui-monospace,monospace;pointer-events:none;white-space:pre}
+.rps-after[data-tone='err']{color:var(--text-1)}
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:80;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv b.h{flex:1 1 100%;font:700 10px/1 system-ui;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:81;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+.tag{position:fixed;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 8px);z-index:81;font:700 10px/1 system-ui;letter-spacing:.04em;color:#3fae6a;pointer-events:none}
+.tag.old{color:#c0392b}
+.fb-back{position:fixed;left:8px;top:calc(var(--pulo-layout-inset-top,0px) + 6px);z-index:82;height:26px;padding:0 10px;border-radius:999px;border:0;background:rgba(128,128,128,.18);color:var(--text-2);font:600 12px/1 system-ui}
+.fb-back[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<span class="tag" id="tag">PROPOSED r7</span>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p>The shop's page and a debt's page as built today, from the app's own code, with the new Pay sheet. Tap Pay at the bottom, or open the debt and tap Pay there. Type an amount and Send: the sheet closes and the waiting band appears (in the app the Done page shows first, unchanged).</p>
+  <b class="h">Start on</b>
+  <button data-k="start" data-v="SHOP">GrapeStore</button>
+  <button data-k="start" data-v="DEBT">Kilo of orange</button>
+  <b class="h">Data</b>
+  <button data-k="scn" data-v="ONE">One debt</button>
+  <button data-k="scn" data-v="MORE">Two debts</button>
+  <b class="h">Compare</b>
+  <button id="old">As built today</button>
+  <button id="th">Theme</button>
+  <button id="kb">Keyboard numbers</button>
+  <button id="hide">Hide</button>
+</div>
+<script>
+(function(){
+  var e=document.createElement('div');e.className='kbn';
+  function tick(){var vv=window.visualViewport||{},T=window.Telegram&&window.Telegram.WebApp||{},a=document.querySelector('.pulo-app'),sh=document.querySelector('.feel-sheet'),d=window.__payDiag||{},si=T.safeAreaInset||{},ci=T.contentSafeAreaInset||{};
+    if(!e.isConnected&&document.body)document.body.appendChild(e);
+    e.textContent='vv '+Math.round(vv.height||0)+' top '+Math.round(vv.offsetTop||0)+' | inner '+innerHeight+' | scr '+screen.height+'\ntg '+(T.platform||'-')+' '+Math.round(T.viewportHeight||0)+'/'+Math.round(T.viewportStableHeight||0)+' full '+(T.isFullscreen?1:0)+' safe '+(si.bottom||0)+'/'+(ci.bottom||0)+'\nframe '+(a?Math.round(a.getBoundingClientRect().height):0)+' sheetBot '+(sh?Math.round(sh.getBoundingClientRect().bottom):0)+'\nfocus '+(d.focus||0)+' lift '+(d.lift?1:0)+' kb '+d.kb+' by '+d.by+' tall '+d.tallest;
+    requestAnimationFrame(tick)}
+  requestAnimationFrame(tick);
+})();
+</script>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  if(inTG){try{TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}}
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');
+    if(TG.viewportStableHeight)r.setProperty('--pulo-viewport-height',TG.viewportStableHeight+'px')}
+  if(inTG){try{TG.onEvent('safeAreaChanged',insets);TG.onEvent('contentSafeAreaChanged',insets);TG.onEvent('viewportChanged',insets);TG.onEvent('fullscreenChanged',insets)}catch(e){}}
+  window.addEventListener('load',insets);
+  var q=new URLSearchParams(location.search), old=q.get('old')==='1', st={start:q.get('start')||'SHOP',scn:q.get('scn')||'ONE'};
+  if(old){document.getElementById('chg').disabled=true;document.querySelector('link[href*=app-pay]').href='../appcss/app-pay-old-r1.css?v=202611201320';var t=document.getElementById('tag');t.textContent='AS BUILT TODAY';t.className='tag old';document.getElementById('old').setAttribute('aria-pressed','true')}
+  var pv=document.getElementById('pv');
+  [].forEach.call(document.querySelectorAll('[data-k]'),function(b){b.setAttribute('aria-pressed',st[b.getAttribute('data-k')]===b.getAttribute('data-v'))});
+  function go(){var u=new URLSearchParams();if(old)u.set('old','1');u.set('start',st.start);u.set('scn',st.scn);location.search=u.toString()}
+  [].forEach.call(document.querySelectorAll('[data-k]'),function(b){b.addEventListener('click',function(){st[b.getAttribute('data-k')]=b.getAttribute('data-v');go()})});
+  document.getElementById('old').addEventListener('click',function(){old=!old;go()});
+  document.getElementById('th').addEventListener('click',function(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';if(window.PT)PT.setTheme(t);else document.documentElement.setAttribute('data-theme',t)});
+  document.getElementById('kb').addEventListener('click',function(){var e=document.querySelector('.kbn');if(e){e.remove();return}e=document.createElement('div');e.className='kbn';document.body.appendChild(e);pv.classList.add('hide');
+    (function tick(){if(!e.isConnected)return;var vv=window.visualViewport||{},T=window.Telegram&&window.Telegram.WebApp||{},a=document.querySelector('.pulo-app'),sh=document.querySelector('.feel-sheet');
+      e.textContent='vv '+Math.round(vv.height||0)+' top '+Math.round(vv.offsetTop||0)+'\ninner '+innerHeight+'\ntg '+Math.round(T.viewportHeight||0)+' / '+Math.round(T.viewportStableHeight||0)+'\nframe '+(a?Math.round(a.getBoundingClientRect().height):0)+'\nsheet bottom '+(sh?Math.round(sh.getBoundingClientRect().bottom):0);requestAnimationFrame(tick)})()});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+  window.__payInit={start:st.start,scn:st.scn,old:old};
+  var s=document.createElement('script');s.src=(old?'../js/pay-old-r1.js':'../js/pay-r7.js')+'?v=202611201710';document.body.appendChild(s);
+})();
+</script>
+<script src="../tg.js?v=202611191930"></script>
+</body>
+</html>

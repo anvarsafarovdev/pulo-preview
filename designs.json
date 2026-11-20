@@ -1,6 +1,13 @@
 {
- "updated": "20 Nov 16:40 (Tashkent)",
+ "updated": "20 Nov 17:10 (Tashkent)",
  "designs": [
+  {
+   "file": "pay-sheet-r7.html",
+   "title": "Pay sheet: one shop and one debt (r7), working + keyboard numbers",
+   "rev": "r7",
+   "what": "r7: the iPhone lift always applies while the amount has focus; the keyboard numbers are shown at the top-left all the time so one screenshot tells what the phone reports.",
+   "stamp": "202611201710"
+  },
   {
    "file": "pay-sheet-r6.html",
    "title": "Pay sheet: one shop and one debt (r6), working",
