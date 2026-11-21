@@ -2,6 +2,13 @@
  "updated": "2026-11-20",
  "designs": [
   {
+   "file": "onboarding-r11.html",
+   "title": "Onboarding r11: Welcome with two starts, language pill, business name",
+   "rev": "r11",
+   "stamp": "21 Nov 2026",
+   "what": "The app's real Welcome and business-name pages with PREVIEW-ONB-1: language pill and sheet (four languages switch in place), Start for my business / Start for myself, the new business-name words, keypad view, and the real opening playing into Welcome."
+  },
+  {
    "file": "payment-sheets-r3.html",
    "title": "Every payment sheet, on the app's real pages (r3)",
    "rev": "r3",

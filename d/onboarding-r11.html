@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="robots" content="noindex,nofollow">
+<title>Onboarding r11</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- The opening, exactly as the app's index.html draws it today (MICRO-30 to 34), unedited. -->
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var theme = null;
+          try {
+            var stored = localStorage.getItem('pulo-theme');
+            if (stored === 'light' || stored === 'dark') theme = stored;
+          } catch (e) {}
+          if (theme === null) {
+            try {
+              var scheme = window.Telegram.WebApp.colorScheme;
+              if (scheme === 'light' || scheme === 'dark') theme = scheme;
+            } catch (e) {}
+          }
+          root.dataset.splashTheme = theme === null ? 'light' : theme;
+          var from = root.dataset.splashTheme;
+          try {
+            var fromScheme = window.Telegram.WebApp.colorScheme;
+            if (fromScheme === 'light' || fromScheme === 'dark') from = fromScheme;
+          } catch (e) {}
+          root.dataset.splashFrom = from;
+          root.dataset.splashStart = String(performance.now());
+        } catch (e) {}
+        try {
+          var html = document.documentElement;
+          var tg = null;
+          var platform = null;
+          try {
+            tg = window.Telegram.WebApp;
+            platform = tg.platform;
+          } catch (e) {}
+          var splashDy = function () {
+            var dy = '0px';
+            try {
+              if (platform === 'ios') {
+                var b = tg.safeAreaInset.bottom;
+                dy =
+                  typeof b === 'number' && b > 0
+                    ? String(-b / 2) + 'px'
+                    : 'calc(env(safe-area-inset-bottom) * -0.5)';
+              } else if (platform === 'android') {
+                dy = '40px';
+              }
+            } catch (e) {
+              dy = platform === 'ios' ? 'calc(env(safe-area-inset-bottom) * -0.5)' : '40px';
+            }
+            return dy;
+          };
+          var splashW = platform === 'ios' ? '72px' : platform === 'android' ? '93px' : '113px';
+          var splashOn = platform === 'ios' || platform === 'android';
+          try {
+            html.style.setProperty('--splash-w', splashOn ? splashW : '113px');
+            html.style.setProperty('--splash-dy', splashOn ? splashDy() : '0px');
+          } catch (e) {}
+          if (splashOn && typeof tg.onEvent === 'function') {
+            var stopped = false;
+            var stop = function () {
+              if (stopped) return;
+              stopped = true;
+              try {
+                tg.offEvent('safeAreaChanged', onInset);
+              } catch (e) {}
+              try {
+                tg.offEvent('contentSafeAreaChanged', onInset);
+              } catch (e) {}
+            };
+            var layerDone = function (layer) {
+              if (layer === null) return document.readyState !== 'loading';
+              return (
+                !layer.isConnected ||
+                layer.classList.contains('opening-rise') ||
+                layer.classList.contains('opening-out')
+              );
+            };
+            var onInset = function () {
+              try {
+                if (layerDone(document.getElementById('pulo-splash'))) {
+                  stop();
+                  return;
+                }
+                html.style.setProperty('--splash-dy', splashDy());
+              } catch (e) {}
+            };
+            try {
+              tg.onEvent('safeAreaChanged', onInset);
+              tg.onEvent('contentSafeAreaChanged', onInset);
+            } catch (e) {}
+            try {
+              document.addEventListener('DOMContentLoaded', function () {
+                try {
+                  var layer = document.getElementById('pulo-splash');
+                  if (layer === null || typeof MutationObserver !== 'function') return;
+                  new MutationObserver(function () {
+                    try {
+                      if (layerDone(layer)) stop();
+                    } catch (e) {}
+                  }).observe(layer, { attributes: true, attributeFilter: ['class'] });
+                } catch (e) {}
+              });
+            } catch (e) {}
+          }
+          // MICRO-34: on Android the mark waits, invisible, until the page has had no size
+          // change for 120 ms (cap 600 ms), then fades in. Once released it never comes back.
+          try {
+            var waitOn = false;
+            try {
+              waitOn = window.Telegram.WebApp.platform === 'android';
+            } catch (e) {}
+            if (waitOn) {
+              var waitDone = false;
+              var holdTimer = null;
+              var capTimer = null;
+              var vv = null;
+              try {
+                vv = window.visualViewport || null;
+              } catch (e) {}
+              var release = function () {
+                if (waitDone) return;
+                waitDone = true;
+                try {
+                  html.removeAttribute('data-splash-wait');
+                } catch (e) {}
+                try {
+                  clearTimeout(holdTimer);
+                  clearTimeout(capTimer);
+                } catch (e) {}
+                try {
+                  window.removeEventListener('resize', restart);
+                } catch (e) {}
+                try {
+                  if (vv) vv.removeEventListener('resize', restart);
+                } catch (e) {}
+                try {
+                  tg.offEvent('viewportChanged', restart);
+                } catch (e) {}
+              };
+              var restart = function () {
+                try {
+                  if (waitDone) return;
+                  clearTimeout(holdTimer);
+                  holdTimer = setTimeout(release, 120);
+                } catch (e) {}
+              };
+              html.dataset.splashWait = '1';
+              holdTimer = setTimeout(release, 120);
+              capTimer = setTimeout(release, 600);
+              try {
+                window.addEventListener('resize', restart);
+              } catch (e) {}
+              try {
+                if (vv) vv.addEventListener('resize', restart);
+              } catch (e) {}
+              try {
+                tg.onEvent('viewportChanged', restart);
+              } catch (e) {}
+            }
+          } catch (e) {}
+        } catch (e) {
+          try {
+            document.documentElement.style.setProperty('--splash-w', '113px');
+            document.documentElement.style.setProperty('--splash-dy', '0px');
+          } catch (e2) {}
+        }
+      })();
+    </script>
+<script>try{document.documentElement.setAttribute('data-theme',document.documentElement.dataset.splashTheme||'light')}catch(e){}</script>
+    <style>
+      #pulo-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483000;
+        background: var(--splash-ground);
+        animation: pulo-splash-ground 1100ms ease-in-out 1 backwards;
+      }
+      :root,
+      :root[data-splash-from='light'] {
+        --splash-from-ground: #F9F9F9;
+        --splash-from-faint: #EBEBEB;
+      }
+      :root[data-splash-from='dark'] {
+        --splash-from-ground: #1A1D21;
+        --splash-from-faint: #313438;
+      }
+      :root,
+      :root[data-splash-theme='light'] {
+        --splash-ground: #F9F9F9;
+        --splash-ink: #202020;
+        --splash-faint: #EBEBEB;
+      }
+      :root[data-splash-theme='dark'] {
+        --splash-ground: #1A1D21;
+        --splash-ink: #D1D2D3;
+        --splash-faint: #313438;
+      }
+      #pulo-splash svg {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: calc(50% + var(--splash-dy, 0px));
+        width: var(--splash-w, 113px);
+        height: calc(var(--splash-w, 113px) * 609 / 1298);
+        transform: translate(-50%, -50%);
+        overflow: visible;
+        color: var(--splash-faint);
+        animation: pulo-splash-tone 1100ms ease-in-out 1 both;
+      }
+      #pulo-splash svg path.o {
+        transform-box: view-box;
+        transform-origin: 1130.85px 304.8px;
+        animation: pulo-splash-o 1100ms cubic-bezier(0.5, 0.15, 0.5, 0.85) infinite;
+      }
+      @keyframes pulo-splash-ground {
+        from {
+          background-color: var(--splash-from-ground);
+        }
+        to {
+          background-color: var(--splash-ground);
+        }
+      }
+      @keyframes pulo-splash-tone {
+        from {
+          color: var(--splash-from-faint);
+        }
+        to {
+          color: var(--splash-ink);
+        }
+      }
+      @keyframes pulo-splash-o {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      /* Founder's ruling MICRO-24/MICRO-30: the spin and the colour stay under
+         Reduce Motion. The id selectors and !important beat the universal 1ms
+         rules in design/motion.css (same pattern as .feel-rise-blink). */
+      #pulo-splash {
+        animation-duration: 1100ms !important;
+      }
+      #pulo-splash svg {
+        animation-duration: 1100ms !important;
+      }
+      #pulo-splash svg path.o {
+        animation-duration: 1100ms !important;
+      }
+      /* MICRO-34: on Android the mark waits, invisible, then fades in over 200 ms. */
+      :root[data-splash-wait] #pulo-splash svg {
+        opacity: 0;
+      }
+      #pulo-splash svg {
+        transition: opacity 200ms ease-out;
+      }
+      /* MICRO-30: the opening's rise, fade and reveal. One place for the
+         opening's values; the classes are set by app/feel/OpeningSplash.tsx. */
+      #pulo-splash.opening-rise,
+      #pulo-splash.opening-out {
+        animation: none !important;
+      }
+      #pulo-splash.opening-rise svg {
+        transition: transform 520ms cubic-bezier(.2, 0, 0, 1) !important;
+        transition-duration: 520ms !important;
+      }
+      #pulo-splash.opening-out {
+        transition: opacity 320ms var(--ease-out) !important;
+        transition-duration: 320ms !important;
+      }
+      #root.opening-reveal {
+        animation: opening-reveal 380ms var(--ease-out) both;
+        animation-duration: 380ms !important;
+      }
+      @keyframes opening-reveal {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+<link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
+<!-- The app's own stylesheets as they are in the repository today, plus r11's additions to WelcomeKit.css. -->
+<link rel="stylesheet" href="../appcss/app-onb-r11.css?v=202611211552">
+<style>
+/* ════ r11 (PREVIEW-ONB-1, approved by Anvar from screenshots on 21 Nov). The pages are the app's real
+   Welcome and business-name screens, from its own code, with these changes:
+   1. Welcome: a language pill top right (globe, the language in its own script, a chevron). It opens the
+      language sheet; a choice changes every word in place with a short fade.
+   2. Welcome: "Right inside Telegram." is gone. Two starts: "Start for my business" (black, on top) and
+      "Start for myself" (the app's grey second button). The line above reads "By starting, ...".
+   3. Business name: new title, lead, placeholder and button ("Start"); the field has the cursor when the page
+      opens; the keypad's Enter presses Start; a quiet "Not a business? Start for myself" under the hint.
+   4. Every word in all four languages (PROVISIONAL: the language pass decides). ════ */
+.r11-ph{margin:0 auto;max-width:300px;padding:var(--s5);border-radius:var(--r-1);background:var(--surface);text-align:center;display:flex;flex-direction:column;gap:var(--s2)}
+.r11-ph b{font-size:var(--t-4);font-weight:700;color:var(--text-1)}
+.r11-ph span{font-size:var(--t-2);color:var(--text-2)}
+/* keypad-open view: the app's frame is 490px tall and a stand-in keypad fills the rest */
+html.kb .pulo-app{height:490px!important}
+.fkb{display:none;position:fixed;left:0;right:0;top:490px;bottom:0;z-index:70;background:#d1d3d9;padding:16px 4px 6px;flex-direction:column;gap:6px}
+[data-theme="dark"] .fkb{background:#2b2d31}
+html.kb .fkb{display:flex}
+.fkb i{flex:1 1 0;min-height:0;display:flex;gap:5px;justify-content:center}
+.fkb u{flex:0 1 32px;max-height:42px;border-radius:5px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.25)}
+[data-theme="dark"] .fkb u{background:#4a4c52}
+.fkb u.w{flex-basis:180px}.fkb u.g{flex-basis:72px;background:#3a7bf6}
+.fkb em{position:absolute;left:0;right:0;top:3px;font-style:normal;text-align:center;font:600 10px system-ui;color:#888}
+</style>
+<style>
+/* preview chrome (not part of the design) */
+.pv{position:fixed;left:8px;right:8px;top:calc(var(--pulo-layout-inset-top,0px) + 34px);z-index:2147483100;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font:600 11px/1 system-ui,sans-serif;padding:8px;border-radius:14px;background:rgba(128,128,128,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pv p{flex:1 1 100%;margin:0 0 4px;padding:8px 10px;border-radius:10px;background:var(--ground);font:600 11px/1.45 system-ui;color:#2e9a5a}
+.pv b.h{flex:1 1 100%;font:700 10px/1 system-ui;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
+.pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
+.pv.hide{display:none}
+.pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:2147483100;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
+</style>
+</head>
+<body>
+    <div id="pulo-splash" role="img" aria-label="Pulo">
+      <svg viewBox="0 0 1298 609" focusable="false">
+        <g fill="currentColor">
+          <path d="M58.0674 246.667C49.7558 263.967 45.5996 283.344 45.5996 304.8C45.5996 328.4 50.8002 349.8 61.2002 369C71.6002 387.8 86.0005 402.599 104.4 413.399C122.8 424.199 143.4 429.6 166.2 429.6C188.389 429.6 208.382 424.66 226.181 414.78L258.701 447.301C257.286 448.219 255.853 449.119 254.4 450C230 464.4 202.4 471.6 171.6 471.6C144.8 471.6 120.4 466 98.4004 454.8C76.8004 443.2 59.4002 427.999 46.2002 409.199V585.6C46.2002 592.8 43.9996 598.399 39.5996 602.399C35.5997 606.799 30.2002 609 23.4004 609C16.2004 609 10.4 606.799 6 602.399C2.00007 598.399 0 592.8 0 585.6V302.399C0.400028 271.199 7.80023 243.199 22.2002 218.399C23.1381 216.802 24.0952 215.226 25.0732 213.673L58.0674 246.667ZM166.2 137.399C198.2 137.399 226.8 144.8 252 159.6C277.2 174 297 193.8 311.4 219C326.2 244.2 333.6 272.8 333.6 304.8C333.6 335.723 326.703 363.581 312.913 388.376L278.84 354.303C284.946 339.045 288 322.545 288 304.8C288 280.8 282.6 259.4 271.8 240.6C261.4 221.8 247 206.999 228.6 196.199C210.2 184.999 189.4 179.399 166.2 179.399C147.687 179.399 130.625 183.092 115.013 190.476L82.8369 158.3C107.722 144.366 135.51 137.399 166.2 137.399Z" />
+          <path d="M699.019 140.399C705.819 140.399 711.418 142.6 715.818 147C720.218 151 722.419 156.399 722.419 163.199V445.199C722.419 452.399 720.218 458.2 715.818 462.6C711.418 466.599 705.818 468.6 699.019 468.6C692.219 468.6 686.619 466.6 682.219 462.6C678.219 458.2 676.219 452.399 676.219 445.199V424.758C665.622 436.975 652.823 447.189 637.818 455.399C616.618 466.599 593.018 472.199 567.019 472.199C538.619 472.199 513.218 466.4 490.818 454.8C468.418 442.8 450.619 425.399 437.419 402.6C424.619 379.8 418.219 351.999 418.219 319.199V163.199C418.219 156.8 420.419 151.4 424.818 147C429.218 142.6 434.619 140.399 441.019 140.399C447.819 140.399 453.418 142.6 457.818 147C462.218 151.4 464.419 156.799 464.419 163.199V319.199C464.419 343.999 469.019 364.399 478.219 380.399C487.819 396.399 500.619 408.399 516.619 416.399C533.019 424.399 551.419 428.399 571.818 428.399C591.418 428.399 609.019 424.6 624.619 417C640.619 409.4 653.219 399 662.419 385.8C671.331 373.012 675.927 358.535 676.205 342.369L676.219 340.8V163.199C676.219 156.4 678.219 151 682.219 147C686.619 142.6 692.219 140.399 699.019 140.399Z" />
+          <path d="M841.073 0C847.873 0 853.273 2.19962 857.273 6.59961C861.673 10.5996 863.873 15.9998 863.873 22.7998V364.8C863.873 382 867.273 396 874.073 406.8C881.273 417.6 890.273 423 901.073 423H916.073C922.073 423 926.874 425.2 930.474 429.6C934.074 433.6 935.873 439 935.873 445.8C935.873 452.6 933.273 458.2 928.073 462.6C923.273 466.6 916.873 468.6 908.873 468.6H901.073C885.073 468.6 870.673 464.199 857.873 455.399C845.473 446.599 835.674 434.4 828.474 418.8C821.674 403.2 818.273 385.2 818.273 364.8V22.7998C818.273 15.9998 820.273 10.5996 824.273 6.59961C828.673 2.19966 834.273 4.249e-05 841.073 0Z" />
+          <path class="o" d="M1016.41 259.01C1011.5 273.045 1009.04 288.309 1009.04 304.8C1009.04 328.8 1014.25 350.2 1024.65 369C1035.45 387.8 1050.05 402.599 1068.45 413.399C1086.85 424.199 1107.65 429.6 1130.85 429.6C1147.94 429.6 1163.72 426.669 1178.21 420.809L1210.48 453.078C1187.02 465.425 1160.48 471.6 1130.85 471.6C1098.85 471.6 1070.24 464.4 1045.04 450C1019.85 435.6 1000.05 415.8 985.646 390.6C971.246 365.4 964.045 336.8 964.045 304.8C964.045 275.106 970.094 248.436 982.189 224.789L1016.41 259.01ZM1130.85 137.399C1162.85 137.399 1191.25 144.6 1216.04 159C1241.24 173.4 1261.05 193.199 1275.45 218.399C1289.85 243.599 1297.25 272.4 1297.65 304.8C1297.65 336.8 1290.25 365.4 1275.45 390.6C1273.71 393.635 1271.9 396.59 1270.01 399.469L1237.53 366.992C1247.21 348.68 1252.04 327.95 1252.04 304.8C1252.04 280.8 1246.85 259.4 1236.45 240.6C1226.05 221.4 1211.65 206.4 1193.25 195.6C1174.85 184.8 1154.05 179.399 1130.85 179.399C1107.65 179.399 1086.85 184.8 1068.45 195.6C1067.96 195.884 1067.48 196.172 1067 196.462L1035.45 164.915C1038.56 162.851 1041.76 160.88 1045.04 159C1070.24 144.6 1098.85 137.399 1130.85 137.399Z" />
+        </g>
+      </svg>
+    </div>
+<div id="root"></div>
+<div class="fkb" aria-hidden="true"><i><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></i><i><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></i><i><u></u><u></u><u></u><u></u><u></u><u></u><u></u></i><i><u></u><u class="w"></u><u class="g"></u></i><em>stand-in keypad (on a phone, the real one opens)</em></div>
+<button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<div class="pv hide" id="pv">
+  <p>r11: the app's real Welcome and business-name pages (its own code). Try the language pill, both starts, and the name page. "Play the opening" reloads and plays the real opening into Welcome.</p>
+  <b class="h">Page</b>
+  <button data-go="WELCOME">Welcome</button><button data-go="NAME">Business name</button><button data-go="PERSONAL">Start for myself (placeholder)</button>
+  <b class="h">Language</b>
+  <button data-l="UZ">Özbek</button><button data-l="UZ_CYRL">Ўзбек</button><button data-l="RU">Русский</button><button data-l="EN">English</button>
+  <b class="h">Other</b>
+  <button id="kb">Keypad open (360×490)</button><button id="th">Theme</button><button id="play">▶ Play the opening</button><button id="hide">Hide</button>
+</div>
+<script src="../js/onb-r11.js?v=202611211552"></script>
+<script>
+(function(){
+  var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
+  function insets(){if(!inTG)return;var a=TG.safeAreaInset||{},c=TG.contentSafeAreaInset||{},r=document.documentElement.style;
+    r.setProperty('--pulo-layout-inset-top',((a.top||0)+(c.top||0))+'px');r.setProperty('--pulo-layout-inset-bottom',((a.bottom||0)+(c.bottom||0))+'px');
+    r.setProperty('--pulo-layout-inset-left',(a.left||0)+'px');r.setProperty('--pulo-layout-inset-right',(a.right||0)+'px');
+    if(TG.viewportHeight)r.setProperty('--pulo-viewport-height',TG.viewportHeight+'px')}
+  if(inTG){try{insets();TG.ready();TG.expand();if(TG.requestFullscreen&&!TG.isFullscreen)TG.requestFullscreen();TG.disableVerticalSwipes&&TG.disableVerticalSwipes()}catch(e){}
+    try{TG.onEvent('safeAreaChanged',insets);TG.onEvent('contentSafeAreaChanged',insets);TG.onEvent('viewportChanged',insets);TG.onEvent('fullscreenChanged',insets)}catch(e){}}
+  var pv=document.getElementById('pv'), H=document.documentElement;
+  function mark(){var s=window.__r11||{};pv.querySelectorAll('[data-go]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.go===s.page)});
+    pv.querySelectorAll('[data-l]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===s.lang)});document.getElementById('kb').setAttribute('aria-pressed',H.classList.contains('kb'))}
+  window.addEventListener('r11',mark);
+  pv.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){window.__go(b.dataset.go)})});
+  pv.querySelectorAll('[data-l]').forEach(function(b){b.addEventListener('click',function(){window.__go('WELCOME',b.dataset.l)})});
+  document.getElementById('kb').addEventListener('click',function(){H.classList.toggle('kb');if(H.classList.contains('kb'))window.__go('NAME');mark()});
+  document.getElementById('th').addEventListener('click',function(){var t=H.getAttribute('data-theme')==='light'?'dark':'light';H.setAttribute('data-theme',t);try{localStorage.setItem('pulo-theme',t)}catch(e){}});
+  document.getElementById('play').addEventListener('click',function(){var s=window.__r11||{};location.replace(location.pathname+'?lang='+(s.lang||'EN'))});
+  document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
+  mark();
+})();
+</script>
+</body>
+</html>
