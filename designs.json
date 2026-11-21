@@ -3,10 +3,10 @@
  "designs": [
   {
    "file": "onboarding-r11.html",
-   "title": "Onboarding r12 (Phase 1): Welcome, business name, day-one Home, Me",
-   "rev": "r12",
+   "title": "Onboarding r13 (Phase 1): Welcome, business name, day-one Home, Me",
+   "rev": "r13",
    "stamp": "21 Nov 2026",
-   "what": "PREVIEW-ONB-1 v2 with the r12 fixes: name page hint lines under the field and only Start above the keyboard; Welcome clear of the language pill on small phones; Me keeps the dock; a person's rename words and saved line; Back closes an open sheet first; every tap leads somewhere."
+   "what": "PREVIEW-ONB-1 v2 with the r12 and r13 fixes: on a short keyboard screen the name page folds its wordmark away so the box and both lines sit above Start (fade edge if it still scrolls); the dock colours its own glyphs, so Me matches Home in light and dark; no duplicate 'Name' label on Your name."
   },
   {
    "file": "payment-sheets-r3.html",
