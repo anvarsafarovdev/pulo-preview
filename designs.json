@@ -3,10 +3,10 @@
  "designs": [
   {
    "file": "onboarding-r11.html",
-   "title": "Onboarding r13 (Phase 1): Welcome, business name, day-one Home, Me",
-   "rev": "r13",
+   "title": "Onboarding r14 (Phase 1): Welcome, business name, day-one Home, Me",
+   "rev": "r14",
    "stamp": "21 Nov 2026",
-   "what": "PREVIEW-ONB-1 v2 with the r12 and r13 fixes: on a short keyboard screen the name page folds its wordmark away so the box and both lines sit above Start (fade edge if it still scrolls); the dock colours its own glyphs, so Me matches Home in light and dark; no duplicate 'Name' label on Your name."
+   "what": "PREVIEW-ONB-1 v2 with the r12-r14 fixes. r14: on the smallest phones with the keyboard up, the name page's top edge fades while scrolled, so the title is never cut through; the Business stand-in has its bottom bar."
   },
   {
    "file": "payment-sheets-r3.html",
