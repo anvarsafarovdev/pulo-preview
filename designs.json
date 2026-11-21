@@ -3,10 +3,10 @@
  "designs": [
   {
    "file": "onboarding-r11.html",
-   "title": "Onboarding r11 (Phase 1): Welcome, business name, day-one Home, Me",
-   "rev": "r11",
+   "title": "Onboarding r12 (Phase 1): Welcome, business name, day-one Home, Me",
+   "rev": "r12",
    "stamp": "21 Nov 2026",
-   "what": "PREVIEW-ONB-1 v2 on the app's real pages: Welcome with two starts and the language pill; business name; the day-one Home for a business and for a person (empty book: 0 UZS, Record your first debt, no find/chips/Parties/supplier row; personal: no QR, no account disc, Me seat); the Me page (pencil, Add a business book, Help). Four languages, light and dark, keypad view, and the real opening."
+   "what": "PREVIEW-ONB-1 v2 with the r12 fixes: name page hint lines under the field and only Start above the keyboard; Welcome clear of the language pill on small phones; Me keeps the dock; a person's rename words and saved line; Back closes an open sheet first; every tap leads somewhere."
   },
   {
    "file": "payment-sheets-r3.html",

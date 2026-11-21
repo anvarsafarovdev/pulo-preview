@@ -291,7 +291,7 @@
     </style>
 <link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
 <!-- The app's own stylesheets as they are in the repository today, plus r11's additions to WelcomeKit.css. -->
-<link rel="stylesheet" href="../appcss/app-onb-r11.css?v=202611211632">
+<link rel="stylesheet" href="../appcss/app-onb-r11.css?v=202611211707">
 <style>
 /* ════ r11 (PREVIEW-ONB-1, approved by Anvar from screenshots on 21 Nov). The pages are the app's real
    Welcome and business-name screens, from its own code, with these changes:
@@ -324,7 +324,7 @@ html.kb .fkb{display:flex}
 .pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
 .pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
 .pv.hide{display:none}
-.pvb{position:fixed;bottom:calc(var(--pulo-layout-inset-bottom,0px) + 12px);left:12px;z-index:2147483100;width:44px;height:30px;border-radius:999px;border:0;background:rgba(128,128,128,.28);color:var(--text-1);font:700 18px/1 system-ui}
+.pvb{position:fixed;top:50%;left:0;z-index:2147483100;width:26px;height:44px;margin-top:-22px;border-radius:0 12px 12px 0;border:0;background:rgba(128,128,128,.28);color:var(--text-1);font:700 18px/1 system-ui}
 .pvb[hidden]{display:none}
 .pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:2147483100;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
 </style>
@@ -345,7 +345,7 @@ html.kb .fkb{display:flex}
 <button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
 <button class="pvb" id="pvb" type="button" aria-label="Back" hidden>‹</button>
 <div class="pv hide" id="pv">
-  <p>r11, Phase 1: the app's real Welcome, business name, day-one Home (business and personal) and Me, from its own code. Start on Welcome and tap through; "Play the opening" reloads and plays the real opening into Welcome.</p>
+  <p>r11, Phase 1: the app's real Welcome, business name, day-one Home (business and personal) and Me, from its own code. Start on Welcome and tap through; "Play the opening" reloads and plays the real opening into Welcome. r12: every fix in PREVIEW-ONB-1-r12-fixes. For your language pass: the Uzbek Welcome headline takes 3 lines with "boring." alone on the last one.</p>
   <b class="h">Page</b>
   <button data-go="WELCOME">Welcome</button><button data-go="NAME">Business name</button><button data-go="HOME_B">Business Home</button><button data-go="HOME_P">Personal Home</button><button data-go="ME">Me</button><button data-go="ACCOUNT_B">My account (business)</button>
   <b class="h">Language</b>
@@ -353,7 +353,7 @@ html.kb .fkb{display:flex}
   <b class="h">Other</b>
   <button id="kb">Keypad open (360×490)</button><button id="th">Theme</button><button id="play">▶ Play the opening</button><button id="hide">Hide</button>
 </div>
-<script src="../js/onb-r11.js?v=202611211632"></script>
+<script src="../js/onb-r11.js?v=202611211707"></script>
 <script>
 (function(){
   var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
@@ -374,7 +374,7 @@ html.kb .fkb{display:flex}
   var pvb=document.getElementById('pvb'), BB=inTG&&TG.BackButton;
   function goBack(){if(window.__back)window.__back()}
   if(BB){try{BB.onClick(goBack)}catch(e){}} else pvb.addEventListener('click',goBack);
-  window.addEventListener('r11',function(e){var b=!!(e.detail&&e.detail.back);if(BB){try{b?BB.show():BB.hide()}catch(x){}}else pvb.hidden=!b});
+  window.addEventListener('r11back',function(e){var b=!!(e.detail&&e.detail.back);if(BB){try{b?BB.show():BB.hide()}catch(x){}}else pvb.hidden=!b});
   document.getElementById('play').addEventListener('click',function(){var s=window.__r11||{};location.replace(location.pathname+'?lang='+(s.lang||'EN'))});
   document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
   document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
