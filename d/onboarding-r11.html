@@ -291,7 +291,7 @@
     </style>
 <link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
 <!-- The app's own stylesheets as they are in the repository today, plus r11's additions to WelcomeKit.css. -->
-<link rel="stylesheet" href="../appcss/app-onb-r11.css?v=202611211552">
+<link rel="stylesheet" href="../appcss/app-onb-r11.css?v=202611211632">
 <style>
 /* ════ r11 (PREVIEW-ONB-1, approved by Anvar from screenshots on 21 Nov). The pages are the app's real
    Welcome and business-name screens, from its own code, with these changes:
@@ -324,6 +324,8 @@ html.kb .fkb{display:flex}
 .pv button{padding:7px 10px;border-radius:999px;border:1px solid rgba(128,128,128,.35);background:var(--ground);color:var(--text-2);font:inherit;cursor:pointer}
 .pv button[aria-pressed="true"]{background:var(--text-1);color:var(--ground)}
 .pv.hide{display:none}
+.pvb{position:fixed;bottom:calc(var(--pulo-layout-inset-bottom,0px) + 12px);left:12px;z-index:2147483100;width:44px;height:30px;border-radius:999px;border:0;background:rgba(128,128,128,.28);color:var(--text-1);font:700 18px/1 system-ui}
+.pvb[hidden]{display:none}
 .pvh{position:fixed;top:calc(var(--pulo-layout-inset-top,0px) + 6px);left:50%;transform:translateX(-50%);z-index:2147483100;width:34px;height:22px;border-radius:999px;border:0;background:rgba(128,128,128,.14);color:var(--text-3);font:700 12px/1 system-ui;opacity:.6}
 </style>
 </head>
@@ -341,16 +343,17 @@ html.kb .fkb{display:flex}
 <div id="root"></div>
 <div class="fkb" aria-hidden="true"><i><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></i><i><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></i><i><u></u><u></u><u></u><u></u><u></u><u></u><u></u></i><i><u></u><u class="w"></u><u class="g"></u></i><em>stand-in keypad (on a phone, the real one opens)</em></div>
 <button class="pvh" id="pvh" type="button" aria-label="Preview">···</button>
+<button class="pvb" id="pvb" type="button" aria-label="Back" hidden>‹</button>
 <div class="pv hide" id="pv">
-  <p>r11: the app's real Welcome and business-name pages (its own code). Try the language pill, both starts, and the name page. "Play the opening" reloads and plays the real opening into Welcome.</p>
+  <p>r11, Phase 1: the app's real Welcome, business name, day-one Home (business and personal) and Me, from its own code. Start on Welcome and tap through; "Play the opening" reloads and plays the real opening into Welcome.</p>
   <b class="h">Page</b>
-  <button data-go="WELCOME">Welcome</button><button data-go="NAME">Business name</button><button data-go="PERSONAL">Start for myself (placeholder)</button>
+  <button data-go="WELCOME">Welcome</button><button data-go="NAME">Business name</button><button data-go="HOME_B">Business Home</button><button data-go="HOME_P">Personal Home</button><button data-go="ME">Me</button><button data-go="ACCOUNT_B">My account (business)</button>
   <b class="h">Language</b>
   <button data-l="UZ">Özbek</button><button data-l="UZ_CYRL">Ўзбек</button><button data-l="RU">Русский</button><button data-l="EN">English</button>
   <b class="h">Other</b>
   <button id="kb">Keypad open (360×490)</button><button id="th">Theme</button><button id="play">▶ Play the opening</button><button id="hide">Hide</button>
 </div>
-<script src="../js/onb-r11.js?v=202611211552"></script>
+<script src="../js/onb-r11.js?v=202611211632"></script>
 <script>
 (function(){
   var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
@@ -367,7 +370,11 @@ html.kb .fkb{display:flex}
   pv.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){window.__go(b.dataset.go)})});
   pv.querySelectorAll('[data-l]').forEach(function(b){b.addEventListener('click',function(){window.__go('WELCOME',b.dataset.l)})});
   document.getElementById('kb').addEventListener('click',function(){H.classList.toggle('kb');if(H.classList.contains('kb'))window.__go('NAME');mark()});
-  document.getElementById('th').addEventListener('click',function(){var t=H.getAttribute('data-theme')==='light'?'dark':'light';H.setAttribute('data-theme',t);try{localStorage.setItem('pulo-theme',t)}catch(e){}});
+  document.getElementById('th').addEventListener('click',function(){if(window.__toggleTheme)window.__toggleTheme()});
+  var pvb=document.getElementById('pvb'), BB=inTG&&TG.BackButton;
+  function goBack(){if(window.__back)window.__back()}
+  if(BB){try{BB.onClick(goBack)}catch(e){}} else pvb.addEventListener('click',goBack);
+  window.addEventListener('r11',function(e){var b=!!(e.detail&&e.detail.back);if(BB){try{b?BB.show():BB.hide()}catch(x){}}else pvb.hidden=!b});
   document.getElementById('play').addEventListener('click',function(){var s=window.__r11||{};location.replace(location.pathname+'?lang='+(s.lang||'EN'))});
   document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
   document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
