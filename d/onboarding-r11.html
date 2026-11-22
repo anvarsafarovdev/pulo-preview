@@ -291,7 +291,7 @@
     </style>
 <link rel="stylesheet" href="../fonts/pulo-round.css?v=202611191930">
 <!-- The app's own stylesheets as they are in the repository today, plus r11's additions to WelcomeKit.css. -->
-<link rel="stylesheet" href="../appcss/app-onb-r11.css?v=202611220329">
+<link rel="stylesheet" href="../appcss/app-onb-r11.css?v=202611220341">
 <style>
 /* ════ r11 (PREVIEW-ONB-1, approved by Anvar from screenshots on 21 Nov). The pages are the app's real
    Welcome and business-name screens, from its own code, with these changes:
@@ -350,10 +350,12 @@ html.kb .fkb{display:flex}
   <button data-go="WELCOME">Welcome</button><button data-go="NAME">Business name</button><button data-go="HOME_B">Business Home</button><button data-go="HOME_P">Personal Home</button><button data-go="ME">Me</button><button data-go="ACCOUNT_B">My account (business)</button><button data-go="ME2">Me (two books)</button><button data-go="ACCOUNT2">My account (two books)</button><button id="long">Long business name</button>
   <b class="h">Language</b>
   <button data-l="UZ">Özbek</button><button data-l="UZ_CYRL">Ўзбек</button><button data-l="RU">Русский</button><button data-l="EN">English</button>
+  <b class="h">Keyboard (Android trial)</b>
+  <span id="kbinfo" style="flex:1 1 100%;font:600 11px/1.4 system-ui;color:var(--text-2);text-align:center">open the business-name page and type, then look here</span>
   <b class="h">Other</b>
   <button id="kb">Keypad open (360×490)</button><button id="th">Theme</button><button id="play">▶ Play the opening</button><button id="hide">Hide</button>
 </div>
-<script src="../js/onb-r11.js?v=202611220329"></script>
+<script src="../js/onb-r11.js?v=202611220341"></script>
 <script>
 (function(){
   var TG=window.Telegram&&window.Telegram.WebApp, inTG=!!(TG&&TG.platform&&TG.platform!=='unknown');
@@ -377,6 +379,8 @@ html.kb .fkb{display:flex}
   window.addEventListener('r11back',function(e){var b=!!(e.detail&&e.detail.back);if(BB){try{b?BB.show():BB.hide()}catch(x){}}else pvb.hidden=!b});
   document.getElementById('play').addEventListener('click',function(){var s=window.__r11||{};location.replace(location.pathname+'?lang='+(s.lang||'EN'))});
   document.getElementById('hide').addEventListener('click',function(){pv.classList.add('hide')});
+  function kbinfo(){var k=window.__kb||{};var est=window.__kbEstimate?window.__kbEstimate():null;document.getElementById('kbinfo').textContent='keyboard API: '+(k.api||'?')+' · measured: '+(k.measured==null?'none':k.measured+'px')+' · estimate: '+(est==null?'none':est+'px')}
+  window.addEventListener('r11kb',kbinfo); document.getElementById('pvh').addEventListener('click',kbinfo);
   document.getElementById('long').addEventListener('click',function(){if(window.__longName)window.__longName()});
   document.getElementById('pvh').addEventListener('click',function(){pv.classList.toggle('hide')});
   mark();

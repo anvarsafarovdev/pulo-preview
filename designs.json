@@ -4,9 +4,9 @@
   {
    "file": "onboarding-r11.html",
    "title": "Onboarding r15 (Phase 1): Welcome, business name, day-one Home, Me, Your books",
-   "rev": "r15.1",
+   "rev": "r15.2",
    "stamp": "22 Nov 2026",
-   "what": "r14 plus PREVIEW-BOOKS-1: 'Your books' on Me (two books) and My account, the open book drawn as the selected language; the lighter switch (Opening, then that book's Home with You're in {name}); the pencil on both cards, no letter box. r15.1: the app's own keyboard fit now runs in the Preview (Android full screen gives no keyboard signal; the fit estimates it), so Start sits above the keyboard on Android."
+   "what": "r14 plus PREVIEW-BOOKS-1: 'Your books' on Me (two books) and My account, the open book drawn as the selected language; the lighter switch (Opening, then that book's Home with You're in {name}); the pencil on both cards, no letter box. r15.1: the app's own keyboard fit now runs in the Preview (Android full screen gives no keyboard signal; the fit estimates it), so Start sits above the keyboard on Android. r15.2 (trial): on Android full screen the real keyboard height is read from Chrome's VirtualKeyboard API where it reports one, instead of the 38.5% estimate."
   },
   {
    "file": "payment-sheets-r3.html",
